@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        applicationId "team.wonderland.ucount.ucount_android"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:26.+'
+
+    provided 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.1'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
+
+}
+
+def AAVersion = "4.3.0"
+dependencies {
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    apt "org.androidannotations:rest-spring:$AAVersion"
+    compile "org.androidannotations:rest-spring-api:$AAVersion"
+}
+
