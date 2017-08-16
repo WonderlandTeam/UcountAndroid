@@ -10,6 +10,7 @@ import team.wonderland.ucount.ucount_android.json.LoginJson;
  * 登录
  * Created by CLL on 17/8/16.
  */
+
 @Rest(rootUrl = "",converters = {MappingJackson2HttpMessageConverter.class})
 public interface LoginService {
     @Post("")
