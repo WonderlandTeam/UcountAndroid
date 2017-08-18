@@ -1,10 +1,12 @@
 package team.wonderland.ucount.ucount_android.json;
 
+import java.io.Serializable;
+
 /**
  * 登录信息
  * Created by CLL on 17/8/16.
  */
-public class LoginJson {
+public class UserSignUpJson implements Serializable{
     String username;
     String password;
 
