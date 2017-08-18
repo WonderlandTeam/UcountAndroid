@@ -7,4 +7,5 @@ import java.io.Serializable;
  * Created by CLL on 17/8/18.
  */
 public class UserInfoJson implements Serializable{
+    // TODO
 }
