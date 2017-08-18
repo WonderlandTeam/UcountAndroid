@@ -16,19 +16,19 @@ import java.util.List;
 public interface BudgetService {
     /**
      * 获取预算信息
-     * @param budgetId          预算id
+     * @param budget_id         预算id
      * @return                  预算信息vo
      */
     @Get("/budgets/{budget_id}")
-    public BudgetInfoJson getBudget(@Path Long budgetId);
+    public BudgetInfoJson getBudget(@Path Long budget_id);
 
     /**
      * 获取用户预算
-     * @param userId            用户id
+     * @param user_id           用户id
      * @return                  用户预算列表
      */
-    @Get("/budgets")
-    public List<BudgetInfoJson> getBudgetsByUser(@Path Long userId);
+    @Get("/budgets/{user_id}")
+    public List<BudgetInfoJson> getBudgetsByUser(@Path Long user_id);
 
     /**
      * 添加预算
@@ -40,16 +40,16 @@ public interface BudgetService {
 
     /**
      * 修改预算信息
-     * @param budgetId          预算id
+     * @param budget_id          预算id
      * @param budgetModifyJson    预算修改信息vo
      */
     @Put("/budgets/{budget_id}")
-    public void updateBudget(@Path Long budgetId, @Body BudgetModifyJson budgetModifyJson);
+    public void updateBudget(@Path Long budget_id, @Body BudgetModifyJson budgetModifyJson);
 
     /**
      * 删除预算
-     * @param budgetId          预算id
+     * @param budget_id          预算id
      */
     @Delete("/budgets/{budget_id}")
-    public void deleteBudget(@Path Long budgetId);
+    public void deleteBudget(@Path Long budget_id);
 }

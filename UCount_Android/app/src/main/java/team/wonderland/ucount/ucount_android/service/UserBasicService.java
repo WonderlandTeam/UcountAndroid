@@ -1,7 +1,6 @@
 package team.wonderland.ucount.ucount_android.service;
 
 import org.androidannotations.rest.spring.annotations.Body;
-import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.Post;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -27,6 +26,5 @@ public interface UserBasicService {
      * @param password
      * @return
      */
-    @Post("")
-    public Long login(@Path String userName,@Path String password);
+    //TODO
 }

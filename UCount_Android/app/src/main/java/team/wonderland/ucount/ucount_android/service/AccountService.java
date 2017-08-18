@@ -15,11 +15,11 @@ import java.util.List;
 public interface AccountService {
     /**
      * 获取账户信息
-     * @param accountID
+     * @param account_id
      * @return
      */
     @Get("/accounts/{account_id}")
-    public AccountInfoJson getAccountByID(@Path Long accountID);
+    public AccountInfoJson getAccountByID(@Path Long account_id);
 
     /**
      * 获取用户所有账户信息
@@ -32,15 +32,15 @@ public interface AccountService {
     /**
      * 添加账户信息
      * @param accountAddJson
-     * @return
+     * @return account_id
      */
     @Post("/accounts")
     public Long addAccount(@Body AccountAddJson accountAddJson);
 
     /**
      * 删除账户信息
-     * @param accountID
+     * @param account_id
      */
     @Delete("/accounts/{account_id}")
-    public void deleteAccount(@Path Long accountID);
+    public void deleteAccount(@Path Long account_id);
 }

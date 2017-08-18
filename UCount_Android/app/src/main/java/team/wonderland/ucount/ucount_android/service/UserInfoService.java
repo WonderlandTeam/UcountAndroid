@@ -14,18 +14,18 @@ import team.wonderland.ucount.ucount_android.json.UserModifyJson;
 public interface UserInfoService {
     /**
      * 获得用户信息
-     * @param userID
+     * @param user_id
      * @return
      */
     @Get("/users/{user_id}")
-    public UserInfoJson getUserInfo(@Path Long userID);
+    public UserInfoJson getUserInfo(@Path Long user_id);
 
     /**
      * 修改用户信息
-     * @param userID
+     * @param user_id
      * @param userModifyJson
      */
     @Put("/users/{user_id}")
-    void modifyUserInfo(@Path Long userID, @Body UserModifyJson userModifyJson);
+    void modifyUserInfo(@Path Long user_id, @Body UserModifyJson userModifyJson);
 
 }

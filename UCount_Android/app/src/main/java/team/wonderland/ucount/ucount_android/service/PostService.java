@@ -24,11 +24,11 @@ public interface PostService {
 
     /**
      * 获取帖子信息
-     * @param postId        帖子id
+     * @param post_id      帖子id
      * @return              帖子信息vo
      */
     @Get("posts/{post_id}")
-    public PostInfoJson getPostInfo(@Path Long postId);
+    public PostInfoJson getPostInfo(@Path Long post_id);
 
     /**
      * 用户分享帖子
@@ -40,49 +40,49 @@ public interface PostService {
 
     /**
      * 获取用户分享所有帖子
-     * @param userId        用户id
+     * @param user_id        用户id
      * @return              帖子信息列表
      */
-    @Get("posts/release")
-    public List<PostInfoJson> getPostsSharedByUser(@Path Long userId);
+    @Get("posts/release/{user_id}")
+    public List<PostInfoJson> getPostsSharedByUser(@Path Long user_id);
 
     /**
      * 获取用户收藏
-     * @param userId        用户id
+     * @param user_id        用户id
      * @return              帖子信息列表
      */
-    @Get("posts/collections")
-    public List<PostInfoJson> getPostsCollectedByUser(@Path Long userId);
+    @Get("posts/collections/{user_id}")
+    public List<PostInfoJson> getPostsCollectedByUser(@Path Long user_id);
 
     /**
      * 称赞帖子
-     * @param userId        用户id
-     * @param postId        帖子id
+     * @param user_id        用户id
+     * @param post_id       帖子id
      */
-    @Post("/posts/{post_id}/praises")
-    public void praisePost(@Path Long userId,@Path Long postId);
+    @Post("/posts/{post_id}/praises/{user_id}")
+    public void praisePost(@Path Long user_id,@Path Long post_id);
 
     /**
      * 取消称赞
-     * @param userId        用户id
-     * @param postId        帖子id
+     * @param user_id        用户id
+     * @param post_id        帖子id
      */
-    @Delete("/posts/{post_id}/praises")
-    public void cancelPraisePost(@Path Long userId, @Path Long postId);
+    @Delete("/posts/{post_id}/praises/{user_id}")
+    public void cancelPraisePost(@Path Long user_id, @Path Long post_id);
 
     /**
      * 回复帖子
-     * @param postId        帖子id
+     * @param post_id        帖子id
      * @param postReplyJson   帖子回复信息
      */
     @Post("/posts/{post_id}/replies")
-    public void replyPost(@Path Long postId,@Body PostReplyJson postReplyJson);
+    public void replyPost(@Path Long post_id,@Body PostReplyJson postReplyJson);
 
     /**
      * 获取帖子回复信息
-     * @param postId        帖子id
+     * @param post_id        帖子id
      * @return              帖子回复信息列表
      */
     @Get("/posts/{post_id}/replies")
-    public List<PostReplyJson> getPostReplies(@Path Long postId);
+    public List<PostReplyJson> getPostReplies(@Path Long post_id);
 }
