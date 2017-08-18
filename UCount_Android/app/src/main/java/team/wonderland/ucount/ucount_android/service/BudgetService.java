@@ -23,12 +23,13 @@ public interface BudgetService {
     public BudgetInfoJson getBudget(@Path Long budget_id);
 
     /**
-     * 获取用户预算
+     * 获取用户所有预算信息
      * @param user_id           用户id
+     * @param date
      * @return                  用户预算列表
      */
-    @Get("/budgets/{user_id}")
-    public List<BudgetInfoJson> getBudgetsByUser(@Path Long user_id);
+    @Get("/budgets?budgetId={user_id}&date={date}")
+    public List<BudgetInfoJson> getBudgetsByUser(@Path Long user_id,@Path String date);
 
     /**
      * 添加预算

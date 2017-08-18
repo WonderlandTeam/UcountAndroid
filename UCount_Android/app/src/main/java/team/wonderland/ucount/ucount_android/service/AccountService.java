@@ -23,11 +23,11 @@ public interface AccountService {
 
     /**
      * 获取用户所有账户信息
-     * @param
+     * @param userId
      * @return
      */
-    @Get("/accounts")
-    public List<AccountInfoJson> getAccountsByUser();
+    @Get("/accounts?userId={userId}")
+    public List<AccountInfoJson> getAccountsByUser(@Path Long userId);
 
     /**
      * 添加账户信息

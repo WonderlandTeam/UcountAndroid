@@ -25,16 +25,20 @@ public interface BillService {
     /**
      * 获取账户所有账目信息
      * @param account_id         账户id
+     *                           pageable筛选信息传什么？
      * @return                  账目列表
      */
+    //TODO
     @Get("/accounts/{account_id}/bills")
     public List<BillInfoJson> getBillsByAccount(@Path Long account_id);
 
     /**
      * 获取用户所有账目信息
      * @param user_id            用户id
+     *                           pageable筛选信息传什么？
      * @return                  账目列表
      */
+    //TODO
     @Get("/users/{user_id}/bills")
     public List<BillInfoJson> getBillsByUser(@Path Long user_id);
 
@@ -46,14 +50,6 @@ public interface BillService {
      */
     @Post("/accounts/{account_id}/bills")
     public Long addBillManually(@Path Long account_id, @Body BillAddJson billAddJson);
-
-    /**
-     * 用户实时同步记账
-     * @param account_id         账户id
-     * @return                  同步账目信息列表
-     */
-    @Put("/accounts/{account_id}/bills")
-    public List<BillInfoJson> addBillAutomatically(@Path Long account_id);
 
     /**
      * 删除单条账目信息
