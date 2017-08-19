@@ -5,6 +5,11 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
 
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
     defaultConfig {
         applicationId "team.wonderland.ucount.ucount_android"
         minSdkVersion 15
