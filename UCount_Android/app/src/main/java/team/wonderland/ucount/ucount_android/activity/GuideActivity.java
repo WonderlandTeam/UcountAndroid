@@ -6,10 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -39,7 +37,7 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.guide_layout);
+        setContentView(R.layout.activity_guide);
 
         // 初始化页面
         initViews();

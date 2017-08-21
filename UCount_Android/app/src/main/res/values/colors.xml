@@ -6,5 +6,7 @@
     <color name="transparent">#7f000000</color>
     <!-- 透明的 -->
     <color name="white">#ffffff</color>
+    <color name="text_green">#BBECB9</color>
+    <color name="text_gray">#bdc3c7</color>
 
 </resources>

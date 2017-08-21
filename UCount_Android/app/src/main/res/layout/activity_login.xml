@@ -96,16 +96,35 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" />
+        android:orientation="vertical">
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/login_txtForgotPwd"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:text="@string/forgot_pwd"
-        android:textColor="#0079FF"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/login_txtForgotPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:text="@string/forgot_pwd"
+            android:textColor="#0079FF"
+            android:textSize="18sp"
+            android:layout_weight="0.44" />
+
+        <TextView
+            android:id="@+id/login_txtRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:text="没有账号?"
+            android:layout_alignParentRight="true"
+            android:textColor="#0079FF"
+            android:textSize="18sp"
+            android:layout_weight="0.44" />
+    </RelativeLayout>
 
 </LinearLayout>
