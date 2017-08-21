@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -14,6 +16,9 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import team.wonderland.ucount.ucount_android.R;
 
@@ -117,12 +122,13 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
     // 当当前页面被滑动时调用
     @Override
     public void onPageScrolled(int arg0, float arg1, int arg2) {
+
     }
 
     // 当新的页面被选中时调用
     @Override
     public void onPageSelected(int arg0) {
-        // 设置底部小点选中状态
+        //设置底部小圆点被选中
         setCurrentDot(arg0);
     }
 }

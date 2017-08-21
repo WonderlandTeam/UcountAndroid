@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.AssetFragment;
+import team.wonderland.ucount.ucount_android.fragment.MoneyFragment;
+import team.wonderland.ucount.ucount_android.fragment.PlanFragment;
+import team.wonderland.ucount.ucount_android.fragment.ReportFragment;
 
 /**
  * Created by liuyu on 2017/8/19.
@@ -26,16 +30,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tabReport;
     private TextView tabPlan;
     private TextView tabMoney;
+    private Button quitButton;
+    private SharedPreferences sp;
+
 
     private FrameLayout ly_content;
 
-    private AssetFragment f1,f2,f3,f4;
+    private AssetFragment assetFragment;
+    private ReportFragment reportFragment;
+    private PlanFragment planFragment;
+    private MoneyFragment moneyFragment;
     private FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp = this.getSharedPreferences("userInfo",0);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
@@ -79,6 +90,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         bindView();
+
+        tabAsset.performClick();
+
+        quitButton = (Button)findViewById(R.id.quit_btn);
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("USERNAME","");
+                editor.putString("PASSWORD","");
+                editor.putBoolean("HAVELOGINED",false);
+                editor.commit();
+            }
+        });
     }
 
 
@@ -117,67 +142,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //隐藏所有Fragment
     public void hideAllFragment(FragmentTransaction transaction){
-        if(f1!=null){
-            transaction.hide(f1);
+        if(assetFragment !=null){
+            transaction.hide(assetFragment);
         }
-        if(f2!=null){
-            transaction.hide(f2);
+        if(reportFragment !=null){
+            transaction.hide(reportFragment);
         }
-        if(f3!=null){
-            transaction.hide(f3);
+        if(planFragment !=null){
+            transaction.hide(planFragment);
         }
-        if(f4!=null){
-            transaction.hide(f4);
+        if(moneyFragment !=null){
+            transaction.hide(moneyFragment);
         }
     }
 
     @Override
     public void onClick(View v) {
-        //FragmentTransaction transaction = getFragmentManager().beginTransaction();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideAllFragment(transaction);
         switch(v.getId()){
             case R.id.txt_asset:
                 selected();
                 tabAsset.setSelected(true);
-                if(f1==null){
-                    f1 = new AssetFragment("第一个Fragment");
-                    transaction.add(R.id.fragment_container,f1);
+                if(assetFragment ==null){
+                    assetFragment = new AssetFragment("资产");
+                    transaction.add(R.id.fragment_container, assetFragment);
                 }else{
-                    transaction.show(f1);
+                    transaction.show(assetFragment);
                 }
                 break;
 
             case R.id.txt_report:
                 selected();
                 tabReport.setSelected(true);
-                if(f2==null){
-                    f2 = new AssetFragment("第二个Fragment");
-                    transaction.add(R.id.fragment_container,f2);
+                if(reportFragment ==null){
+                    reportFragment = new ReportFragment("报表");
+                    transaction.add(R.id.fragment_container, reportFragment);
                 }else{
-                    transaction.show(f2);
+                    transaction.show(reportFragment);
                 }
                 break;
 
             case R.id.txt_plan:
                 selected();
                 tabPlan.setSelected(true);
-                if(f3==null){
-                    f3 = new AssetFragment("第三个Fragment");
-                    transaction.add(R.id.fragment_container,f3);
+                if(planFragment ==null){
+                    planFragment = new PlanFragment("计划");
+                    transaction.add(R.id.fragment_container, planFragment);
                 }else{
-                    transaction.show(f3);
+                    transaction.show(planFragment);
                 }
                 break;
 
             case R.id.txt_money:
                 selected();
                 tabMoney.setSelected(true);
-                if(f4==null){
-                    f4 = new AssetFragment("第四个Fragment");
-                    transaction.add(R.id.fragment_container,f4);
+                if(moneyFragment ==null){
+                    moneyFragment = new MoneyFragment("理财");
+                    transaction.add(R.id.fragment_container, moneyFragment);
                 }else{
-                    transaction.show(f4);
+                    transaction.show(moneyFragment);
                 }
                 break;
         }

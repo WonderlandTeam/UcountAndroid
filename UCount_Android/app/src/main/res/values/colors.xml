@@ -8,5 +8,5 @@
     <color name="white">#ffffff</color>
     <color name="text_green">#BBECB9</color>
     <color name="text_gray">#bdc3c7</color>
-
+    <color name="text_green_darker">#1abc9c</color>
 </resources>

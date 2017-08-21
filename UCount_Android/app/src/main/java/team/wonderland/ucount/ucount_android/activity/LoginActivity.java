@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import team.wonderland.ucount.ucount_android.R;
-
+/**
+ * Created by CLL on 17/8/16.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;

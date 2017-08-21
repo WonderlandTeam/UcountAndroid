@@ -9,7 +9,7 @@
         android:layout_width="132dp"
         android:layout_height="132dp"
         android:layout_gravity="center"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/icon_avatar_login" />
 
     <LinearLayout
@@ -110,9 +110,8 @@
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
             android:text="@string/forgot_pwd"
-            android:textColor="#0079FF"
-            android:textSize="18sp"
-            android:layout_weight="0.44" />
+            android:textColor="#e74c3c"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/login_txtRegister"
@@ -120,9 +119,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_marginRight="15dp"
-            android:text="没有账号?"
+            android:text="@string/no_username"
             android:layout_alignParentRight="true"
-            android:textColor="#0079FF"
+            android:textColor="#e74c3c"
             android:textSize="18sp"
             android:layout_weight="0.44" />
     </RelativeLayout>

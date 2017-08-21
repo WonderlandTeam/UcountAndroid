@@ -1,7 +1,7 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +10,14 @@ import android.widget.TextView;
 import team.wonderland.ucount.ucount_android.R;
 
 /**
- * Created by liuyu on 2017/8/21.
+ * Created by liuyu on 2017/8/22.
  */
 
-
-public class AssetFragment extends Fragment {
+public class ReportFragment extends Fragment {
     private String context;
     private TextView mTextView;
 
-    public  AssetFragment(String context){
+    public  ReportFragment(String context){
         this.context = context;
     }
 
@@ -30,5 +29,4 @@ public class AssetFragment extends Fragment {
         mTextView.setText(context);
         return view;
     }
-
 }

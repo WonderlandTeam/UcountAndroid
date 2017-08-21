@@ -93,13 +93,28 @@
          The drawer is given a fixed width in dp and extends the full height of
          the container. A solid background is used for contrast
          with the content view. -->
-    <ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="240dp"
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:background="#111"/>
+        android:orientation="vertical"
+        android:layout_gravity="left"
+        android:background="#fff"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DrawerLayout抽屉效果"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="文本"
+            />
+        <Button
+            android:id="@+id/quit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退出当前账号"/>
+    </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>
