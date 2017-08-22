@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="transparent">#7f000000</color>
-    <!-- 透明的 -->
     <color name="white">#ffffff</color>
     <color name="text_green">#BBECB9</color>
     <color name="text_gray">#bdc3c7</color>
     <color name="text_green_darker">#1abc9c</color>
+    <color name="main_bg">#f5f5f5</color>
 </resources>

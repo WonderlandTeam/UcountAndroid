@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import team.wonderland.ucount.ucount_android.R;
 /**
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText username, password;
     private Button btn_login;
     private String usernameValue,passwordValue;
+    private TextView forgetPass,register;
     private SharedPreferences sp;
     private boolean haveLogined;
 
@@ -31,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.login_edtId);
         password = (EditText)findViewById(R.id.login_edtPwd);
         btn_login = (Button)findViewById(R.id.login_btnLogin);
+        forgetPass = (TextView)findViewById(R.id.login_txtForgotPwd);
+        register = (TextView)findViewById(R.id.login_txtRegister);
         sp = this.getSharedPreferences("userInfo",0);
         usernameValue = sp.getString("USERNAME","");
         passwordValue = sp.getString("PASSWORD","");
@@ -60,6 +64,16 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+
+        //跳转到注册界面
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

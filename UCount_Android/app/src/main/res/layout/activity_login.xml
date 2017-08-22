@@ -76,7 +76,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:paddingRight="0dp"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColorHint="#999999"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -84,7 +84,7 @@
         <Button
             android:id="@+id/login_btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/login_button_style"
             android:text="@string/loginbtntext"
