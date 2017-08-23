@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
 import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.service.UserBasicService;
@@ -16,6 +17,7 @@ import team.wonderland.ucount.ucount_android.service.UserBasicService;
 /**
  * Created by CLL on 17/8/16.
  */
+@EActivity
 public class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
@@ -26,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean haveLogined;
 
     @RestService
-    private UserBasicService userBasicService;
+    UserBasicService userBasicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

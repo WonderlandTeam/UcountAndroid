@@ -1,6 +1,5 @@
 package team.wonderland.ucount.ucount_android.service.servicestub;
 
-import org.androidannotations.rest.spring.annotations.Body;
 import team.wonderland.ucount.ucount_android.json.UserSignUpJson;
 import team.wonderland.ucount.ucount_android.service.UserBasicService;
 
@@ -9,7 +8,7 @@ import team.wonderland.ucount.ucount_android.service.UserBasicService;
  */
 public class UserBasicService_Stub implements UserBasicService {
     @Override
-    public Long signUp(@Body UserSignUpJson userSignUpJson) {
+    public Long signUp(UserSignUpJson userSignUpJson) {
         return Long.valueOf(1);
     }
 }

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
@@ -18,14 +19,14 @@ import team.wonderland.ucount.ucount_android.service.servicestub.UserBasicServic
 /**
  * Created by liuyu on 2017/8/20.
  */
-
+@EActivity
 public class RegisterActivity extends AppCompatActivity{
     private EditText phone,username, password;
     private Button btn_register;
     private String phoneValue,usernameValue,passwordValue;
 
     @RestService
-    private UserBasicService userBasicService;
+    UserBasicService userBasicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
