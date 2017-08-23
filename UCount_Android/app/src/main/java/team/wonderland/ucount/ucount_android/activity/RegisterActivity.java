@@ -1,6 +1,5 @@
 package team.wonderland.ucount.ucount_android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -71,9 +70,7 @@ public class RegisterActivity extends AppCompatActivity{
 
     @UiThread
     void showLoginActivity(){
-        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
-        //getApplication可以缺省
-        getApplication().startActivity(intent);
+        LoginActivity_.intent(getApplication()).start();
     }
 
     @UiThread

@@ -74,8 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Click(R.id.login_txtRegister)
     public void registerClick(View view){
-        Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-        startActivity(intent);
+        RegisterActivity_.intent(getApplication()).start();
         finish();
     }
 }
