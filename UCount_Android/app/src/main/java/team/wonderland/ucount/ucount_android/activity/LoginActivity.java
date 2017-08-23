@@ -1,18 +1,18 @@
 package team.wonderland.ucount.ucount_android.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-
+import org.androidannotations.annotations.Click;
+import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.service.UserBasicService;
+
 /**
  * Created by CLL on 17/8/16.
  */
@@ -24,6 +24,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgetPass,register;
     private SharedPreferences sp;
     private boolean haveLogined;
+
+    @RestService
+    private UserBasicService userBasicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,35 +49,31 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                usernameValue = username.getText().toString();
-                passwordValue = password.getText().toString();
+    }
 
-                //TODO:如果登录成功
-                if(true){
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("USERNAME",usernameValue);
-                    editor.putString("PASSWORD",passwordValue);
-                    editor.putBoolean("HAVELOGINED",true);
-                    editor.commit();
+    @Click(R.id.login_btnLogin)
+    public void loginClick(View view){
+        usernameValue = username.getText().toString();
+        passwordValue = password.getText().toString();
 
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
+        //TODO:如果登录成功
+        if(true){
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("USERNAME",usernameValue);
+            editor.putString("PASSWORD",passwordValue);
+            editor.putBoolean("HAVELOGINED",true);
+            editor.commit();
 
-        //跳转到注册界面
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Click(R.id.login_txtRegister)
+    public void registerClick(View view){
+        Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
