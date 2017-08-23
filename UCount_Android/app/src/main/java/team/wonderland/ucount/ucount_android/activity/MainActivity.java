@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selected();
                 tabAsset.setSelected(true);
                 if(assetFragment ==null){
-                    assetFragment = new AssetFragment("资产");
+                    assetFragment = new AssetFragment();
                     transaction.add(R.id.fragment_container, assetFragment);
                 }else{
                     transaction.show(assetFragment);
