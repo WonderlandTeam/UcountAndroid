@@ -2,6 +2,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,12 +38,15 @@ public class AssetFragment extends Fragment {
         txtIn = (TextView)view.findViewById(R.id.asset_txt_in);
         txtOut = (TextView)view.findViewById(R.id.asset_txt_out);
         recyclerView = (RecyclerView)view.findViewById(R.id.asset_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         initData();
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new AssetRecyclerAdapter(accounts,getActivity());
         recyclerView.setAdapter(adapter);
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(
+                getActivity(), DividerItemDecoration.HORIZONTAL));
         return view;
     }
 
@@ -52,6 +56,5 @@ public class AssetFragment extends Fragment {
         accounts.add(new Account("银行卡",0.0,R.mipmap.yinhangka));
         accounts.add(new Account("校园卡",0.0,R.mipmap.xiaoyuan));
         accounts.add(new Account("支付宝",0.0,R.mipmap.zhifubao));
-
     }
 }

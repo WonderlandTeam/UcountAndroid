@@ -52,7 +52,7 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
         isFirst = pref.getBoolean("status", true);
 
         if (!isFirst) {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity_.class);
             startActivity(intent);
             finish();
         }
@@ -62,7 +62,7 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
         guideThree.findViewById(R.id.toMain).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GuideActivity.this, LoginActivity.class);
+                Intent intent = new Intent(GuideActivity.this, LoginActivity_.class);
                 startActivity(intent);
                 finish();
             }
