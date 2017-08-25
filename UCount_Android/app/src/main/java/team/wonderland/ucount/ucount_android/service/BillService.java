@@ -6,12 +6,13 @@ import team.wonderland.ucount.ucount_android.json.BillAddJson;
 import team.wonderland.ucount.ucount_android.json.BillInfoJson;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 账目管理
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = "",converters = {MappingJackson2HttpMessageConverter.class},interceptors = {BasicAuthInterceptor.class})
+@Rest(rootUrl = "localhost:8080/api/",converters = {MappingJackson2HttpMessageConverter.class},interceptors = {BasicAuthInterceptor.class})
 public interface BillService {
     /**
      * 获取单条账目信息
@@ -34,13 +35,13 @@ public interface BillService {
 
     /**
      * 获取用户所有账目信息
-     * @param user_id            用户id
+     * @param username          用户id
      *                           pageable筛选信息传什么？
      * @return                  账目列表
      */
     //TODO
-    @Get("/users/{user_id}/bills")
-    public List<BillInfoJson> getBillsByUser(@Path Long user_id);
+    @Get("/users/{username}/bills")
+    public List<BillInfoJson> getBillsByUser(@Path String username);
 
     /**
      * 用户手动记账
@@ -49,7 +50,7 @@ public interface BillService {
      * @return                  新增账目id
      */
     @Post("/accounts/{account_id}/bills")
-    public Long addBillManually(@Path Long account_id, @Body BillAddJson billAddJson);
+    public Map<String, Object> addBillManually(@Path Long account_id, @Body BillAddJson billAddJson);
 
     /**
      * 删除单条账目信息
@@ -57,5 +58,5 @@ public interface BillService {
      * @param bill_id            账目id
      */
     @Delete("/accounts/{account_id}/bills/{bill_id}")
-    public void deleteBill(@Path Long account_id,@Path Long bill_id);
+    public Map<String, Object> deleteBill(@Path Long account_id, @Path Long bill_id);
 }

@@ -6,12 +6,13 @@ import team.wonderland.ucount.ucount_android.json.AccountAddJson;
 import team.wonderland.ucount.ucount_android.json.AccountInfoJson;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户账户管理
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = "",converters = {MappingJackson2HttpMessageConverter.class},interceptors = {BasicAuthInterceptor.class})
+@Rest(rootUrl = "localhost:8080/api/",converters = {MappingJackson2HttpMessageConverter.class},interceptors = {BasicAuthInterceptor.class})
 public interface AccountService {
     /**
      * 获取账户信息
@@ -23,11 +24,11 @@ public interface AccountService {
 
     /**
      * 获取用户所有账户信息
-     * @param userId
+     * @param username
      * @return
      */
-    @Get("/accounts?userId={userId}")
-    public List<AccountInfoJson> getAccountsByUser(@Path Long userId);
+    @Get("/accounts?username={username}")
+    public List<AccountInfoJson> getAccountsByUser(@Path String username);
 
     /**
      * 添加账户信息
@@ -35,12 +36,12 @@ public interface AccountService {
      * @return account_id
      */
     @Post("/accounts")
-    public Long addAccount(@Body AccountAddJson accountAddJson);
+    public Map<String, Object> addAccount(@Body AccountAddJson accountAddJson);
 
     /**
      * 删除账户信息
      * @param account_id
      */
     @Delete("/accounts/{account_id}")
-    public void deleteAccount(@Path Long account_id);
+    public Map<String, Object> deleteAccount(@Path Long account_id);
 }
