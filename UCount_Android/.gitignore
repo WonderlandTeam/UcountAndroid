@@ -2,7 +2,9 @@
 .idea
 .gradle
 .idea/misc.xml
+.idea/modules
 .idea/modules.xml
+.idea/workspace.xml
 /local.properties
 .DS_Store
 /build
