@@ -48,3 +48,13 @@ dependencies {
     compile "org.androidannotations:rest-spring-api:$AAVersion"
 }
 
+dependencies {
+    repositories {
+        mavenCentral()
+        maven {
+            url  'http://dl.bintray.com/gigamole/maven/'
+        }
+    }
+    compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:+'
+}
+

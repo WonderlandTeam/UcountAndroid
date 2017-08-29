@@ -14,16 +14,15 @@ import team.wonderland.ucount.ucount_android.R;
  */
 
 public class PlanFragment extends Fragment {
-    private String context;
     private TextView mTextView;
 
     public  PlanFragment(String context){
-        this.context = context;
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.asset_fragment,container,false);
+        View view = inflater.inflate(R.layout.plan_fragment,container,false);
         return view;
     }
 }
