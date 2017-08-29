@@ -9,11 +9,7 @@ import android.widget.Toast;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
-import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.json.UserSignUpJson;
-import team.wonderland.ucount.ucount_android.service.UserBasicService;
-import team.wonderland.ucount.ucount_android.service.servicestub.UserBasicService_Stub;
 
 /**
  * Created by liuyu on 2017/8/20.
@@ -24,16 +20,16 @@ public class RegisterActivity extends AppCompatActivity{
     private Button btn_register;
     private String phoneValue,usernameValue,passwordValue;
 
-    @RestService
-    UserBasicService userBasicService;
+//    @RestService
+//    UserBasicService userBasicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //先用stub
-        userBasicService=new UserBasicService_Stub();
+//        //先用stub
+//        userBasicService=new UserBasicService_Stub();
 
         phone = (EditText)findViewById(R.id.et_reg_phone);
         username = (EditText)findViewById(R.id.et_reg_username);
@@ -55,17 +51,17 @@ public class RegisterActivity extends AppCompatActivity{
         }
         //邮箱可选，先空着
         //TODO
-        UserSignUpJson userSignUpJson=new UserSignUpJson(username.getText().toString(),password.getText().toString(),
-                phone.getText().toString(),null);
-        if (userBasicService.signUp(userSignUpJson)==null){
-            //error填入错误信息
-            showErrorMessage("");
-        }
-        //返回用户id
-        else{
-            //进入登录界面
-            showLoginActivity();
-        }
+//        UserSignUpJson userSignUpJson=new UserSignUpJson(username.getText().toString(),password.getText().toString(),
+//                phone.getText().toString(),null);
+//        if (userBasicService.signUp(userSignUpJson)==null){
+//            //error填入错误信息
+//            showErrorMessage("");
+//        }
+//        //返回用户id
+//        else{
+//            //进入登录界面
+//            showLoginActivity();
+//        }
     }
 
     @UiThread

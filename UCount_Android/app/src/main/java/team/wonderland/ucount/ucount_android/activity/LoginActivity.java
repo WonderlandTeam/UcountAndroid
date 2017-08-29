@@ -10,9 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.service.UserBasicService;
 
 /**
  * Created by CLL on 17/8/16.
@@ -27,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private boolean haveLogined;
 
-    @RestService
-    UserBasicService userBasicService;
+//    @RestService
+//    UserBasicService userBasicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

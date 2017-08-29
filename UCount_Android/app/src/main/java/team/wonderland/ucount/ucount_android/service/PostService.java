@@ -121,15 +121,15 @@ public interface PostService {
      * @param reply_id       回复id
      * @return              帖子回复信息列表
      */
-    @Get("/posts/replies/{reply_id}")
-    public Map<String,Object> getPostReply(@Path Long reply_id);
+    @Get("/posts/replies/{reply_id}?username={username}")
+    public Map<String,Object> getPostReply(@Path Long reply_id,@Path String username);
 
     /**
      *
      * @param post_id
      * @return
      */
-    @Get("/posts/{post_id}/replies")
-    public Map<String, Object> getPostReplies(@Path Long post_id);
+    @Get("/posts/{post_id}/replies?username={username}")
+    public Map<String, Object> getPostReplies(@Path Long post_id,@Path String username);
 
 }
