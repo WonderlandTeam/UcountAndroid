@@ -52,7 +52,7 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
         isFirst = pref.getBoolean("status", true);
 
         if (!isFirst) {
-            Intent intent = new Intent(this, LoginActivity_.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         }
