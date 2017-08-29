@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -36,6 +37,7 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
 
@@ -47,7 +49,6 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
     }
 
     private void initViews() {
-
         SharedPreferences pref = getSharedPreferences("first", Activity.MODE_PRIVATE);
         isFirst = pref.getBoolean("status", true);
 
@@ -55,6 +56,10 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
+        }else{
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("status", false);
+            editor.commit();
         }
 
         LayoutInflater inflater = LayoutInflater.from(this);

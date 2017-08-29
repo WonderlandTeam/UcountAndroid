@@ -5,10 +5,11 @@
         android:id="@+id/asset_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="8dp">
+        app:cardCornerRadius="3dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_toRightOf="@id/asset_img_account"
                 android:background="#00000000"
                 android:gravity="center"
-                android:textSize="25sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/asset_txt_accounttotal"
@@ -40,7 +41,7 @@
                 android:layout_marginRight="8dp"
                 android:background="#00000000"
                 android:gravity="center"
-                android:textSize="25dp" />
+                android:textSize="18sp" />
 
 
         </RelativeLayout>

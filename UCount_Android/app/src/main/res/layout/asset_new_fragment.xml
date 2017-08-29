@@ -1,7 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/asset_new_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        >
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="新建账户"
+            android:textSize="20sp" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/asset_new_cardview_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:layout_below="@+id/asset_new_header"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@color/main_bg"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="账户名称"
+            android:textSize="16sp"
+            android:paddingLeft="8dp"
+            />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/ic_more"
+            />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/asset_new_cardview_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:layout_below="@+id/asset_new_cardview_name"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:background="@color/main_bg"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="账户类型"
+            android:textSize="16sp"
+            android:paddingLeft="8dp"
+            />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/ic_more"
+            />
+    </android.support.v7.widget.CardView>
 
 
-</LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/asset_new_cardview_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:layout_below="@+id/asset_new_cardview_type"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@color/main_bg"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="账户余额"
+            android:textSize="16sp"
+            android:paddingLeft="8dp"
+            />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/ic_more"
+            />
+    </android.support.v7.widget.CardView>
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/add_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true">
+    </at.markushi.ui.CircleButton>
+</RelativeLayout>

@@ -1,7 +1,9 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.activity.MainActivity;
 
 /**
  * Created by liuyu on 2017/8/21.
@@ -25,6 +28,7 @@ public class AssetFragment extends Fragment {
     private RecyclerView recyclerView;
     private AssetRecyclerAdapter adapter;
     private List<Account> accounts;
+
     public  AssetFragment(){
 
     }
@@ -41,10 +45,20 @@ public class AssetFragment extends Fragment {
 
         initData();
 
+        txtNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .addToBackStack(null)  //将当前fragment加入到返回栈中
+                        .replace(R.id.fragment_container, new AssetNewFragment()).commit();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.add(R.id.fragment_container, new AssetNewFragment());
+        }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new AssetRecyclerAdapter(accounts,getActivity());
         recyclerView.setAdapter(adapter);
-
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.HORIZONTAL));
         return view;
@@ -52,9 +66,13 @@ public class AssetFragment extends Fragment {
 
     public void initData(){
         accounts = new ArrayList<>();
-        accounts.add(new Account("现金",0.0,R.mipmap.xianjin));
+        accounts.add(new Account("现金",20.0,R.mipmap.xianjin));
+        accounts.add(new Account("现金2",0.0,R.mipmap.xianjin));
         accounts.add(new Account("银行卡",0.0,R.mipmap.yinhangka));
         accounts.add(new Account("校园卡",0.0,R.mipmap.xiaoyuan));
         accounts.add(new Account("支付宝",0.0,R.mipmap.zhifubao));
     }
+
+    //TODO:点击新建按钮
+
 }
