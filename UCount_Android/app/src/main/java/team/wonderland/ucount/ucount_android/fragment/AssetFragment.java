@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,15 @@ public class AssetFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.HORIZONTAL));
+
+        adapter.setOnItemClickListener(new AssetRecyclerAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view , int position){
+                getFragmentManager().beginTransaction()
+                        .addToBackStack(null)  //将当前fragment加入到返回栈中
+                        .replace(R.id.fragment_container, new AssetCashDetailFragment()).commit();
+            }
+        });
         return view;
     }
 

@@ -3,12 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/asset_detail_item_cardview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="40dp"
     android:layout_marginBottom="2dp"
-    android:background="@color/white"
-    android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="8dp"
+    android:background="@color/main_bg"
     >
 
     <TextView
@@ -17,7 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:text="8月1日"
-        android:textSize="32sp"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/text_gray"
+        android:textSize="16sp"
         />
 
     <TextView
@@ -26,8 +25,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginLeft="8dp"
+        android:layout_gravity="center_vertical"
         android:text="餐饮"
-        android:textSize="32sp"
+        android:textColor="@color/text_gray"
+        android:textSize="20sp"
         />
 
     <TextView
@@ -36,8 +37,10 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:layout_marginRight="8dp"
+        android:textColor="@color/text_green"
+        android:layout_gravity="center_vertical"
         android:text="20.00"
-        android:textSize="32sp"
+        android:textSize="20sp"
 
         />
 

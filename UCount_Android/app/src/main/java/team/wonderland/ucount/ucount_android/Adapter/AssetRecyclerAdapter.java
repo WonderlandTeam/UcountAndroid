@@ -18,10 +18,12 @@ import team.wonderland.ucount.ucount_android.fragment.Account;
  * Created by liuyu on 2017/8/23.
  */
 
-public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdapter.AccountViewHolder> {
+public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdapter.AccountViewHolder>
+        implements View.OnClickListener{
 
     private List<Account> accounts;
     private Context context;
+    private OnItemClickListener mOnItemClickListener = null;
 
     public AssetRecyclerAdapter(List<Account> accounts,Context context) {
         this.accounts = accounts;
@@ -32,6 +34,7 @@ public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdap
     public AssetRecyclerAdapter.AccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(context).inflate(R.layout.asset_item,parent,false);
         AccountViewHolder nvh=new AccountViewHolder(v);
+        v.setOnClickListener(this);
         return nvh;
     }
 
@@ -43,6 +46,8 @@ public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdap
         AccountViewHolder.accountName.setText(accounts.get(position).getName());
         AccountViewHolder.accountTotal.setText(String.valueOf(accounts.get(position).getTotal()));
 
+        //将position保存在itemView的Tag中，以便点击时进行获取
+        holder.itemView.setTag(position);
     }
 
     @Override
@@ -64,4 +69,22 @@ public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdap
             accountTotal = (TextView)itemView.findViewById(R.id.asset_txt_accounttotal);
         }
     }
+
+    //define interface
+    public static interface OnItemClickListener {
+        void onItemClick(View view , int position);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取position
+            mOnItemClickListener.onItemClick(v,(int)v.getTag());
+        }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
 }

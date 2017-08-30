@@ -52,6 +52,7 @@ public class AssetDetailFragment extends Fragment {
 
         mPercentageRing = (PercentageRing) view.findViewById(R.id.Circle);
         //设置目标百分比为30
+        //TODO:余额占预算的百分比
         mPercentageRing.setTargetPercent(30);
 
 
