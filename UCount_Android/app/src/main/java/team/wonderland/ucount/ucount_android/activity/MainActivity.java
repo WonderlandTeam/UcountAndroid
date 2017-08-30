@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +14,10 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.fragment.AssetFragment;
-import team.wonderland.ucount.ucount_android.fragment.MoneyFragment;
-import team.wonderland.ucount.ucount_android.fragment.PlanFragment;
-import team.wonderland.ucount.ucount_android.fragment.ReportFragment;
+import team.wonderland.ucount.ucount_android.fragment.*;
+
+import static team.wonderland.ucount.ucount_android.R.id.fragment_container;
+import static team.wonderland.ucount.ucount_android.R.layout.activity_main;
 
 /**
  * Created by liuyu on 2017/8/19.
@@ -33,7 +32,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tabReport;
     private TextView tabPlan;
     private TextView tabMoney;
+
     private Button quitButton;
+    private Button bt_modifyPassword;
+    private Button bt_post;
+    private Button bt_reply;
+    private Button bt_praise;
+    private Button bt_collection;
+    private Button bt_message;
+
     private SharedPreferences sp;
 
     private FrameLayout ly_content;
@@ -42,12 +49,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ReportFragment reportFragment;
     private PlanFragment planFragment;
     private MoneyFragment moneyFragment;
-    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
+
+    private ModifyPasswordFragment modifyPasswordFragment;
+    private MyPostsFragment myPostsFragment;
+    private MyMessageFragment myMessageFragment;
+    private MyCollectionFragment myCollectionFragment;
+    private MyReplyFragment myReplyFragment;
+    private MyPraiseFragment myPraiseFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(activity_main);
         sp = this.getSharedPreferences("userInfo",0);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tabAsset.performClick();
 
+        //个人中心按钮
         quitButton = (Button)findViewById(R.id.quit_btn);
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +124,84 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 editor.putString("PASSWORD","");
                 editor.putBoolean("HAVELOGINED",false);
                 editor.commit();
+            }
+        });
+
+        bt_modifyPassword= (Button) findViewById(R.id.password_more);
+        bt_modifyPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View left_menu=findViewById(R.id.left_menu);
+                mDrawerLayout.closeDrawer(left_menu);
+                transaction = getSupportFragmentManager().beginTransaction();
+                modifyPasswordFragment = new ModifyPasswordFragment();
+                transaction.replace(fragment_container, modifyPasswordFragment);
+                transaction.commit();
+            }
+        });
+
+        bt_post= (Button) findViewById(R.id.post_more);
+        bt_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View left_menu=findViewById(R.id.left_menu);
+                mDrawerLayout.closeDrawer(left_menu);
+                transaction = getSupportFragmentManager().beginTransaction();
+                myPostsFragment=new MyPostsFragment();
+                transaction.replace(fragment_container, myPostsFragment);
+                transaction.commit();
+            }
+        });
+
+        bt_collection= (Button) findViewById(R.id.collection_more);
+        bt_collection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View left_menu=findViewById(R.id.left_menu);
+                mDrawerLayout.closeDrawer(left_menu);
+                transaction = getSupportFragmentManager().beginTransaction();
+                myCollectionFragment=new MyCollectionFragment();
+                transaction.replace(fragment_container, myCollectionFragment);
+                transaction.commit();
+            }
+        });
+
+        bt_praise= (Button) findViewById(R.id.praise_more);
+        bt_praise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View left_menu=findViewById(R.id.left_menu);
+                mDrawerLayout.closeDrawer(left_menu);
+                transaction = getSupportFragmentManager().beginTransaction();
+                myPraiseFragment=new MyPraiseFragment();
+                transaction.replace(fragment_container, myPraiseFragment);
+                transaction.commit();
+            }
+        });
+
+        bt_message= (Button) findViewById(R.id.message_more);
+        bt_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View left_menu=findViewById(R.id.left_menu);
+                mDrawerLayout.closeDrawer(left_menu);
+                transaction = getSupportFragmentManager().beginTransaction();
+                myMessageFragment=new MyMessageFragment();
+                transaction.replace(fragment_container, myMessageFragment);
+                transaction.commit();
+            }
+        });
+
+        bt_reply= (Button) findViewById(R.id.reply_more);
+        bt_reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View left_menu=findViewById(R.id.left_menu);
+                mDrawerLayout.closeDrawer(left_menu);
+                transaction = getSupportFragmentManager().beginTransaction();
+                myReplyFragment=new MyReplyFragment();
+                transaction.replace(fragment_container, myReplyFragment);
+                transaction.commit();
             }
         });
 
@@ -133,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabReport = (TextView)this.findViewById(R.id.txt_report);
         tabPlan = (TextView)this.findViewById(R.id.txt_plan);
         tabMoney = (TextView)this.findViewById(R.id.txt_money);
-        ly_content = (FrameLayout) findViewById(R.id.fragment_container);
+        ly_content = (FrameLayout) findViewById(fragment_container);
 
         tabAsset.setOnClickListener(this);
         tabReport.setOnClickListener(this);
@@ -168,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction = getSupportFragmentManager().beginTransaction();
         hideAllFragment(transaction);
         switch(v.getId()){
             case R.id.txt_asset:
@@ -176,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tabAsset.setSelected(true);
                 if(assetFragment ==null){
                     assetFragment = new AssetFragment();
-                    transaction.add(R.id.fragment_container, assetFragment);
+                    transaction.add(fragment_container, assetFragment);
                 }else{
                     transaction.show(assetFragment);
                 }
@@ -187,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tabReport.setSelected(true);
                 if(reportFragment ==null){
                     reportFragment = new ReportFragment("报表");
-                    transaction.add(R.id.fragment_container, reportFragment);
+                    transaction.add(fragment_container, reportFragment);
                 }else{
                     transaction.show(reportFragment);
                 }
@@ -198,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tabPlan.setSelected(true);
                 if(planFragment ==null){
                     planFragment = new PlanFragment("计划");
-                    transaction.add(R.id.fragment_container, planFragment);
+                    transaction.add(fragment_container, planFragment);
                 }else{
                     transaction.show(planFragment);
                 }
@@ -209,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tabMoney.setSelected(true);
                 if(moneyFragment ==null){
                     moneyFragment = new MoneyFragment("理财");
-                    transaction.add(R.id.fragment_container, moneyFragment);
+                    transaction.add(fragment_container, moneyFragment);
                 }else{
                     transaction.show(moneyFragment);
                 }
