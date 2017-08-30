@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MenuItemView">
+        <attr format="dimension" name="headerDrawable"></attr>
+        <attr format="integer" name="drawPadding"></attr>
+        <attr format="string" name="textHeader"></attr>
+        <attr format="integer" name="textHeaderColor"></attr>
+        <attr format="integer" name="textSize"></attr>
+        <attr format="dimension" name="arrowDrawable"></attr>
+        <attr format="integer" name="arrowSize"></attr>
+        <attr format="boolean" name="arrowWropToSelf"></attr>
+        <attr format="integer" name="arrowColor"/>
+        <attr format="integer" name="onColor"></attr>
+        <attr format="integer" name="offColor"></attr>
+        <attr format="integer" name="areaColor"></attr>
+        <attr format="integer" name="handlerColor"></attr>
+        <attr format="integer" name="bordeWidth"></attr>
+        <attr format="boolean" name="animate"></attr>
+        <attr format="boolean" name="defaultOn"></attr>
+        <attr name="Style">
+            <enum name="customStyle" value="0"/>
+            <enum name="switchStyle" value="1"/>
+        </attr>
+        <attr format="integer" name="switchButtonWidth"></attr>
+        <attr format="integer" name="switchButtonHeight"></attr>
+        <attr format="dimension" name="piderr"/>
+        <attr format="integer" name="piderWidth"/>
+        <attr format="boolean" name="piderVisibilty"/>
+
+    </declare-styleable>
+
+</resources>
+

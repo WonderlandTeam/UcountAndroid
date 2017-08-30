@@ -13,8 +13,8 @@
         android:layout_height="match_parent" >
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_gravity="center">
             <LinearLayout
                 android:id="@+id/tab_menu"
                 android:layout_width="match_parent"
@@ -80,15 +80,15 @@
                 android:id="@+id/div_tab_bar"
                 android:layout_width="match_parent"
                 android:layout_height="2px"
-                android:background="@color/text_gray"
+                android:background="@color/text_green"
                 android:layout_above="@id/tab_menu"/>
 
             <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/tab_menu"
-                android:background="@color/transparent"></FrameLayout>
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent" android:layout_above="@+id/div_tab_bar"
+                    android:layout_alignParentLeft="true" android:layout_alignParentStart="true"></FrameLayout>
         </RelativeLayout>
     </FrameLayout>
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
@@ -102,62 +102,217 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="left"
-        android:background="#fff"
         >
-        <TextView
-            android:id="@+id/profile_txt_useranme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户名"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/profile_txt_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="修改密码"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/profile_txt_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的帖子"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/profile_txt_star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的收藏"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/profile_txt_remark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的评论"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/profile_txt_praise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的赞"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:id="@+id/profile_txt_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的消息"
-            android:textSize="20sp"
-            />
-        <Button
-            android:id="@+id/quit_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="退出当前账号"/>
+        <GridView android:layout_width="match_parent" android:layout_height="450px"
+                  android:background="@drawable/header" android:numColumns="3" >
+        </GridView>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/main_bg"
+        android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                    android:id="@+id/main_center_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="2dp"
+            >
+                <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="20px"
+                            android:src="@mipmap/ic_password"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="修改密码"
+                        android:textSize="20sp" />
+                <ImageView
+                        android:id="@+id/password_more"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="240dp"
+                        android:src="@mipmap/ic_more" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:id="@+id/main_center_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="2dp"
+            >
+                <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginLeft="20px"
+                           android:src="@mipmap/ic_post"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="我的帖子"
+                        android:textSize="20sp" />
+                <ImageView
+                        android:id="@+id/post_more"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="240dp"
+                        android:src="@mipmap/ic_more" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:id="@+id/main_center_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="4dp"
+            >
+                <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginLeft="20px"
+                           android:src="@mipmap/ic_collection"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="我的收藏"
+                        android:textSize="20sp" />
+                <ImageView
+                        android:id="@+id/collection_more"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="240dp"
+                        android:src="@mipmap/ic_more" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:id="@+id/main_center_reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="4dp"
+            >
+                <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginLeft="20px"
+                           android:src="@mipmap/ic_reply"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="我的评论"
+                        android:textSize="20sp" />
+                <ImageView
+                        android:id="@+id/reply_more"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="240dp"
+                        android:src="@mipmap/ic_more" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:id="@+id/main_Center_praise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="4dp"
+            >
+                <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginLeft="20px"
+                           android:src="@mipmap/ic_praise"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="我的赞"
+                        android:textSize="20sp" />
+                <ImageView
+                        android:id="@+id/praise_more"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="240dp"
+                        android:src="@mipmap/ic_more" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:id="@+id/main_center_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="4dp"
+            >
+                <ImageView android:layout_width="40dp" android:layout_height="40dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginLeft="20px"
+                           android:src="@mipmap/ic_message"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="我的消息"
+                        android:textSize="20sp" />
+                <ImageView
+                        android:id="@+id/message_more"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="240dp"
+                        android:src="@mipmap/ic_more" />
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="50dp" android:orientation="horizontal">
+                <Button
+                        android:id="@+id/quit_btn"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="100dp"
+                        android:background="@mipmap/ic_back2"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="退出当前账户"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/text_green_darker"/>
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

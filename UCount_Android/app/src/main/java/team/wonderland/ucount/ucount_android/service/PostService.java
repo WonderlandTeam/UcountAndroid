@@ -18,7 +18,7 @@ public interface PostService {
 
     /**
      * 根据筛选条件获取帖子(筛选参数？)
-     * @return              帖子
+     * @return              ic_post
      */
     @Get("/posts?username={username}&page={page}&size={size}&sort={sort},{direct}")
     public List<PostInfoJson> getPosts(@Path String username,@Path int page,@Path int size,@Path String sort,@Path String direct);

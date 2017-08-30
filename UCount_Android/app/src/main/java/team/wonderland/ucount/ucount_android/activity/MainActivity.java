@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.AssetFragment;
 import team.wonderland.ucount.ucount_android.fragment.MoneyFragment;
@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //跳回到登录界面
+                Intent intent=new Intent(MainActivity.this,LoginActivity_.class);
+                startActivity(intent);
+
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("USERNAME","");
                 editor.putString("PASSWORD","");
