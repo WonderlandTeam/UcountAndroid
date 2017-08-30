@@ -1,9 +1,7 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import team.wonderland.ucount.ucount_android.Adapter.AssetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.activity.MainActivity;
 
 /**
  * Created by liuyu on 2017/8/21.
@@ -56,6 +54,15 @@ public class AssetFragment extends Fragment {
         }
         });
 
+        txtDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .addToBackStack(null)  //将当前fragment加入到返回栈中
+                        .replace(R.id.fragment_container, new AssetDetailFragment()).commit();
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new AssetRecyclerAdapter(accounts,getActivity());
         recyclerView.setAdapter(adapter);
@@ -73,6 +80,5 @@ public class AssetFragment extends Fragment {
         accounts.add(new Account("支付宝",0.0,R.mipmap.zhifubao));
     }
 
-    //TODO:点击新建按钮
 
 }

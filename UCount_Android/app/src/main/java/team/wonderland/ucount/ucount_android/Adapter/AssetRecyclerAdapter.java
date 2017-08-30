@@ -1,4 +1,4 @@
-package team.wonderland.ucount.ucount_android.fragment;
+package team.wonderland.ucount.ucount_android.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.fragment.Account;
 
 /**
  * Created by liuyu on 2017/8/23.
@@ -57,7 +58,7 @@ public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdap
 
         public AccountViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView)itemView.findViewById(R.id.asset_card_view);
+            cardView = (CardView)itemView.findViewById(R.id.asset_item_cardview);
             accountImg = (ImageView)itemView.findViewById(R.id.asset_img_account);
             accountName = (TextView)itemView.findViewById(R.id.asset_txt_accountname);
             accountTotal = (TextView)itemView.findViewById(R.id.asset_txt_accounttotal);
