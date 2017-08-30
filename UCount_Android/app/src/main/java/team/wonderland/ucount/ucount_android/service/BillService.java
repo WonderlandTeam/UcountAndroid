@@ -29,9 +29,8 @@ public interface BillService {
      *                           pageable筛选信息传什么？
      * @return                  账目列表
      */
-    //TODO
-    @Get("/accounts/{account_id}/bills")
-    public List<BillInfoJson> getBillsByAccount(@Path Long account_id);
+    @Get("/accounts/{account_id}/bills?page={page}&size={size}&sort={sort},{direct}")
+    public List<BillInfoJson> getBillsByAccount(@Path Long account_id,@Path int page,@Path int size,@Path String sort,@Path String direct);
 
     /**
      * 获取用户所有账目信息
@@ -39,9 +38,8 @@ public interface BillService {
      *                           pageable筛选信息传什么？
      * @return                  账目列表
      */
-    //TODO
-    @Get("/users/{username}/bills")
-    public List<BillInfoJson> getBillsByUser(@Path String username);
+    @Get("/users/{username}/bills?page={page}&size={size}&sort={sort},{direct}")
+    public List<BillInfoJson> getBillsByUser(@Path String username,@Path int page,@Path int size,@Path String sort,@Path String direct);
 
     /**
      * 用户手动记账

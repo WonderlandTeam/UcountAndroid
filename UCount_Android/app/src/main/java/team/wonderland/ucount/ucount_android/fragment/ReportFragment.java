@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,6 @@ import java.util.List;
 public class ReportFragment extends Fragment {
     private ViewPager mViewPager;
     private NavigationTabStrip mTopNavigationTabStrip;
-    private NavigationTabStrip mCenterNavigationTabStrip;
-    private NavigationTabStrip mBottomNavigationTabStrip;
     private List<View> viewList;
 
     public  ReportFragment(String context){
@@ -41,7 +40,7 @@ public class ReportFragment extends Fragment {
         mTopNavigationTabStrip = (NavigationTabStrip) view.findViewById(R.id.nts_top);
     }
 
-    private void setUI(LayoutInflater inflater,View view) {
+    private void setUI(LayoutInflater inflater, final View view) {
         View view1 = inflater.inflate(R.layout.report_one, null);
         View view2 = inflater.inflate(R.layout.report_two,null);
         View view3 = inflater.inflate(R.layout.report_three, null);
@@ -57,7 +56,7 @@ public class ReportFragment extends Fragment {
 
             @Override
             public boolean isViewFromObject(final View view, final Object object) {
-                return view.equals(object);
+                return view == object;
             }
 
             @Override
@@ -68,13 +67,21 @@ public class ReportFragment extends Fragment {
 
             @Override
             public Object instantiateItem(final ViewGroup container, final int position) {
-                container.addView(viewList.get(position));
-
-
                 return viewList.get(position);
             }
         });
 
-        mTopNavigationTabStrip.setTabIndex(1, true);
+        mTopNavigationTabStrip.setTabIndex(0, true);
+        mTopNavigationTabStrip.setOnTabStripSelectedIndexListener(new NavigationTabStrip.OnTabStripSelectedIndexListener() {
+            @Override
+            public void onStartTabSelected(String title, int index) {
+                Log.i("tag","切换"+title);
+            }
+
+            @Override
+            public void onEndTabSelected(String title, int index) {
+
+            }
+        });
     }
 }
