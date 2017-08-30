@@ -25,7 +25,7 @@ import java.util.List;
 public class GuideActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager vp;
-    private ViewPagerAdapter vpAdapter;
+    private GuideViewPagerAdapter vpAdapter;
     private List<View> views;
 
     // 底部小点图片
@@ -78,7 +78,7 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
         views.add(inflater.inflate(R.layout.guide_view02, null));
         views.add(guideThree);
         // 初始化Adapter
-        vpAdapter = new ViewPagerAdapter(views, this);
+        vpAdapter = new GuideViewPagerAdapter(views, this);
 
         vp = (ViewPager) findViewById(R.id.viewpager);
         vp.setAdapter(vpAdapter);

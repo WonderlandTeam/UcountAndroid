@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/asset_img_header"
-        android:src="@drawable/header1"
+        android:src="@drawable/header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"

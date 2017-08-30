@@ -14,14 +14,14 @@ import android.widget.ImageView;
  * Created by liuyu on 2017/8/19.
  */
 
-public class ViewPagerAdapter extends PagerAdapter {
+public class GuideViewPagerAdapter extends PagerAdapter {
 
     // 界面列表
     private List<View> views;
     private AppCompatActivity activity;
 
 
-    public ViewPagerAdapter(List<View> views, AppCompatActivity activity) {
+    public GuideViewPagerAdapter(List<View> views, AppCompatActivity activity) {
         this.views = views;
         this.activity = activity;
     }

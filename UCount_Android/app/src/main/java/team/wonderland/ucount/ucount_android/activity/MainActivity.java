@@ -1,6 +1,7 @@
 package team.wonderland.ucount.ucount_android.activity;
 
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +25,8 @@ import team.wonderland.ucount.ucount_android.fragment.ReportFragment;
  */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    public static String PACKAGE_NAME;
+    public static Resources resources;
 
     private DrawerLayout mDrawerLayout = null;
     private TextView tabAsset;
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tabMoney;
     private Button quitButton;
     private SharedPreferences sp;
-
 
     private FrameLayout ly_content;
 
@@ -104,6 +106,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 editor.commit();
             }
         });
+
+        // 获得包名和资源，方便后面的程序使用
+        PACKAGE_NAME = getApplicationContext().getPackageName();
+        resources = getResources();
     }
 
 

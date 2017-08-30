@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+
+    <ImageView
+        android:id="@+id/asset_img_header"
+        android:src="@drawable/header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_heightPercent="30%" />
+
+    <TextView
+        android:id="@+id/asset_txt_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="明细"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/asset_txt_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:text="新建"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/asset_txt_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        app:layout_marginTopPercent="6%"
+        android:layout_centerHorizontal="true"
+        android:text="剩余预算"
+        android:textColor="@color/white"
+        android:textSize="28sp"/>
+
+    <TextView
+        android:id="@+id/asset_txt_totalnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="11%"
+        android:layout_centerHorizontal="true"
+        android:text="20.00"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/asset_recyclerview"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp"
+                android:layout_below="@id/asset_img_header"
+                />
+
+
+        </android.support.percent.PercentRelativeLayout>
