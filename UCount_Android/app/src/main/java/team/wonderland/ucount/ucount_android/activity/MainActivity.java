@@ -244,69 +244,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabMoney.setSelected(false);
     }
 
-    //隐藏所有Fragment
-    public void hideAllFragment(FragmentTransaction transaction){
-        if(assetFragment !=null){
-            transaction.hide(assetFragment);
-        }
-        if(reportFragment !=null){
-            transaction.hide(reportFragment);
-        }
-        if(planFragment !=null){
-            transaction.hide(planFragment);
-        }
-        if(moneyFragment !=null){
-            transaction.hide(moneyFragment);
-        }
-    }
 
     @Override
     public void onClick(View v) {
         transaction = getSupportFragmentManager().beginTransaction();
-        hideAllFragment(transaction);
         switch(v.getId()){
             case R.id.txt_asset:
                 selected();
                 tabAsset.setSelected(true);
-                if(assetFragment ==null){
-                    assetFragment = new AssetFragment();
-                    transaction.add(fragment_container, assetFragment);
-                }else{
-                    transaction.show(assetFragment);
-                }
+                assetFragment = new AssetFragment();
+                transaction.add(fragment_container, assetFragment);
                 break;
 
             case R.id.txt_report:
                 selected();
                 tabReport.setSelected(true);
-                if(reportFragment ==null){
-                    reportFragment = new ReportFragment("报表");
-                    transaction.add(fragment_container, reportFragment);
-                }else{
-                    transaction.show(reportFragment);
-                }
+                reportFragment = new ReportFragment();
+                transaction.add(fragment_container, reportFragment);
                 break;
 
             case R.id.txt_plan:
                 selected();
                 tabPlan.setSelected(true);
-                if(planFragment ==null){
-                    planFragment = new PlanFragment("计划");
-                    transaction.add(fragment_container, planFragment);
-                }else{
-                    transaction.show(planFragment);
-                }
+                planFragment = new PlanFragment();
+                transaction.add(fragment_container, planFragment);
                 break;
 
             case R.id.txt_money:
                 selected();
                 tabMoney.setSelected(true);
-                if(moneyFragment ==null){
-                    moneyFragment = new MoneyFragment("理财");
-                    transaction.add(fragment_container, moneyFragment);
-                }else{
-                    transaction.show(moneyFragment);
-                }
+                moneyFragment = new MoneyFragment();
+                transaction.add(fragment_container, moneyFragment);
                 break;
         }
 

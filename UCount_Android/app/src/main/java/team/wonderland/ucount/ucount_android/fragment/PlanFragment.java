@@ -16,7 +16,7 @@ import team.wonderland.ucount.ucount_android.R;
 public class PlanFragment extends Fragment {
     private TextView mTextView;
 
-    public  PlanFragment(String context){
+    public  PlanFragment(){
 
     }
 

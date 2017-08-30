@@ -31,8 +31,8 @@ import team.wonderland.ucount.ucount_android.util.ViewPagerAdapter;
  */
 
 public class AssetCostFragment extends Fragment {
-    private String[] titles = {"饮食", "日用", "水电气", "通讯／网费", "电子设备", "交通", "衣帽鞋服", "护肤品",
-            "彩妆", "首饰", "培训", "书", "文具", "打印／图像影音", "组织活动","捐款","恋爱","社交","兴趣"};
+    private String[] titles = {"饮食", "日用", "水电气", "通讯网费", "电子设备", "交通", "衣帽鞋服", "护肤品",
+            "彩妆", "首饰", "培训", "书", "文具", "图像影音", "组织活动","捐款","恋爱","社交","兴趣"};
     private ViewPager mPager;
     private List<View> mPagerList;
     private List<IOItem> mDatas;
@@ -82,7 +82,7 @@ public class AssetCostFragment extends Fragment {
         mPagerList = new ArrayList<View>();
         for (int i = 0; i < pageCount; i++) {
             RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.item_recycler_grid, mPager ,false);
-            MyGridLayoutManager layoutManager = new MyGridLayoutManager(getContext(), 6);
+            MyGridLayoutManager layoutManager = new MyGridLayoutManager(getContext(), 4);
             recyclerView.setLayoutManager(layoutManager);
             GridRecyclerAdapter adaper = new GridRecyclerAdapter(mDatas, i, pageSize);
             recyclerView.setAdapter(adaper);

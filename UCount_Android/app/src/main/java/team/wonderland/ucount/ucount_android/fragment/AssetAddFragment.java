@@ -37,6 +37,8 @@ public class AssetAddFragment extends Fragment{
     private Button clearBtn;
     private ImageButton addFinishBtn;
     private ImageButton addDescription;
+    private Button zero,one,two,three,four,five,six,seven,eight,nine,dot;
+
 
 
     private ImageView bannerImage;
@@ -85,6 +87,91 @@ public class AssetAddFragment extends Fragment{
         transaction.replace(R.id.item_fragment, new AssetCostFragment());
         transaction.commit();
 
+        zero = (Button) view.findViewById(R.id.zero);
+        one = (Button) view.findViewById(R.id.one);
+        two = (Button) view.findViewById(R.id.two);
+        three = (Button) view.findViewById(R.id.three);
+        four = (Button) view.findViewById(R.id.four);
+        five = (Button) view.findViewById(R.id.five);
+        six = (Button) view.findViewById(R.id.six);
+        seven = (Button) view.findViewById(R.id.seven);
+        eight = (Button) view.findViewById(R.id.eight);
+        nine = (Button) view.findViewById(R.id.nine);
+        dot = (Button) view.findViewById(R.id.dot);
+
+        zero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        seven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        eight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorNumOnclick(view);
+            }
+        });
+        dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculatorPushDot(view);
+            }
+        });
+
         return view;
     }
 
@@ -98,14 +185,12 @@ public class AssetAddFragment extends Fragment{
                     addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“支出“按钮为灰色
                     addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“收入”按钮为绿色
                     transaction.replace(R.id.item_fragment, new AssetCostFragment());
-                    Log.d(TAG, "onClick: add_cost_button");
 
                     break;
                 case R.id.add_earn_button:
                     addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“收入“按钮为灰色
                     addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“支出”按钮为绿色
                     transaction.replace(R.id.item_fragment, new AssetEarnFragment());
-                    Log.d(TAG, "onClick: add_earn_button");
 
                     break;
                 case R.id.add_finish:

@@ -23,7 +23,7 @@ public class ReportFragment extends Fragment {
     private NavigationTabStrip mTopNavigationTabStrip;
     private List<View> viewList;
 
-    public  ReportFragment(String context){
+    public  ReportFragment(){
 
     }
 

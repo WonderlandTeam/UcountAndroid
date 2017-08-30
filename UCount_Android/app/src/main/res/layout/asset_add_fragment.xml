@@ -122,7 +122,6 @@
 
             <Button
                 android:id="@+id/one"
-                android:onClick="calculatorNumOnclick"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_widthPercent="33%"
@@ -135,7 +134,6 @@
 
             <Button
                 android:id="@+id/two"
-                android:onClick="calculatorNumOnclick"
                 android:layout_toRightOf="@id/one"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -149,7 +147,6 @@
 
             <Button
                 android:id="@+id/three"
-                android:onClick="calculatorNumOnclick"
                 android:layout_toRightOf="@id/two"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -163,7 +160,6 @@
 
             <Button
                 android:id="@+id/four"
-                android:onClick="calculatorNumOnclick"
                 android:layout_below="@id/one"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -177,7 +173,6 @@
 
             <Button
                 android:id="@+id/five"
-                android:onClick="calculatorNumOnclick"
                 android:layout_below="@id/one"
                 android:layout_toRightOf="@id/four"
                 android:layout_width="0dp"
@@ -192,7 +187,6 @@
 
             <Button
                 android:id="@+id/six"
-                android:onClick="calculatorNumOnclick"
                 android:layout_below="@id/one"
                 android:layout_toRightOf="@id/five"
                 android:layout_width="0dp"
@@ -207,7 +201,6 @@
 
             <Button
                 android:id="@+id/seven"
-                android:onClick="calculatorNumOnclick"
                 android:layout_below="@id/four"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -221,7 +214,6 @@
 
             <Button
                 android:id="@+id/eight"
-                android:onClick="calculatorNumOnclick"
                 android:layout_below="@id/four"
                 android:layout_toRightOf="@id/seven"
                 android:layout_width="0dp"
@@ -236,7 +228,6 @@
 
             <Button
                 android:id="@+id/nine"
-                android:onClick="calculatorNumOnclick"
                 android:layout_below="@id/four"
                 android:layout_toRightOf="@id/eight"
                 android:layout_width="0dp"
@@ -263,7 +254,6 @@
 
             <Button
                 android:id="@+id/zero"
-                android:onClick="calculatorNumOnclick"
                 android:layout_below="@id/seven"
                 android:layout_toRightOf="@id/clear"
                 android:layout_width="0dp"
@@ -278,7 +268,6 @@
 
             <Button
                 android:id="@+id/dot"
-                android:onClick="calculatorPushDot"
                 android:layout_below="@id/seven"
                 android:layout_toRightOf="@id/zero"
                 android:layout_width="0dp"

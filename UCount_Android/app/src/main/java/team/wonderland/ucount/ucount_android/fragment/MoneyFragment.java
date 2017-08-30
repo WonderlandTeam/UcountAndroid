@@ -17,8 +17,8 @@ public class MoneyFragment extends Fragment {
     private String context;
     private TextView mTextView;
 
-    public  MoneyFragment(String context){
-        this.context = context;
+    public  MoneyFragment(){
+
     }
 
     @Override
