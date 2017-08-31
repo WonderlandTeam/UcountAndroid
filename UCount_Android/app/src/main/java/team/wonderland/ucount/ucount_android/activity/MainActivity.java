@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
                 modifyPasswordFragment = new ModifyPasswordFragment();
-                transaction.replace(fragment_container, modifyPasswordFragment);
+                transaction.add(fragment_container, modifyPasswordFragment);
                 transaction.commit();
             }
         });
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
                 myPostsFragment=new MyPostsFragment();
-                transaction.replace(fragment_container, myPostsFragment);
+                transaction.add(fragment_container, myPostsFragment);
                 transaction.commit();
             }
         });
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
                 myCollectionFragment=new MyCollectionFragment();
-                transaction.replace(fragment_container, myCollectionFragment);
+                transaction.add(fragment_container, myCollectionFragment);
                 transaction.commit();
             }
         });
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
                 myPraiseFragment=new MyPraiseFragment();
-                transaction.replace(fragment_container, myPraiseFragment);
+                transaction.add(fragment_container, myPraiseFragment);
                 transaction.commit();
             }
         });
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
                 myMessageFragment=new MyMessageFragment();
-                transaction.replace(fragment_container, myMessageFragment);
+                transaction.add(fragment_container, myMessageFragment);
                 transaction.commit();
             }
         });
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
                 myReplyFragment=new MyReplyFragment();
-                transaction.replace(fragment_container, myReplyFragment);
+                transaction.add(fragment_container, myReplyFragment);
                 transaction.commit();
             }
         });
