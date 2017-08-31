@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "team.wonderland.ucount.ucount_android"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -65,3 +65,11 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+dependencies {
+    compile 'com.github.allan1st:JellyRefreshLayout:2.0'
+}

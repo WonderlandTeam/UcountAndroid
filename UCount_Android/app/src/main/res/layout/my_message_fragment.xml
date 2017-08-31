@@ -4,7 +4,27 @@
               android:layout_height="match_parent"
               android:background="@color/main_bg"
               android:orientation="vertical">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="我的消息" android:textSize="40dp"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="56dp"
+              android:text="我的消息" android:textSize="20dp" android:layout_marginLeft="20dp"
+              android:background="@color/text_green"/>
+
+    <uk.co.imallan.jellyrefresh.JellyRefreshLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/message_loading"
+            android:text="正在加载中..."
+            android:textColor="@color/text_gray"
+            app:jellyColor="@color/text_green"
+            app:pullHeight="128dp"
+            app:triggerHeight="96dp"
+            app:headerHeight="56dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </uk.co.imallan.jellyrefresh.JellyRefreshLayout>
 
 </LinearLayout>
