@@ -48,7 +48,6 @@
                     android:maxLines="1"
                     android:textColorHint="#999999"
                     android:textSize="18sp" >
-
                     <requestFocus />
                 </EditText>
 

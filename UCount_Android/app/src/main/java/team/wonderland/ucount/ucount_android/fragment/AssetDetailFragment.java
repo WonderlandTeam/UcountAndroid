@@ -2,6 +2,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,7 @@ public class AssetDetailFragment extends Fragment {
     private AssetDetailRecyclerAdapter adapter;
     private List<AssetItem> assetItems;
     private PercentageRing mPercentageRing;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +56,22 @@ public class AssetDetailFragment extends Fragment {
         //设置目标百分比为30
         //TODO:余额占预算的百分比
         mPercentageRing.setTargetPercent(30);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.asset_detail_refresh);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.text_green,
+                R.color.text_green_darker
+        );
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //TODO:
+                //重新获取完网络数据刷新Adapter，完成后需要调用onRefreshComplete方法取消滑出来的圆形进度
+                assetItems.add(new AssetItem("8月31日","交通","5.00"));
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
 
 
         return view;

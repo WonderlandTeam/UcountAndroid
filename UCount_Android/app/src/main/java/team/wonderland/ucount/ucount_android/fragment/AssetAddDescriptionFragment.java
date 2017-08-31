@@ -1,10 +1,52 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import at.markushi.ui.CircleButton;
+import team.wonderland.ucount.ucount_android.R;
 
 /**
  * Created by liuyu on 2017/8/30.
  */
 
 public class AssetAddDescriptionFragment extends Fragment {
+    ImageView back;
+    CircleButton save;
+    EditText inputTxt;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View view = inflater.inflate(R.layout.asset_add_description_fragment, container, false);
+
+        inputTxt = (EditText) view.findViewById(R.id.asset_add_description_et);
+
+        back = (ImageView) view.findViewById(R.id.asset_add_description_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().popBackStack();
+            }
+        });
+
+        save = (CircleButton) view.findViewById(R.id.asset_add_description_save);
+        if(!GlobalVariables.getmDescription().equals("")){
+            inputTxt.setText(GlobalVariables.getmDescription());
+        }
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO:保存
+                GlobalVariables.setmDescription(inputTxt.getText().toString());
+                getFragmentManager().popBackStack();
+            }
+        });
+        return view;
+    }
 }

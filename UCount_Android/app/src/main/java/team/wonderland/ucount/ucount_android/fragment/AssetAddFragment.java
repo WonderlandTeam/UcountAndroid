@@ -200,8 +200,8 @@ public class AssetAddFragment extends Fragment{
                     else {
                         putItemInData(Double.parseDouble(moneyText.getText().toString()));
                         calculatorClear();
-                        //TODO: 返回上一个fragment
-                        getActivity().finish();
+                        //TODO:保存后应该怎样处理
+                        getFragmentManager().popBackStack();
                     }
                     break;
                 case R.id.clear:
@@ -269,10 +269,9 @@ public class AssetAddFragment extends Fragment{
         if (GlobalVariables.getmHasDot()) {
             Toast.makeText(getActivity(), "已经输入过小数点了", Toast.LENGTH_SHORT).show();
         } else {
-            GlobalVariables.setmInputMoney(GlobalVariables.getmInputMoney()+".");
+            GlobalVariables.setmInputMoney(GlobalVariables.getmInputMoney() + ".");
             GlobalVariables.setHasDot(true);
         }
     }
-
 
 }
