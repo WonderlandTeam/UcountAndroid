@@ -40,12 +40,21 @@ public class MoneyHotFragment extends Fragment {
         LinearLayoutManager linerLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linerLayoutManager);
 
+
+
+
         adapter.setOnItemClickListener(new AssetRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("post",posts.get(position));
+                Fragment fragment = new Fragment();
+                fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.money_fragment_container, new MoneyHotDetailFragment()).commit();
+                        .replace(R.id.money_fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         recyclerView.addItemDecoration(new MyItemDecoration());

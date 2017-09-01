@@ -1,10 +1,12 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import java.io.Serializable;
+
 /**
  * Created by liuyu on 2017/8/31.
  */
 
-public class Post {
+public class Post implements Serializable{
     private String title;
     private String date;
     private String author;

@@ -16,6 +16,9 @@ public class MoneyHotDetailFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.money_hot_detail_fragment, container, false);
+
+
+
         return view;
     }
 }
