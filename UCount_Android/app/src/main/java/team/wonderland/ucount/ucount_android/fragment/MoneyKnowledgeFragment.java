@@ -43,9 +43,16 @@ public class MoneyKnowledgeFragment extends Fragment {
         adapter.setOnItemClickListener(new AssetRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
+                Bundle bundle = new Bundle();
+                bundle.putInt("num",position);
+                Fragment fragment = new MoneyKnowledgeDetailFragment();
+                fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.money_fragment_container, new MoneyHotDetailFragment()).commit();
+                        .replace(R.id.money_fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
         recyclerView.addItemDecoration(new MyItemDecoration());
@@ -55,9 +62,13 @@ public class MoneyKnowledgeFragment extends Fragment {
 
     public void initData(){
         posts = new ArrayList<>();
-        posts.add(new Post("说说信用卡还贷款","2017.8.31","wind",".............."));
-        posts.add(new Post("P2P还款方式那么多，总有一款适合你","2017.8.31","飘飘",".............."));
-        posts.add(new Post("如何通过自己的爱好赚钱","2017.8.31","黄飘",".............."));
-        posts.add(new Post("腾讯信用和芝麻信用哪个更重要","2017.8.31","飘",".............."));
+        posts.add(new Post("大学生理财真人秀:不做“穷学生”，只需这四步","","",""));
+        posts.add(new Post("政府工作报告对股市影响解读汇总:2017全年看呈U型","","",""));
+        posts.add(new Post("银行理财要蔫了，但还有更安全的理财方式!","","",""));
+        posts.add(new Post("理财知识 | 基础理财知识普及","","",""));
+        posts.add(new Post("理财全靠机器?理财经理怎么办?","","",""));
+        posts.add(new Post("理财和不理财，人生会有多大差别?| 直播","","",""));
+        posts.add(new Post("理财基础知识","","",""));
+        posts.add(new Post("理财扩展知识","","",""));
     }
 }
