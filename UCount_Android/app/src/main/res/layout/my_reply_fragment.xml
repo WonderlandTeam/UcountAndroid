@@ -4,8 +4,42 @@
               android:layout_height="match_parent"
               android:background="@color/main_bg"
               android:orientation="vertical">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="我的评论" android:textSize="40dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp"
+                  android:orientation="horizontal"
+                  android:background="@color/text_green">
+        <ImageView android:layout_width="35dp" android:layout_height="35dp"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginLeft="15dp"
+                   android:src="@mipmap/ic_reply"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="50dp"
+                  android:text="我的评论" android:textSize="20dp" android:layout_marginLeft="16dp"
+                  android:layout_marginTop="10dp"
+        />
+
+    </LinearLayout>
+
+    <uk.co.imallan.jellyrefresh.JellyRefreshLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/reply_loading"
+            android:text="正在加载"
+            android:textColor="@color/text_gray"
+            app:jellyColor="@color/text_green"
+            app:pullHeight="120dp"
+            app:triggerHeight="90dp"
+            app:headerHeight="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/reply_recycler"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="4dp"
+                android:background="@color/main_bg">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </uk.co.imallan.jellyrefresh.JellyRefreshLayout>
 
 </LinearLayout>
-

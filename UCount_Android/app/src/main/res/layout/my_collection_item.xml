@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/post_item_card"
+        android:id="@+id/collection_item_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -11,7 +11,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="3dp">
     <TextView
-            android:id="@+id/my_post_title"
+            android:id="@+id/my_collection_title"
             android:layout_width="wrap_content"
             android:layout_height="65dp"
             android:layout_alignParentLeft="true"
@@ -21,7 +21,7 @@
     />
 
     <Button
-            android:id="@+id/my_post_more"
+            android:id="@+id/my_collection_more"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:background="@mipmap/ic_more"
