@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.util.GridRecyclerAdapter;
+import team.wonderland.ucount.ucount_android.Adapter.GridRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.util.MyGridLayoutManager;
-import team.wonderland.ucount.ucount_android.util.ViewPagerAdapter;
+import team.wonderland.ucount.ucount_android.Adapter.ViewPagerAdapter;
 
 /**
  * Created by liuyu on 2017/8/30.

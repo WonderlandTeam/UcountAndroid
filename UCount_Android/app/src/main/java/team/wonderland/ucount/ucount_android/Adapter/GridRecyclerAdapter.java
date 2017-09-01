@@ -1,4 +1,4 @@
-package team.wonderland.ucount.ucount_android.util;
+package team.wonderland.ucount.ucount_android.Adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;

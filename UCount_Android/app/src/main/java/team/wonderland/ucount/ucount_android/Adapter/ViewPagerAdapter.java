@@ -1,4 +1,4 @@
-package team.wonderland.ucount.ucount_android.util;
+package team.wonderland.ucount.ucount_android.Adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -13,26 +13,22 @@ public class ViewPagerAdapter extends PagerAdapter {
     private List<View> mViewList;
 
     public ViewPagerAdapter(List<View> mViewList) {
-        Log.d(TAG, "ViewPagerAdapter: ");
         this.mViewList = mViewList;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        Log.d(TAG, "destroyItem: ");
         container.removeView(mViewList.get(position));
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        Log.d(TAG, "instantiateItem: ");
         container.addView(mViewList.get(position));
         return (mViewList.get(position));
     }
 
     @Override
     public int getCount() {
-        Log.d(TAG, "getCount: ");
         if (mViewList == null)
             return 0;
         return mViewList.size();
@@ -40,7 +36,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        Log.d(TAG, "isViewFromObject: ");
         return view == object;
     }
 }

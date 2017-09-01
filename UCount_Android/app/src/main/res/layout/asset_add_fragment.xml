@@ -298,7 +298,7 @@
                 android:id="@+id/anime_words"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="记得点保存哦"
+                android:text="保存"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:gravity="center"
@@ -311,6 +311,7 @@
                 android:scaleType="centerCrop"
                 android:layout_marginRight="6dp"
                 android:layout_marginTop="27dp"
+                android:src="@mipmap/ic_tick"
                 android:background="#00000000"/>
         </LinearLayout>
 

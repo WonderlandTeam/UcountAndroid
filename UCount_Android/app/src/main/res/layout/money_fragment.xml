@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    >
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/menu_money"
-            android:id="@+id/textView" android:layout_gravity="center_vertical"/>
-</LinearLayout>
+    <com.gigamole.navigationtabstrip.NavigationTabStrip
+        android:id="@+id/money_nts_top"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        app:nts_active_color="#BBECB9"
+        app:nts_color="#BBECB9"
+        app:nts_corners_radius="1dp"
+        app:nts_inactive_color="@color/text_gray"
+        app:nts_size="15sp"
+        app:nts_titles="@array/money"
+        app:nts_weight="3dp"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/money_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/money_nts_top"
+        />
+
+    <FrameLayout
+        android:id="@+id/money_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/money_nts_top"
+        >
+    </FrameLayout>
+</RelativeLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/main_bg"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/money_tab"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/login_button_style"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--&gt;-->
+    <!--<Button-->
+    <!--android:id="@+id/money_bt_hot"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/main_bg"-->
+    <!--android:textColor="@color/text_gray"-->
+    <!--android:text="热门"/>-->
+
+    <!--<Button-->
+    <!--android:id="@+id/money_bt_post"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/main_bg"-->
+    <!--android:textColor="@color/text_gray"-->
+    <!--android:text="帖子"/>-->
+
+    <!--<Button-->
+    <!--android:id="@+id/money_bt_knowledge"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/main_bg"-->
+    <!--android:text="知识"-->
+    <!--android:textColor="@color/text_gray" />-->
+    <!--</LinearLayout>-->
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/money_framlayout"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
+
+    <!--</FrameLayout>-->
+    <!--</LinearLayout>-->
