@@ -8,11 +8,13 @@ public class Message {
     private int imgId;
     private String header;
     private String context;
+    private String time;
 
-    public Message(int imgId, String header, String context) {
+    public Message(int imgId, String header, String context,String time) {
         this.imgId = imgId;
         this.header = header;
         this.context = context;
+        this.time=time;
     }
 
     public int getImgId() {
@@ -37,5 +39,13 @@ public class Message {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

@@ -40,6 +40,7 @@ public class MyMessageRecyclerAdapter extends RecyclerView.Adapter<MyMessageRecy
         MyMessageViewHolder.message_img.setImageResource(messages.get(position).getImgId());
         MyMessageViewHolder.message_header.setText(messages.get(position).getHeader());
         MyMessageViewHolder.message_context.setText(messages.get(position).getContext());
+        MyMessageViewHolder.message_time.setText(messages.get(position).getTime());
     }
 
     @Override
@@ -52,6 +53,7 @@ public class MyMessageRecyclerAdapter extends RecyclerView.Adapter<MyMessageRecy
         static CardView cardView;
         static TextView message_header;
         static TextView message_context;
+        static TextView message_time;
 
         public MyMessageViewHolder(View itemView) {
             super(itemView);
@@ -59,6 +61,7 @@ public class MyMessageRecyclerAdapter extends RecyclerView.Adapter<MyMessageRecy
             cardView=itemView.findViewById(R.id.message_item_card);
             message_header=itemView.findViewById(R.id.message_item_header);
             message_context=itemView.findViewById(R.id.message_item_context);
+            message_time=itemView.findViewById(R.id.message_item_time);
         }
     }
 

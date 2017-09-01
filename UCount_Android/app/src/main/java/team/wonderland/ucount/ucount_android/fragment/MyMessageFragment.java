@@ -57,8 +57,8 @@ public class MyMessageFragment extends Fragment {
 
     void initData(){
         messages=new ArrayList<>();
-        messages.add(new Message(R.mipmap.ic_message_green,"任务完成","成功购买耳机一副"));
-        messages.add(new Message(R.mipmap.ic_message_yellow,"预算提醒","距离本月消费预算还剩下50元"));
+        messages.add(new Message(R.mipmap.ic_message_green,"任务完成","成功购买耳机一副","今天12:00"));
+        messages.add(new Message(R.mipmap.ic_message_yellow,"预算提醒","距离本月消费预算还剩下50元","今天9:32"));
         //结束刷新
         jellyRefreshLayout.setRefreshing(false);
     }
