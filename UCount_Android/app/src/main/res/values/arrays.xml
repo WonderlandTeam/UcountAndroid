@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="reports">
-        <item>Report one</item>
-        <item>Report two</item>
-        <item>Report three</item>
+        <item>收支储蓄</item>
+        <item>资产负债</item>
+        <item>现金流量</item>
     </string-array>
 
     <string-array name="money">
