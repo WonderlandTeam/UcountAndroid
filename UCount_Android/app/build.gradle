@@ -36,6 +36,7 @@ dependencies {
     compile 'com.merhold.extensiblepageindicator:extensiblepageindicator:1.0.1'
     compile 'com.android.support:palette-v7:+'
     compile 'com.github.barteksc:android-pdf-viewer:2.5.0'
+    compile 'com.wx.goodview:goodview:1.0.0'
 
     provided 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
 

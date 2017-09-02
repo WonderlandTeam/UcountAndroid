@@ -41,14 +41,12 @@ public class MoneyHotFragment extends Fragment {
         recyclerView.setLayoutManager(linerLayoutManager);
 
 
-
-
         adapter.setOnItemClickListener(new AssetRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("post",posts.get(position));
-                Fragment fragment = new Fragment();
+                Fragment fragment = new MoneyHotDetailFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
