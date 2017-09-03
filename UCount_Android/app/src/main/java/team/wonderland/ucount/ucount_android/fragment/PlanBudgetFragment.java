@@ -97,8 +97,9 @@ public class PlanBudgetFragment extends Fragment {
         initData();
 
         recyclerView = view.findViewById(R.id.plan_budget_recyclerview);
-        //设置布局管理器
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //设置布局管理器 , 将布局设置成纵向
+        LinearLayoutManager linerLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linerLayoutManager);
         //设置适配器
         adapter = new PlanBudgetRecyclerAdapter(budgets,getActivity());
         recyclerView.setAdapter(adapter);

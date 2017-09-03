@@ -129,21 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-//        quitButton = (Button)findViewById(R.id.quit_btn);
-//        quitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //跳回到登录界面
-//                Intent intent=new Intent(MainActivity.this,LoginActivity_.class);
-//                startActivity(intent);
-//
-//                SharedPreferences.Editor editor = sp.edit();
-//                editor.putString("USERNAME","");
-//                editor.putString("PASSWORD","");
-//                editor.putBoolean("HAVELOGINED",false);
-//                editor.commit();
-//            }
-//        });
 
 
 

@@ -40,7 +40,7 @@ public class MoneyKnowledgeFragment extends Fragment {
         LinearLayoutManager linerLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linerLayoutManager);
 
-        adapter.setOnItemClickListener(new AssetRecyclerAdapter.OnItemClickListener(){
+        adapter.setOnItemClickListener(new MoneyHotRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
                 Bundle bundle = new Bundle();

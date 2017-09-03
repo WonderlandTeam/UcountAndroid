@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/plan_task_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/plan_task_detail_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:src="@mipmap/ic_back3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="任务"
+            android:textSize="20sp" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/plan_task_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="年底买一辆自行车"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/plan_task_detail_header"
+        android:gravity="center"
+        android:textSize="20sp"
+        />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/plan_task_detail_cardview_money"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/plan_task_detail_title"
+        android:layout_marginTop="16dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="目标金额"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                />
+
+            <EditText
+                android:id="@+id/plan_task_detail_edittext_money"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:enabled="false"
+                android:text="2000.0"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_vertical"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/plan_task_detail_cardview_date"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/plan_task_detail_cardview_money"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="截止日期"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/plan_task_detail_textview_date"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:enabled="false"
+                android:text="2017-12-31"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/plan_task_detail_cardview_have"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/plan_task_detail_cardview_date"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="已攒金额" />
+
+            <TextView
+                android:id="@+id/plan_task_detail_edittext_have"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:enabled="false"
+                android:text="340.0" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/plan_task_detail_cardview_daily"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/plan_task_detail_cardview_have"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="每日需攒金额" />
+
+            <TextView
+                android:id="@+id/plan_task_detail_edittext_daily"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:enabled="false"
+                android:text="30.0" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/asset_new_bt_save"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@mipmap/ic_tick"
+        app:cb_color="#99CC00"
+        app:cb_pressedRingWidth="8dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        >
+    </at.markushi.ui.CircleButton>
+</RelativeLayout>

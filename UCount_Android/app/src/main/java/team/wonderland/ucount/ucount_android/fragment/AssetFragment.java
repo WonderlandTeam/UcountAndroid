@@ -69,8 +69,6 @@ public class AssetFragment extends Fragment {
         //设置适配器
         adapter = new AssetRecyclerAdapter(accounts,getActivity());
         recyclerView.setAdapter(adapter);
-//        recyclerView.addItemDecoration(new DividerItemDecoration(
-//                getActivity(), DividerItemDecoration.HORIZONTAL));
 
         adapter.setOnItemClickListener(new AssetRecyclerAdapter.OnItemClickListener(){
             @Override

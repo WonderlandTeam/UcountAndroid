@@ -41,7 +41,7 @@ public class MoneyHotFragment extends Fragment {
         recyclerView.setLayoutManager(linerLayoutManager);
 
 
-        adapter.setOnItemClickListener(new AssetRecyclerAdapter.OnItemClickListener(){
+        adapter.setOnItemClickListener(new MoneyHotRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
                 Bundle bundle = new Bundle();

@@ -14,52 +14,51 @@ import java.util.List;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.Account;
 import team.wonderland.ucount.ucount_android.fragment.Post;
+import team.wonderland.ucount.ucount_android.util.Task;
 
 /**
  * Created by liuyu on 2017/8/31.
  */
 
-public class MoneyHotRecyclerAdapter extends RecyclerView.Adapter<MoneyHotRecyclerAdapter.MoneyHotViewHolder>
+public class PlanTaskRecyclerAdapter extends RecyclerView.Adapter<PlanTaskRecyclerAdapter.PlanTaskViewHolder>
         implements View.OnClickListener{
 
 
-    private List<Post> posts;
+    private List<Task> tasks;
     private Context context;
-    private MoneyHotRecyclerAdapter.OnItemClickListener mOnItemClickListener = null;
+    private PlanTaskRecyclerAdapter.OnItemClickListener mOnItemClickListener = null;
 
-    public MoneyHotRecyclerAdapter(List<Post> posts,Context context) {
-        this.posts = posts;
+    public PlanTaskRecyclerAdapter(List<Task> tasks,Context context) {
+        this.tasks = tasks;
         this.context=context;
     }
 
     @Override
-    public MoneyHotRecyclerAdapter.MoneyHotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(context).inflate(R.layout.money_hot_recyclerview_item,parent,false);
-        MoneyHotRecyclerAdapter.MoneyHotViewHolder nvh=new MoneyHotRecyclerAdapter.MoneyHotViewHolder(v);
+    public PlanTaskRecyclerAdapter.PlanTaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v= LayoutInflater.from(context).inflate(R.layout.plan_task_item,parent,false);
+        PlanTaskRecyclerAdapter.PlanTaskViewHolder nvh=new PlanTaskRecyclerAdapter.PlanTaskViewHolder(v);
         v.setOnClickListener(this);
         return nvh;
     }
 
     @Override
-    public void onBindViewHolder(MoneyHotRecyclerAdapter.MoneyHotViewHolder holder, int position) {
-        MoneyHotViewHolder.title.setText(posts.get(position).getTitle());
+    public void onBindViewHolder(PlanTaskRecyclerAdapter.PlanTaskViewHolder holder, int position) {
+        PlanTaskViewHolder.title.setText(tasks.get(position).getName());
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        return tasks.size();
     }
 
-    static class MoneyHotViewHolder extends RecyclerView.ViewHolder{
-        static CardView cardView;
+    static class PlanTaskViewHolder extends RecyclerView.ViewHolder{
         static TextView title;
 
-        public MoneyHotViewHolder(View itemView) {
+        public PlanTaskViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView)itemView.findViewById(R.id.money_hot_recyclerview_item_cardview);
-            title = (TextView)itemView.findViewById(R.id.money_hot_recyclerview_item_title);
+            title = (TextView)itemView.findViewById(R.id.plan_task_item_title);
         }
     }
 
@@ -76,7 +75,7 @@ public class MoneyHotRecyclerAdapter extends RecyclerView.Adapter<MoneyHotRecycl
         }
     }
 
-    public void setOnItemClickListener(MoneyHotRecyclerAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(PlanTaskRecyclerAdapter.OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
 }

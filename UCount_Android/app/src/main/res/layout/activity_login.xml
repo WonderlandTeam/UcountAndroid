@@ -26,7 +26,7 @@
         android:paddingRight="32dp"
         android:maxLines="1"
         android:textColorHint="#999999"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginTop="40dp"
         >
         <requestFocus />

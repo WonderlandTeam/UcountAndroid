@@ -27,7 +27,7 @@
             android:gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_gravity="center"
-            android:text="餐饮"
+            android:text="饮食"
             android:textColor="@color/text_gray"
             android:textSize="20sp"
             android:layout_toRightOf="@id/asset_detail_item_img"
