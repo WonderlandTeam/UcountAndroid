@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.*;
@@ -33,13 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tabPlan;
     private TextView tabMoney;
 
-    private Button quitButton;
-    private Button bt_modifyPassword;
-    private Button bt_post;
-    private Button bt_reply;
-    private Button bt_praise;
-    private Button bt_collection;
-    private Button bt_message;
+    private LinearLayout ll_quit;
+    private CardView cv_modifyPassword;
+    private CardView cv_post;
+    private CardView cv_reply;
+    private CardView cv_praise;
+    private CardView cv_collection;
+    private CardView cv_message;
 
     private SharedPreferences sp;
 
@@ -111,8 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabAsset.performClick();
 
         //个人中心按钮
-        quitButton = (Button)findViewById(R.id.quit_btn);
-        quitButton.setOnClickListener(new View.OnClickListener() {
+        ll_quit = (LinearLayout) findViewById(R.id.main_center_quit);
+        ll_quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //跳回到登录界面
@@ -127,8 +129,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bt_modifyPassword= (Button) findViewById(R.id.password_more);
-        bt_modifyPassword.setOnClickListener(new View.OnClickListener() {
+//        quitButton = (Button)findViewById(R.id.quit_btn);
+//        quitButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //跳回到登录界面
+//                Intent intent=new Intent(MainActivity.this,LoginActivity_.class);
+//                startActivity(intent);
+//
+//                SharedPreferences.Editor editor = sp.edit();
+//                editor.putString("USERNAME","");
+//                editor.putString("PASSWORD","");
+//                editor.putBoolean("HAVELOGINED",false);
+//                editor.commit();
+//            }
+//        });
+
+
+
+        cv_modifyPassword=  (CardView) findViewById(R.id.main_center_password);
+        cv_modifyPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View left_menu=findViewById(R.id.left_menu);
@@ -140,8 +160,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bt_post= (Button) findViewById(R.id.post_more);
-        bt_post.setOnClickListener(new View.OnClickListener() {
+        cv_post= (CardView) findViewById(R.id.main_center_post);
+        cv_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View left_menu=findViewById(R.id.left_menu);
@@ -153,8 +173,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bt_collection= (Button) findViewById(R.id.collection_more);
-        bt_collection.setOnClickListener(new View.OnClickListener() {
+        cv_collection= (CardView) findViewById(R.id.main_center_collection);
+        cv_collection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View left_menu=findViewById(R.id.left_menu);
@@ -166,8 +186,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bt_praise= (Button) findViewById(R.id.praise_more);
-        bt_praise.setOnClickListener(new View.OnClickListener() {
+        cv_praise= (CardView) findViewById(R.id.main_Center_praise);
+        cv_praise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View left_menu=findViewById(R.id.left_menu);
@@ -179,8 +199,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bt_message= (Button) findViewById(R.id.message_more);
-        bt_message.setOnClickListener(new View.OnClickListener() {
+        cv_message= (CardView) findViewById(R.id.main_center_message);
+        cv_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View left_menu=findViewById(R.id.left_menu);
@@ -192,8 +212,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bt_reply= (Button) findViewById(R.id.reply_more);
-        bt_reply.setOnClickListener(new View.OnClickListener() {
+        cv_reply= (CardView) findViewById(R.id.main_center_reply);
+        cv_reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View left_menu=findViewById(R.id.left_menu);
