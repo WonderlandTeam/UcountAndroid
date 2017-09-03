@@ -121,7 +121,7 @@
                 <ImageView android:layout_width="40dp" android:layout_height="40dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="20px"
-                            android:src="@mipmap/ic_password"/>
+                            android:src="@mipmap/lock"/>
 
                 <TextView
                         android:layout_width="match_parent"
@@ -152,7 +152,7 @@
                 <ImageView android:layout_width="40dp" android:layout_height="40dp"
                            android:layout_gravity="center_vertical"
                            android:layout_marginLeft="20px"
-                           android:src="@mipmap/ic_post"/>
+                           android:src="@mipmap/post"/>
 
                 <TextView
                         android:layout_width="match_parent"
@@ -183,7 +183,7 @@
                 <ImageView android:layout_width="40dp" android:layout_height="40dp"
                            android:layout_gravity="center_vertical"
                            android:layout_marginLeft="20px"
-                           android:src="@mipmap/ic_collection"/>
+                           android:src="@mipmap/collect"/>
 
                 <TextView
                         android:layout_width="match_parent"
@@ -214,7 +214,7 @@
                 <ImageView android:layout_width="40dp" android:layout_height="40dp"
                            android:layout_gravity="center_vertical"
                            android:layout_marginLeft="20px"
-                           android:src="@mipmap/ic_reply"/>
+                           android:src="@mipmap/talk"/>
 
                 <TextView
                         android:layout_width="match_parent"
@@ -259,7 +259,7 @@
                         android:layout_height="35dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="240dp"
-                        android:background="@mipmap/ic_more" />
+                        android:background="@mipmap/thumbUp" />
 
             </android.support.v7.widget.CardView>
 
@@ -276,7 +276,7 @@
                 <ImageView android:layout_width="40dp" android:layout_height="40dp"
                            android:layout_gravity="center_vertical"
                            android:layout_marginLeft="20px"
-                           android:src="@mipmap/ic_message"/>
+                           android:src="@mipmap/message"/>
 
                 <TextView
                         android:layout_width="match_parent"
