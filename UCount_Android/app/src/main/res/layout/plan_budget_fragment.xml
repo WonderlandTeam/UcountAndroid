@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    >
+
+    <TextView
+        android:id="@+id/plan_budget_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017,9月"
+        android:textColor="@color/text_gray"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/date_textview_style"
+        android:layout_centerHorizontal="true"
+        />
+
+    <team.wonderland.ucount.ucount_android.util.PercentageRing
+        android:id="@+id/plan_budget_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:radius="180"
+        app:circleBackground="#ffBBECB9"
+        app:ringColor="#ff3cb371"
+        app:textColor="#ffffffff"
+        android:layout_below="@id/plan_budget_date"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/plan_budget_textview_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="剩余预算"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+
+        />
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/plan_budget_bt_add"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@mipmap/ic_plus"
+        app:cb_color="#99CC00"
+        app:cb_pressedRingWidth="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        >
+    </at.markushi.ui.CircleButton>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/plan_budget_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/plan_budget_circle"
+        android:layout_above="@id/plan_budget_bt_add"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        >
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

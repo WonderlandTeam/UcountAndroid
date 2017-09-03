@@ -29,7 +29,6 @@ public class AssetDetailFragment extends Fragment {
     private RecyclerView recyclerView;
     private AssetDetailRecyclerAdapter adapter;
     private List<AssetItem> assetItems;
-    private PercentageRing mPercentageRing;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -52,10 +51,6 @@ public class AssetDetailFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.HORIZONTAL));
 
-        mPercentageRing = (PercentageRing) view.findViewById(R.id.Circle);
-        //设置目标百分比为30
-        //TODO:余额占预算的百分比
-        mPercentageRing.setTargetPercent(30);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.asset_detail_refresh);
         swipeRefreshLayout.setColorSchemeResources(
@@ -67,11 +62,10 @@ public class AssetDetailFragment extends Fragment {
             public void onRefresh() {
                 //TODO:
                 //重新获取完网络数据刷新Adapter，完成后需要调用onRefreshComplete方法取消滑出来的圆形进度
-                assetItems.add(new AssetItem("8月31日","交通","5.00"));
+                assetItems.add(new AssetItem("2017年\n8月31日\n14:23","交通","5.00"));
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
 
 
         return view;

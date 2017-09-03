@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    >
+    <!-- 可以看到需要一个radiogroup进行radiobutton的嵌套，我们可以选择的排列方式进行设定。   -->
+    <RadioGroup
+        android:id="@+id/plan_budget_new_selecttype_radiogroup"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        >
+        <!-- 解释一些属性：android:button=“@null”是去掉原生radiobutton的圆圈单选   -->
+        <!-- android:checked是初始化选定状态   android:drawableRight就是自定义的关键，设置选中和非选中状态的样式。这里的属性是设置一个图片在radiobutton的右边，我们当然也可以设置在左边  -->
+        <!-- android:drawablePadding="" 设置图片和文字距离 -->
+        <!-- 小tips，radiogroup里面的格式我们还是可以加些控件的，比如这里加了textview -->
+        <RadioButton
+            android:id="@+id/rbtn_cost_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="餐饮"
+            android:textSize="17.0sp"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"
+            android:checked="true"
+            android:button="@null"
+            android:paddingLeft="30dp"
+            android:drawableRight="@drawable/radiobutton_style"
+            />
+
+
+        <RadioButton
+            android:id="@+id/rbtn_cost_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="日用"
+            android:textSize="17.0sp"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"
+            android:button="@null"
+            android:paddingLeft="30dp"
+            android:drawableRight="@drawable/radiobutton_style"
+
+            />
+
+        <RadioButton
+            android:id="@+id/rbtn_cost_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="水电气"
+            android:textSize="17.0sp"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"
+            android:button="@null"
+            android:paddingLeft="30dp"
+            android:drawableRight="@drawable/radiobutton_style"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/text_gray"/>
+    </RadioGroup>
+</LinearLayout>

@@ -30,7 +30,6 @@ public class AssetCashDetailFragment extends Fragment {
     private RecyclerView recyclerView;
     private AssetDetailRecyclerAdapter adapter;
     private List<AssetItem> assetItems;
-    private PercentageRing mPercentageRing;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -63,11 +62,6 @@ public class AssetCashDetailFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.HORIZONTAL));
 
-        mPercentageRing = (PercentageRing) view.findViewById(R.id.asset_cash_detail_Circle);
-        //设置目标百分比为30
-        //TODO:余额占预算的百分比
-        mPercentageRing.setTargetPercent(30);
-
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.asset_cash_detail_refresh);
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.text_green,
@@ -88,12 +82,12 @@ public class AssetCashDetailFragment extends Fragment {
 
     public void initData(){
         assetItems = new ArrayList<>();
-        assetItems.add(new AssetItem("8月3日","餐饮","15.00"));
-        assetItems.add(new AssetItem("8月4日","餐饮","15.00"));
-        assetItems.add(new AssetItem("8月5日","餐饮","15.00"));
-        assetItems.add(new AssetItem("8月6日","餐饮","15.00"));
-        assetItems.add(new AssetItem("8月7日","餐饮","15.00"));
-        assetItems.add(new AssetItem("8月8日","餐饮","15.00"));
-        assetItems.add(new AssetItem("8月9日","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月3日\n14:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月4日\n15:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月5日\n16:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月6日\n14:34","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月7日\n06:16","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月8日\n14:03","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
     }
 }

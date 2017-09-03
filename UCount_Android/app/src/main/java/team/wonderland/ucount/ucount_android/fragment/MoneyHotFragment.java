@@ -51,7 +51,6 @@ public class MoneyHotFragment extends Fragment {
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
                         .replace(R.id.money_fragment_container, fragment)
-                        .addToBackStack(null)
                         .commit();
             }
         });
