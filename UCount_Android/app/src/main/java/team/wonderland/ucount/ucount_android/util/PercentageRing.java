@@ -33,7 +33,6 @@ public class PercentageRing extends View{
     private int mTextSize;
     private int mTextColor;
 
-
     public PercentageRing(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
@@ -90,8 +89,6 @@ public class PercentageRing extends View{
         mArcPaint.setStrokeWidth((float) (0.075*mRadius));
         //获得文字的字号 因为要设置文字在圆的中心位置
         mTextSize = (int) mTextPaint.getTextSize();
-
-
     }
 
     //主要是测量wrap_content时候的宽和高，因为宽高一样，只需要测量一次宽即可，高等于宽
