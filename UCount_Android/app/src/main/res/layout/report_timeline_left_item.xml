@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:baselineAligned="false"
+              android:orientation="horizontal" >
+
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="3dp"
+            android:gravity="center|right"
+            android:orientation="vertical" >
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/type"
+                  android:textColor="@color/text_gray" android:textSize="18dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/time"
+                  android:textColor="@color/text_gray" android:textSize="13dp"
+                  android:layout_marginTop="1dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+        <!-- 上下各画一根橙色的线条，线宽设置为3dp -->
+
+        <View
+                android:layout_width="3dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/text_gray"/>
+
+        <!-- 设置中间的节点大小为30x30 -->
+
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/img_center"/>
+
+        <View
+                android:layout_width="3dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/text_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:background="@color/main_bg"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+    </LinearLayout>
+
+</LinearLayout>

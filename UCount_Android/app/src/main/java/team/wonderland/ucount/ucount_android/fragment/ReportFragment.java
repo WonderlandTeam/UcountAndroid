@@ -42,7 +42,7 @@ public class ReportFragment extends Fragment {
         mTopNavigationTabStrip = (NavigationTabStrip) view.findViewById(R.id.report_nts_top);
         report1 = new ReportOneFragment();
         report2 = new ReportTwoFragment();
-        report3 = new ReportTwoFragment();
+        report3 = new ReportThreeFragment();
     }
 
     private void setUI(LayoutInflater inflater, final View view) {

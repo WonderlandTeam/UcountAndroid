@@ -64,13 +64,13 @@
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textColor="@color/text_gray" android:textSize="20dp"
                   android:layout_marginTop="20dp"
-                  android:layout_marginLeft="250dp"
+                  android:layout_marginLeft="100dp"
                   android:text="生活必需支出分配"
                   android:textAlignment="center"/>
 
         <lecho.lib.hellocharts.view.ColumnChartView
                 android:id="@+id/output_columnchart"
-                android:layout_width="400dp"
+                android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="5dp"
@@ -83,12 +83,12 @@
                   android:textColor="@color/text_gray" android:textSize="20dp"
                   android:text="服饰支出分配"
                   android:layout_marginTop="20dp"
-                  android:layout_marginLeft="250dp"
+                  android:layout_marginLeft="100dp"
                   android:textAlignment="center"/>
 
         <lecho.lib.hellocharts.view.ColumnChartView
                 android:id="@+id/output_columnchart2"
-                android:layout_width="400dp"
+                android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="5dp"
@@ -101,12 +101,12 @@
                   android:textColor="@color/text_gray" android:textSize="20dp"
                   android:text="学习支出分配"
                   android:layout_marginTop="20dp"
-                  android:layout_marginLeft="250dp"
+                  android:layout_marginLeft="100dp"
                   android:textAlignment="center"/>
 
         <lecho.lib.hellocharts.view.ColumnChartView
                 android:id="@+id/output_columnchart3"
-                android:layout_width="400dp"
+                android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="5dp"
