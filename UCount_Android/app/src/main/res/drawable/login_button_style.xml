@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/text_green_darker"
-        android:state_pressed="true"/>
-    <item android:drawable="@color/text_green"
-         android:state_pressed="false"/>
+    <item android:state_pressed="true"
+        >
+        <shape android:shape="rectangle" >
+            <solid android:color="@color/text_green_darker" />
+            <corners android:radius="25dp" />
+            <stroke android:width="2dp" android:color="@color/text_green_darker"  />
+        </shape>
+    </item>
 
+
+    <item android:state_pressed="false"
+        >
+        <shape android:shape="rectangle" >
+            <solid android:color="@color/text_green" />
+            <corners android:radius="25dp" />
+            <stroke android:width="2dp" android:color="@color/text_green"  />
+        </shape>
+    </item>
 </selector>
+

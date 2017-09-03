@@ -1,128 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e7e7e7"
-    android:orientation="vertical" >
+    android:background="@color/main_bg">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/icon_avatar_login" />
+        android:id="@+id/login_icon"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon_avatar_login"
+        />
 
-    <LinearLayout
-        android:id="@+id/login_linearLayout"
+    <!-- android:ems="10"表示EditText内最多只显示10个字符，超出不显示 -->
+    <EditText
+        android:id="@+id/login_edtId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="44dp"
+        android:layout_below="@id/login_icon"
+        android:background="@null"
+        android:ems="11"
+        android:hint="@string/idtxthint"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:maxLines="1"
+        android:textColorHint="#999999"
+        android:textSize="18sp"
+        android:layout_marginTop="40dp"
+        >
+        <requestFocus />
+    </EditText>
+
+    <!-- 横线  -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CACDD1"
+        android:layout_below="@id/login_edtId"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        />
+
+    <EditText
+        android:id="@+id/login_edtPwd"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@null"
+        android:hint="@string/pwdtxthint"
+        android:inputType="textPassword"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
         android:layout_marginTop="8dp"
-        android:orientation="vertical" >
+        android:maxLines="1"
+        android:textColorHint="#999999"
+        android:textSize="16sp"
+        android:layout_below="@id/login_edtId"
+        />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+    <!-- 横线  -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CACDD1"
+        android:layout_below="@id/login_edtPwd"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        />
 
-            <LinearLayout
-                android:id="@+id/userId_LinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="horizontal" >
+    <TextView
+        android:id="@+id/login_txtForgotPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/forgot_pwd"
+        android:textColor="#7f8c8d"
+        android:textSize="16sp"
+        android:layout_below="@id/login_edtPwd"
 
-                <!-- android:ems="10"表示EditText内最多只显示10个字符，超出不显示 -->
-                <EditText
-                    android:id="@+id/login_edtId"
-                    android:layout_width="0dp"
-                    android:layout_height="44dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:ems="10"
-                    android:hint="@string/idtxthint"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:maxLines="1"
-                    android:textColorHint="#999999"
-                    android:textSize="18sp" >
-                    <requestFocus />
-                </EditText>
+        />
 
-                <ImageView
-                    android:id="@+id/login_more_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/login_more_up" />
-            </LinearLayout>
-
-            <!-- 横线  -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#CACDD1" />
-
-            <EditText
-                android:id="@+id/login_edtPwd"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:background="@null"
-                android:hint="@string/pwdtxthint"
-                android:inputType="textPassword"
-                android:paddingLeft="15dp"
-                android:paddingRight="0dp"
-                android:layout_marginTop="5dp"
-                android:maxLines="1"
-                android:textColorHint="#999999"
-                android:textSize="18sp" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/login_txtRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/no_username"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/text_green"
+        android:textSize="18sp"
+        android:layout_below="@id/login_edtPwd"
+        />
 
         <Button
             android:id="@+id/login_btnLogin"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/login_button_style"
             android:text="@string/loginbtntext"
             android:textColor="#FFFFFF"
-            android:textSize="19sp" />
-    </LinearLayout>
+            android:textSize="20sp"
+            android:layout_below="@id/login_txtRegister"
+            android:layout_marginLeft="64dp"
+            android:layout_marginRight="64dp"
+            />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"></LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/login_txtForgotPwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:text="@string/forgot_pwd"
-            android:textColor="#e74c3c"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/login_txtRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="15dp"
-            android:text="@string/no_username"
-            android:layout_alignParentRight="true"
-            android:textColor="#e74c3c"
-            android:textSize="18sp"
-            android:layout_weight="0.44" />
     </RelativeLayout>
-
-</LinearLayout>

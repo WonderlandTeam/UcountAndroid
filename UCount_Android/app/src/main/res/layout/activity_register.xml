@@ -5,7 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg"
-    android:padding="@dimen/activity_horizontal_margin">
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/register_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/register_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:src="@mipmap/ic_back3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="注册"
+            android:textSize="20sp" />
+    </android.support.v7.widget.CardView>
 
 
     <EditText
@@ -16,14 +39,27 @@
         android:inputType="number"
         android:background="@null"
         android:ems="11"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
         android:maxLines="1"
         android:textColorHint="#999999"
         android:textSize="18sp"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/register_header"
+        >
         <requestFocus/>
     </EditText>
+
+    <!-- 横线  -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CACDD1"
+        android:layout_below="@id/et_reg_phone"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        />
+
 
     <EditText
         android:id="@+id/et_reg_username"
@@ -34,14 +70,25 @@
         android:inputType="text"
         android:layout_weight="1"
         android:background="@null"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
         android:maxLines="1"
         android:textColorHint="#999999"
         android:textSize="18sp"
         android:layout_marginTop="15dp"
         >
     </EditText>
+
+    <!-- 横线  -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CACDD1"
+        android:layout_below="@id/et_reg_username"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        />
+
 
     <EditText
         android:id="@+id/et_reg_pass"
@@ -50,8 +97,8 @@
         android:background="@null"
         android:hint="@string/pwdtxthint"
         android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="0dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
         android:maxLines="1"
         android:textColorHint="#999999"
         android:textSize="18sp"
@@ -60,6 +107,17 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp" />
 
+    <!-- 横线  -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#CACDD1"
+        android:layout_below="@id/et_reg_pass"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        />
+
+
     <Button
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
@@ -67,9 +125,9 @@
         android:text="注册"
         android:background="@drawable/login_button_style"
         android:layout_below="@+id/et_reg_pass"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginTop="32dp"
         android:textColor="#FFFFFF"
         android:textSize="21sp"/>
 

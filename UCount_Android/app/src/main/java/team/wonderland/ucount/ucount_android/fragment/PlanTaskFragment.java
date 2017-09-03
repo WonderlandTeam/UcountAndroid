@@ -21,12 +21,9 @@ import team.wonderland.ucount.ucount_android.util.PercentageRing;
 
 public class PlanTaskFragment extends Fragment {
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.plan_task_fragment, container, false);
-
 
 
 

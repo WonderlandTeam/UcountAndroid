@@ -1,10 +1,12 @@
 package team.wonderland.ucount.ucount_android.activity;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -19,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity{
     private EditText phone,username, password;
     private Button btn_register;
     private String phoneValue,usernameValue,passwordValue;
+    private ImageView back;
 
 //    @RestService
 //    UserBasicService userBasicService;
@@ -30,12 +33,18 @@ public class RegisterActivity extends AppCompatActivity{
 
 //        //先用stub
 //        userBasicService=new UserBasicService_Stub();
-
+        back = (ImageView)findViewById(R.id.register_back);
         phone = (EditText)findViewById(R.id.et_reg_phone);
         username = (EditText)findViewById(R.id.et_reg_username);
         password = (EditText)findViewById(R.id.et_reg_pass);
         btn_register = (Button)findViewById(R.id.btn_register);
-        
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLoginActivity();
+            }
+        });
     }
 
     @Click(R.id.btn_register)
