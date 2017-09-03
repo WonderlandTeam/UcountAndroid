@@ -250,7 +250,7 @@
                 <ImageView android:layout_width="40dp" android:layout_height="40dp"
                            android:layout_gravity="center_vertical"
                            android:layout_marginLeft="20px"
-                           android:src="@mipmap/thumbup"/>
+                           android:src="@mipmap/thumb"/>
 
                 <TextView
                         android:layout_width="match_parent"
