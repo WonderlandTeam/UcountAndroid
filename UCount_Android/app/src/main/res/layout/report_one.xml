@@ -7,9 +7,9 @@
 >
 
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:layout_marginTop="4dp"
-                  android:orientation="horizontal" android:background="@color/main_bg">
+                  android:background="@color/main_bg">
         <EditText android:layout_width="140dp" android:layout_height="wrap_content"
                   android:id="@+id/begin_date_text"
                   android:focusable="false"
@@ -17,13 +17,17 @@
                   android:inputType="date"
                   android:textAlignment="center"
                   android:textColor="@color/text_gray" android:textSize="16dp"
-                  android:layout_marginLeft="20dp"
+                  android:layout_marginLeft="16dp"
                   android:scrollbars="vertical"
                   android:background="@drawable/pick_date_shape"
                   android:hint="请选择开始日期"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textColor="@color/text_gray" android:textSize="20dp"
-                  android:text="     To:   "/>
+        <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                  android:textColor="@color/text_gray"
+                    android:textSize="20dp"
+                  android:text="To:"
+            android:layout_centerInParent="true"
+            />
 
         <EditText android:layout_width="140dp" android:layout_height="wrap_content"
                   android:id="@+id/end_date_text"
@@ -34,9 +38,12 @@
                   android:scrollbars="vertical"
                   android:textAlignment="center"
                   android:background="@drawable/pick_date_shape"
-                  android:layout_marginLeft="20dp"
-                  android:hint="请选择结束日期"/>
-    </LinearLayout>
+                    android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+                  android:hint="请选择结束日期"
+
+            />
+    </RelativeLayout>
     <team.wonderland.ucount.ucount_android.util.FlowLayout android:layout_width="match_parent"
                                                            android:layout_height="wrap_content">
         <lecho.lib.hellocharts.view.PieChartView
@@ -46,7 +53,8 @@
 
                 android:layout_height="325dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="40dp">
+            android:layout_marginLeft="30dp"
+                >
 
         </lecho.lib.hellocharts.view.PieChartView>
 
@@ -57,7 +65,8 @@
 
                 android:layout_height="325dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginLeft="40dp">
+                android:layout_marginLeft="30dp"
+                >
 
         </lecho.lib.hellocharts.view.PieChartView>
 
