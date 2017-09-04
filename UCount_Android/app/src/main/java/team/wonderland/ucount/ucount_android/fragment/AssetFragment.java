@@ -84,7 +84,6 @@ public class AssetFragment extends Fragment {
     public void initData(){
         accounts = new ArrayList<>();
         accounts.add(new Account("现金",20.0,R.mipmap.xianjin));
-        accounts.add(new Account("现金2",0.0,R.mipmap.xianjin));
         accounts.add(new Account("银行卡",0.0,R.mipmap.yinhangka));
         accounts.add(new Account("校园卡",0.0,R.mipmap.xiaoyuan));
         accounts.add(new Account("支付宝",0.0,R.mipmap.zhifubao));

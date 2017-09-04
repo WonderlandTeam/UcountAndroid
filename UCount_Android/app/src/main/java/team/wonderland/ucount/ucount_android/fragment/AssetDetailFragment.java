@@ -24,7 +24,6 @@ import team.wonderland.ucount.ucount_android.util.PercentageRing;
  */
 
 public class AssetDetailFragment extends Fragment {
-
     private ImageView back;
     private RecyclerView recyclerView;
     private AssetDetailRecyclerAdapter adapter;

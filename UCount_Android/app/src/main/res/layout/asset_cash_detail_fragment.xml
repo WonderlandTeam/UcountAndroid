@@ -13,8 +13,6 @@
         android:layout_marginBottom="8dp"
         >
 
-
-
         <ImageView
             android:id="@+id/asset_cash_detail_back"
             android:layout_width="35dp"
@@ -30,6 +28,52 @@
             android:text="明细"
             android:textSize="20sp" />
     </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/asset_cash_detail_txt_intitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/asset_cash_detail_header"
+        android:layout_marginLeft="16dp"
+        android:text="流入"
+        android:textColor="@color/text_gray"
+        />
+
+    <TextView
+        android:id="@+id/asset_cash_detail_txt_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/asset_cash_detail_header"
+        android:layout_marginLeft="8dp"
+        android:text="200.0"
+        android:textColor="@color/text_red"
+        android:layout_toEndOf="@+id/asset_cash_detail_txt_intitle"
+        />
+
+    <TextView
+        android:id="@+id/asset_cash_detail_txt_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/asset_cash_detail_header"
+        android:text="1000.0"
+        android:textColor="@color/text_green_darker"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        />
+
+    <TextView
+        android:id="@+id/asset_cash_detail_txt_outtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/asset_cash_detail_header"
+        android:layout_toLeftOf="@id/asset_cash_detail_txt_out"
+        android:text="流出"
+        android:textColor="@color/text_gray"
+        android:gravity="center"
+        android:layout_marginRight="8dp"
+        />
+
 
     <at.markushi.ui.CircleButton
         android:id="@+id/asset_cash_detail_bt_add"
@@ -47,7 +91,7 @@
         android:id="@+id/asset_cash_detail_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/asset_cash_detail_header"
+        android:layout_below="@id/asset_cash_detail_txt_in"
         android:layout_above="@id/asset_cash_detail_bt_add"
         >
         <android.support.v7.widget.RecyclerView
