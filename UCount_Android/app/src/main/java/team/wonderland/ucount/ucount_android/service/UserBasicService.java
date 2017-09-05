@@ -13,7 +13,7 @@ import java.util.Map;
  * 注册和登录
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = "localhost:8080/api/",converters = {MappingJackson2HttpMessageConverter.class})
+@Rest(rootUrl = "localhost:8090/api/",converters = {MappingJackson2HttpMessageConverter.class})
 public interface UserBasicService {
     /**
      * 用户注册

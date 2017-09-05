@@ -24,7 +24,7 @@ import java.util.List;
  * 收支表
  * Created by CLL on 17/9/2.
  */
-public class ReportOneFragment extends Fragment implements TimePickerDialog.TimePickerDialogInterface{
+public class ReportOneFragment extends Fragment implements TimePickerDialog.TimePickerDialogInterface {
     private EditText beginDate;
     private EditText endDate;
     private TimePickerDialog beginPickerDialog;
@@ -36,23 +36,29 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     private ColumnChartView outputColumnChart3;
     private final static String[] outputCategory1 = new String[]{"日用品", "水电费", "通讯和网费",
             "饮食", "电子设备", "交通"};//生活必需
-    private final static String[] outputCategory2 = new String[]{"衣帽鞋包","护肤品","彩妆","首饰"};//服饰
-    private final static String[] outputCategory3=new String[]{"培训、考证","书","文具","打印","组织活动"};//学习
+    private final static String[] outputCategory2 = new String[]{"衣帽鞋包", "护肤品", "彩妆", "首饰"};//服饰
+    private final static String[] outputCategory3 = new String[]{"培训、考证", "书", "文具", "打印", "组织活动"};//学习
     //娱乐
     //理财支出
-    private final static String[] outputCategory4=new String[]{"捐款","其他捐赠"};//捐赠
+    private final static String[] outputCategory4 = new String[]{"捐款", "其他捐赠"};//捐赠
     //其他支出
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.report_one, container, false);
-        beginDate=view.findViewById(R.id.begin_date_text);
+        beginDate = view.findViewById(R.id.begin_date_text);
         beginDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 beginPickerDialog.showDatePickerDialog();
             }
         });
-        endDate=view.findViewById(R.id.end_date_text);
+        endDate = view.findViewById(R.id.end_date_text);
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,51 +66,56 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             }
         });
 
-        beginPickerDialog=new TimePickerDialog(view.getContext(),this,0);
-        endPickerDialog=new TimePickerDialog(view.getContext(),this,1);
+        beginPickerDialog = new TimePickerDialog(view.getContext(), this, 0);
+        endPickerDialog = new TimePickerDialog(view.getContext(), this, 1);
 
-        incomePieChart=view.findViewById(R.id.income_piechart);
-        initPieChart(incomePieChart,getIncomeData());
+        incomePieChart = view.findViewById(R.id.income_piechart);
+        initPieChart(incomePieChart, getIncomeData());
 
-        outputPieChart=view.findViewById(R.id.output_piechart);
-        initPieChart(outputPieChart,getOutputData());
+        outputPieChart = view.findViewById(R.id.output_piechart);
+        initPieChart(outputPieChart, getOutputData());
 
         /**生活必需**/
-        outputColumnChart1=view.findViewById(R.id.output_columnchart);
+        outputColumnChart1 = view.findViewById(R.id.output_columnchart);
 
         //假的数据
-        ArrayList<Float> list=new ArrayList<>();
+        ArrayList<Float> list = new ArrayList<>();
         list.add(10.6f);
         list.add(12.2f);
         list.add(20.8f);
         list.add(10.6f);
         list.add(12.2f);
         list.add(20.8f);
-        initColumnChart(outputColumnChart1,list,outputCategory1);
+        initColumnChart(outputColumnChart1, list, outputCategory1);
 
         /**服饰**/
-        outputColumnChart2=view.findViewById(R.id.output_columnchart2);
+        outputColumnChart2 = view.findViewById(R.id.output_columnchart2);
 
         //假的数据
-        ArrayList<Float> list2=new ArrayList<>();
+        ArrayList<Float> list2 = new ArrayList<>();
         list2.add(10.6f);
         list2.add(12.2f);
         list2.add(20.8f);
         list2.add(10.6f);
-        initColumnChart(outputColumnChart2,list2,outputCategory2);
+        initColumnChart(outputColumnChart2, list2, outputCategory2);
         /**学习**/
-        outputColumnChart3=view.findViewById(R.id.output_columnchart3);
+        outputColumnChart3 = view.findViewById(R.id.output_columnchart3);
 
         //假的数据
-        ArrayList<Float> list3=new ArrayList<>();
+        ArrayList<Float> list3 = new ArrayList<>();
         list3.add(10.6f);
         list3.add(12.2f);
         list3.add(20.8f);
         list3.add(10.6f);
         list3.add(12.2f);
-        initColumnChart(outputColumnChart3,list3,outputCategory3);
+        initColumnChart(outputColumnChart3, list3, outputCategory3);
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     /**
@@ -112,23 +123,23 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
      */
     @Override
     public void positiveListener(int tag) {
-        switch (tag){
+        switch (tag) {
             case 0:
-                String year=String.valueOf(beginPickerDialog.getYear());
-                String month=String.valueOf(beginPickerDialog.getMonth());
-                String day=String.valueOf(beginPickerDialog.getDay());
-                Log.i("=====","=======year======"+beginPickerDialog.getYear());
-                Log.i("=====","=======getMonth======"+beginPickerDialog.getMonth());
-                Log.i("=====","=======getDay======"+beginPickerDialog.getDay());
-                beginDate.setText(year+" - "+month+" - "+day);
+                String year = String.valueOf(beginPickerDialog.getYear());
+                String month = String.valueOf(beginPickerDialog.getMonth());
+                String day = String.valueOf(beginPickerDialog.getDay());
+                Log.i("=====", "=======year======" + beginPickerDialog.getYear());
+                Log.i("=====", "=======getMonth======" + beginPickerDialog.getMonth());
+                Log.i("=====", "=======getDay======" + beginPickerDialog.getDay());
+                beginDate.setText(year + " - " + month + " - " + day);
             case 1:
-                String year1=String.valueOf(endPickerDialog.getYear());
-                String month1=String.valueOf(endPickerDialog.getMonth());
-                String day1=String.valueOf(endPickerDialog.getDay());
-                Log.i("=====","=======year======"+endPickerDialog.getYear());
-                Log.i("=====","=======getMonth======"+endPickerDialog.getMonth());
-                Log.i("=====","=======getDay======"+endPickerDialog.getDay());
-                endDate.setText(year1+" - "+month1+" - "+day1);
+                String year1 = String.valueOf(endPickerDialog.getYear());
+                String month1 = String.valueOf(endPickerDialog.getMonth());
+                String day1 = String.valueOf(endPickerDialog.getDay());
+                Log.i("=====", "=======year======" + endPickerDialog.getYear());
+                Log.i("=====", "=======getMonth======" + endPickerDialog.getMonth());
+                Log.i("=====", "=======getDay======" + endPickerDialog.getDay());
+                endDate.setText(year1 + " - " + month1 + " - " + day1);
         }
 
     }
@@ -143,10 +154,11 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     /**
      * 绘制饼状图
+     *
      * @param pieChartView
      * @param pd
      */
-    private void initPieChart(PieChartView pieChartView,PieChartData pd){
+    private void initPieChart(PieChartView pieChartView, PieChartData pd) {
         pieChartView.setViewportCalculationEnabled(true);//设置饼图自动适应大小
         pieChartView.setChartRotationEnabled(true);//设置饼图是否可以手动旋转
         pieChartView.setValueSelectionEnabled(true);//选择饼图某一块变大
@@ -171,26 +183,27 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     /**
      * 获得收入饼状图数据
+     *
      * @return
      */
-    private PieChartData getIncomeData(){
-        PieChartData pd=new PieChartData();
+    private PieChartData getIncomeData() {
+        PieChartData pd = new PieChartData();
 
         pd.setCenterText1("收入");//环形中间的文字1
         pd.setCenterText1Color(Color.BLACK);//文字颜色
         pd.setCenterText1FontSize(30);//文字大小
 
         List<SliceValue> sliceList = new ArrayList<SliceValue>();
-        List<String> incomeLabels=new ArrayList<>();
+        List<String> incomeLabels = new ArrayList<>();
         incomeLabels.add("工资 ");
         incomeLabels.add("理财 ");
         incomeLabels.add("其他 ");
-        List<Float> incomes=new ArrayList<>();
+        List<Float> incomes = new ArrayList<>();
         incomes.add((float) 10);
         incomes.add((float) 20);
         incomes.add((float) 5);
-        for(int i=0;i<incomeLabels.size();i++){
-            sliceList.add(new SliceValue(incomes.get(i),ChartUtils.pickColor()).setLabel(incomeLabels.get(i)+incomes.get(i)));
+        for (int i = 0; i < incomeLabels.size(); i++) {
+            sliceList.add(new SliceValue(incomes.get(i), ChartUtils.pickColor()).setLabel(incomeLabels.get(i) + incomes.get(i)));
         }
 //        sliceList.add(new SliceValue(incomes.get(0),Color.parseColor("#3F51B5")).setLabel("工资 "+incomes.get(0)));
 //        sliceList.add(new SliceValue(incomes.get(1),Color.parseColor("#1abc9c")).setLabel("理财 "+incomes.get(1)));
@@ -201,16 +214,17 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     /**
      * 获得支出饼状图数据
+     *
      * @return
      */
-    private PieChartData getOutputData(){
-        PieChartData pd=new PieChartData();
+    private PieChartData getOutputData() {
+        PieChartData pd = new PieChartData();
 
         pd.setCenterText1("支出");//环形中间的文字1
         pd.setCenterText1Color(Color.BLACK);//文字颜色
         pd.setCenterText1FontSize(30);//文字大小
 
-        List<String> outputLabels=new ArrayList<>();
+        List<String> outputLabels = new ArrayList<>();
         outputLabels.add("生活必需 ");
         outputLabels.add("服饰 ");
         outputLabels.add("学习 ");
@@ -219,7 +233,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         outputLabels.add("捐赠 ");
         outputLabels.add("其他 ");
 
-        List<Float> outputs=new ArrayList<>();
+        List<Float> outputs = new ArrayList<>();
         outputs.add((float) 10);
         outputs.add((float) 20);
         outputs.add((float) 25);
@@ -229,14 +243,14 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         outputs.add((float) 5);
 
         List<SliceValue> sliceList = new ArrayList<SliceValue>();
-        for (int i=0;i<outputLabels.size();i++){
-            sliceList.add(new SliceValue(outputs.get(i),ChartUtils.pickColor()).setLabel(outputLabels.get(i)+outputs.get(i)));
+        for (int i = 0; i < outputLabels.size(); i++) {
+            sliceList.add(new SliceValue(outputs.get(i), ChartUtils.pickColor()).setLabel(outputLabels.get(i) + outputs.get(i)));
         }
         pd.setValues(sliceList);
         return pd;
     }
 
-    private void initColumnChart(ColumnChartView columnChartView,List<Float> list,String[] labels){
+    private void initColumnChart(ColumnChartView columnChartView, List<Float> list, String[] labels) {
         columnChartView.setZoomEnabled(false);//禁止手势缩放
         ColumnChartData data;
         // 每列1个subcolumn。
@@ -273,7 +287,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             axisValues.add(new AxisValue(i).setLabel(labels[i]));
         }
         //创建一个带有之前圆柱对象column集合的ColumnChartData
-        data= new ColumnChartData(columns);
+        data = new ColumnChartData(columns);
 
         //定义x轴y轴相应参数
         Axis axisX = new Axis();

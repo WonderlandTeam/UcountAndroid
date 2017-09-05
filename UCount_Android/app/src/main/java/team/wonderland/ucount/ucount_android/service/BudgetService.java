@@ -13,7 +13,7 @@ import java.util.Map;
  * 预算管理
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = "localhost:8080/api/",converters = {MappingJackson2HttpMessageConverter.class},interceptors = {BasicAuthInterceptor.class})
+@Rest(rootUrl = "localhost:8090/api",converters = {MappingJackson2HttpMessageConverter.class},interceptors = {BasicAuthInterceptor.class})
 public interface BudgetService {
     /**
      * 获取预算信息

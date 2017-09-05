@@ -1,26 +1,22 @@
 package team.wonderland.ucount.ucount_android.json;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 /**
  * 预算添加信息
  * Created by CLL on 17/8/18.
  */
 public class BudgetAddJson implements Serializable{
-    private String username;//用户名
-    private String consumeType;//消费类型
-    private Double consumeMoney;//消费金额
-    private Calendar consumeTime;//消费时间
-    private Calendar createTime;//创建时间
+    private String username;
+    private String consumeType;
+    private double consumeMoney;
+    private String consumeTime;
 
-    public BudgetAddJson(String username, String consumeType, Double consumeMoney,
-                         Calendar consumeTime, Calendar createTime) {
+    public BudgetAddJson(String username, String consumeType, double consumeMoney, String consumeTime) {
         this.username = username;
         this.consumeType = consumeType;
         this.consumeMoney = consumeMoney;
         this.consumeTime = consumeTime;
-        this.createTime = createTime;
     }
 
     public String getUsername() {
@@ -39,27 +35,19 @@ public class BudgetAddJson implements Serializable{
         this.consumeType = consumeType;
     }
 
-    public Double getConsumeMoney() {
+    public double getConsumeMoney() {
         return consumeMoney;
     }
 
-    public void setConsumeMoney(Double consumeMoney) {
+    public void setConsumeMoney(double consumeMoney) {
         this.consumeMoney = consumeMoney;
     }
 
-    public Calendar getConsumeTime() {
+    public String getConsumeTime() {
         return consumeTime;
     }
 
-    public void setConsumeTime(Calendar consumeTime) {
+    public void setConsumeTime(String consumeTime) {
         this.consumeTime = consumeTime;
-    }
-
-    public Calendar getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Calendar createTime) {
-        this.createTime = createTime;
     }
 }

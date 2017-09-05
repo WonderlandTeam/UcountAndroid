@@ -7,14 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import at.markushi.ui.CircleButton;
+import org.androidannotations.annotations.EFragment;
 import team.wonderland.ucount.ucount_android.R;
 
 /**
  * Created by liuyu on 2017/9/3.
  */
-
+@EFragment
 public class PlanBudgetNewFragment extends Fragment {
     CircleButton save;
     ImageView back;

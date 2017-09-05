@@ -26,9 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private boolean haveLogined;
 
-//    @RestService
-//    UserBasicService userBasicService;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         usernameValue = username.getText().toString();
         passwordValue = password.getText().toString();
 
+//        Map<String,Object> result=userBasicService.login(usernameValue,passwordValue);
+//        Log.i("login",(String)result.get("content"));
         //TODO:如果登录成功
         if(true){
             SharedPreferences.Editor editor = sp.edit();
