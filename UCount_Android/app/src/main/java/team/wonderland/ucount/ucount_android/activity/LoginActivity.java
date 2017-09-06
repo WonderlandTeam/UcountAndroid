@@ -9,9 +9,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.util.Map;
+
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.json.LoginJson;
+import team.wonderland.ucount.ucount_android.service.UserBasicService;
 
 /**
  * Created by CLL on 17/8/16.
@@ -25,6 +34,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgetPass,register;
     private SharedPreferences sp;
     private boolean haveLogined;
+
+    @RestService
+    UserBasicService userBasicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,20 +76,55 @@ public class LoginActivity extends AppCompatActivity {
         usernameValue = username.getText().toString();
         passwordValue = password.getText().toString();
 
-//        Map<String,Object> result=userBasicService.login(usernameValue,passwordValue);
-//        Log.i("login",(String)result.get("content"));
-        //TODO:如果登录成功
-        if(true){
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString("USERNAME",usernameValue);
-            editor.putString("PASSWORD",passwordValue);
-            editor.putBoolean("HAVELOGINED",true);
-            editor.commit();
+        LoginJson loginJson = new LoginJson();
+        loginJson.setUsername(usernameValue);
+        loginJson.setPassword(passwordValue);
+        loginAsync(loginJson);
 
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
+//        Log.i("login",(String)result.get("content"));
+//        //TODO:如果登录成功
+//        if(true) {
+//            SharedPreferences.Editor editor = sp.edit();
+//            editor.putString("USERNAME",usernameValue);
+//            editor.putString("PASSWORD",passwordValue);
+//            editor.putBoolean("HAVELOGINED",true);
+//            editor.commit();
+//
+//            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+    }
+
+    @Background
+    void loginAsync(LoginJson loginJson) {
+        Map<String, Object> result = userBasicService.login(loginJson);
+        if (result.containsKey("content")) {
+            System.out.println(result.get("content"));
+            loginSuccess();
+        } else {
+            showErrorInfo((String) result.get("error"));
         }
+
+    }
+
+    @UiThread
+    void loginSuccess() {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("USERNAME",usernameValue);
+        editor.putString("PASSWORD",passwordValue);
+        editor.putBoolean("HAVELOGINED",true);
+        editor.commit();
+
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @UiThread
+    void showErrorInfo(String error) {
+        System.out.println(error);
+        Log.i("login", error);
     }
 
     @Click(R.id.login_txtRegister)
