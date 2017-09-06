@@ -3,6 +3,8 @@ package team.wonderland.ucount.ucount_android.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,9 @@ import lecho.lib.hellocharts.model.*;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
+import team.wonderland.ucount.ucount_android.Adapter.ReportItemAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.entity.ReportItem;
 import team.wonderland.ucount.ucount_android.util.TimePickerDialog;
 
 import java.util.ArrayList;
@@ -34,14 +38,20 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     private ColumnChartView outputColumnChart1;
     private ColumnChartView outputColumnChart2;
     private ColumnChartView outputColumnChart3;
+    private RecyclerView inputRecyclerView;
+    private RecyclerView outputRecyclerView;
+
     private final static String[] outputCategory1 = new String[]{"日用品", "水电费", "通讯和网费",
             "饮食", "电子设备", "交通"};//生活必需
     private final static String[] outputCategory2 = new String[]{"衣帽鞋包", "护肤品", "彩妆", "首饰"};//服饰
     private final static String[] outputCategory3 = new String[]{"培训、考证", "书", "文具", "打印", "组织活动"};//学习
     //娱乐
     //理财支出
-    private final static String[] outputCategory4 = new String[]{"捐款", "其他捐赠"};//捐赠
+    //捐赠
     //其他支出
+
+    private List<ReportItem> incomeItems;
+    private List<ReportItem> outputItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,12 +79,23 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         beginPickerDialog = new TimePickerDialog(view.getContext(), this, 0);
         endPickerDialog = new TimePickerDialog(view.getContext(), this, 1);
 
+        incomeItems=new ArrayList<>();
         incomePieChart = view.findViewById(R.id.income_piechart);
         initPieChart(incomePieChart, getIncomeData());
 
+        Log.i("input",""+incomeItems.size());
+        inputRecyclerView=view.findViewById(R.id.income_recycleview);
+        //设置布局管理器
+        inputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        inputRecyclerView.setAdapter(new ReportItemAdapter(incomeItems,getActivity()));
+
+        outputItems=new ArrayList<>();
         outputPieChart = view.findViewById(R.id.output_piechart);
         initPieChart(outputPieChart, getOutputData());
 
+        outputRecyclerView=view.findViewById(R.id.output_recycleview);
+        outputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        outputRecyclerView.setAdapter(new ReportItemAdapter(outputItems,getActivity()));
         /**生活必需**/
         outputColumnChart1 = view.findViewById(R.id.output_columnchart);
 
@@ -188,26 +209,36 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
      */
     private PieChartData getIncomeData() {
         PieChartData pd = new PieChartData();
-
-        pd.setCenterText1("收入");//环形中间的文字1
-        pd.setCenterText1Color(Color.BLACK);//文字颜色
-        pd.setCenterText1FontSize(30);//文字大小
-
-        List<SliceValue> sliceList = new ArrayList<SliceValue>();
-        List<String> incomeLabels = new ArrayList<>();
-        incomeLabels.add("工资 ");
-        incomeLabels.add("理财 ");
-        incomeLabels.add("其他 ");
         List<Float> incomes = new ArrayList<>();
         incomes.add((float) 10);
         incomes.add((float) 20);
+        incomes.add((float) 25);
         incomes.add((float) 5);
+
+
+        List<SliceValue> sliceList = new ArrayList<SliceValue>();
+        List<String> incomeLabels = new ArrayList<>();
+        incomeLabels.add("工资");
+        incomeLabels.add("理财");
+        incomeLabels.add("补助");
+        incomeLabels.add("其他");
+        //饼图颜色
+        String[] colors={"#33CCCC","#FF99CC","#FF6600","#009933"};
+        int[] icons={R.drawable.type_get_3,R.drawable.type_get_4,R.drawable.type_get_2,R.drawable.type_get_1};
+        float totalIncome=0f;
         for (int i = 0; i < incomeLabels.size(); i++) {
-            sliceList.add(new SliceValue(incomes.get(i), ChartUtils.pickColor()).setLabel(incomeLabels.get(i) + incomes.get(i)));
+            totalIncome=totalIncome+incomes.get(i);
         }
-//        sliceList.add(new SliceValue(incomes.get(0),Color.parseColor("#3F51B5")).setLabel("工资 "+incomes.get(0)));
-//        sliceList.add(new SliceValue(incomes.get(1),Color.parseColor("#1abc9c")).setLabel("理财 "+incomes.get(1)));
-//        sliceList.add(new SliceValue(incomes.get(2),Color.parseColor("#bdc3c7")).setLabel("其他 "+incomes.get(2)));
+        for (int i = 0; i < incomeLabels.size(); i++) {
+            sliceList.add(new SliceValue(incomes.get(i),Color.parseColor(colors[i])).setLabel(incomeLabels.get(i)));
+            //初始化条目数据
+            incomeItems.add(new ReportItem(icons[i],incomeLabels.get(i)+"收入",
+                    String.format("%.1f",incomes.get(i)*100/totalIncome),incomes.get(i)));
+        }
+        pd.setCenterText1("收入"+totalIncome);//环形中间的文字1
+        pd.setCenterText1Color(Color.BLACK);//文字颜色
+        pd.setCenterText1FontSize(25);//文字大小
+
         pd.setValues(sliceList);
         return pd;
     }
@@ -220,18 +251,14 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     private PieChartData getOutputData() {
         PieChartData pd = new PieChartData();
 
-        pd.setCenterText1("支出");//环形中间的文字1
-        pd.setCenterText1Color(Color.BLACK);//文字颜色
-        pd.setCenterText1FontSize(30);//文字大小
-
         List<String> outputLabels = new ArrayList<>();
-        outputLabels.add("生活必需 ");
-        outputLabels.add("服饰 ");
-        outputLabels.add("学习 ");
-        outputLabels.add("娱乐 ");
-        outputLabels.add("理财 ");
-        outputLabels.add("捐赠 ");
-        outputLabels.add("其他 ");
+        outputLabels.add("必需");
+        outputLabels.add("服饰");
+        outputLabels.add("学习");
+        outputLabels.add("娱乐");
+        outputLabels.add("理财");
+        outputLabels.add("捐赠");
+        outputLabels.add("其他");
 
         List<Float> outputs = new ArrayList<>();
         outputs.add((float) 10);
@@ -242,10 +269,24 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         outputs.add((float) 5);
         outputs.add((float) 5);
 
+        String[] colors={"#996600","#00CC66","#99CCFF","#FF9933","#FF99CC","#FF0066","#CC6666"};
+        int[] icons={R.drawable.type_cost_1,R.drawable.type_cost_7,R.drawable.type_cost_12,R.drawable.type_cost_18,
+        R.drawable.type_cost_15,R.drawable.type_cost_16,R.drawable.type_cost_5};
+        float totalOutput=0f;
+
         List<SliceValue> sliceList = new ArrayList<SliceValue>();
         for (int i = 0; i < outputLabels.size(); i++) {
-            sliceList.add(new SliceValue(outputs.get(i), ChartUtils.pickColor()).setLabel(outputLabels.get(i) + outputs.get(i)));
+            totalOutput = totalOutput + outputs.get(i);
         }
+        for (int i = 0; i < outputLabels.size(); i++) {
+            sliceList.add(new SliceValue(outputs.get(i), Color.parseColor(colors[i])).setLabel(outputLabels.get(i)));
+            outputItems.add(new ReportItem(icons[i],outputLabels.get(i)+"支出",
+                    String.format("%.1f",outputs.get(i)*100/totalOutput),outputs.get(i)));
+        }
+
+        pd.setCenterText1("支出"+totalOutput);//环形中间的文字1
+        pd.setCenterText1Color(Color.BLACK);//文字颜色
+        pd.setCenterText1FontSize(25);//文字大小
         pd.setValues(sliceList);
         return pd;
     }

@@ -16,7 +16,7 @@
     </LinearLayout>
 
     <LinearLayout
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical" >
@@ -25,20 +25,20 @@
 
         <View
                 android:layout_width="3dp"
-                android:layout_height="0dp"
+                android:layout_height="2dp"
                 android:layout_weight="1"
                 android:background="@color/text_gray" />
 
         <!-- 设置中间的节点大小为30x30 -->
 
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/img_center"/>
 
         <View
                 android:layout_width="3dp"
-                android:layout_height="0dp"
+                android:layout_height="2dp"
                 android:layout_weight="1"
                 android:background="@color/text_gray" />
     </LinearLayout>

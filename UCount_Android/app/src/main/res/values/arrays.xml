@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="reports">
-        <item>收支储蓄</item>
+        <item>收支盈余</item>
         <item>资产负债</item>
         <item>现金流量</item>
     </string-array>
