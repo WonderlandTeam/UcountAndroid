@@ -74,25 +74,11 @@
         android:layout_marginRight="8dp"
         />
 
-
-    <at.markushi.ui.CircleButton
-        android:id="@+id/asset_cash_detail_bt_add"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@mipmap/ic_plus"
-        app:cb_color="#99CC00"
-        app:cb_pressedRingWidth="8dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        >
-    </at.markushi.ui.CircleButton>
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/asset_cash_detail_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/asset_cash_detail_txt_in"
-        android:layout_above="@id/asset_cash_detail_bt_add"
         >
         <android.support.v7.widget.RecyclerView
             android:id="@+id/asset_cash_detail_recyclerview"
@@ -103,5 +89,16 @@
              />
     </android.support.v4.widget.SwipeRefreshLayout>
 
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/asset_cash_detail_bt_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_plus"
+        app:fab_colorNormal="@color/main_bg"
+        />
 
 </android.support.percent.PercentRelativeLayout>

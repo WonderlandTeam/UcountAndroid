@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.melnykov.fab.FloatingActionButton;
 
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class PlanBudgetFragment extends Fragment {
 
     private PercentageRing mPercentageRing;
     private TextView dateTextView;
-    private CircleButton newBudget;
+    private FloatingActionButton newBudget;
     private RecyclerView recyclerView;
     private PlanBudgetRecyclerAdapter adapter;
     private List<Budget> budgets;
@@ -113,6 +114,8 @@ public class PlanBudgetFragment extends Fragment {
 //                        .replace(R.id.fragment_container, new AssetCashDetailFragment()).commit();
 //            }
 //        });
+
+        newBudget.attachToRecyclerView(recyclerView);
         return view;
     }
 

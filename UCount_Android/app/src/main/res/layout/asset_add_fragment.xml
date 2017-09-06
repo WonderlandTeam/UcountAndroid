@@ -116,7 +116,7 @@
             android:id="@+id/input_board"
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            app:layout_widthPercent="70%"
+            app:layout_widthPercent="80%"
             android:useDefaultMargins="false"
             android:layout_below="@id/calculator_banner">
 
@@ -288,31 +288,18 @@
             android:layout_height="match_parent"
             android:layout_alignTop="@id/input_board"
             android:layout_width="0dp"
-            app:layout_widthPercent="31%"
+            app:layout_widthPercent="20%"
             android:layout_alignParentRight="true"
             android:orientation="vertical"
             android:background="@drawable/calculator_button">
 
-
             <TextView
-                android:id="@+id/anime_words"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="保存"
-                android:textColor="#000"
-                android:textSize="15sp"
-                android:gravity="center"
-                android:layout_marginTop="20dp"/>
-
-            <ImageButton
-                android:id="@+id/add_finish"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:layout_marginRight="6dp"
-                android:layout_marginTop="27dp"
-                android:src="@mipmap/ic_tick"
-                android:background="#00000000"/>
+                android:text="保存"
+                android:gravity="center"
+                android:textSize="20sp"
+                />
         </LinearLayout>
 
     </android.support.percent.PercentRelativeLayout>

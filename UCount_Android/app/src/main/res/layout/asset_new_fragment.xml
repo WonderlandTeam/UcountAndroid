@@ -40,22 +40,40 @@
         android:background="@color/main_bg"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:text="账户名称"
-            android:textSize="16sp"
-            android:paddingLeft="8dp"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="8dp"
-            android:src="@mipmap/ic_more"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="账户名称"
+                android:textSize="16sp"
+                android:paddingLeft="8dp"
+                />
+
+            <ImageView
+                android:id="@+id/asset_new_cardview_img_name"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/ic_more"
+                />
+
+            <TextView
+                android:id="@+id/asset_new_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="现金账户"
+                android:gravity="center"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/asset_new_cardview_img_name"
+                />
+        </RelativeLayout>
+
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -69,22 +87,40 @@
         android:background="@color/main_bg"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:text="账户类型"
-            android:textSize="16sp"
-            android:paddingLeft="8dp"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="8dp"
-            android:src="@mipmap/ic_more"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="账户类型"
+                android:textSize="16sp"
+                android:paddingLeft="8dp"
+                />
+
+            <ImageView
+                android:id="@+id/asset_new_img_type"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/ic_more"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:id="@+id/asset_new_tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="银行卡"
+                android:gravity="center"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/asset_new_img_type"
+                />
+        </RelativeLayout>
+
     </android.support.v7.widget.CardView>
 
 
@@ -99,22 +135,41 @@
         android:background="@color/main_bg"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:text="账户余额"
-            android:textSize="16sp"
-            android:paddingLeft="8dp"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="8dp"
-            android:src="@mipmap/ic_more"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="账户余额"
+                android:textSize="16sp"
+                android:paddingLeft="8dp"
+                />
+
+            <ImageView
+                android:id="@+id/asset_new_img_balance"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/ic_more"
+                />
+
+            <TextView
+                android:id="@+id/asset_new_tv_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="10"
+                android:gravity="center"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/asset_new_img_balance"
+                />
+
+        </RelativeLayout>
+
     </android.support.v7.widget.CardView>
 
     <at.markushi.ui.CircleButton

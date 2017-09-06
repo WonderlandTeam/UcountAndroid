@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import at.markushi.ui.CircleButton;
 import team.wonderland.ucount.ucount_android.R;
 
@@ -28,6 +31,12 @@ public class AssetNewFragment extends Fragment{
     CardView cv_type;
     CardView cv_balance;
     CircleButton bt_save;
+    TextView tv_name;
+    TextView tv_type;
+    TextView tv_balance;
+    EditText et_name;
+    EditText et_balance;
+    String[] titles = {"现金","银行卡","校园卡","支付宝"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +53,9 @@ public class AssetNewFragment extends Fragment{
         cv_type = (CardView)view.findViewById(R.id.asset_new_cardview_type);
         cv_balance = (CardView)view.findViewById(R.id.asset_new_cardview_balance);
         bt_save = (CircleButton)view.findViewById(R.id.asset_new_bt_save);
+        tv_name = (TextView)view.findViewById(R.id.asset_new_tv_name);
+        tv_type = (TextView)view.findViewById(R.id.asset_new_tv_type);
+        tv_balance = (TextView)view.findViewById(R.id.asset_new_tv_balance);
 
         cv_name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,19 +64,20 @@ public class AssetNewFragment extends Fragment{
                 View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
                 localBuilder.setView(dialog);
                 TextView tv = (TextView) dialog.findViewById(R.id.asset_new_dialog_tv);
-                EditText et = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
+                et_name = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
                 tv.setText("请输入账户名称");
                 localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
                     {
-
+                        tv_name.setText(et_name.getText());
+                        paramAnonymousDialogInterface.dismiss();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
                     {
-
+                        paramAnonymousDialogInterface.dismiss();
                     }
                 }).create().show();
             }
@@ -73,25 +86,19 @@ public class AssetNewFragment extends Fragment{
         cv_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder localBuilder = new AlertDialog.Builder(getActivity());
-                View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
-                localBuilder.setView(dialog);
-                TextView tv = (TextView) dialog.findViewById(R.id.asset_new_dialog_tv);
-                EditText et = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
-                tv.setText("请输入账户类型");
-                localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
-                    {
 
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
-                    {
-
-                    }
-                }).create().show();
+                Dialog dialog = new AlertDialog.Builder(getActivity())
+                        .setTitle("账户类型")
+                        //设置单选框监听
+                        .setSingleChoiceItems(titles, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //根据which决定选择了哪一个子项
+                                tv_type.setText(titles[which]);
+                                dialog.dismiss();
+                            }
+                        }).create();
+                dialog.show();
             }
         });
 
@@ -100,22 +107,23 @@ public class AssetNewFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder localBuilder = new AlertDialog.Builder(getActivity());
-                View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
+                final View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
                 localBuilder.setView(dialog);
                 TextView tv = (TextView) dialog.findViewById(R.id.asset_new_dialog_tv);
-                EditText et = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
+                et_balance = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
                 tv.setText("请输入账户余额");
                 localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
                     {
-
+                        tv_balance.setText(et_balance.getText());
+                        paramAnonymousDialogInterface.dismiss();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
                     {
-
+                        paramAnonymousDialogInterface.dismiss();
                     }
                 }).create().show();
             }

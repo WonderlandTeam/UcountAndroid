@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ import team.wonderland.ucount.ucount_android.util.PercentageRing;
 
 public class AssetCashDetailFragment extends Fragment {
     private ImageView back;
-    private CircleButton add;
+    private FloatingActionButton add;
     private RecyclerView recyclerView;
     private AssetDetailRecyclerAdapter adapter;
     private List<AssetItem> assetItems;
@@ -36,7 +38,7 @@ public class AssetCashDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.asset_cash_detail_fragment, container, false);
         back = (ImageView)view.findViewById(R.id.asset_cash_detail_back);
-        add = (CircleButton)view.findViewById(R.id.asset_cash_detail_bt_add);
+        add = (FloatingActionButton) view.findViewById(R.id.asset_cash_detail_bt_add);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +46,7 @@ public class AssetCashDetailFragment extends Fragment {
                 getFragmentManager().popBackStack();
             }
         });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +79,7 @@ public class AssetCashDetailFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
+        add.attachToRecyclerView(recyclerView);
         return view;
     }
 
@@ -89,5 +92,14 @@ public class AssetCashDetailFragment extends Fragment {
         assetItems.add(new AssetItem("2017年\n8月7日\n06:16","餐饮","15.00"));
         assetItems.add(new AssetItem("2017年\n8月8日\n14:03","餐饮","15.00"));
         assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+        assetItems.add(new AssetItem("2017年\n8月9日\n23:23","餐饮","15.00"));
+
+
     }
 }

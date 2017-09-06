@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,6 @@ public class AssetAddFragment extends Fragment{
     private Button addCostBtn;
     private Button addEarnBtn;
     private Button clearBtn;
-    private ImageButton addFinishBtn;
     private ImageButton addDescription;
     private Button zero,one,two,three,four,five,six,seven,eight,nine,dot;
 
@@ -46,11 +46,15 @@ public class AssetAddFragment extends Fragment{
 
     private TextView moneyText;
 
-    private TextView words;
+    private LinearLayout save;
 
     private SimpleDateFormat formatItem = new SimpleDateFormat("yyyy年MM月dd日");
     private SimpleDateFormat formatSum  = new SimpleDateFormat("yyyy年MM月");
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+    public void onBackPressed() {
+        getFragmentManager().popBackStack();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,10 +63,9 @@ public class AssetAddFragment extends Fragment{
 
         addCostBtn = (Button) view.findViewById(R.id.add_cost_button);
         addEarnBtn = (Button) view.findViewById(R.id.add_earn_button);
-        addFinishBtn   = (ImageButton) view.findViewById(R.id.add_finish);
         addDescription = (ImageButton) view.findViewById(R.id.add_description);
         clearBtn = (Button) view.findViewById(R.id.clear);
-        words = (TextView) view.findViewById(R.id.anime_words);
+        save = (LinearLayout)view.findViewById(R.id.calculator_sidebar);
 //        // 设置字体颜色
 //        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/chinese_character.ttf");
 //        clearBtn.setTypeface(typeface);
@@ -70,10 +73,9 @@ public class AssetAddFragment extends Fragment{
         // 设置按钮监听
         addCostBtn.setOnClickListener(new ButtonListener());
         addEarnBtn.setOnClickListener(new ButtonListener());
-        addFinishBtn.setOnClickListener(new ButtonListener());
         addDescription.setOnClickListener(new ButtonListener());
         clearBtn.setOnClickListener(new ButtonListener());
-
+        save.setOnClickListener(new ButtonListener());
 
         bannerText = (TextView) view.findViewById(R.id.chosen_type);
         bannerImage = (ImageView) view.findViewById(R.id.chosen_image);
@@ -182,18 +184,18 @@ public class AssetAddFragment extends Fragment{
 
             switch (view.getId()) {
                 case R.id.add_cost_button:
-                    addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“支出“按钮为灰色
-                    addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“收入”按钮为绿色
+                    addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“支出“按钮为灰色
+                    addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“收入”按钮为绿色
                     transaction.replace(R.id.item_fragment, new AssetCostFragment());
 
                     break;
                 case R.id.add_earn_button:
-                    addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“收入“按钮为灰色
-                    addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“支出”按钮为绿色
+                    addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“收入“按钮为灰色
+                    addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“支出”按钮为绿色
                     transaction.replace(R.id.item_fragment, new AssetEarnFragment());
 
                     break;
-                case R.id.add_finish:
+                case R.id.calculator_sidebar:
                     String moneyString =  moneyText.getText().toString();
                     if (moneyString.equals("0.00") || GlobalVariables.getmInputMoney().equals(""))
                         Toast.makeText(getActivity(),"你还没输入金额",Toast.LENGTH_SHORT).show();
@@ -272,6 +274,6 @@ public class AssetAddFragment extends Fragment{
             GlobalVariables.setmInputMoney(GlobalVariables.getmInputMoney() + ".");
             GlobalVariables.setHasDot(true);
         }
-    }
 
+    }
 }
