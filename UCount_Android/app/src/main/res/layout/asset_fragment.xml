@@ -18,20 +18,20 @@
             android:id="@+id/asset_txt_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:text="明细"
             android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
 
         <TextView
             android:id="@+id/asset_txt_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="8dp"
             android:text="新建"
             android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
 
     <TextView
         android:id="@+id/asset_txt_total"
@@ -40,9 +40,9 @@
         android:minHeight="0dp"
         app:layout_marginTopPercent="6%"
         android:layout_centerHorizontal="true"
-        android:text="总资产"
+        android:text="净资产"
         android:textColor="@color/white"
-        android:textSize="28sp"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/asset_txt_totalnum"
@@ -52,6 +52,7 @@
         android:layout_centerHorizontal="true"
         android:text="20.00"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="30sp"/>
 
     <TextView
@@ -60,9 +61,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_below="@id/asset_txt_totalnum"
-        android:text="流入"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:text="资产"
+        android:textColor="@color/main_bg"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/asset_txt_out"
@@ -71,9 +72,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_below="@id/asset_txt_totalnum"
-        android:text="流出"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:text="负债"
+        android:textColor="@color/main_bg"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/asset_txt_innum"
@@ -83,6 +84,7 @@
         android:layout_marginLeft="8dp"
         android:text="200.00"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="24sp" />
 
     <TextView
@@ -93,6 +95,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="8dp"
         android:text="0.00"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="24sp" />
 
