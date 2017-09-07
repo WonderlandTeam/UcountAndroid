@@ -96,15 +96,21 @@
          The drawer is given a fixed width in dp and extends the full height of
          the container. A solid background is used for contrast
          with the content view. -->
-    <LinearLayout android:id="@+id/left_menu"
+    <team.wonderland.ucount.ucount_android.util.FlowLayout android:id="@+id/left_menu"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="left"
         >
-        <GridView android:layout_width="match_parent" android:layout_height="450px"
-                  android:background="@drawable/header" android:numColumns="3" >
-        </GridView>
+        <LinearLayout android:layout_width="280dp" android:layout_height="450px"
+                        android:background="@drawable/header">
+            <TextView   android:id="@+id/username"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="115dp"
+                        android:textSize="25dp"/>
+        </LinearLayout>
+
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/main_bg"
         android:orientation="vertical">
             <android.support.v7.widget.CardView
@@ -323,6 +329,6 @@
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
+    </team.wonderland.ucount.ucount_android.util.FlowLayout>
 
 </android.support.v4.widget.DrawerLayout>

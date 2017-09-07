@@ -11,7 +11,6 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CardView cv_praise;
     private CardView cv_collection;
     private CardView cv_message;
+    private TextView username;
 
     private SharedPreferences sp;
 
@@ -111,6 +111,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bindView();
 
         tabAsset.performClick();
+        
+        username= (TextView) findViewById(R.id.username);
+        // TODO: 17/9/7  
+        username.setText("Username："+"chen");
 
         //个人中心按钮
         ll_quit = (LinearLayout) findViewById(R.id.main_center_quit);
