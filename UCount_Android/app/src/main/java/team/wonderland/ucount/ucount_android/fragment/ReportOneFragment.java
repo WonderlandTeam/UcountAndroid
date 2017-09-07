@@ -1,5 +1,7 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import lecho.lib.hellocharts.formatter.ColumnChartValueFormatter;
 import lecho.lib.hellocharts.formatter.SimpleColumnChartValueFormatter;
@@ -16,9 +19,12 @@ import lecho.lib.hellocharts.model.*;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.Adapter.ReportItemAdapter;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.entity.ReportItem;
+import team.wonderland.ucount.ucount_android.service.StatementService;
 import team.wonderland.ucount.ucount_android.util.TimePickerDialog;
 
 import java.util.ArrayList;
@@ -28,9 +34,11 @@ import java.util.List;
  * 收支表
  * Created by CLL on 17/9/2.
  */
+@EFragment
 public class ReportOneFragment extends Fragment implements TimePickerDialog.TimePickerDialogInterface {
     private EditText beginDate;
     private EditText endDate;
+    private Button confirm;
     private TimePickerDialog beginPickerDialog;
     private TimePickerDialog endPickerDialog;
     private PieChartView incomePieChart;
@@ -52,6 +60,9 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     private List<ReportItem> incomeItems;
     private List<ReportItem> outputItems;
+
+    @RestService
+    StatementService statementService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,57 +90,22 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         beginPickerDialog = new TimePickerDialog(view.getContext(), this, 0);
         endPickerDialog = new TimePickerDialog(view.getContext(), this, 1);
 
-        incomeItems=new ArrayList<>();
+        confirm=view.findViewById(R.id.confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initData();
+                showTables();
+            }
+        });
+
         incomePieChart = view.findViewById(R.id.income_piechart);
-        initPieChart(incomePieChart, getIncomeData());
-
-        Log.i("input",""+incomeItems.size());
         inputRecyclerView=view.findViewById(R.id.income_recycleview);
-        //设置布局管理器
-        inputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        inputRecyclerView.setAdapter(new ReportItemAdapter(incomeItems,getActivity()));
-
-        outputItems=new ArrayList<>();
         outputPieChart = view.findViewById(R.id.output_piechart);
-        initPieChart(outputPieChart, getOutputData());
-
         outputRecyclerView=view.findViewById(R.id.output_recycleview);
-        outputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        outputRecyclerView.setAdapter(new ReportItemAdapter(outputItems,getActivity()));
-        /**生活必需**/
         outputColumnChart1 = view.findViewById(R.id.output_columnchart);
-
-        //假的数据
-        ArrayList<Float> list = new ArrayList<>();
-        list.add(10.6f);
-        list.add(12.2f);
-        list.add(20.8f);
-        list.add(10.6f);
-        list.add(12.2f);
-        list.add(20.8f);
-        initColumnChart(outputColumnChart1, list, outputCategory1);
-
-        /**服饰**/
         outputColumnChart2 = view.findViewById(R.id.output_columnchart2);
-
-        //假的数据
-        ArrayList<Float> list2 = new ArrayList<>();
-        list2.add(10.6f);
-        list2.add(12.2f);
-        list2.add(20.8f);
-        list2.add(10.6f);
-        initColumnChart(outputColumnChart2, list2, outputCategory2);
-        /**学习**/
         outputColumnChart3 = view.findViewById(R.id.output_columnchart3);
-
-        //假的数据
-        ArrayList<Float> list3 = new ArrayList<>();
-        list3.add(10.6f);
-        list3.add(12.2f);
-        list3.add(20.8f);
-        list3.add(10.6f);
-        list3.add(12.2f);
-        initColumnChart(outputColumnChart3, list3, outputCategory3);
 
         return view;
     }
@@ -171,6 +147,61 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     @Override
     public void negativeListener(int tag) {
 
+    }
+
+
+
+    //调服务器获得数据
+    private void initData(){
+        SharedPreferences preferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        String userName=preferences.getString("USERNAME","default");
+        statementService.getIncomeStatement(userName,beginDate.getText().toString(),endDate.getText().toString());
+        // TODO: 17/9/7
+    }
+
+    private void showTables(){
+        incomeItems=new ArrayList<>();
+
+        initPieChart(incomePieChart, getIncomeData());
+
+        //设置布局管理器
+        inputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        inputRecyclerView.setAdapter(new ReportItemAdapter(incomeItems,getActivity()));
+
+        outputItems=new ArrayList<>();
+
+        initPieChart(outputPieChart, getOutputData());
+
+        outputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        outputRecyclerView.setAdapter(new ReportItemAdapter(outputItems,getActivity()));
+        /**生活必需**/
+        //假的数据
+        ArrayList<Float> list = new ArrayList<>();
+        list.add(10.6f);
+        list.add(12.2f);
+        list.add(20.8f);
+        list.add(10.6f);
+        list.add(12.2f);
+        list.add(20.8f);
+        initColumnChart(outputColumnChart1, list, outputCategory1);
+
+        /**服饰**/
+        //假的数据
+        ArrayList<Float> list2 = new ArrayList<>();
+        list2.add(10.6f);
+        list2.add(12.2f);
+        list2.add(20.8f);
+        list2.add(10.6f);
+        initColumnChart(outputColumnChart2, list2, outputCategory2);
+        /**学习**/
+        //假的数据
+        ArrayList<Float> list3 = new ArrayList<>();
+        list3.add(10.6f);
+        list3.add(12.2f);
+        list3.add(20.8f);
+        list3.add(10.6f);
+        list3.add(12.2f);
+        initColumnChart(outputColumnChart3, list3, outputCategory3);
     }
 
     /**
@@ -271,7 +302,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
         String[] colors={"#996600","#00CC66","#99CCFF","#FF9933","#FF99CC","#FF0066","#CC6666"};
         int[] icons={R.drawable.type_cost_1,R.drawable.type_cost_7,R.drawable.type_cost_12,R.drawable.type_cost_18,
-        R.drawable.type_cost_15,R.drawable.type_cost_16,R.drawable.type_cost_5};
+                R.drawable.type_cost_15,R.drawable.type_cost_16,R.drawable.type_cost_5};
         float totalOutput=0f;
 
         List<SliceValue> sliceList = new ArrayList<SliceValue>();
@@ -346,5 +377,4 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         //给表填充数据，显示出来
         columnChartView.setColumnChartData(data);
     }
-
 }

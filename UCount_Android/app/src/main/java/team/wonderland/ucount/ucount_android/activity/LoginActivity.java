@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,19 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-
-import java.util.Map;
-
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.service.UserBasicService;
+
+import java.util.Map;
 
 /**
  * Created by CLL on 17/8/16.
@@ -113,7 +110,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @UiThread
     void loginSuccess() {
-        SharedPreferences.Editor editor = sp.edit();
+        SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
         editor.putString("USERNAME", usernameValue);
         editor.putString("PASSWORD", passwordValue);
         editor.putBoolean("HAVELOGINED", true);
