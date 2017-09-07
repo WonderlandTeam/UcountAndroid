@@ -42,7 +42,6 @@ public class AssetAddDescriptionFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:保存
                 GlobalVariables.setmDescription(inputTxt.getText().toString());
                 getFragmentManager().popBackStack();
             }

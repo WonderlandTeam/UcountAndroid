@@ -42,6 +42,7 @@ public class PlanBudgetNewFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: 新建预算  PlanBudgetService.addBudget
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.plan_fragment_container, new PlanBudgetFragment())

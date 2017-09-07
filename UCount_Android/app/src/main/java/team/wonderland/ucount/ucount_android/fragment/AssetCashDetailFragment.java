@@ -73,7 +73,7 @@ public class AssetCashDetailFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //TODO:
+                //TODO: 获得用户某类账户中所有账目 BillService.getBillsByAccount
                 //重新获取完网络数据刷新Adapter，完成后需要调用onRefreshComplete方法取消滑出来的圆形进度
                 assetItems.add(new AssetItem("8月31日","交通","5.00"));
                 swipeRefreshLayout.setRefreshing(false);
@@ -84,6 +84,7 @@ public class AssetCashDetailFragment extends Fragment {
     }
 
     public void initData(){
+        //TODO: 获得用户某类账户中所有账目 BillService.getBillsByAccount
         assetItems = new ArrayList<>();
         assetItems.add(new AssetItem("2017年\n8月3日\n14:23","餐饮","15.00"));
         assetItems.add(new AssetItem("2017年\n8月4日\n15:23","餐饮","15.00"));

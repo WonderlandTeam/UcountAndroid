@@ -37,6 +37,7 @@ public class AssetAddFragment extends Fragment{
     private Button addEarnBtn;
     private Button clearBtn;
     private ImageButton addDescription;
+    private TextView tv_description;
     private Button zero,one,two,three,four,five,six,seven,eight,nine,dot;
 
 
@@ -66,10 +67,6 @@ public class AssetAddFragment extends Fragment{
         addDescription = (ImageButton) view.findViewById(R.id.add_description);
         clearBtn = (Button) view.findViewById(R.id.clear);
         save = (LinearLayout)view.findViewById(R.id.calculator_sidebar);
-//        // 设置字体颜色
-//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/chinese_character.ttf");
-//        clearBtn.setTypeface(typeface);
-//        words.setTypeface(typeface);
         // 设置按钮监听
         addCostBtn.setOnClickListener(new ButtonListener());
         addEarnBtn.setOnClickListener(new ButtonListener());
@@ -100,6 +97,7 @@ public class AssetAddFragment extends Fragment{
         eight = (Button) view.findViewById(R.id.eight);
         nine = (Button) view.findViewById(R.id.nine);
         dot = (Button) view.findViewById(R.id.dot);
+        tv_description = (TextView)view.findViewById(R.id.txt_add_description);
 
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +172,11 @@ public class AssetAddFragment extends Fragment{
             }
         });
 
+        if(!GlobalVariables.getmDescription().equals("")){
+            tv_description.setText(GlobalVariables.getmDescription());
+            //清空备注
+            GlobalVariables.setmDescription("");
+        }
         return view;
     }
 
@@ -202,7 +205,7 @@ public class AssetAddFragment extends Fragment{
                     else {
                         putItemInData(Double.parseDouble(moneyText.getText().toString()));
                         calculatorClear();
-                        //TODO:保存后应该怎样处理
+                        //TODO: 手动添加一条账目 BillService.addBillMannually
                         getFragmentManager().popBackStack();
                     }
                     break;
@@ -235,9 +238,6 @@ public class AssetAddFragment extends Fragment{
 //        ioItem.setTimeStamp(formatItem.format(new Date()));         // 存储记账时间
 //        ioItem.setDescription(GlobalVariables.getmDescription());
 //        ioItem.save();
-
-        // 存储完之后及时清空备注
-        GlobalVariables.setmDescription("");
 
         int type = ioItem.getType();
         String sumDate = formatSum.format(new Date());

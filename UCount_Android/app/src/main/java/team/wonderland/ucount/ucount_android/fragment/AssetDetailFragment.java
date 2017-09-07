@@ -71,6 +71,7 @@ public class AssetDetailFragment extends Fragment {
     }
 
     public void initData(){
+
         assetItems = new ArrayList<>();
         assetItems.add(new AssetItem("8月3日","餐饮","15.00"));
         assetItems.add(new AssetItem("8月4日","餐饮","15.00"));

@@ -59,6 +59,7 @@ public class PlanTaskFragment extends Fragment {
     }
 
     public void initData(){
+        //TODO: 获得所有任务 TaskService.getTasksByUser
         tasks = new ArrayList<>();
         tasks.add(new Task("买一双鞋","2017-12-31",2000,340,30));
     }

@@ -132,6 +132,9 @@ public class AssetNewFragment extends Fragment{
         bt_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: 新建账户 AccountService.addAccount
+
+                //保存成功跳转到资产主界面
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.add(R.id.fragment_container, new AssetFragment()).commit();
             }

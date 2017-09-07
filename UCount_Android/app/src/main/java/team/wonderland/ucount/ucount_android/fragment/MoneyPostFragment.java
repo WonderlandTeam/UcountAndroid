@@ -47,6 +47,7 @@ public class MoneyPostFragment extends Fragment {
                 }else{
                     mTitle.setText("");
                     mContent.setText("");
+                    //TODO  PostService.addPost  发表帖子
                     Toast.makeText(getContext(), "保存成功",
                             Toast.LENGTH_SHORT).show();
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

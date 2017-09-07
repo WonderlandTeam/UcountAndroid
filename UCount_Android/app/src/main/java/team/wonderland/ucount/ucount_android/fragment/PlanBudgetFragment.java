@@ -46,7 +46,7 @@ public class PlanBudgetFragment extends Fragment {
         dateTextView = (TextView) view.findViewById(R.id.plan_budget_date);
         mPercentageRing = (PercentageRing) view.findViewById(R.id.plan_budget_circle);
         //设置目标百分比为30
-        //TODO:余额占预算的百分比
+        //TODO:(余额占预算的百分比,从逻辑层获得预算余额) BudgetService.getBudget
         mPercentageRing.setTargetPercent(30);
         mPercentageRing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +120,7 @@ public class PlanBudgetFragment extends Fragment {
     }
 
     public void initData(){
+        //TODO: 获得所有预算  BudgetService.getBudgetsByUser
         budgets = new ArrayList<>();
         budgets.add(new Budget("type_cost_1","餐饮",1000));
         budgets.add(new Budget("type_cost_2","日用",1000));

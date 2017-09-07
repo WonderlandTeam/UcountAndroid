@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wx.goodview.GoodView;
@@ -37,6 +38,7 @@ public class MoneyHotDetailFragment extends Fragment{
     private MoneyHotDetailRecyclerAdapter adapter;
     private List<Post> posts;
     private ImageView back;
+    private TextView tv_remark;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class MoneyHotDetailFragment extends Fragment{
         mGoodView = new GoodView(getContext());
         good = view.findViewById(R.id.money_hot_detail_good);
         star = view.findViewById(R.id.money_hot_detail_star);
+        tv_remark = view.findViewById(R.id.money_hot_detail_remark);
 
         good.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +86,12 @@ public class MoneyHotDetailFragment extends Fragment{
             }
         });
 
+        tv_remark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: 发表评论 PostService.replyPost
+            }
+        });
         initData();
 
         recyclerView = (RecyclerView)view.findViewById(R.id.money_hot_detail_recyclerview);
@@ -102,9 +111,10 @@ public class MoneyHotDetailFragment extends Fragment{
     }
 
         public void initData(){
+            //TODO 获得所有热门的帖子 PostService.getPosts
             posts = new ArrayList<>();
-            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘","弄撒子嘞"));
-            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘","弄撒子嘞"));
-            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘","弄撒子嘞"));
+            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘",""));
+            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘",""));
+            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘",""));
         }
 }
