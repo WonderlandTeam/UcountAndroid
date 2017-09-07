@@ -60,6 +60,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
     compile 'com.contrarywind:Android-PickerView:3.2.6'
 
+    compile 'com.google.code.gson:gson:2.8.0'
+
 }
 
 apply plugin: 'com.android.application'
