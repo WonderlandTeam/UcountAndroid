@@ -10,6 +10,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import team.wonderland.ucount.ucount_android.json.UserSignUpJson;
+import team.wonderland.ucount.ucount_android.util.RestAPI;
 
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import java.util.Map;
  * 注册和登录
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = "http://192.168.43.229:8080/api",converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class})
+@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class})
 public interface UserBasicService {
     /**
      * 用户注册

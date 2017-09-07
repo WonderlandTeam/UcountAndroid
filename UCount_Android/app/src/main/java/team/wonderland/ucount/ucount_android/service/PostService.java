@@ -1,10 +1,12 @@
 package team.wonderland.ucount.ucount_android.service;
 
 import org.androidannotations.rest.spring.annotations.*;
+import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 import team.wonderland.ucount.ucount_android.json.PostReplyJson;
 import team.wonderland.ucount.ucount_android.json.PostShareJson;
+import team.wonderland.ucount.ucount_android.util.RestAPI;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ import java.util.Map;
  * 帖子管理
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = "localhost:8080/api/",converters = {MappingJackson2HttpMessageConverter.class},interceptors = {BasicAuthInterceptor.class})
+@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class})
 public interface PostService {
 
     /**
