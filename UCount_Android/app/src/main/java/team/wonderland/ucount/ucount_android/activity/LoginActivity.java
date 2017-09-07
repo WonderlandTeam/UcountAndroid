@@ -15,11 +15,12 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.Map;
 
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.json.LoginJson;
 import team.wonderland.ucount.ucount_android.service.UserBasicService;
 
 /**
@@ -76,10 +77,12 @@ public class LoginActivity extends AppCompatActivity {
         usernameValue = username.getText().toString();
         passwordValue = password.getText().toString();
 
-        LoginJson loginJson = new LoginJson();
-        loginJson.setUsername(usernameValue);
-        loginJson.setPassword(passwordValue);
-        loginAsync(loginJson);
+//        LinkedMultiValueMap<String, String> loginData = new LinkedMultiValueMap<>();
+//        loginData.add("username", usernameValue);
+//        loginData.add("password", passwordValue);
+//        loginAsync(loginData);
+
+        loginAsync();
 
 //        Log.i("login",(String)result.get("content"));
 //        //TODO:如果登录成功
@@ -97,8 +100,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Background
-    void loginAsync(LoginJson loginJson) {
-        Map<String, Object> result = userBasicService.login(loginJson);
+    void loginAsync() {
+        Map<String, Object> result = userBasicService.login(usernameValue, passwordValue);
         if (result.containsKey("content")) {
             System.out.println(result.get("content"));
             loginSuccess();
@@ -111,12 +114,12 @@ public class LoginActivity extends AppCompatActivity {
     @UiThread
     void loginSuccess() {
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("USERNAME",usernameValue);
-        editor.putString("PASSWORD",passwordValue);
-        editor.putBoolean("HAVELOGINED",true);
+        editor.putString("USERNAME", usernameValue);
+        editor.putString("PASSWORD", passwordValue);
+        editor.putBoolean("HAVELOGINED", true);
         editor.commit();
 
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
