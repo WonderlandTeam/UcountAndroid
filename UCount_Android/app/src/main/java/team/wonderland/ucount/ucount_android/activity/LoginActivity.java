@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -124,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @UiThread
     void showErrorInfo(String error) {
-        System.out.println(error);
+        Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
         Log.i("login", error);
     }
 

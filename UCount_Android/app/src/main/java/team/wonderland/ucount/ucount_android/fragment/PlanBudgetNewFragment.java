@@ -3,6 +3,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -16,8 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import at.markushi.ui.CircleButton;
+
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.rest.spring.annotations.RestService;
+
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.json.BudgetAddJson;
+import team.wonderland.ucount.ucount_android.service.BudgetService;
 
 /**
  * Created by liuyu on 2017/9/3.
@@ -33,6 +40,14 @@ public class PlanBudgetNewFragment extends Fragment {
     String[] titles = {"饮食", "日用", "水电气", "通讯网费", "电子设备", "交通", "衣帽鞋服", "护肤品",
             "彩妆", "首饰", "培训", "书", "文具", "图像影音", "组织活动","捐款","恋爱","社交","兴趣"};
     String type;
+    private String username;
+    private String consumeType;
+    private double consumeMoney;
+    private String consumeTime;
+
+    @RestService
+    BudgetService budgetService;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,11 +57,13 @@ public class PlanBudgetNewFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: 新建预算  PlanBudgetService.addBudget
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.plan_fragment_container, new PlanBudgetFragment())
-                        .commit();
+                //TODO 设定以下变量的值
+                username="";
+                consumeType="";
+                consumeMoney=0;
+                consumeTime="";
+                //添加预算
+                addBudget();
             }
         });
 
@@ -90,5 +107,27 @@ public class PlanBudgetNewFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Background
+    void addBudget(){
+        BudgetAddJson budgetAddJson=new BudgetAddJson(username,consumeType,consumeMoney,consumeTime);
+        budgetService.addBudget(budgetAddJson);
+    }
+
+    //返回到预算主界面
+    @UiThread
+    void returnToPlanBudgetFragment(){
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.plan_fragment_container, new PlanBudgetFragment())
+                .commit();
+    }
+
+    //显示错误信息
+    @UiThread
+    void showErrorInfo(String error){
+        Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+        Log.e("addNewBudget:", error);
     }
 }
