@@ -11,8 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import at.markushi.ui.CircleButton;
 import lecho.lib.hellocharts.formatter.ColumnChartValueFormatter;
 import lecho.lib.hellocharts.formatter.SimpleColumnChartValueFormatter;
 import lecho.lib.hellocharts.model.*;
@@ -38,7 +38,7 @@ import java.util.List;
 public class ReportOneFragment extends Fragment implements TimePickerDialog.TimePickerDialogInterface {
     private EditText beginDate;
     private EditText endDate;
-    private Button confirm;
+    private CircleButton confirm;
     private TimePickerDialog beginPickerDialog;
     private TimePickerDialog endPickerDialog;
     private PieChartView incomePieChart;
@@ -155,7 +155,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     private void initData(){
         SharedPreferences preferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         String userName=preferences.getString("USERNAME","default");
-        statementService.getIncomeStatement(userName,beginDate.getText().toString(),endDate.getText().toString());
+        //statementService.getIncomeStatement(userName,beginDate.getText().toString(),endDate.getText().toString());
         // TODO: 17/9/7
     }
 

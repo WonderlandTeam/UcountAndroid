@@ -10,7 +10,7 @@
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:layout_marginTop="4dp"
                   android:background="@color/main_bg">
-        <EditText android:layout_width="130dp" android:layout_height="wrap_content"
+        <EditText android:layout_width="135dp" android:layout_height="wrap_content"
                   android:id="@+id/begin_date_text"
                   android:focusable="false"
                   android:focusableInTouchMode="false"
@@ -22,13 +22,16 @@
                   android:background="@drawable/pick_date_shape"
                   android:hint="请选择开始日期"/>
         <TextView android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                  android:layout_height="wrap_content"
                   android:textColor="@color/text_gray"
-                    android:textSize="20dp"
+                  android:textSize="20dp"
                   android:text="To:"
-            android:layout_centerInParent="true"
+                  android:layout_toRightOf="@+id/begin_date_text"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginTop="2dp"
+                  android:id="@+id/to"
             />
-        <EditText android:layout_width="130dp" android:layout_height="wrap_content"
+        <EditText android:layout_width="135dp" android:layout_height="wrap_content"
                   android:id="@+id/end_date_text"
                   android:focusable="false"
                   android:focusableInTouchMode="false"
@@ -38,12 +41,21 @@
                   android:textAlignment="center"
                   android:background="@drawable/pick_date_shape"
                   android:hint="请选择结束日期"
+                  android:layout_toRightOf="@+id/to"
+                  android:layout_marginLeft="5dp"
 
             />
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:background="@mipmap/ic_tick_clicked" android:layout_marginLeft="2dp"
-                android:layout_marginRight="10dp"  android:layout_alignParentRight="true"
-                android:id="@+id/confirm"/>
+        <at.markushi.ui.CircleButton
+                android:id="@+id/confirm"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_tick"
+                app:cb_color="#99CC00"
+                app:cb_pressedRingWidth="8dip"
+                android:layout_toRightOf="@+id/end_date_text"
+                android:layout_marginLeft="2dp"
+        >
+        </at.markushi.ui.CircleButton>
     </RelativeLayout>
     <team.wonderland.ucount.ucount_android.util.FlowLayout android:layout_width="match_parent"
                                                            android:layout_height="wrap_content">

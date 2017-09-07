@@ -1,6 +1,7 @@
 package team.wonderland.ucount.ucount_android.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,6 +27,7 @@ public class ChartTableView extends View {
     private Paint mPaintHead2;
     private Paint mPaintHead3;
     private Paint mPaintWhiteText;
+    private Paint mPaintNumText;
 
     private int textSize = SizeConvert.dip2px(getContext(), 13);//文本尺寸，dp转px
 
@@ -44,8 +46,20 @@ public class ChartTableView extends View {
     private static final ArrayList<String[]> assets = new ArrayList<>();
     private static final ArrayList<String[]> debts = new ArrayList<>();
 
+    private ArrayList<Double> assetCost;//资产成本一列数据
+    private ArrayList<Double> assetPrice;//资产市价一列
+    private ArrayList<Double> debtMoney;//负债金额一列
+    private ArrayList<Double> clearCost;
+    private ArrayList<Double> clearPrice;
+
+    private Context context;
+
+//    @RestService
+//    StatementService statementService;
+
     public ChartTableView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context=context;
 
         mPaintLine = new Paint();
         mPaintLine.setColor(Color.LTGRAY);
@@ -158,11 +172,12 @@ public class ChartTableView extends View {
 
                 now_height = now_height + tableItemHeight;
             }
+
             canvas.drawRect(startX, now_height, width, now_height + tableItemHeight, mPaintGreyBg);
             canvas.drawLine(startX, now_height + tableItemHeight, width, now_height + tableItemHeight, mPaintLine);
             //资产
             canvas.drawText(assetType[i], startX + tableItemWidth / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintText);
-            //资产
+            //负债
             canvas.drawText(debtType[i], startX + tableItemWidth * 7 / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintText);
             //净值
             canvas.drawText(clearType[i], startX + tableItemWidth * 11 / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintText);
@@ -183,7 +198,56 @@ public class ChartTableView extends View {
         //分隔线
         canvas.drawLine((float) (startX + tableItemWidth * (5 - 1.0 / 8)), startY + tableItemHeight, (float) (startX + tableItemWidth
                 * (5 - 1.0 / 8)), now_height, mPaintLine);
+
+        initData();
+
+        now_height=startY + tableItemHeight / 2 + textSize / 2;
+        for(int i=0;i<assetCost.size();i++){
+            now_height=now_height+tableItemHeight;
+            if(!assetCost.get(i).equals(0.0)){
+                canvas.drawText(""+assetCost.get(i).intValue(),startX + tableItemWidth * 3 / 2,now_height,mPaintText);
+            }
+            if(!assetPrice.get(i).equals(0.0)){
+                canvas.drawText(""+assetPrice.get(i).intValue(),startX + tableItemWidth * 5 / 2,now_height,mPaintText);
+            }
+            if(!debtMoney.get(i).equals(0.0)){
+                canvas.drawText(""+debtMoney.get(i).intValue(),startX + tableItemWidth * 9 / 2,now_height,mPaintText);
+            }
+            if(!clearCost.get(i).equals(0.0)){
+                canvas.drawText(""+clearCost.get(i).intValue(),startX + tableItemWidth * 13 / 2,now_height,mPaintText);
+            }
+            if(!clearPrice.get(i).equals(0.0)){
+                canvas.drawText(""+clearPrice.get(i).intValue(),startX + tableItemWidth * 15 / 2,now_height,mPaintText);
+            }
+        }
+
     }
 
+
+    private void initData(){
+        SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        String userName=preferences.getString("USERNAME","default");
+        //TODO
+        //statementService.getBalanceSheet(userName,null,null);
+        assetCost=new ArrayList<>();
+        //TODO 从上到下共13个数
+        assetCost.add(1000.0);
+
+        assetPrice=new ArrayList<>();
+        // TODO 13
+        assetPrice.add(1000.0);
+
+        debtMoney=new ArrayList<>();
+        // TODO 6,其余设为0
+        debtMoney.add(1000.0);
+
+        clearCost=new ArrayList<>();
+        // TODO 4
+        clearCost.add(1000.0);
+
+        clearPrice=new ArrayList<>();
+        // TODO 4
+        clearPrice.add(1000.0);
+    }
 
 }

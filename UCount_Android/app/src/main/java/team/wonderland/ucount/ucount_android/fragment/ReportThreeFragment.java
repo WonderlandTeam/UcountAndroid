@@ -40,6 +40,7 @@ public class ReportThreeFragment extends Fragment {
     }
 
     void initData(){
+        //stub data
         moneyFlows=new ArrayList<>();
         moneyFlows.add(new MoneyFlow(true,1000,"工资","2017-8-1", R.drawable.type_get_2));
         moneyFlows.add(new MoneyFlow(false,50,"支付宝","2017-8-4",R.mipmap.alipay));
@@ -50,5 +51,7 @@ public class ReportThreeFragment extends Fragment {
         moneyFlows.add(new MoneyFlow(true,1000,"工资","2017-8-1", R.drawable.type_get_2));
         moneyFlows.add(new MoneyFlow(false,50,"支付宝","2017-8-4",R.mipmap.alipay));
         moneyFlows.add(new MoneyFlow(false,100,"银行卡","2017-8-5",R.mipmap.card_pay));
+
+        //TODO get data from server
     }
 }
