@@ -75,7 +75,7 @@ public class AssetFragment extends Fragment {
             public void onItemClick(View view , int position){
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, new AssetCashDetailFragment()).commit();
+                        .replace(R.id.fragment_container, new AssetImportCardFragment()).commit();
             }
         });
         return view;

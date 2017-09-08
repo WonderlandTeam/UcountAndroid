@@ -33,7 +33,7 @@
         <!-- 半透明 -->
     </style>
 
-    <style name="StartWindow" parent="AppTheme">
+    <style name="StartWindow" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/start_window</item>
     </style>
 
