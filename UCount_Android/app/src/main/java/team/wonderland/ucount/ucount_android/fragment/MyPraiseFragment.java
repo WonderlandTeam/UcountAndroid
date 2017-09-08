@@ -52,6 +52,7 @@ public class MyPraiseFragment extends Fragment {
     }
 
     void initData(){
+        // TODO: 17/9/8 获得该用户点赞的帖子
         myPosts=new ArrayList<>();
         myPosts.add(new MyPost("理财需要关注什么","Chen","10:20",10,5));
         myPosts.add(new MyPost("大学生的消费观","Wang","11:11",6,4));

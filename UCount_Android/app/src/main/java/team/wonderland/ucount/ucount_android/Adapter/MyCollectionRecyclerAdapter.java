@@ -54,7 +54,7 @@ public class MyCollectionRecyclerAdapter extends RecyclerView.Adapter<MyCollecti
             collection_more.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO
+                    //TODO 进入帖子详情界面
                 }
             });
         }

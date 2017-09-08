@@ -59,7 +59,7 @@ public class MyReplyRecyclerAdapter extends RecyclerView.Adapter<MyReplyRecycler
             reply_more.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO
+                    //TODO 进入帖子详情界面
                 }
             });
         }

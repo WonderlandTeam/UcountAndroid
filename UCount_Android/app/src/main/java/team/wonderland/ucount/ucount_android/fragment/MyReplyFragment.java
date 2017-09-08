@@ -53,6 +53,7 @@ public class MyReplyFragment extends Fragment {
     }
 
     void initData(){
+        // TODO: 17/9/8 获得该用户评论的帖子
         replies=new ArrayList<>();
         replies.add(new Reply("大学生的消费观","对一点点等奶茶的消费","Wang"));
     }
