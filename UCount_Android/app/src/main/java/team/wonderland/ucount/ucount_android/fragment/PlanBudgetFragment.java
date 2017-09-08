@@ -90,7 +90,7 @@ public class PlanBudgetFragment extends Fragment {
                 getFragmentManager()
                         .beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.plan_fragment_container, new PlanBudgetNewFragment())
+                        .replace(R.id.plan_fragment_container, new PlanBudgetNewFragment_())
                         .commit();
             }
         });

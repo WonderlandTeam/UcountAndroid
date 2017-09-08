@@ -40,7 +40,7 @@ public interface BudgetService {
      * @param budgetAddJson       新建预算信息vo
      * @return                  预算id
      */
-    @Post("/budgets")
+    @Post("/budgets/")
     public Map<String, Object> addBudget(@Body BudgetAddJson budgetAddJson);
 
     /**
@@ -48,7 +48,7 @@ public interface BudgetService {
      * @param budget_id          预算id
      * @param budgetModifyJson    预算修改信息vo
      */
-    @Post("/budgets/{budget_id}")
+    @Post("/budgets/{budget_id}/")
     public Map<String, Object> updateBudget(@Path Long budget_id, @Body BudgetModifyJson budgetModifyJson);
 
     /**

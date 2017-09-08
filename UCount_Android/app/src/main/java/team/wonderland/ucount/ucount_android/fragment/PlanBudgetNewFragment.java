@@ -152,18 +152,14 @@ public class PlanBudgetNewFragment extends Fragment {
 
     @Background
     void addBudget(){
-
-//        if(budgetService==null){
-//            showErrorInfo("wrong");
-//        }else{
             Map<String,Object> result=budgetService.addBudget(budgetAddJson);
-//        }
 
-//        if(result.containsKey("content")){
+        if(result.containsKey("content")){
 //            returnToPlanBudgetFragment();
-//        }else{
-//            showErrorInfo((String) result.get("error"));
-//        }
+            System.out.println(result.get("content"));
+        }else{
+            showErrorInfo((String) result.get("error"));
+        }
 
     }
 
