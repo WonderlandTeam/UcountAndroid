@@ -8,19 +8,38 @@ import java.util.Calendar;
  * Created by CLL on 17/8/18.
  */
 public class BudgetInfoJson implements Serializable{
-    private Long budgetID;//ID
-    private String username;//用户名
-    private String consumeType;//消费类型
-    private Double consumeMoney;//消费金额
-    private Calendar consumeTime;//消费时间
-    private Calendar createTime;//创建时间
+    private Long id;
+    private String username;
+    private String consumeType;
+    private double budgetMoney;
+    private String bugdetTime;
+    private double consume;
+    private double remain;
 
-    public Long getBudgetID() {
-        return budgetID;
+    public BudgetInfoJson(){}
+
+    public BudgetInfoJson(Long id, String username, String consumeType, double budgetMoney, String bugdetTime, double consume, double remain) {
+        this.id = id;
+        this.username = username;
+        this.consumeType = consumeType;
+        this.budgetMoney = budgetMoney;
+        this.bugdetTime = bugdetTime;
+        this.consume = consume;
+        this.remain = remain;
     }
 
-    public void setBudgetID(Long budgetID) {
-        this.budgetID = budgetID;
+
+    public String toString(){
+        String s=id+" "+username+" "+consumeType+" "+budgetMoney+" "+bugdetTime+" "+consume+" "+remain;
+        return s;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -39,27 +58,36 @@ public class BudgetInfoJson implements Serializable{
         this.consumeType = consumeType;
     }
 
-    public Double getConsumeMoney() {
-        return consumeMoney;
+    public double getBudgetMoney() {
+        return budgetMoney;
     }
 
-    public void setConsumeMoney(Double consumeMoney) {
-        this.consumeMoney = consumeMoney;
+    public void setBudgetMoney(double budgetMoney) {
+        this.budgetMoney = budgetMoney;
     }
 
-    public Calendar getConsumeTime() {
-        return consumeTime;
+    public String getBugdetTime() {
+        return bugdetTime;
     }
 
-    public void setConsumeTime(Calendar consumeTime) {
-        this.consumeTime = consumeTime;
+    public void setBugdetTime(String bugdetTime) {
+        this.bugdetTime = bugdetTime;
     }
 
-    public Calendar getCreateTime() {
-        return createTime;
+    public double getConsume() {
+        return consume;
     }
 
-    public void setCreateTime(Calendar createTime) {
-        this.createTime = createTime;
+    public void setConsume(double consume) {
+        this.consume = consume;
     }
+
+    public double getRemain() {
+        return remain;
+    }
+
+    public void setRemain(double remain) {
+        this.remain = remain;
+    }
+
 }
