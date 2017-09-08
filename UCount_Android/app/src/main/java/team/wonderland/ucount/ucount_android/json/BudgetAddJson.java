@@ -12,6 +12,8 @@ public class BudgetAddJson implements Serializable{
     private double consumeMoney;
     private String consumeTime;
 
+    public BudgetAddJson(){}
+
     public BudgetAddJson(String username, String consumeType, double consumeMoney, String consumeTime) {
         this.username = username;
         this.consumeType = consumeType;
@@ -19,6 +21,10 @@ public class BudgetAddJson implements Serializable{
         this.consumeTime = consumeTime;
     }
 
+    public String toString(){
+        String s=username+" "+consumeType+" "+consumeMoney+" "+consumeTime;
+        return s;
+    }
     public String getUsername() {
         return username;
     }

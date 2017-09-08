@@ -27,6 +27,8 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
+import java.util.Objects;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.json.BudgetAddJson;
@@ -52,6 +54,7 @@ public class PlanBudgetNewFragment extends Fragment {
     private String username;
     private double consumeMoney;
     private String consumeTime;
+    BudgetAddJson budgetAddJson;
 
     @RestService
     BudgetService budgetService;
@@ -65,15 +68,11 @@ public class PlanBudgetNewFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO 设定以下变量的值
-                //consumeMoney的获取方法：Double.parseDouble(cv_money.getText());
-                //consumeType的获取方法:tv_type.getText();
-                //consumeTime的获取方法:tv_date.getText();
-                //username的获取方法： getActivity().getSharedPreferences("userInfo",0).getString("USERNAME","");
-                username="";
-                consumeType="";
-                consumeMoney=0;
-                consumeTime="";
+                username=getActivity().getSharedPreferences("user",0).getString("USERNAME","");
+                consumeType=tv_type.getText().toString();
+                consumeMoney=Double.parseDouble(et_money.getText().toString());
+                consumeTime=tv_date.getText().toString();
+                budgetAddJson=new BudgetAddJson(username,consumeType,consumeMoney,consumeTime);
                 //添加预算
                 addBudget();
             }
@@ -153,13 +152,25 @@ public class PlanBudgetNewFragment extends Fragment {
 
     @Background
     void addBudget(){
-        BudgetAddJson budgetAddJson=new BudgetAddJson(username,consumeType,consumeMoney,consumeTime);
-        budgetService.addBudget(budgetAddJson);
+
+//        if(budgetService==null){
+//            showErrorInfo("wrong");
+//        }else{
+            Map<String,Object> result=budgetService.addBudget(budgetAddJson);
+//        }
+
+//        if(result.containsKey("content")){
+//            returnToPlanBudgetFragment();
+//        }else{
+//            showErrorInfo((String) result.get("error"));
+//        }
+
     }
 
     //返回到预算主界面
     @UiThread
     void returnToPlanBudgetFragment(){
+        Toast.makeText(getContext(),"添加成功",Toast.LENGTH_SHORT).show();
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.plan_fragment_container, new PlanBudgetFragment())
