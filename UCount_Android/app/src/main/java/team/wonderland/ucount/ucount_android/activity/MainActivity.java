@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent=new Intent(MainActivity.this,LoginActivity_.class);
                 startActivity(intent);
 
+                sp=getSharedPreferences("user", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("USERNAME","");
                 editor.putString("PASSWORD","");

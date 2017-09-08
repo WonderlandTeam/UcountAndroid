@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = (Button)findViewById(R.id.login_btnLogin);
         forgetPass = (TextView)findViewById(R.id.login_txtForgotPwd);
         register = (TextView)findViewById(R.id.login_txtRegister);
-        sp = this.getSharedPreferences("userInfo",0);
+        sp = this.getSharedPreferences("user",0);
         usernameValue = sp.getString("USERNAME","");
         passwordValue = sp.getString("PASSWORD","");
         haveLogined = sp.getBoolean("HAVELOGINED",false);
