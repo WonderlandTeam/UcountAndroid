@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import at.markushi.ui.CircleButton;
 import lecho.lib.hellocharts.formatter.ColumnChartValueFormatter;
 import lecho.lib.hellocharts.formatter.SimpleColumnChartValueFormatter;
@@ -48,6 +49,8 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     private ColumnChartView outputColumnChart3;
     private RecyclerView inputRecyclerView;
     private RecyclerView outputRecyclerView;
+    private TextView intro1;
+    private TextView intro2;
 
     private final static String[] outputCategory1 = new String[]{"日用品", "水电费", "通讯和网费",
             "饮食", "电子设备", "交通"};//生活必需
@@ -90,12 +93,18 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         beginPickerDialog = new TimePickerDialog(view.getContext(), this, 0);
         endPickerDialog = new TimePickerDialog(view.getContext(), this, 1);
 
+        intro1=view.findViewById(R.id.intros1);
+        intro2=view.findViewById(R.id.intros2);
+
         confirm=view.findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 initData();
                 showTables();
+                //显示说明文字
+                intro1.setText(getActivity().getString(R.string.report_intros1));
+                intro2.setText(getActivity().getString(R.string.report_intros2));
             }
         });
 

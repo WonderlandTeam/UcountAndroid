@@ -8,8 +8,8 @@
 
 
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:layout_marginTop="4dp"
-                  android:background="@color/main_bg">
+                    android:layout_marginTop="4dp"
+                    android:background="@color/main_bg">
         <EditText android:layout_width="135dp" android:layout_height="wrap_content"
                   android:id="@+id/begin_date_text"
                   android:focusable="false"
@@ -30,7 +30,7 @@
                   android:layout_marginLeft="5dp"
                   android:layout_marginTop="2dp"
                   android:id="@+id/to"
-            />
+        />
         <EditText android:layout_width="135dp" android:layout_height="wrap_content"
                   android:id="@+id/end_date_text"
                   android:focusable="false"
@@ -44,7 +44,7 @@
                   android:layout_toRightOf="@+id/to"
                   android:layout_marginLeft="5dp"
 
-            />
+        />
         <at.markushi.ui.CircleButton
                 android:id="@+id/confirm"
                 android:layout_width="50dp"
@@ -66,11 +66,11 @@
 
                 android:layout_height="325dp"
                 android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-                >
+                android:layout_marginLeft="30dp"
+        >
 
         </lecho.lib.hellocharts.view.PieChartView>
-        
+
         <android.support.v7.widget.RecyclerView android:id="@+id/income_recycleview"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
@@ -79,6 +79,11 @@
                                                 android:background="@color/main_bg">
 
         </android.support.v7.widget.RecyclerView>
+
+        <TextView android:layout_width="300dp" android:layout_height="wrap_content"
+                  android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
+                  android:layout_marginTop="20dp"
+                  android:textSize="15dp" android:id="@+id/intros1"/>
 
         <lecho.lib.hellocharts.view.PieChartView
                 android:id="@+id/output_piechart"
@@ -100,6 +105,11 @@
                                                 android:background="@color/main_bg">
 
         </android.support.v7.widget.RecyclerView>
+
+        <TextView android:layout_width="300dp" android:layout_height="wrap_content"
+                  android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
+                  android:layout_marginTop="20dp"
+                  android:textSize="15dp" android:id="@+id/intros2"/>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textColor="@color/text_gray" android:textSize="20dp"
@@ -156,7 +166,6 @@
         </lecho.lib.hellocharts.view.ColumnChartView>
 
     </team.wonderland.ucount.ucount_android.util.FlowLayout>
-
 
 
 </LinearLayout>
