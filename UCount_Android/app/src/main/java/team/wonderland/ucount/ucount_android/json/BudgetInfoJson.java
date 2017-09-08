@@ -10,11 +10,11 @@ import java.util.Calendar;
 public class BudgetInfoJson implements Serializable{
     private Long id;
     private String username;
-    private String consumeType;
-    private double budgetMoney;
-    private String bugdetTime;
-    private double consume;
-    private double remain;
+    private String consumeType;//消费类型
+    private double budgetMoney;//预算金额
+    private String bugdetTime;//预算设置的时间，时间格式为 yyyy-mm , 年-月
+    private double consume;//已消费的金额
+    private double remain;//剩余金额
 
     public BudgetInfoJson(){}
 

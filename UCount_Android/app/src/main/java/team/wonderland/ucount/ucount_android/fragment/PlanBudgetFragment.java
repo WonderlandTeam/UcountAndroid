@@ -2,6 +2,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -35,6 +36,7 @@ import at.markushi.ui.CircleButton;
 import team.wonderland.ucount.ucount_android.Adapter.AssetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.Adapter.PlanBudgetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
 import team.wonderland.ucount.ucount_android.service.BudgetService;
 import team.wonderland.ucount.ucount_android.util.Budget;
@@ -91,11 +93,11 @@ public class PlanBudgetFragment extends Fragment {
                 final TimePickerView pvTime = new TimePickerView.Builder(getActivity(), new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
-                        dateTextView.setText((date.getYear()+1900)+","+(date.getMonth()+1)+"月");
+                        dateTextView.setText((date.getYear() + 1900) + "," + (date.getMonth() + 1) + "月");
                     }
                 })
-                        .setType(new boolean[]{true,true,false,false,false,false})
-                        .setLabel("年","月","","","","")
+                        .setType(new boolean[]{true, true, false, false, false, false})
+                        .setLabel("年", "月", "", "", "", "")
                         .setRangDate(startDate, endDate)
                         .setCancelText("取消")//取消按钮文字
                         .setSubmitText("确认")//确认按钮文字
@@ -119,10 +121,11 @@ public class PlanBudgetFragment extends Fragment {
             }
         });
 
+        //TODO 如果修改了预算时间，需要将date的值修改，然后调用initBudget（）方法
         //获取时间
-        date=dateTextView.getText().toString();
-        username=getActivity().getSharedPreferences("user",0).getString("USERNAME","");
-        fragmentActivity=getActivity();
+        date = dateTextView.getText().toString();
+        username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
+        fragmentActivity = getActivity();
         initData();
 
 
@@ -131,7 +134,7 @@ public class PlanBudgetFragment extends Fragment {
         LinearLayoutManager linerLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linerLayoutManager);
         //设置适配器
-        adapter = new PlanBudgetRecyclerAdapter(budgets,getActivity());
+        adapter = new PlanBudgetRecyclerAdapter(budgets, getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new MyItemDecoration());
 
@@ -149,40 +152,43 @@ public class PlanBudgetFragment extends Fragment {
         return view;
     }
 
-    public void initData(){
-        //TODO: 获得所有预算  BudgetService.getBudgetsByUser
-        initBudget();
+    public void initData() {
+        initBudget();//获得所选月份的预算
 
         budgets = new ArrayList<>();
-        budgets.add(new Budget("type_cost_1","餐饮",1000));
-        budgets.add(new Budget("type_cost_2","日用",1000));
-        budgets.add(new Budget("type_cost_4","手机通讯",1000));
+        budgets.add(new Budget("type_cost_1", "餐饮", 1000));
+        budgets.add(new Budget("type_cost_2", "日用", 1000));
+        budgets.add(new Budget("type_cost_4", "手机通讯", 1000));
     }
 
+    /*
+     *获得用户某个月份的所有预算
+     */
     @Background
-    void initBudget(){
-        date=date.replace(",","-").replace("月","");
-        Map<String,Object> result=budgetService.getBudgetsByUser(username,date);
+    void initBudget() {
+        date = date.replace(",", "-").replace("月", "");
+        try {
+            Map<String, Object> result = budgetService.getBudgetsByUser(username, date);
+            String content = result.get("content").toString();
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<BudgetInfoJson>>() {
+            }.getType();
+            List<BudgetInfoJson> budgetInfoJsons = gson.fromJson(content, type);
 
-        System.out.println(result);
+            //TODO 处理成Budget类型
 
-        if(result.containsKey("content")){
-            String content=result.get("content").toString();
-            Gson gson=new Gson();
-            Type type=new TypeToken<List<BudgetInfoJson>>(){}.getType();
-            List<BudgetInfoJson> budgetInfoJsons=gson.fromJson(content,type);
-            System.out.println(budgetInfoJsons.get(0));
-        }else{
-            showErrorInfo((String) result.get("error"));
+        } catch (ResponseException e) {
+            showErrorInfo(e.getMessage());
         }
-
     }
 
 
     //显示错误信息
     @UiThread
-    void showErrorInfo(String error){
-        Toast.makeText(getContext().getApplicationContext(),"1",Toast.LENGTH_SHORT).show();
-        Log.e("initAllBudget:", error);
+    void showErrorInfo(String error) {
+        Looper.prepare();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        Looper.loop();
+
     }
 }

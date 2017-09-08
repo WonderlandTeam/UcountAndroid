@@ -4,6 +4,8 @@ import org.androidannotations.rest.spring.annotations.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+
+import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
 import team.wonderland.ucount.ucount_android.json.BudgetAddJson;
 import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
 import team.wonderland.ucount.ucount_android.json.BudgetModifyJson;
@@ -16,7 +18,7 @@ import java.util.Map;
  * 预算管理
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, StringHttpMessageConverter.class})
+@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, StringHttpMessageConverter.class},responseErrorHandler = MyResponseErrorHandler.class)
 public interface BudgetService {
     /**
      * 获取预算信息

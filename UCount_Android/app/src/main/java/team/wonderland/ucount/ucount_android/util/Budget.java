@@ -3,6 +3,7 @@ package team.wonderland.ucount.ucount_android.util;
 import android.content.res.Resources;
 
 import team.wonderland.ucount.ucount_android.activity.MainActivity;
+import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
 
 /**
  * Created by liuyu on 2017/9/3.
@@ -25,6 +26,11 @@ public class Budget {
         this.typename = typename;
         this.num = num;
         this.srcName = srcName;
+    }
+
+    public Budget toBudget(BudgetInfoJson budgetInfoJson){
+//        return new Budget(budgetInfoJson.getId(),budgetInfoJson.getConsumeType(),budgetInfoJson.getBudgetMoney(),budgetInfoJson.)
+        return null;
     }
     public int getId() {
         return id;
