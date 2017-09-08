@@ -18,6 +18,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.service.UserBasicService;
 
 import java.util.Map;
@@ -100,14 +101,12 @@ public class LoginActivity extends AppCompatActivity {
 
     @Background
     void loginAsync() {
-        Map<String, Object> result = userBasicService.login(usernameValue, passwordValue);
-        if (result.containsKey("content")) {
-            System.out.println(result.get("content"));
+        try {
+            Map<String, Object> result = userBasicService.login(usernameValue, passwordValue);
             loginSuccess();
-        } else {
-            showErrorInfo((String) result.get("error"));
+        } catch (ResponseException e) {
+            showErrorInfo(e.getMessage());
         }
-
     }
 
     @UiThread
@@ -126,8 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @UiThread
     void showErrorInfo(String error) {
-        Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
-        Log.i("login", error);
+        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
     }
 
     @Click(R.id.login_txtRegister)
