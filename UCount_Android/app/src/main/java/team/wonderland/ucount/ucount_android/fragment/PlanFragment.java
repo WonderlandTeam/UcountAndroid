@@ -43,7 +43,7 @@ public class PlanFragment extends Fragment {
     private void initUI(View view) {
         mViewPager = (ViewPager) view.findViewById(R.id.plan_vp);
         mTopNavigationTabStrip = (NavigationTabStrip) view.findViewById(R.id.plan_nts_top);
-        budget = new PlanBudgetFragment();
+        budget = new PlanBudgetFragment_();
         task = new PlanTaskFragment();
     }
 

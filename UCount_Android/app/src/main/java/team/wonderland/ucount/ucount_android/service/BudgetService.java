@@ -24,7 +24,7 @@ public interface BudgetService {
      * @return                  预算信息vo
      */
     @Get("/budgets/{budget_id}")
-    public BudgetInfoJson getBudget(@Path Long budget_id);
+    public Map<String, Object> getBudget(@Path Long budget_id);
 
     /**
      * 获取用户所有预算信息
@@ -33,7 +33,7 @@ public interface BudgetService {
      * @return                  用户预算列表
      */
     @Get("/budgets?username={username}&date={date}")
-    public List<BudgetInfoJson> getBudgetsByUser(@Path String username,@Path String date);
+    public Map<String, Object>  getBudgetsByUser(@Path String username,@Path String date);
 
     /**
      * 添加预算

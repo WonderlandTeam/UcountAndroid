@@ -1,27 +1,42 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.melnykov.fab.FloatingActionButton;
 
 
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import at.markushi.ui.CircleButton;
 import team.wonderland.ucount.ucount_android.Adapter.AssetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.Adapter.PlanBudgetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
+import team.wonderland.ucount.ucount_android.service.BudgetService;
 import team.wonderland.ucount.ucount_android.util.Budget;
 import team.wonderland.ucount.ucount_android.util.PercentageRing;
 
@@ -29,6 +44,7 @@ import team.wonderland.ucount.ucount_android.util.PercentageRing;
  * Created by liuyu on 2017/9/2.
  */
 
+@EFragment(R.layout.plan_budget_fragment)
 public class PlanBudgetFragment extends Fragment {
 
     private PercentageRing mPercentageRing;
@@ -37,6 +53,14 @@ public class PlanBudgetFragment extends Fragment {
     private RecyclerView recyclerView;
     private PlanBudgetRecyclerAdapter adapter;
     private List<Budget> budgets;
+
+    FragmentActivity fragmentActivity;
+
+    String username;
+    String date;
+
+    @RestService
+    BudgetService budgetService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,7 +119,12 @@ public class PlanBudgetFragment extends Fragment {
             }
         });
 
+        //获取时间
+        date=dateTextView.getText().toString();
+        username=getActivity().getSharedPreferences("user",0).getString("USERNAME","");
+        fragmentActivity=getActivity();
         initData();
+
 
         recyclerView = view.findViewById(R.id.plan_budget_recyclerview);
         //设置布局管理器 , 将布局设置成纵向
@@ -116,14 +145,44 @@ public class PlanBudgetFragment extends Fragment {
 //        });
 
         newBudget.attachToRecyclerView(recyclerView);
+
         return view;
     }
 
     public void initData(){
         //TODO: 获得所有预算  BudgetService.getBudgetsByUser
+        initBudget();
+
         budgets = new ArrayList<>();
         budgets.add(new Budget("type_cost_1","餐饮",1000));
         budgets.add(new Budget("type_cost_2","日用",1000));
         budgets.add(new Budget("type_cost_4","手机通讯",1000));
+    }
+
+    @Background
+    void initBudget(){
+        date=date.replace(",","-").replace("月","");
+        Map<String,Object> result=budgetService.getBudgetsByUser(username,date);
+
+        System.out.println(result);
+
+        if(result.containsKey("content")){
+            String content=result.get("content").toString();
+            Gson gson=new Gson();
+            Type type=new TypeToken<List<BudgetInfoJson>>(){}.getType();
+            List<BudgetInfoJson> budgetInfoJsons=gson.fromJson(content,type);
+            System.out.println(budgetInfoJsons.get(0));
+        }else{
+            showErrorInfo((String) result.get("error"));
+        }
+
+    }
+
+
+    //显示错误信息
+    @UiThread
+    void showErrorInfo(String error){
+        Toast.makeText(getContext().getApplicationContext(),"1",Toast.LENGTH_SHORT).show();
+        Log.e("initAllBudget:", error);
     }
 }

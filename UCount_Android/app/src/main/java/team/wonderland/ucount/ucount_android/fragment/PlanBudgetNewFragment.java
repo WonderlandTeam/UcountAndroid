@@ -155,8 +155,7 @@ public class PlanBudgetNewFragment extends Fragment {
             Map<String,Object> result=budgetService.addBudget(budgetAddJson);
 
         if(result.containsKey("content")){
-//            returnToPlanBudgetFragment();
-            System.out.println(result.get("content"));
+            returnToPlanBudgetFragment();
         }else{
             showErrorInfo((String) result.get("error"));
         }
@@ -169,7 +168,7 @@ public class PlanBudgetNewFragment extends Fragment {
         Toast.makeText(getContext(),"添加成功",Toast.LENGTH_SHORT).show();
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.plan_fragment_container, new PlanBudgetFragment())
+                .replace(R.id.plan_fragment_container, new PlanBudgetFragment_())
                 .commit();
     }
 
