@@ -5,12 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import org.androidannotations.annotations.EFragment;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.util.ChartTableView;
 
 /**
  * Created by CLL on 17/9/2.
  */
+@EFragment
 public class ReportTwoFragment extends Fragment {
     private ChartTableView chartTableView;
     @Override

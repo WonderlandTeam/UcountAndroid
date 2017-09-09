@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+import team.wonderland.ucount.ucount_android.json.BalanceSheetJson;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,8 @@ public class ChartTableView extends View {
     private ArrayList<Double> debtMoney;//负债金额一列
     private ArrayList<Double> clearCost;
     private ArrayList<Double> clearPrice;
+
+    private BalanceSheetJson balanceSheetJson;
 
     private Context context;
 
@@ -223,12 +226,21 @@ public class ChartTableView extends View {
 
     }
 
-
     private void initData(){
-        SharedPreferences preferences=context.getSharedPreferences("user", Context.MODE_PRIVATE);
-        String userName=preferences.getString("USERNAME","default");
-        //TODO
-        //statementService.getBalanceSheet(userName,null,null);
+        SharedPreferences preferences = context.getSharedPreferences("user", 0);
+        String userName = preferences.getString("USERNAME", "sigma");
+//        try {
+//            Map<String, Object> contents = statementService.getBalanceSheet(userName,);
+//            String json = contents.get("content").toString();
+//            Log.i("json", json);
+//            balanceSheetJson=new Gson().fromJson(json,BalanceSheetJson.class);
+//            if(balanceSheetJson==null){
+//                Log.i("balanceSheetJson","null");
+//            }
+//
+//        } catch (ResponseException e) {
+//            Log.i("error", e.getMessage());
+//        }
         assetCost=new ArrayList<>();
         //TODO 从上到下共13个数
         assetCost.add(1000.0);

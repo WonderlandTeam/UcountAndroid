@@ -1,9 +1,10 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,23 +14,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import at.markushi.ui.CircleButton;
+import com.google.gson.Gson;
 import lecho.lib.hellocharts.formatter.ColumnChartValueFormatter;
 import lecho.lib.hellocharts.formatter.SimpleColumnChartValueFormatter;
 import lecho.lib.hellocharts.model.*;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.Adapter.ReportItemAdapter;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.entity.ReportItem;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.IncomeStatementJson;
 import team.wonderland.ucount.ucount_android.service.StatementService;
 import team.wonderland.ucount.ucount_android.util.TimePickerDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 收支表
@@ -37,20 +44,22 @@ import java.util.List;
  */
 @EFragment
 public class ReportOneFragment extends Fragment implements TimePickerDialog.TimePickerDialogInterface {
-    private EditText beginDate;
-    private EditText endDate;
-    private CircleButton confirm;
-    private TimePickerDialog beginPickerDialog;
-    private TimePickerDialog endPickerDialog;
-    private PieChartView incomePieChart;
-    private PieChartView outputPieChart;
-    private ColumnChartView outputColumnChart1;
-    private ColumnChartView outputColumnChart2;
-    private ColumnChartView outputColumnChart3;
-    private RecyclerView inputRecyclerView;
-    private RecyclerView outputRecyclerView;
-    private TextView intro1;
-    private TextView intro2;
+    EditText beginDate;
+    EditText endDate;
+    CircleButton confirm;
+    TimePickerDialog beginPickerDialog;
+    TimePickerDialog endPickerDialog;
+    PieChartView incomePieChart;
+    PieChartView outputPieChart;
+    ColumnChartView outputColumnChart1;
+    ColumnChartView outputColumnChart2;
+    ColumnChartView outputColumnChart3;
+    RecyclerView inputRecyclerView;
+    RecyclerView outputRecyclerView;
+    TextView intro1;
+    TextView intro2;
+
+    private String userName;
 
     private final static String[] outputCategory1 = new String[]{"日用品", "水电费", "通讯和网费",
             "饮食", "电子设备", "交通"};//生活必需
@@ -63,6 +72,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     private List<ReportItem> incomeItems;
     private List<ReportItem> outputItems;
+    private IncomeStatementJson incomeStatementJson;
 
     @RestService
     StatementService statementService;
@@ -93,10 +103,13 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         beginPickerDialog = new TimePickerDialog(view.getContext(), this, 0);
         endPickerDialog = new TimePickerDialog(view.getContext(), this, 1);
 
-        intro1=view.findViewById(R.id.intros1);
-        intro2=view.findViewById(R.id.intros2);
+        intro1 = view.findViewById(R.id.intros1);
+        intro2 = view.findViewById(R.id.intros2);
 
-        confirm=view.findViewById(R.id.confirm);
+        SharedPreferences preferences = getActivity().getSharedPreferences("user", 0);
+        userName = preferences.getString("USERNAME", "sigma");
+
+        confirm = view.findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,9 +122,9 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         });
 
         incomePieChart = view.findViewById(R.id.income_piechart);
-        inputRecyclerView=view.findViewById(R.id.income_recycleview);
+        inputRecyclerView = view.findViewById(R.id.income_recycleview);
         outputPieChart = view.findViewById(R.id.output_piechart);
-        outputRecyclerView=view.findViewById(R.id.output_recycleview);
+        outputRecyclerView = view.findViewById(R.id.output_recycleview);
         outputColumnChart1 = view.findViewById(R.id.output_columnchart);
         outputColumnChart2 = view.findViewById(R.id.output_columnchart2);
         outputColumnChart3 = view.findViewById(R.id.output_columnchart3);
@@ -134,18 +147,12 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
                 String year = String.valueOf(beginPickerDialog.getYear());
                 String month = String.valueOf(beginPickerDialog.getMonth());
                 String day = String.valueOf(beginPickerDialog.getDay());
-                Log.i("=====", "=======year======" + beginPickerDialog.getYear());
-                Log.i("=====", "=======getMonth======" + beginPickerDialog.getMonth());
-                Log.i("=====", "=======getDay======" + beginPickerDialog.getDay());
-                beginDate.setText(year + " - " + month + " - " + day);
+                beginDate.setText(year + "-" + month + "-" + day);
             case 1:
                 String year1 = String.valueOf(endPickerDialog.getYear());
                 String month1 = String.valueOf(endPickerDialog.getMonth());
                 String day1 = String.valueOf(endPickerDialog.getDay());
-                Log.i("=====", "=======year======" + endPickerDialog.getYear());
-                Log.i("=====", "=======getMonth======" + endPickerDialog.getMonth());
-                Log.i("=====", "=======getDay======" + endPickerDialog.getDay());
-                endDate.setText(year1 + " - " + month1 + " - " + day1);
+                endDate.setText(year1 + "-" + month1 + "-" + day1);
         }
 
     }
@@ -159,30 +166,54 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     }
 
 
-
     //调服务器获得数据
-    private void initData(){
-        SharedPreferences preferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-        String userName=preferences.getString("USERNAME","default");
-        //statementService.getIncomeStatement(userName,beginDate.getText().toString(),endDate.getText().toString());
-        // TODO: 17/9/7
+    @Background
+    void initData() {
+        try {
+            Map<String, Object> contents = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())
+                    , removeAllSpace(endDate.getText().toString()));
+            String json = contents.get("content").toString();
+            Log.i("json", json);
+            incomeStatementJson=new Gson().fromJson(json,IncomeStatementJson.class);
+            if(incomeStatementJson==null){
+                Log.i("incomeStatementJson","null");
+            }
+
+        } catch (ResponseException e) {
+            Log.i("error", e.getMessage());
+            showErrorInfo(e.getMessage());
+        }
     }
 
-    private void showTables(){
-        incomeItems=new ArrayList<>();
+    private String removeAllSpace(String str) {
+        String tmpstr = str.replace(" ", "");
+        return tmpstr;
+    }
+
+    //显示错误信息
+    @UiThread
+    void showErrorInfo(String error) {
+        Looper.prepare();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        Looper.loop();
+
+    }
+
+    private void showTables() {
+        incomeItems = new ArrayList<>();
 
         initPieChart(incomePieChart, getIncomeData());
 
         //设置布局管理器
         inputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        inputRecyclerView.setAdapter(new ReportItemAdapter(incomeItems,getActivity()));
+        inputRecyclerView.setAdapter(new ReportItemAdapter(incomeItems, getActivity()));
 
-        outputItems=new ArrayList<>();
+        outputItems = new ArrayList<>();
 
         initPieChart(outputPieChart, getOutputData());
 
         outputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        outputRecyclerView.setAdapter(new ReportItemAdapter(outputItems,getActivity()));
+        outputRecyclerView.setAdapter(new ReportItemAdapter(outputItems, getActivity()));
         /**生活必需**/
         //假的数据
         ArrayList<Float> list = new ArrayList<>();
@@ -192,6 +223,15 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         list.add(10.6f);
         list.add(12.2f);
         list.add(20.8f);
+        if(incomeStatementJson!=null) {
+            list.add((float) incomeStatementJson.getCommodity());
+            list.add((float) incomeStatementJson.getUtilities());
+            list.add((float) incomeStatementJson.getCommunication());
+            list.add((float) incomeStatementJson.getDiet());
+            list.add((float) incomeStatementJson.getElectronic());
+            list.add((float) incomeStatementJson.getTraffic());
+        }
+
         initColumnChart(outputColumnChart1, list, outputCategory1);
 
         /**服饰**/
@@ -201,6 +241,12 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         list2.add(12.2f);
         list2.add(20.8f);
         list2.add(10.6f);
+        if(incomeStatementJson!=null) {
+            list2.add((float) incomeStatementJson.getClothing());
+            list2.add((float) incomeStatementJson.getCream());
+            list2.add((float) incomeStatementJson.getCosmetics());
+            list2.add((float) incomeStatementJson.getJewelry());
+        }
         initColumnChart(outputColumnChart2, list2, outputCategory2);
         /**学习**/
         //假的数据
@@ -210,6 +256,13 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         list3.add(20.8f);
         list3.add(10.6f);
         list3.add(12.2f);
+        if(incomeStatementJson!=null) {
+            list3.add((float) incomeStatementJson.getTraining());
+            list3.add((float) incomeStatementJson.getBook());
+            list3.add((float) incomeStatementJson.getStationery());
+            list3.add((float) incomeStatementJson.getPrint());
+            list3.add((float) incomeStatementJson.getActivity());
+        }
         initColumnChart(outputColumnChart3, list3, outputCategory3);
     }
 
@@ -249,33 +302,41 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
      */
     private PieChartData getIncomeData() {
         PieChartData pd = new PieChartData();
-        List<Float> incomes = new ArrayList<>();
-        incomes.add((float) 10);
-        incomes.add((float) 20);
-        incomes.add((float) 25);
-        incomes.add((float) 5);
-
-
-        List<SliceValue> sliceList = new ArrayList<SliceValue>();
         List<String> incomeLabels = new ArrayList<>();
         incomeLabels.add("工资");
         incomeLabels.add("理财");
         incomeLabels.add("补助");
         incomeLabels.add("其他");
+
+        List<Float> incomes = new ArrayList<>();
+        //stub data
+        incomes.add((float) 10);
+        incomes.add((float) 20);
+        incomes.add((float) 25);
+        incomes.add((float) 5);
+        //TODO
+        if(incomeStatementJson!=null) {
+            incomes.add((float) incomeStatementJson.getSalary());
+            incomes.add((float) incomeStatementJson.getManagementIncome());
+            incomes.add((float) incomeStatementJson.getAlimony());
+            incomes.add((float) incomeStatementJson.getOtherIncome());
+        }
+
+        List<SliceValue> sliceList = new ArrayList<SliceValue>();
         //饼图颜色
-        String[] colors={"#33CCCC","#FF99CC","#FF6600","#009933"};
-        int[] icons={R.drawable.type_get_3,R.drawable.type_get_4,R.drawable.type_get_2,R.drawable.type_get_1};
-        float totalIncome=0f;
+        String[] colors = {"#33CCCC", "#FF99CC", "#FF6600", "#009933"};
+        int[] icons = {R.drawable.type_get_3, R.drawable.type_get_4, R.drawable.type_get_2, R.drawable.type_get_1};
+        float totalIncome = 0f;
         for (int i = 0; i < incomeLabels.size(); i++) {
-            totalIncome=totalIncome+incomes.get(i);
+            totalIncome = totalIncome + incomes.get(i);
         }
         for (int i = 0; i < incomeLabels.size(); i++) {
-            sliceList.add(new SliceValue(incomes.get(i),Color.parseColor(colors[i])).setLabel(incomeLabels.get(i)));
+            sliceList.add(new SliceValue(incomes.get(i), Color.parseColor(colors[i])).setLabel(incomeLabels.get(i)));
             //初始化条目数据
-            incomeItems.add(new ReportItem(icons[i],incomeLabels.get(i)+"收入",
-                    String.format("%.1f",incomes.get(i)*100/totalIncome),incomes.get(i)));
+            incomeItems.add(new ReportItem(icons[i], incomeLabels.get(i) + "收入",
+                    String.format("%.1f", incomes.get(i) * 100 / totalIncome), incomes.get(i)));
         }
-        pd.setCenterText1("收入"+totalIncome);//环形中间的文字1
+        pd.setCenterText1("收入" + totalIncome);//环形中间的文字1
         pd.setCenterText1Color(Color.BLACK);//文字颜色
         pd.setCenterText1FontSize(25);//文字大小
 
@@ -300,6 +361,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         outputLabels.add("捐赠");
         outputLabels.add("其他");
 
+        //TODO
         List<Float> outputs = new ArrayList<>();
         outputs.add((float) 10);
         outputs.add((float) 20);
@@ -308,11 +370,20 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         outputs.add((float) 5);
         outputs.add((float) 5);
         outputs.add((float) 5);
+        if(incomeStatementJson!=null){
+            outputs.add((float) incomeStatementJson.getNecessityTotal());
+            outputs.add((float) incomeStatementJson.getAdornTotal());
+            outputs.add((float) incomeStatementJson.getLearningTotal());
+            outputs.add((float) incomeStatementJson.getEntertainment());
+            outputs.add((float) incomeStatementJson.getManagementExpenditure());
+            outputs.add((float) incomeStatementJson.getDonationTotal());
+            outputs.add((float) incomeStatementJson.getOtherExpenditure());
+        }
 
-        String[] colors={"#996600","#00CC66","#99CCFF","#FF9933","#FF99CC","#FF0066","#CC6666"};
-        int[] icons={R.drawable.type_cost_1,R.drawable.type_cost_7,R.drawable.type_cost_12,R.drawable.type_cost_18,
-                R.drawable.type_cost_15,R.drawable.type_cost_16,R.drawable.type_cost_5};
-        float totalOutput=0f;
+        String[] colors = {"#996600", "#00CC66", "#99CCFF", "#FF9933", "#FF99CC", "#FF0066", "#CC6666"};
+        int[] icons = {R.drawable.type_cost_1, R.drawable.type_cost_7, R.drawable.type_cost_12, R.drawable.type_cost_18,
+                R.drawable.type_cost_15, R.drawable.type_cost_16, R.drawable.type_cost_5};
+        float totalOutput = 0f;
 
         List<SliceValue> sliceList = new ArrayList<SliceValue>();
         for (int i = 0; i < outputLabels.size(); i++) {
@@ -320,11 +391,11 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         }
         for (int i = 0; i < outputLabels.size(); i++) {
             sliceList.add(new SliceValue(outputs.get(i), Color.parseColor(colors[i])).setLabel(outputLabels.get(i)));
-            outputItems.add(new ReportItem(icons[i],outputLabels.get(i)+"支出",
-                    String.format("%.1f",outputs.get(i)*100/totalOutput),outputs.get(i)));
+            outputItems.add(new ReportItem(icons[i], outputLabels.get(i) + "支出",
+                    String.format("%.1f", outputs.get(i) * 100 / totalOutput), outputs.get(i)));
         }
 
-        pd.setCenterText1("支出"+totalOutput);//环形中间的文字1
+        pd.setCenterText1("支出" + totalOutput);//环形中间的文字1
         pd.setCenterText1Color(Color.BLACK);//文字颜色
         pd.setCenterText1FontSize(25);//文字大小
         pd.setValues(sliceList);

@@ -4,17 +4,18 @@ import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
+import team.wonderland.ucount.ucount_android.util.RestAPI;
 
 import java.util.Map;
-
-import team.wonderland.ucount.ucount_android.util.RestAPI;
 
 /**
  * 获取报表
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class})
+@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, StringHttpMessageConverter.class},responseErrorHandler = MyResponseErrorHandler.class)
 public interface StatementService {
     /**
      * 获取资产负债表
@@ -23,7 +24,7 @@ public interface StatementService {
      * @param endDate
      * @return
      */
-    @Get("/statement/balanceSheet?username={username}&beginDate={beginDate}&endDate={endDate}")
+    @Get("/statements//balanceSheet?username={username}&beginDate={beginDate}&endDate={endDate}")
     public Map<String, Object> getBalanceSheet(@Path String username,
                                                @Path String beginDate,
                                                @Path String endDate);
@@ -35,7 +36,7 @@ public interface StatementService {
      * @param endDate
      * @return
      */
-    @Get("/statement/incomeStatement?username={username}&beginDate={beginDate}&endDate={endDate}")
+    @Get("/statements/incomeStatement?username={username}&beginDate={beginDate}&endDate={endDate}")
     public Map<String, Object> getIncomeStatement(@Path String username,
                                                   @Path String beginDate,
                                                   @Path String endDate);
@@ -47,7 +48,7 @@ public interface StatementService {
      * @param endDate
      * @return
      */
-    @Get("/statement/cashFlowsStatement?username={username}&beginDate={beginDate}&endDate={endDate}")
+    @Get("/statements/cashFlows?username={username}&beginDate={beginDate}&endDate={endDate}")
     public Map<String, Object> getCashFlowsStatement(@Path String username,
                                                      @Path String beginDate,
                                                      @Path String endDate);

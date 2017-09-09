@@ -39,7 +39,7 @@ public class ReportItemAdapter extends RecyclerView.Adapter<ReportItemAdapter.Re
         ReportItemViewHolder.icon.setImageResource(reportItems.get(position).getIcon_id());
         ReportItemViewHolder.type.setText(reportItems.get(position).getType());
         ReportItemViewHolder.percent.setText(""+reportItems.get(position).getPercent()+"%");
-        ReportItemViewHolder.money.setText(""+reportItems.get(position).getMoney());
+        ReportItemViewHolder.money.setText(""+String.format("%.1f", reportItems.get(position).getMoney()));
     }
 
     @Override
