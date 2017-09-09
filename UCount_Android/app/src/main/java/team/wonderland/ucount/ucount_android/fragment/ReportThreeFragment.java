@@ -91,10 +91,11 @@ public class ReportThreeFragment extends Fragment {
             Type type = new TypeToken<List<CashFlowJson>>() {
             }.getType();
             List<CashFlowJson> cashFlowJsons=gson.fromJson(json, type);
+            Log.i("jsonSize",""+cashFlowJsons.size());
             if(cashFlowJsons!=null) {
                 for (CashFlowJson cashFlowJson : cashFlowJsons) {
-                    moneyFlows.add(new MoneyFlow(isIn(cashFlowJson.billType),cashFlowJson.money,cashFlowJson.accountType,
-                            cashFlowJson.time,getIconID(cashFlowJson.billType)));
+                    moneyFlows.add(new MoneyFlow(isIn(cashFlowJson.getBillType()),cashFlowJson.getMoney(),cashFlowJson.getAccountType(),
+                            cashFlowJson.getTime(),getIconID(cashFlowJson.getBillType())));
                 }
             }
             else{
@@ -104,7 +105,6 @@ public class ReportThreeFragment extends Fragment {
             Log.i("error",e.getMessage());
             showErrorInfo(e.getMessage());
         }
-
     }
 
     //显示错误信息
