@@ -15,7 +15,7 @@ import team.wonderland.ucount.ucount_android.R;
 
 public class PlanTaskDetailFragment extends Fragment {
 
-    ImageView back;
+    private ImageView back;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

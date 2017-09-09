@@ -13,7 +13,6 @@ import java.util.List;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.GlobalVariables;
 import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
-import team.wonderland.ucount.ucount_android.util.Budget;
 
 /**
  * Created by liuyu on 2017/9/3.
