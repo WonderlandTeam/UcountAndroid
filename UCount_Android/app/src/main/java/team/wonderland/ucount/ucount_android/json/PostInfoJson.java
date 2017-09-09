@@ -7,20 +7,26 @@ import java.io.Serializable;
  * Created by CLL on 17/8/18.
  */
 public class PostInfoJson implements Serializable {
-    private String username;//用户名
-    private Long postId;//帖子id
-    private String title;//主题
-    private String content;//内容
-    private String time;//发布时间
-    private int supportNum;//点赞数
 
-    public PostInfoJson(String username, Long postId, String title, String content, String time, int supportNum) {
+    public Long postId;                 // 帖子id
+    public String username;             // 用户名
+    public String title;                // 标题
+    public String content;              // 内容
+    public String time;                 // 时间
+    public int supportNum;              // 点赞数
+    public boolean isCollected;         // 用户是否收藏
+    public boolean isSupported;         // 用户是否点赞
+
+
+    public PostInfoJson(String username, Long postId, String title, String content, String time, int supportNum,boolean isCollected,boolean isPraised) {
         this.username = username;
         this.postId = postId;
         this.title = title;
         this.content = content;
         this.time = time;
         this.supportNum = supportNum;
+        this.isCollected=isCollected;
+        this.isSupported=isCollected;
     }
 
     public String getUsername() {
@@ -69,5 +75,21 @@ public class PostInfoJson implements Serializable {
 
     public void setSupportNum(int supportNum) {
         this.supportNum = supportNum;
+    }
+
+    public boolean isCollected() {
+        return isCollected;
+    }
+
+    public void setCollected(boolean collected) {
+        isCollected = collected;
+    }
+
+    public boolean isSupported() {
+        return isSupported;
+    }
+
+    public void setSupported(boolean supported) {
+        isSupported = supported;
     }
 }

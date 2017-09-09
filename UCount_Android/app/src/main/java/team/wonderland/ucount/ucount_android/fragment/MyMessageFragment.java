@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ public class MyMessageFragment extends Fragment {
     private MyMessageRecyclerAdapter myMessageRecyclerAdapter;
     private List<Message> messages;
     private RecyclerView recyclerView;
+    private String userName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view=inflater.inflate(R.layout.my_message_fragment,container,false);
@@ -36,6 +38,9 @@ public class MyMessageFragment extends Fragment {
                 initData();
             }
         });
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("user", 0);
+        userName = preferences.getString("USERNAME", "sigma");
 
         initData();
 

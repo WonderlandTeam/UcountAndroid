@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,9 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.Adapter.MyReplyRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.entity.Reply;
+import team.wonderland.ucount.ucount_android.service.PostService;
 import uk.co.imallan.jellyrefresh.JellyRefreshLayout;
 import uk.co.imallan.jellyrefresh.PullToRefreshLayout;
 
@@ -20,11 +24,17 @@ import java.util.List;
  * 我的评论
  * Created by CLL on 17/8/30.
  */
+@EFragment
 public class MyReplyFragment extends Fragment {
     private JellyRefreshLayout jellyRefreshLayout;
     private MyReplyRecyclerAdapter myReplyRecyclerAdapter;
     private List<Reply> replies;
     private RecyclerView recyclerView;
+    private String userName;
+
+    @RestService
+    PostService postService;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view=inflater.inflate(R.layout.my_reply_fragment,container,false);
@@ -36,6 +46,10 @@ public class MyReplyFragment extends Fragment {
                 initData();
             }
         });
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("user", 0);
+        userName = preferences.getString("USERNAME", "sigma");
+
         initData();
         recyclerView=view.findViewById(R.id.reply_recycler);
         //设置布局管理器

@@ -47,7 +47,7 @@ public interface PostService {
      * @return              帖子信息列表
      */
     @Get("/posts/release?username={username}")
-    public List<PostInfoJson> getPostsSharedByUser(@Path String username);
+    public Map<String, Object> getPostsSharedByUser(@Path String username);
 
     /**
      * 用户收藏原贴
@@ -73,7 +73,7 @@ public interface PostService {
      * @return              帖子信息列表
      */
     @Get("/posts/collections?username={username}")
-    public List<PostInfoJson> getPostsCollectedByUser(@Path String username);
+    public Map<String, Object> getPostsCollectedByUser(@Path String username);
 
     /**
      * 称赞帖子

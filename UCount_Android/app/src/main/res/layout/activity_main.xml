@@ -106,8 +106,8 @@
                         android:background="@drawable/header">
             <TextView   android:id="@+id/username"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="95dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="80dp"
                         android:textSize="25dp"/>
         </LinearLayout>
 

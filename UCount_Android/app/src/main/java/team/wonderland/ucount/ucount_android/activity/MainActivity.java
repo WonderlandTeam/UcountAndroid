@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 View left_menu=findViewById(R.id.left_menu);
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
-                myPostsFragment=new MyPostsFragment();
+                myPostsFragment=new MyPostsFragment_();
                 transaction.add(fragment_container, myPostsFragment);
                 transaction.commit();
             }
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 View left_menu=findViewById(R.id.left_menu);
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
-                myCollectionFragment=new MyCollectionFragment();
+                myCollectionFragment=new MyCollectionFragment_();
                 transaction.add(fragment_container, myCollectionFragment);
                 transaction.commit();
             }
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 View left_menu=findViewById(R.id.left_menu);
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
-                myPraiseFragment=new MyPraiseFragment();
+                myPraiseFragment=new MyPraiseFragment_();
                 transaction.add(fragment_container, myPraiseFragment);
                 transaction.commit();
             }
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 View left_menu=findViewById(R.id.left_menu);
                 mDrawerLayout.closeDrawer(left_menu);
                 transaction = getSupportFragmentManager().beginTransaction();
-                myReplyFragment=new MyReplyFragment();
+                myReplyFragment=new MyReplyFragment_();
                 transaction.add(fragment_container, myReplyFragment);
                 transaction.commit();
             }
