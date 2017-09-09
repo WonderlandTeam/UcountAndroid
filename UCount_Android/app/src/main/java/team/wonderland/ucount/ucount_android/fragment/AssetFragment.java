@@ -100,6 +100,9 @@ public class AssetFragment extends Fragment {
 
     public void initData(){
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
+
+//        TODO 因为服务器端相关bug还没解决，所以下面的方法先注释掉
+
 //        initAsset();//获得用户所有账户信息 AccountService.getAccountsByUser
 
         accounts = new ArrayList<>();
@@ -121,6 +124,7 @@ public class AssetFragment extends Fragment {
             Type type = new TypeToken<List<AccountInfoJson>>() {
             }.getType();
             List<AccountInfoJson> accountInfoJsons = gson.fromJson(content, type);
+            System.out.println(accountInfoJsons);
 
             //TODO 处理成Account类型
 

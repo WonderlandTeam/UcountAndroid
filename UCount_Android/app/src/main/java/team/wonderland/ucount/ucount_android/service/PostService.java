@@ -3,6 +3,8 @@ package team.wonderland.ucount.ucount_android.service;
 import org.androidannotations.rest.spring.annotations.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+
+import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 import team.wonderland.ucount.ucount_android.json.PostReplyJson;
 import team.wonderland.ucount.ucount_android.json.PostShareJson;
@@ -15,7 +17,7 @@ import java.util.Map;
  * 帖子管理
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class})
+@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class},responseErrorHandler = MyResponseErrorHandler.class)
 public interface PostService {
 
     /**

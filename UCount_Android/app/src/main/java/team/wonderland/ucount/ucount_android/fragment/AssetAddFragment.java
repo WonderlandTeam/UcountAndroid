@@ -3,6 +3,8 @@ package team.wonderland.ucount.ucount_android.fragment;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Looper;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,16 +19,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.rest.spring.annotations.RestService;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.BillAddJson;
+import team.wonderland.ucount.ucount_android.service.BillService;
 
 /**
  * Created by liuyu on 2017/8/30.
  */
 
+@EFragment(R.layout.asset_add_fragment)
 public class AssetAddFragment extends Fragment{
     private static final String TAG = "AddItemActivity";
 
@@ -52,6 +63,12 @@ public class AssetAddFragment extends Fragment{
     private SimpleDateFormat formatItem = new SimpleDateFormat("yyyy年MM月dd日");
     private SimpleDateFormat formatSum  = new SimpleDateFormat("yyyy年MM月");
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+    @RestService
+    BillService billService;
+
+    long accountID;
+    BillAddJson billAddJson;
 
     public void onBackPressed() {
         getFragmentManager().popBackStack();
@@ -206,7 +223,8 @@ public class AssetAddFragment extends Fragment{
                         putItemInData(Double.parseDouble(moneyText.getText().toString()));
                         calculatorClear();
                         //TODO: 手动添加一条账目 BillService.addBillMannually
-                        getFragmentManager().popBackStack();
+                        addBill();
+//                        getFragmentManager().popBackStack();
                     }
                     break;
                 case R.id.clear:
@@ -276,4 +294,44 @@ public class AssetAddFragment extends Fragment{
         }
 
     }
+
+
+    void addBill(){
+        //TODO   accountID 和 billAddJson还未设置,可以在这个方法里面设置
+
+    }
+
+    @Background
+    void addBillAsync(){
+        try {
+            Map<String,Object> result=billService.addBillManually(accountID,billAddJson);
+//            System.out.println(result.get("content"));
+            returnToFragment();
+        }catch (ResponseException e){
+            showErrorInfo(e.toString());
+        }
+    }
+
+    //返回界面,
+    //TODO 对应上面注释掉的那条，不知道对不对
+    @UiThread
+    void returnToFragment(){
+
+        Looper.prepare();
+        Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
+        Looper.loop();
+
+        //跳转
+        getFragmentManager().popBackStack();
+    }
+
+    //显示错误信息
+    @UiThread
+    void showErrorInfo(String error) {
+        Looper.prepare();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        Looper.loop();
+
+    }
+
 }

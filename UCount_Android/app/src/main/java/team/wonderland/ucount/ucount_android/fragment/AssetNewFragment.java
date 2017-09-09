@@ -160,7 +160,7 @@ public class AssetNewFragment extends Fragment{
                 cardID=tv_name.getText().toString();
                 balance=Double.parseDouble(tv_balance.getText().toString());
                 accountAddJson=new AccountAddJson(username,accountType,cardID,balance);
-                addBudget();
+                addAccount();
             }
         });
 
@@ -168,9 +168,8 @@ public class AssetNewFragment extends Fragment{
     }
 
     @Background
-    void addBudget(){
+    void addAccount(){
         try {
-            System.out.println(accountAddJson);
             Map<String,Object> result=accountService.addAccount(accountAddJson);
 //            System.out.println(result.get("content"));
             returnToAssetFragment();

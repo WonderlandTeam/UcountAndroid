@@ -3,6 +3,8 @@ package team.wonderland.ucount.ucount_android.service;
 import org.androidannotations.rest.spring.annotations.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+
+import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
 import team.wonderland.ucount.ucount_android.json.BillAddJson;
 import team.wonderland.ucount.ucount_android.json.BillInfoJson;
 import team.wonderland.ucount.ucount_android.util.RestAPI;
@@ -14,7 +16,7 @@ import java.util.Map;
  * 账目管理
  * Created by CLL on 17/8/18.
  */
-@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class})
+@Rest(rootUrl = RestAPI.URL, converters = {FormHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class},responseErrorHandler = MyResponseErrorHandler.class)
 public interface BillService {
     /**
      * 获取单条账目信息
@@ -49,7 +51,7 @@ public interface BillService {
      * @param billAddJson       账目添加信息
      * @return                  新增账目id
      */
-    @Post("/accounts/{account_id}/bills")
+    @Post("/accounts/{account_id}/bills/")
     public Map<String, Object> addBillManually(@Path Long account_id, @Body BillAddJson billAddJson);
 
     /**
