@@ -106,7 +106,6 @@ public class PlanBudgetFragment extends Fragment {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
                         dateTextView.setText((date.getYear() + 1900) + "," + (date.getMonth() + 1) + "月");
-
                         new aTask().execute();
                     }
                 })
@@ -184,15 +183,20 @@ public class PlanBudgetFragment extends Fragment {
 
         recyclerView.addItemDecoration(new MyItemDecoration());
 
+        //跳转到查看预算界面
         adapter.setOnItemClickListener(new PlanBudgetRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
+                Bundle bundle = new Bundle();
+                Fragment fragment = new PlanBudgetReviewFragment_();
+                bundle.putSerializable("budgetInfo",budgets.get(position));
+                fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.plan_fragment_container, new PlanBudgetReviewFragment()).commit();
+                        .replace(R.id.plan_fragment_container, fragment)
+                        .commit();
             }
         });
-
 
         newBudget.attachToRecyclerView(recyclerView);
     }
@@ -203,7 +207,6 @@ public class PlanBudgetFragment extends Fragment {
         Looper.prepare();
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
         Looper.loop();
-
     }
 
     private class aTask extends AsyncTask<Void,Void,Void>{
@@ -211,11 +214,8 @@ public class PlanBudgetFragment extends Fragment {
         protected void onPostExecute(Void o) {
             super.onPostExecute(o);
             initRecyclerView();
-
             Log.i("tag", "调用后");
             Log.i("tag",budgets.toString());
-
-
             adapter.notifyDataSetChanged();
         }
 
