@@ -1,7 +1,6 @@
 package team.wonderland.ucount.ucount_android.util;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -57,8 +56,6 @@ public class ChartTableView extends View {
 
     private Context context;
 
-//    @RestService
-//    StatementService statementService;
 
     public ChartTableView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -227,39 +224,92 @@ public class ChartTableView extends View {
     }
 
     private void initData(){
-        SharedPreferences preferences = context.getSharedPreferences("user", 0);
-        String userName = preferences.getString("USERNAME", "sigma");
-//        try {
-//            Map<String, Object> contents = statementService.getBalanceSheet(userName,);
-//            String json = contents.get("content").toString();
-//            Log.i("json", json);
-//            balanceSheetJson=new Gson().fromJson(json,BalanceSheetJson.class);
-//            if(balanceSheetJson==null){
-//                Log.i("balanceSheetJson","null");
-//            }
-//
-//        } catch (ResponseException e) {
-//            Log.i("error", e.getMessage());
-//        }
         assetCost=new ArrayList<>();
-        //TODO 从上到下共13个数
-        assetCost.add(1000.0);
 
         assetPrice=new ArrayList<>();
-        // TODO 13
-        assetPrice.add(1000.0);
 
         debtMoney=new ArrayList<>();
-        // TODO 6,其余设为0
-        debtMoney.add(1000.0);
 
         clearCost=new ArrayList<>();
-        // TODO 4
-        clearCost.add(1000.0);
 
         clearPrice=new ArrayList<>();
-        // TODO 4
-        clearPrice.add(1000.0);
+    }
+
+    /**
+     * 提供给fragment的接口
+     * @param balanceSheetJson
+     */
+    public void setData(BalanceSheetJson balanceSheetJson){
+
+
+        //从上到下共13个数
+        assetCost.add(balanceSheetJson.cash.get("cost"));
+        assetCost.add(balanceSheetJson.deposit.get("cost"));
+        assetCost.add(balanceSheetJson.currentAssets.get("cost"));
+        assetCost.add(balanceSheetJson.foreignDeposit.get("cost"));
+        assetCost.add(balanceSheetJson.stock.get("cost"));
+        assetCost.add(balanceSheetJson.fund.get("cost"));
+        assetCost.add(balanceSheetJson.bond.get("cost"));
+        assetCost.add(balanceSheetJson.investmentInsurance.get("cost"));
+        assetCost.add(balanceSheetJson.investmentAssets.get("cost"));
+        assetCost.add(balanceSheetJson.computer.get("cost"));
+        assetCost.add(balanceSheetJson.mobilePhone.get("cost"));
+        assetCost.add(balanceSheetJson.personalAssets.get("cost"));
+        assetCost.add(balanceSheetJson.totalAssets.get("cost"));
+
+        // 13
+        assetPrice.add(balanceSheetJson.cash.get("market"));
+        assetPrice.add(balanceSheetJson.deposit.get("market"));
+        assetPrice.add(balanceSheetJson.currentAssets.get("market"));
+        assetPrice.add(balanceSheetJson.foreignDeposit.get("market"));
+        assetPrice.add(balanceSheetJson.stock.get("market"));
+        assetPrice.add(balanceSheetJson.fund.get("market"));
+        assetPrice.add(balanceSheetJson.bond.get("market"));
+        assetPrice.add(balanceSheetJson.investmentInsurance.get("market"));
+        assetPrice.add(balanceSheetJson.investmentAssets.get("market"));
+        assetPrice.add(balanceSheetJson.computer.get("market"));
+        assetPrice.add(balanceSheetJson.mobilePhone.get("market"));
+        assetPrice.add(balanceSheetJson.personalAssets.get("market"));
+        assetPrice.add(balanceSheetJson.totalAssets.get("market"));
+
+        //6,其余设为0
+        debtMoney.add(balanceSheetJson.creditCardLiabilities);
+        debtMoney.add(0.0);
+        debtMoney.add(balanceSheetJson.consumerLiabilities);
+        for(int i=0;i<5;i++){
+            debtMoney.add(0.0);
+        }
+        debtMoney.add(balanceSheetJson.investmentLiabilities);
+        debtMoney.add(0.0);
+        debtMoney.add(0.0);
+        debtMoney.add(balanceSheetJson.personalLiabilities);
+        debtMoney.add(balanceSheetJson.totalLiabilities);
+
+        //4
+        debtMoney.add(0.0);
+        debtMoney.add(0.0);
+        clearCost.add(balanceSheetJson.currentNetValue.get("cost"));
+        for(int i=0;i<5;i++){
+            debtMoney.add(0.0);
+        }
+        clearCost.add(balanceSheetJson.investmentNetValue.get("cost"));
+        debtMoney.add(0.0);
+        debtMoney.add(0.0);
+        clearCost.add(balanceSheetJson.personalNetValue.get("cost"));
+        clearCost.add(balanceSheetJson.totalNetValue.get("cost"));
+
+        //4
+        debtMoney.add(0.0);
+        debtMoney.add(0.0);
+        clearPrice.add(balanceSheetJson.currentNetValue.get("market"));
+        for(int i=0;i<5;i++){
+            debtMoney.add(0.0);
+        }
+        clearPrice.add(balanceSheetJson.investmentNetValue.get("market"));
+        debtMoney.add(0.0);
+        debtMoney.add(0.0);
+        clearPrice.add(balanceSheetJson.personalNetValue.get("market"));
+        clearPrice.add(balanceSheetJson.totalNetValue.get("market"));
     }
 
 }

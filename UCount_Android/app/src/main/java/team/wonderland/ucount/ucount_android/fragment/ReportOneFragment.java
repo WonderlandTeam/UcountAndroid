@@ -174,6 +174,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
                     , removeAllSpace(endDate.getText().toString()));
             String json = contents.get("content").toString();
             Log.i("json", json);
+            // TODO: 17/9/9 转json闪退
             incomeStatementJson=new Gson().fromJson(json,IncomeStatementJson.class);
             if(incomeStatementJson==null){
                 Log.i("incomeStatementJson","null");
@@ -186,8 +187,8 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     }
 
     private String removeAllSpace(String str) {
-        String tmpstr = str.replace(" ", "");
-        return tmpstr;
+        String tempStr = str.replace(" ", "");
+        return tempStr;
     }
 
     //显示错误信息
