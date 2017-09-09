@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +20,7 @@ import android.widget.Toast;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.text.DecimalFormat;
@@ -317,10 +317,7 @@ public class AssetAddFragment extends Fragment{
     @UiThread
     void returnToFragment(){
 
-        Looper.prepare();
         Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
-        Looper.loop();
-
         //跳转
         getFragmentManager().popBackStack();
     }
@@ -328,10 +325,7 @@ public class AssetAddFragment extends Fragment{
     //显示错误信息
     @UiThread
     void showErrorInfo(String error) {
-        Looper.prepare();
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-        Looper.loop();
-
     }
 
 }

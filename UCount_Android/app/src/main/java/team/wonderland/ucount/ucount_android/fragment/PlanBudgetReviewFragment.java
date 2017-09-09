@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -23,6 +22,7 @@ import com.bigkoo.pickerview.TimePickerView;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.Calendar;
@@ -154,19 +154,15 @@ public class PlanBudgetReviewFragment extends Fragment {
 
     @UiThread
     void showErrorInfo(String error){
-        Looper.prepare();
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-        Looper.loop();
     }
 
     @UiThread
     void returnToPlanBudgetFragment(){
-        Looper.prepare();
         Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT).show();
         getFragmentManager().beginTransaction()
                 .replace(R.id.plan_fragment_container, new PlanBudgetFragment_())
                 .commit();
-        Looper.loop();
 
     }
 }

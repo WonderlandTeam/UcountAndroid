@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -24,6 +23,7 @@ import at.markushi.ui.CircleButton;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.Calendar;
@@ -166,13 +166,11 @@ public class PlanBudgetNewFragment extends Fragment {
     //返回到预算主界面
     @UiThread
     void returnToPlanBudgetFragment(){
-        Looper.prepare();
         Toast.makeText(getContext(),"添加成功",Toast.LENGTH_SHORT).show();
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.plan_fragment_container, new PlanBudgetFragment_())
                 .commit();
-        Looper.loop();
     }
 
     //显示错误信息

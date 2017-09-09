@@ -2,7 +2,6 @@ package team.wonderland.ucount.ucount_android.fragment;
 
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.lang.reflect.Type;
