@@ -8,4 +8,8 @@ import java.io.Serializable;
  */
 public class UserInfoJson implements Serializable{
     // TODO
+    public String userName; //用户名
+    public String password; //用户密码
+    public String tel; //用户手机
+    public String email; //用户邮箱
 }

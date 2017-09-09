@@ -7,7 +7,7 @@ package team.wonderland.ucount.ucount_android.json;
 public class TaskAddJson {
     private String username;
     private String taskContent;
-    private String createTime;
+    private String createTime;//时间格式为 yyyy-MM-dd
     private String deadline;
     private Double upper;
 
@@ -17,6 +17,17 @@ public class TaskAddJson {
         this.createTime = createTime;
         this.deadline = deadline;
         this.upper = upper;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskAddJson{" +
+                "username='" + username + '\'' +
+                ", taskContent='" + taskContent + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", deadline='" + deadline + '\'' +
+                ", upper=" + upper +
+                '}';
     }
 
     public String getUsername() {

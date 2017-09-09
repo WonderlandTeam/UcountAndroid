@@ -11,12 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.androidannotations.annotations.EFragment;
+
 import team.wonderland.ucount.ucount_android.R;
 
 /**
  * Created by liuyu on 2017/8/31.
  */
 
+@EFragment(R.layout.money_post_fragment)
 public class MoneyPostFragment extends Fragment {
     Button confirm;
     EditText mTitle;

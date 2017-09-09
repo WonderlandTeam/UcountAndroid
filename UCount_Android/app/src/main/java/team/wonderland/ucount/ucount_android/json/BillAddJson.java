@@ -8,38 +8,36 @@ import java.util.Calendar;
  * Created by CLL on 17/8/18.
  */
 public class BillAddJson implements Serializable{
-    private String username;//用户名
-    private Calendar time; //时间
-    private Double incomeExpenditure;//收／支金额
-    private String commodity;//消费项目
-    private String consumeType;//消费类型
-    private String remark;//备注
-    private String cardType;//卡类型
-    private String cardId;//卡号
+    public String time;                 //交易时间
+    public Double incomeExpenditure;    //交易金额
+    public String commodity;            //商品名称
+    public String consumeType;          //交易类型
+    public String remark;
 
-    /**
-     * 构造函数，其余参数set
-     * @param username
-     * @param time
-     */
-    public BillAddJson(String username, Calendar time) {
-        this.username = username;
+    public BillAddJson(String time, Double incomeExpenditure, String commodity, String consumeType, String remark) {
         this.time = time;
+        this.incomeExpenditure = incomeExpenditure;
+        this.commodity = commodity;
+        this.consumeType = consumeType;
+        this.remark = remark;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public String toString() {
+        return "BillAddJson{" +
+                "time='" + time + '\'' +
+                ", incomeExpenditure=" + incomeExpenditure +
+                ", commodity='" + commodity + '\'' +
+                ", consumeType='" + consumeType + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Calendar getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Calendar time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -73,21 +71,5 @@ public class BillAddJson implements Serializable{
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public String getCardType() {
-        return cardType;
-    }
-
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
-
-    public String getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
     }
 }

@@ -5,9 +5,9 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
+import team.wonderland.ucount.ucount_android.json.PostAddJson;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 import team.wonderland.ucount.ucount_android.json.PostReplyJson;
-import team.wonderland.ucount.ucount_android.json.PostShareJson;
 import team.wonderland.ucount.ucount_android.util.RestAPI;
 
 import java.util.List;
@@ -37,11 +37,11 @@ public interface PostService {
 
     /**
      * 用户分享帖子
-     * @param postShareJson   帖子发布信息vo
+     * @param postAddJson   帖子发布信息vo
      * @return              帖子id
      */
     @Post("/posts")
-    public Map<String, Object> addPost(@Body PostShareJson postShareJson);
+    public Map<String, Object> addPost(@Body PostAddJson postAddJson);
 
     /**
      * 获取用户分享所有帖子

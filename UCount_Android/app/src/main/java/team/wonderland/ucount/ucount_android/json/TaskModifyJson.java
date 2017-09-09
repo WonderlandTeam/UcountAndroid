@@ -12,6 +12,7 @@ public class TaskModifyJson {
     }
 
     public double getMoney() {
+
         return money;
     }
 

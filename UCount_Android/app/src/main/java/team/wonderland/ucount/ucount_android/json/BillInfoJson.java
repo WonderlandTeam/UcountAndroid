@@ -8,94 +8,57 @@ import java.util.Calendar;
  * Created by CLL on 17/8/18.
  */
 public class BillInfoJson implements Serializable {
-    private Long billID;//账目id
-    private String username;//用户名
-    private Calendar time; //时间
-    private Double incomeExpenditure;//收／支金额
-    private String commodity;//消费项目
-    private String consumeType;//消费类型
-    private String remark;//备注
-    private String accountType;//账户类型
-    private String cardType;//卡类型
-    private String cardId;//卡号
+    public String type ; 			//交易类型
+    public String trader ; 			//交易对象
+    public double amount ; 			//交易金额
+    public String time;				//交易时间
 
-    public Long getBillID() {
-        return billID;
-    }
-
-    public void setBillID(Long billID) {
-        this.billID = billID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Calendar getTime() {
-        return time;
-    }
-
-    public void setTime(Calendar time) {
+    public BillInfoJson(String type, String trader, double amount, String time) {
+        this.type = type;
+        this.trader = trader;
+        this.amount = amount;
         this.time = time;
     }
 
-    public Double getIncomeExpenditure() {
-        return incomeExpenditure;
+    @Override
+    public String toString() {
+        return "BillInfoJson{" +
+                "type='" + type + '\'' +
+                ", trader='" + trader + '\'' +
+                ", amount=" + amount +
+                ", time='" + time + '\'' +
+                '}';
     }
 
-    public void setIncomeExpenditure(Double incomeExpenditure) {
-        this.incomeExpenditure = incomeExpenditure;
+    public String getType() {
+        return type;
     }
 
-    public String getCommodity() {
-        return commodity;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setCommodity(String commodity) {
-        this.commodity = commodity;
+    public String getTrader() {
+        return trader;
     }
 
-    public String getConsumeType() {
-        return consumeType;
+    public void setTrader(String trader) {
+        this.trader = trader;
     }
 
-    public void setConsumeType(String consumeType) {
-        this.consumeType = consumeType;
+    public double getAmount() {
+        return amount;
     }
 
-    public String getRemark() {
-        return remark;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public String getTime() {
+        return time;
     }
 
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
-
-    public String getCardType() {
-        return cardType;
-    }
-
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
-
-    public String getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
+    public void setTime(String time) {
+        this.time = time;
     }
 }

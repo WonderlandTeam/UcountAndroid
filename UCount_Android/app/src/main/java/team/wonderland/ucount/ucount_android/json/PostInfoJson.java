@@ -29,6 +29,20 @@ public class PostInfoJson implements Serializable {
         this.isSupported=isCollected;
     }
 
+    @Override
+    public String toString() {
+        return "PostInfoJson{" +
+                "postId=" + postId +
+                ", username='" + username + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", time='" + time + '\'' +
+                ", supportNum=" + supportNum +
+                ", isCollected=" + isCollected +
+                ", isSupported=" + isSupported +
+                '}';
+    }
+
     public String getUsername() {
         return username;
     }

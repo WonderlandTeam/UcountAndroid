@@ -1,22 +1,28 @@
 package team.wonderland.ucount.ucount_android.json;
 
-import java.io.Serializable;
-
 /**
- * 帖子发布信息
- * Created by CLL on 17/8/18.
+ * Created by green-cherry on 2017/9/9.
  */
-public class PostShareJson implements Serializable {
-    private String username;//用户名
-    private String title;//主题
-    private String content;//内容
-    private String time;//发布时间
 
-    public PostShareJson(String username, String title, String content, String time) {
+public class PostAddJson {
+
+    public String username;
+    public String title;
+    public String content;
+
+    public PostAddJson(String username, String title, String content) {
         this.username = username;
         this.title = title;
         this.content = content;
-        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "PostAddJson{" +
+                "username='" + username + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 
     public String getUsername() {
@@ -41,13 +47,5 @@ public class PostShareJson implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 }

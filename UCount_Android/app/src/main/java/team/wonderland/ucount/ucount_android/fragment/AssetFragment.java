@@ -101,9 +101,7 @@ public class AssetFragment extends Fragment {
     public void initData(){
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
 
-//        TODO 因为服务器端相关bug还没解决，所以下面的方法先注释掉
-
-//        initAsset();//获得用户所有账户信息 AccountService.getAccountsByUser
+        initAsset();//获得用户所有账户信息 AccountService.getAccountsByUser
 
         accounts = new ArrayList<>();
         accounts.add(new Account("现金",20.0,R.mipmap.xianjin));

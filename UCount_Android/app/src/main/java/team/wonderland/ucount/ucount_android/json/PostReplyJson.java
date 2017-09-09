@@ -7,28 +7,32 @@ import java.io.Serializable;
  * Created by CLL on 17/8/18.
  */
 public class PostReplyJson implements Serializable {
-    private String username;//用户名
-    private Long replyId;//回帖id
-    private String content;//内容
-    private String time;//发布时间
-    private int supportNum;//点赞数
-    private Long postId;//原帖id
+    public Long replyId;
+    public String username;
+    public String content;
+    public String time;
+    public int supportNum;
+    public boolean isSupported;
 
-    public PostReplyJson(String username, Long replyId, String content, String time, int supportNum, Long postId) {
-        this.username = username;
+    public PostReplyJson(Long replyId, String username, String content, String time, int supportNum, boolean isSupported) {
         this.replyId = replyId;
+        this.username = username;
         this.content = content;
         this.time = time;
         this.supportNum = supportNum;
-        this.postId = postId;
+        this.isSupported = isSupported;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    @Override
+    public String toString() {
+        return "PostReplyJson{" +
+                "replyId=" + replyId +
+                ", username='" + username + '\'' +
+                ", content='" + content + '\'' +
+                ", time='" + time + '\'' +
+                ", supportNum=" + supportNum +
+                ", isSupported=" + isSupported +
+                '}';
     }
 
     public Long getReplyId() {
@@ -37,6 +41,14 @@ public class PostReplyJson implements Serializable {
 
     public void setReplyId(Long replyId) {
         this.replyId = replyId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getContent() {
@@ -63,11 +75,11 @@ public class PostReplyJson implements Serializable {
         this.supportNum = supportNum;
     }
 
-    public Long getPostId() {
-        return postId;
+    public boolean isSupported() {
+        return isSupported;
     }
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
+    public void setSupported(boolean supported) {
+        isSupported = supported;
     }
 }
