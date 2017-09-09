@@ -22,7 +22,7 @@ public interface AccountService {
      * @return
      */
     @Get("/accounts/{account_id}")
-    public AccountInfoJson getAccountByID(@Path Long account_id);
+    public Map<String,Object> getAccountByID(@Path Long account_id);
 
     /**
      * 获取用户所有账户信息
@@ -30,7 +30,7 @@ public interface AccountService {
      * @return
      */
     @Get("/accounts?username={username}")
-    public List<AccountInfoJson> getAccountsByUser(@Path String username);
+    public Map<String,Object> getAccountsByUser(@Path String username);
 
     /**
      * 添加账户信息

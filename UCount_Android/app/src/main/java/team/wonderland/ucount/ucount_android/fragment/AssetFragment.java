@@ -1,6 +1,8 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
 import android.os.Bundle;
+import android.os.Looper;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,26 +13,41 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import team.wonderland.ucount.ucount_android.Adapter.AssetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.AccountInfoJson;
+import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
+import team.wonderland.ucount.ucount_android.service.AccountService;
 
 /**
  * Created by liuyu on 2017/8/21.
  */
 
-
+@EFragment(R.layout.asset_fragment)
 public class AssetFragment extends Fragment {
     private TextView txtDetail,txtNew,txtTotal,txtIn,txtOut;
     private RecyclerView recyclerView;
     private AssetRecyclerAdapter adapter;
     private List<Account> accounts;
 
-    public  AssetFragment(){
+    String username;
 
-    }
+    @RestService
+    AccountService accountService;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +66,7 @@ public class AssetFragment extends Fragment {
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, new AssetNewFragment()).commit();
+                        .replace(R.id.fragment_container, new AssetNewFragment_()).commit();
 //                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 //                transaction.add(R.id.fragment_container, new AssetNewFragment());
         }
@@ -82,7 +99,9 @@ public class AssetFragment extends Fragment {
     }
 
     public void initData(){
-        //TODO: 获得用户所有账户信息 AccountService.getAccountsByUser
+        username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
+//        initAsset();//获得用户所有账户信息 AccountService.getAccountsByUser
+
         accounts = new ArrayList<>();
         accounts.add(new Account("现金",20.0,R.mipmap.xianjin));
         accounts.add(new Account("银行卡",0.0,R.mipmap.yinhangka));
@@ -90,5 +109,34 @@ public class AssetFragment extends Fragment {
         accounts.add(new Account("支付宝",0.0,R.mipmap.zhifubao));
     }
 
+    /**
+     * 获得用户所有账户信息
+     */
+    @Background
+    void initAsset() {
+        try {
+            Map<String, Object> result = accountService.getAccountsByUser(username);
+            String content = result.get("content").toString();
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<AccountInfoJson>>() {
+            }.getType();
+            List<AccountInfoJson> accountInfoJsons = gson.fromJson(content, type);
+
+            //TODO 处理成Account类型
+
+        } catch (ResponseException e) {
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+
+    //显示错误信息
+    @UiThread
+    void showErrorInfo(String error) {
+        Looper.prepare();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        Looper.loop();
+
+    }
 
 }

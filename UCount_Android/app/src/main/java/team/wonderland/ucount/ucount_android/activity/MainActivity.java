@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txt_asset:
                 selected();
                 tabAsset.setSelected(true);
-                assetFragment = new AssetFragment();
+                assetFragment = new AssetFragment_();
                 transaction.add(fragment_container, assetFragment);
                 break;
 

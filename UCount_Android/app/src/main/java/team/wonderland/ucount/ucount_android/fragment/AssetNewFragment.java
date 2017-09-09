@@ -3,6 +3,8 @@ package team.wonderland.ucount.ucount_android.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Looper;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -15,16 +17,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.rest.spring.annotations.RestService;
 import org.w3c.dom.Text;
+
+import java.util.Map;
 
 import at.markushi.ui.CircleButton;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.AccountAddJson;
+import team.wonderland.ucount.ucount_android.json.BudgetAddJson;
+import team.wonderland.ucount.ucount_android.service.AccountService;
 
 /**
  * Created by liuyu on 2017/8/29.
  */
 
+@EFragment(R.layout.asset_new_fragment)
 public class AssetNewFragment extends Fragment{
     ImageView im_back;
     CardView cv_name;
@@ -37,6 +50,16 @@ public class AssetNewFragment extends Fragment{
     EditText et_name;
     EditText et_balance;
     String[] titles = {"现金","银行卡","校园卡","支付宝"};
+
+    public String username;         // 用户名
+    public String accountType;      // 账户类型
+    public String cardID;        // 账户id
+    public double balance;          // 初始余额（手动账户须填写）
+    AccountAddJson accountAddJson;
+
+    @RestService
+    AccountService accountService;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,14 +155,49 @@ public class AssetNewFragment extends Fragment{
         bt_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: 新建账户 AccountService.addAccount
-
-                //保存成功跳转到资产主界面
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.fragment_container, new AssetFragment()).commit();
+                username=getActivity().getSharedPreferences("user",0).getString("USERNAME","");
+                accountType=tv_type.getText().toString();
+                cardID=tv_name.getText().toString();
+                balance=Double.parseDouble(tv_balance.getText().toString());
+                accountAddJson=new AccountAddJson(username,accountType,cardID,balance);
+                addBudget();
             }
         });
 
         return view;
+    }
+
+    @Background
+    void addBudget(){
+        try {
+            System.out.println(accountAddJson);
+            Map<String,Object> result=accountService.addAccount(accountAddJson);
+//            System.out.println(result.get("content"));
+            returnToAssetFragment();
+        }catch (ResponseException e){
+            showErrorInfo(e.toString());
+        }
+    }
+
+    //返回到资产主界面
+    @UiThread
+    void returnToAssetFragment(){
+
+        Looper.prepare();
+        Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
+        Looper.loop();
+
+        //保存成功跳转到资产主界面
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container, new AssetFragment_()).commit();
+    }
+
+    //显示错误信息
+    @UiThread
+    void showErrorInfo(String error) {
+        Looper.prepare();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        Looper.loop();
+
     }
 }

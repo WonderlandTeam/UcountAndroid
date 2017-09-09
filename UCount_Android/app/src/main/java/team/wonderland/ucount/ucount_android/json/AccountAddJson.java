@@ -7,14 +7,23 @@ import java.io.Serializable;
  * Created by CLL on 17/8/18.
  */
 public class AccountAddJson implements Serializable {
-    private String username;//用户名
-    private String cardType;//卡类型
-    private String cardId;//卡号
+    public String username;         // 用户名
+    public String accountType;      // 账户类型
+    public String cardID;        // 账户id
+    public double balance;          // 初始余额（手动账户须填写）
 
-    public AccountAddJson(String username, String cardType, String cardId) {
+
+    public AccountAddJson(String username, String accountType, String cardID, double balance) {
         this.username = username;
-        this.cardType = cardType;
-        this.cardId = cardId;
+        this.accountType = accountType;
+        this.cardID = cardID;
+        this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        String s=username+" "+accountType+" "+cardID+" "+balance;
+        return s;
     }
 
     public String getUsername() {
@@ -25,19 +34,27 @@ public class AccountAddJson implements Serializable {
         this.username = username;
     }
 
-    public String getCardType() {
-        return cardType;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
-    public String getCardId() {
-        return cardId;
+    public String getCardID() {
+        return cardID;
     }
 
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
+    public void setCardID(String cardID) {
+        this.cardID = cardID;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
