@@ -31,9 +31,10 @@
 
         <TextView
             android:id="@+id/plan_budget_review_header_review"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:gravity="end|center_vertical"
+            android:layout_gravity="end"
             android:layout_marginRight="8dp"
             android:text="修改"
         />
@@ -45,7 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
         android:layout_below="@id/plan_budget_review_header"
-        android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
         android:background="@color/main_bg"
         >
@@ -146,9 +146,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="right"
-            android:inputType="numberDecimal"
             android:layout_marginRight="24dp"
-
             />
     </android.support.v7.widget.CardView>
 
