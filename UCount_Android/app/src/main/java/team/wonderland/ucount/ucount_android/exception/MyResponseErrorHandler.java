@@ -19,7 +19,7 @@ public class MyResponseErrorHandler implements ResponseErrorHandler {
 
     @Override
     public boolean hasError(ClientHttpResponse response) throws IOException {
-        return response.getStatusCode() != HttpStatus.OK;
+        return !response.getStatusCode().is2xxSuccessful();
     }
 
     @Override
