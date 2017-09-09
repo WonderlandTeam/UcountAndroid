@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -31,6 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.BudgetAddJson;
 import team.wonderland.ucount.ucount_android.service.BudgetService;
 
@@ -152,12 +154,11 @@ public class PlanBudgetNewFragment extends Fragment {
 
     @Background
     void addBudget(){
-        Map<String,Object> result=budgetService.addBudget(budgetAddJson);
-
-        if(result.containsKey("content")){
+        try {
+            Map<String, Object> result = budgetService.addBudget(budgetAddJson);
             returnToPlanBudgetFragment();
-        }else{
-            showErrorInfo((String) result.get("error"));
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
         }
 
     }
@@ -165,17 +166,21 @@ public class PlanBudgetNewFragment extends Fragment {
     //返回到预算主界面
     @UiThread
     void returnToPlanBudgetFragment(){
+        Looper.prepare();
         Toast.makeText(getContext(),"添加成功",Toast.LENGTH_SHORT).show();
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.plan_fragment_container, new PlanBudgetFragment_())
                 .commit();
+        Looper.loop();
     }
 
     //显示错误信息
     @UiThread
     void showErrorInfo(String error){
+        Looper.prepare();
         Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
         Log.e("addNewBudget:", error);
+        Looper.loop();
     }
 }

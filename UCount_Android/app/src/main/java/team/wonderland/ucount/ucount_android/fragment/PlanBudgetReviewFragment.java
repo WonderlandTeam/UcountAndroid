@@ -161,7 +161,6 @@ public class PlanBudgetReviewFragment extends Fragment {
 
     @UiThread
     void returnToPlanBudgetFragment(){
-        Log.i("tag","run here");
         Looper.prepare();
         Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT).show();
         getFragmentManager().beginTransaction()
