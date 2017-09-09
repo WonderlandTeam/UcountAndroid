@@ -60,10 +60,15 @@ public class PlanBudgetFragment extends Fragment {
     private List<BudgetInfoJson> budgets = new ArrayList<>();
 
     private BudgetInfoJson totalBudgetInfoJson;
+//    private BudgetAddJson totalBudgetAddJson;
+//    private BudgetModifyJson totalBudgetModifyJson;
+
     private double totalnum;
 
     private String username;
     private String date;
+
+
 
     @RestService
     BudgetService budgetService;
@@ -153,6 +158,7 @@ public class PlanBudgetFragment extends Fragment {
                 for(int i=0;i<budgets.size();i++){
                     if(budgets.get(i).getConsumeType().equals("总预算")){
                         totalBudgetInfoJson = budgets.get(i);
+                        budgets.remove(i);
                     }else{
                         totalBudgetInfoJson = null;
                     }
@@ -195,70 +201,69 @@ public class PlanBudgetFragment extends Fragment {
         newBudget.attachToRecyclerView(recyclerView);
 
         if(totalBudgetInfoJson!=null){
-            mPercentageRing.setTargetPercent((int)(totalBudgetInfoJson.getRemain()/totalBudgetInfoJson.getConsume()));
+            mPercentageRing.setTargetPercent((int)(totalBudgetInfoJson.getRemain()/totalBudgetInfoJson.getBudgetMoney()));
             totalTextView.setText(String.valueOf(totalBudgetInfoJson.getRemain()));
         }
-
-        mPercentageRing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                if(totalBudgetInfoJson==null){
-                    AlertDialog.Builder localBuilder = new AlertDialog.Builder(getActivity());
-                    View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
-                    localBuilder.setView(dialog);
-                    TextView tv = (TextView) dialog.findViewById(R.id.asset_new_dialog_tv);
-                    final EditText et_num = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
-                    et_num.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                    tv.setText("请输入金额");
-                    localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
-                        {
-                            totalnum = Double.parseDouble(et_num.getText().toString());
-                            username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
-                            date = dateTextView.getText().toString().replace(",", "-").replace("月", "");
-                            BudgetAddJson budgetAddJson = new BudgetAddJson(username,"总预算",totalnum,date);
-                            newTotalBudget(budgetAddJson);
-                            paramAnonymousDialogInterface.dismiss();
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
-                        {
-                            paramAnonymousDialogInterface.dismiss();
-                        }
-                    }).create().show();
-                }else {
-                    AlertDialog.Builder localBuilder = new AlertDialog.Builder(getActivity());
-                    View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
-                    localBuilder.setView(dialog);
-                    TextView tv = (TextView) dialog.findViewById(R.id.asset_new_dialog_tv);
-                    final EditText et_num = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
-                    et_num.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                    tv.setText("总预算修改为");
-                    localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
-                        {
-                            totalnum = Double.parseDouble(et_num.getText().toString());
-                            BudgetModifyJson budgetModifyJson = new BudgetModifyJson();
-                            reviewTotalBudget(totalBudgetInfoJson.getId(),budgetModifyJson);
-                            paramAnonymousDialogInterface.dismiss();
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
-                        {
-                            paramAnonymousDialogInterface.dismiss();
-                        }
-                    }).create().show();
-                }
-            }
-        });
+//
+//        mPercentageRing.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Bundle bundle = new Bundle();
+//                if(totalBudgetInfoJson==null){
+//                    AlertDialog.Builder localBuilder = new AlertDialog.Builder(getActivity());
+//                    View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
+//                    localBuilder.setView(dialog);
+//                    TextView tv = (TextView) dialog.findViewById(R.id.asset_new_dialog_tv);
+//                    final EditText et_num = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
+//                    et_num.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+//                    tv.setText("请输入金额");
+//                    localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+//                    {
+//                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
+//                        {
+//                            totalnum = Double.parseDouble(et_num.getText().toString());
+//                            username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
+//                            date = dateTextView.getText().toString().replace(",", "-").replace("月", "");
+//                            totalBudgetAddJson = new BudgetAddJson(username,"总预算",totalnum,date);
+//                            new bTask().execute();
+//                            paramAnonymousDialogInterface.dismiss();
+//                        }
+//                    }).setNegativeButton("取消", new DialogInterface.OnClickListener()
+//                    {
+//                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
+//                        {
+//                            paramAnonymousDialogInterface.dismiss();
+//                        }
+//                    }).create().show();
+//                }else {
+//                    AlertDialog.Builder localBuilder = new AlertDialog.Builder(getActivity());
+//                    View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
+//                    localBuilder.setView(dialog);
+//                    TextView tv = (TextView) dialog.findViewById(R.id.asset_new_dialog_tv);
+//                    final EditText et_num = (EditText) dialog.findViewById(R.id.asset_new_dialog_et);
+//                    et_num.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+//                    tv.setText("总预算修改为");
+//                    localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+//                    {
+//                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
+//                        {
+//                            totalnum = Double.parseDouble(et_num.getText().toString());
+//                            BudgetModifyJson budgetModifyJson = new BudgetModifyJson();
+//                            reviewTotalBudget(totalBudgetInfoJson.getId(),budgetModifyJson);
+//                            paramAnonymousDialogInterface.dismiss();
+//                        }
+//                    }).setNegativeButton("取消", new DialogInterface.OnClickListener()
+//                    {
+//                        public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt)
+//                        {
+//                            paramAnonymousDialogInterface.dismiss();
+//                        }
+//                    }).create().show();
+//                }
+//            }
+//        });
     }
 
-    @Background
     void reviewTotalBudget(Long id,BudgetModifyJson budgetModifyJson){
         try {
             Map<String, Object> result = budgetService.updateBudget(id, budgetModifyJson);
@@ -268,7 +273,6 @@ public class PlanBudgetFragment extends Fragment {
         }
     }
 
-    @Background
     void newTotalBudget(BudgetAddJson budgetAddJson){
         try {
             Map<String, Object> result = budgetService.addBudget(budgetAddJson);
@@ -278,8 +282,7 @@ public class PlanBudgetFragment extends Fragment {
         }
     }
 
-    @UiThread
-    void addTotalBudgetSuccess(BudgetInfoJson totalBudgetInfoJson,BudgetModifyJson budgetModifyJson){
+    void reviewTotalBudgetSuccess(BudgetInfoJson totalBudgetInfoJson,BudgetModifyJson budgetModifyJson){
         Looper.prepare();
         double total = budgetModifyJson.getMoney();
         double consum = totalBudgetInfoJson.getConsume();
@@ -288,7 +291,6 @@ public class PlanBudgetFragment extends Fragment {
         Looper.loop();
     }
 
-    @UiThread
     void newTotalBudgetSuccess(BudgetAddJson budgetAddJson){
         Looper.prepare();
         mPercentageRing.setTargetPercent(100);
@@ -297,7 +299,6 @@ public class PlanBudgetFragment extends Fragment {
     }
 
     //显示错误信息
-    @UiThread
     void showErrorInfo(String error) {
         Looper.prepare();
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
