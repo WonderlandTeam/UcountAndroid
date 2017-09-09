@@ -18,15 +18,15 @@ public class PostInfoJson implements Serializable {
     public boolean isSupported;         // 用户是否点赞
 
 
-    public PostInfoJson(String username, Long postId, String title, String content, String time, int supportNum,boolean isCollected,boolean isPraised) {
-        this.username = username;
+    public PostInfoJson(Long postId, String username, String title, String content, String time, int supportNum, boolean isCollected, boolean isSupported) {
         this.postId = postId;
+        this.username = username;
         this.title = title;
         this.content = content;
         this.time = time;
         this.supportNum = supportNum;
-        this.isCollected=isCollected;
-        this.isSupported=isCollected;
+        this.isCollected = isCollected;
+        this.isSupported = isSupported;
     }
 
     @Override

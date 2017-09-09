@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -16,10 +20,12 @@ import team.wonderland.ucount.ucount_android.Adapter.MyPostRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.entity.MyPost;
 import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 import team.wonderland.ucount.ucount_android.service.PostService;
 import uk.co.imallan.jellyrefresh.JellyRefreshLayout;
 import uk.co.imallan.jellyrefresh.PullToRefreshLayout;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -82,15 +88,16 @@ public class MyPostsFragment extends Fragment {
             String json=contents.get("content").toString();
             Log.i("json",json);
             // TODO: 17/9/8 闪退
-//            Gson gson = new Gson();
-//            Type type = new TypeToken<List<PostInfoJson>>() {
-//            }.getType();
-//            List<PostInfoJson> postInfoJsons=gson.fromJson(json,type);
-//            for(PostInfoJson postInfoJson:postInfoJsons){
-//                //缺少评论数
-//                myPosts.add(new MyPost(postInfoJson.getTitle(),postInfoJson.getUsername(),
-//                        postInfoJson.getTime(),postInfoJson.getSupportNum(),postInfoJson.getSupportNum()));
-//            }
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<PostInfoJson>>() {
+            }.getType();
+            List<PostInfoJson> postInfoJsons=gson.fromJson(json,type);
+            System.out.println(postInfoJsons);
+            for(PostInfoJson postInfoJson:postInfoJsons){
+                //缺少评论数
+                myPosts.add(new MyPost(postInfoJson.getTitle(),postInfoJson.getUsername(),
+                        postInfoJson.getTime(),postInfoJson.getSupportNum(),postInfoJson.getSupportNum()));
+            }
 
         } catch (ResponseException e) {
             Log.i("error", e.getMessage());
