@@ -9,20 +9,20 @@ import java.io.Serializable;
 public class AccountAddJson implements Serializable {
     public String username;         // 用户名
     public String accountType;      // 账户类型
-    public String cardID;        // 账户id
+    public String cardId;        // 账户id
     public double balance;          // 初始余额（手动账户须填写）
 
 
     public AccountAddJson(String username, String accountType, String cardID, double balance) {
         this.username = username;
         this.accountType = accountType;
-        this.cardID = cardID;
+        this.cardId = cardID;
         this.balance = balance;
     }
 
     @Override
     public String toString() {
-        String s=username+" "+accountType+" "+cardID+" "+balance;
+        String s=username+" "+accountType+" "+cardId+" "+balance;
         return s;
     }
 
@@ -42,12 +42,12 @@ public class AccountAddJson implements Serializable {
         this.accountType = accountType;
     }
 
-    public String getCardID() {
-        return cardID;
+    public String getCardId() {
+        return cardId;
     }
 
-    public void setCardID(String cardID) {
-        this.cardID = cardID;
+    public void setCardId(String cardID) {
+        this.cardId = cardID;
     }
 
     public double getBalance() {

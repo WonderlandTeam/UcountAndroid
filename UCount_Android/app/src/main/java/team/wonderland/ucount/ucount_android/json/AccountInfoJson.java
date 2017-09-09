@@ -2,12 +2,14 @@ package team.wonderland.ucount.ucount_android.json;
 
 import java.io.Serializable;
 
+import static android.R.attr.id;
+
 /**
  * 用户账户信息
  * Created by CLL on 17/8/18.
  */
 public class AccountInfoJson implements Serializable{
-    public long   id;
+    public long   accountId;
     public double balance; 		//余额
     public String type; 		//类型
     public String username; 	//用户名
@@ -15,8 +17,9 @@ public class AccountInfoJson implements Serializable{
     public double income; 		//账户总收入
     public double expend; 		//账户总支出
 
-    public AccountInfoJson(long id, double balance, String type, String username, String cardID, double income, double expend) {
-        this.id = id;
+
+    public AccountInfoJson(long accountId, double balance, String type, String username, String cardID, double income, double expend) {
+        this.accountId = accountId;
         this.balance = balance;
         this.type = type;
         this.username = username;
@@ -26,16 +29,16 @@ public class AccountInfoJson implements Serializable{
     }
 
     public String toString(){
-        String s=id+" "+balance+" "+type+" "+username+" "+cardID+" "+income+" "+expend+" ";
+        String s=accountId+" "+balance+" "+type+" "+username+" "+cardID+" "+income+" "+expend+" ";
         return s;
     }
 
-    public long getId() {
-        return id;
+    public long getAccountId() {
+        return accountId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
     public double getBalance() {
