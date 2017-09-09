@@ -1,6 +1,7 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import team.wonderland.ucount.ucount_android.activity.MainActivity;
 
@@ -63,8 +64,8 @@ public class IOItem{
     public void setmId(int mId)                    { this.mId = mId; }
     public void setSrcName(String srcName)         { this.srcName = srcName; }
 
-    // TODO:返回图片资源的id
-    public int getSrcId() {
+
+    public int getSrcId(){
         Resources resources = MainActivity.resources;
         return resources.getIdentifier(srcName, "drawable", MainActivity.PACKAGE_NAME);
     }

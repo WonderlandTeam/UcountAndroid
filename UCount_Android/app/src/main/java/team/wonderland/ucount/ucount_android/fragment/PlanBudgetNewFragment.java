@@ -152,7 +152,7 @@ public class PlanBudgetNewFragment extends Fragment {
 
     @Background
     void addBudget(){
-            Map<String,Object> result=budgetService.addBudget(budgetAddJson);
+        Map<String,Object> result=budgetService.addBudget(budgetAddJson);
 
         if(result.containsKey("content")){
             returnToPlanBudgetFragment();

@@ -1,6 +1,7 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.UiThread;
@@ -24,6 +25,7 @@ import com.melnykov.fab.FloatingActionButton;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -50,11 +52,12 @@ import team.wonderland.ucount.ucount_android.util.PercentageRing;
 public class PlanBudgetFragment extends Fragment {
 
     private PercentageRing mPercentageRing;
+    private TextView totalTextView;
     private TextView dateTextView;
     private FloatingActionButton newBudget;
     private RecyclerView recyclerView;
     private PlanBudgetRecyclerAdapter adapter;
-    private List<Budget> budgets;
+    private List<BudgetInfoJson> budgets = new ArrayList<>();
 
     FragmentActivity fragmentActivity;
 
@@ -68,16 +71,25 @@ public class PlanBudgetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.plan_budget_fragment, container, false);
 
+        recyclerView = view.findViewById(R.id.plan_budget_recyclerview);
         newBudget = view.findViewById(R.id.plan_budget_bt_add);
         dateTextView = (TextView) view.findViewById(R.id.plan_budget_date);
+        totalTextView = (TextView)view.findViewById(R.id.plan_budget_textview_leftmum);
         mPercentageRing = (PercentageRing) view.findViewById(R.id.plan_budget_circle);
+
+
         //设置目标百分比为30
         //TODO:(余额占预算的百分比,从逻辑层获得预算余额) BudgetService.getBudget
-        mPercentageRing.setTargetPercent(30);
+        mPercentageRing.setTargetPercent(0);
+        totalTextView.setText("点击设置");
         mPercentageRing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.plan_fragment_container, new PlanBudgetNewFragment_())
+                        .commit();
             }
         });
 
@@ -94,6 +106,8 @@ public class PlanBudgetFragment extends Fragment {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
                         dateTextView.setText((date.getYear() + 1900) + "," + (date.getMonth() + 1) + "月");
+
+                        new aTask().execute();
                     }
                 })
                         .setType(new boolean[]{true, true, false, false, false, false})
@@ -121,67 +135,67 @@ public class PlanBudgetFragment extends Fragment {
             }
         });
 
-        //TODO 如果修改了预算时间，需要将date的值修改，然后调用initBudget（）方法
-        //获取时间
-        date = dateTextView.getText().toString();
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
         fragmentActivity = getActivity();
-        initData();
 
-
-        recyclerView = view.findViewById(R.id.plan_budget_recyclerview);
-        //设置布局管理器 , 将布局设置成纵向
-        LinearLayoutManager linerLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(linerLayoutManager);
-        //设置适配器
-        adapter = new PlanBudgetRecyclerAdapter(budgets, getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new MyItemDecoration());
-
-//        adapter.setOnItemClickListener(new PlanBudgetRecyclerAdapter.OnItemClickListener(){
-//            @Override
-//            public void onItemClick(View view , int position){
-//                getFragmentManager().beginTransaction()
-//                        .addToBackStack(null)  //将当前fragment加入到返回栈中
-//                        .replace(R.id.fragment_container, new AssetCashDetailFragment()).commit();
-//            }
-//        });
-
-        newBudget.attachToRecyclerView(recyclerView);
+        //调用后台数据并且调用完成后刷新界面
+        new aTask().execute();
 
         return view;
     }
 
     public void initData() {
         initBudget();//获得所选月份的预算
-
-        budgets = new ArrayList<>();
-        budgets.add(new Budget("type_cost_1", "餐饮", 1000));
-        budgets.add(new Budget("type_cost_2", "日用", 1000));
-        budgets.add(new Budget("type_cost_4", "手机通讯", 1000));
     }
 
     /*
      *获得用户某个月份的所有预算
      */
-    @Background
     void initBudget() {
-        date = date.replace(",", "-").replace("月", "");
+        budgets = new ArrayList<>();
+        date = dateTextView.getText().toString().replace(",", "-").replace("月", "");
         try {
             Map<String, Object> result = budgetService.getBudgetsByUser(username, date);
             String content = result.get("content").toString();
             Gson gson = new Gson();
             Type type = new TypeToken<List<BudgetInfoJson>>() {
             }.getType();
-            List<BudgetInfoJson> budgetInfoJsons = gson.fromJson(content, type);
+            budgets = gson.fromJson(content, type);
 
-            //TODO 处理成Budget类型
+            if(budgets==null){
+                budgets = new ArrayList<BudgetInfoJson>();
+            }
 
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
     }
 
+    void initRecyclerView(){
+        Log.i("tag","测试");
+        Log.i("tag",budgets.toString());
+
+        //设置适配器
+        adapter = new PlanBudgetRecyclerAdapter(budgets, getActivity());
+        recyclerView.setAdapter(adapter);
+        //设置布局管理器 , 将布局设置成纵向
+        LinearLayoutManager linerLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linerLayoutManager);
+
+        recyclerView.addItemDecoration(new MyItemDecoration());
+
+        adapter.setOnItemClickListener(new PlanBudgetRecyclerAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view , int position){
+                getFragmentManager().beginTransaction()
+                        .addToBackStack(null)  //将当前fragment加入到返回栈中
+                        .replace(R.id.plan_fragment_container, new PlanBudgetReviewFragment()).commit();
+            }
+        });
+
+
+        newBudget.attachToRecyclerView(recyclerView);
+    }
 
     //显示错误信息
     @UiThread
@@ -190,5 +204,26 @@ public class PlanBudgetFragment extends Fragment {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
         Looper.loop();
 
+    }
+
+    private class aTask extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected void onPostExecute(Void o) {
+            super.onPostExecute(o);
+            initRecyclerView();
+
+            Log.i("tag", "调用后");
+            Log.i("tag",budgets.toString());
+
+
+            adapter.notifyDataSetChanged();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            initBudget();
+            Log.i("tag","调用后台数据");
+            return null;
+        }
     }
 }

@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.fragment.GlobalVariables;
+import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
 import team.wonderland.ucount.ucount_android.util.Budget;
 
 /**
@@ -20,11 +22,11 @@ import team.wonderland.ucount.ucount_android.util.Budget;
 public class PlanBudgetRecyclerAdapter extends RecyclerView.Adapter<PlanBudgetRecyclerAdapter.PlanBudgetViewHolder>
         implements View.OnClickListener{
 
-    private List<Budget> budgets;
+    private List<BudgetInfoJson> budgets;
     private Context context;
     private OnItemClickListener mOnItemClickListener = null;
 
-    public PlanBudgetRecyclerAdapter(List<Budget> budgets,Context context) {
+    public PlanBudgetRecyclerAdapter(List<BudgetInfoJson> budgets,Context context) {
         this.budgets = budgets;
         this.context=context;
     }
@@ -40,9 +42,9 @@ public class PlanBudgetRecyclerAdapter extends RecyclerView.Adapter<PlanBudgetRe
 
     @Override
     public void onBindViewHolder(PlanBudgetRecyclerAdapter.PlanBudgetViewHolder holder, int position) {
-        PlanBudgetViewHolder.icon.setImageResource(budgets.get(position).getSrcId());
-        PlanBudgetViewHolder.typename.setText(budgets.get(position).getTypename());
-        PlanBudgetViewHolder.num.setText(String.valueOf(budgets.get(position).getNum()));
+        PlanBudgetViewHolder.icon.setImageResource(GlobalVariables.getSrcID(budgets.get(position).getConsumeType()));
+        PlanBudgetViewHolder.typename.setText(budgets.get(position).getConsumeType());
+        PlanBudgetViewHolder.num.setText(String.valueOf(budgets.get(position).getRemain()));
 
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);

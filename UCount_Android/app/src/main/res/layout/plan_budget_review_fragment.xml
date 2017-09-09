@@ -7,14 +7,14 @@
     >
 
     <android.support.v7.widget.CardView
-        android:id="@+id/plan_budget_new_header"
+        android:id="@+id/plan_budget_review_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         >
 
         <ImageView
-            android:id="@+id/plan_budget_new_back"
+            android:id="@+id/plan_budget_review_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
@@ -22,19 +22,29 @@
             android:src="@mipmap/ic_back3" />
 
         <TextView
+            android:id="@+id/plan_budget_review_header_title"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center"
-            android:text="新建预算"
+            android:text="查看预算"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/plan_budget_review_header_review"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="end|center_vertical"
+            android:layout_marginRight="8dp"
+            android:text="修改"
+        />
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/plan_budget_new_cardview_type"
+        android:id="@+id/plan_budget_review_cardview_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:layout_below="@id/plan_budget_new_header"
+        android:layout_below="@id/plan_budget_review_header"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
         android:background="@color/main_bg"
@@ -54,7 +64,7 @@
                 />
 
             <ImageView
-                android:id="@+id/plan_budget_new_img_type"
+                android:id="@+id/plan_budget_review_img_type"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentRight="true"
@@ -65,10 +75,10 @@
 
 
             <TextView
-                android:id="@+id/plan_budget_new_textview_type"
+                android:id="@+id/plan_budget_review_textview_type"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_toLeftOf="@id/plan_budget_new_img_type"
+                android:layout_toLeftOf="@id/plan_budget_review_img_type"
                 android:layout_marginRight="8dp"
                 android:gravity="center"
                 android:layout_centerVertical="true"
@@ -80,11 +90,11 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/plan_budget_new_cardview_num"
+        android:id="@+id/plan_budget_review_cardview_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:layout_below="@id/plan_budget_new_cardview_type"
+        android:layout_below="@id/plan_budget_review_cardview_type"
         android:foreground="?attr/selectableItemBackground"
         android:background="@color/main_bg"
         >
@@ -93,13 +103,45 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:text="预算金额"
+            android:text="总预算"
             android:textSize="16sp"
             android:paddingLeft="8dp"
             />
 
         <EditText
-            android:id="@+id/plan_budget_new_edittext"
+            android:id="@+id/plan_budget_review_edittext_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:inputType="numberDecimal"
+            android:layout_marginRight="24dp"
+
+            />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/plan_budget_review_cardview_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:layout_below="@id/plan_budget_review_cardview_total"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@color/main_bg"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="剩余预算"
+            android:textSize="16sp"
+            android:paddingLeft="8dp"
+            />
+
+        <EditText
+            android:id="@+id/plan_budget_review_edittext_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -111,11 +153,11 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/plan_budget_new_cardview_date"
+        android:id="@+id/plan_budget_review_cardview_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:layout_below="@id/plan_budget_new_cardview_num"
+        android:layout_below="@id/plan_budget_review_cardview_num"
         android:foreground="?attr/selectableItemBackground"
         android:background="@color/main_bg"
         >
@@ -134,7 +176,7 @@
                 />
 
             <ImageView
-                android:id="@+id/plan_budget_new_img_date"
+                android:id="@+id/plan_budget_review_img_date"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentRight="true"
@@ -144,13 +186,13 @@
                 />
 
             <TextView
-                android:id="@+id/plan_budget_new_tv_date"
+                android:id="@+id/plan_budget_review_tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_gravity="right"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@id/plan_budget_new_img_date"
+                android:layout_toLeftOf="@id/plan_budget_review_img_date"
                 android:layout_centerVertical="true"
                 />
 
@@ -159,7 +201,7 @@
     </android.support.v7.widget.CardView>
 
     <at.markushi.ui.CircleButton
-        android:id="@+id/plan_budget_new_bt_save"
+        android:id="@+id/plan_budget_review_bt_save"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@mipmap/ic_tick"
