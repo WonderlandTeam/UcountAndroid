@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.json.TaskInfoJson;
 import team.wonderland.ucount.ucount_android.util.Task;
 
 /**
@@ -20,11 +21,11 @@ public class PlanTaskRecyclerAdapter extends RecyclerView.Adapter<PlanTaskRecycl
         implements View.OnClickListener{
 
 
-    private List<Task> tasks;
+    private List<TaskInfoJson> tasks;
     private Context context;
     private PlanTaskRecyclerAdapter.OnItemClickListener mOnItemClickListener = null;
 
-    public PlanTaskRecyclerAdapter(List<Task> tasks,Context context) {
+    public PlanTaskRecyclerAdapter(List<TaskInfoJson> tasks,Context context) {
         this.tasks = tasks;
         this.context=context;
     }
@@ -39,7 +40,7 @@ public class PlanTaskRecyclerAdapter extends RecyclerView.Adapter<PlanTaskRecycl
 
     @Override
     public void onBindViewHolder(PlanTaskRecyclerAdapter.PlanTaskViewHolder holder, int position) {
-        PlanTaskViewHolder.title.setText(tasks.get(position).getName());
+        PlanTaskViewHolder.title.setText(tasks.get(position).getTaskContent());
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);
     }

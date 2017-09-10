@@ -44,7 +44,7 @@ public class PlanFragment extends Fragment {
         mViewPager = (ViewPager) view.findViewById(R.id.plan_vp);
         mTopNavigationTabStrip = (NavigationTabStrip) view.findViewById(R.id.plan_nts_top);
         budget = new PlanBudgetFragment_();
-        task = new PlanTaskFragment();
+        task = new PlanTaskFragment_();
     }
 
     private void setUI(LayoutInflater inflater, final View view) {
