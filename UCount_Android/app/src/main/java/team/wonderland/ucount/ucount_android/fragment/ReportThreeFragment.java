@@ -87,16 +87,16 @@ public class ReportThreeFragment extends Fragment {
 
         //get data from server
         try {
-            Map<String,Object> contents=statementService.getCashFlowsStatement(userName,"2017-6-1","2017-6-2");
-            String json=contents.get("content").toString();
-            Log.i("json",json);
-            // TODO: 17/9/9 转json闪退
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<CashFlowJson>>() {
-            }.getType();
-            List<CashFlowJson> cashFlowJsons=gson.fromJson(json, type);
-            Log.i("jsonSize",""+cashFlowJsons.size());
-            if(cashFlowJsons!=null) {
+            List<CashFlowJson> cashFlowJsons = statementService.getCashFlowsStatement(userName,"2017-06-01","2017-06-02");
+//            String json=contents.get("content").toString();
+//            Log.i("json",json);
+//            // TODO: 17/9/9 转json闪退
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<List<CashFlowJson>>() {
+//            }.getType();
+//            List<CashFlowJson> cashFlowJsons=gson.fromJson(json, type);
+//            Log.i("jsonSize","" + cashFlowJsons.size());
+            if(cashFlowJsons != null) {
                 for (CashFlowJson cashFlowJson : cashFlowJsons) {
                     moneyFlows.add(new MoneyFlow(isIn(cashFlowJson.getBillType()),cashFlowJson.getMoney(),cashFlowJson.getAccountType(),
                             cashFlowJson.getTime(),getIconID(cashFlowJson.getBillType())));

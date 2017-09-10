@@ -73,18 +73,18 @@ public class MyPostsFragment extends Fragment {
 //        myPosts.add(new MyPost("理财需要关注什么", "Chen", "10:20", 10, 5));
 //        myPosts.add(new MyPost("大学生的消费观", "Wang", "11:11", 6, 4));
         try {
-            Map<String, Object> contents = postService.getPostsSharedByUser(userName);
-            String json = contents.get("content").toString();
-            Log.i("json", json);
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<PostInfoJson>>() {
-            }.getType();
-            List<PostInfoJson> postInfoJsons = gson.fromJson(json, type);
-            Log.i("json", "" + postInfoJsons.size());
-            for (PostInfoJson postInfoJson : postInfoJsons) {
+            List<PostInfoJson> posts = postService.getPostsSharedByUser(userName);
+//            String json = contents.get("content").toString();
+//            Log.i("json", json);
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<List<PostInfoJson>>() {
+//            }.getType();
+//            List<PostInfoJson> postInfoJsons = gson.fromJson(json, type);
+//            Log.i("json", "" + postInfoJsons.size());
+            for (PostInfoJson post : posts) {
                 //缺少评论数
-                myPosts.add(new MyPost(postInfoJson.getTitle(), postInfoJson.getUsername(),
-                        postInfoJson.getTime(), postInfoJson.getSupportNum(), postInfoJson.getSupportNum()));
+                myPosts.add(new MyPost(post.getTitle(), post.getUsername(),
+                        post.getTime(), post.getSupportNum(), post.getSupportNum()));
             }
 
         } catch (ResponseException e) {

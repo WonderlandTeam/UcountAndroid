@@ -83,20 +83,19 @@ public class MyCollectionFragment extends Fragment {
         posts.add(new MyPost("大学生的消费观","Wang","11:11",6,4));
 
         try {
-            Map<String, Object> contents = postService.getPostsCollectedByUser(userName);
-            if(contents!=null) {
-                String json = contents.get("content").toString();
-                Log.i("json", json);
-                Gson gson = new Gson();
-                Type type = new TypeToken<List<PostInfoJson>>() {
-                }.getType();
-                List<PostInfoJson> postInfoJsons = gson.fromJson(json, type);
-                for (PostInfoJson postInfoJson : postInfoJsons) {
-                    //缺少评论数
-                    posts.add(new MyPost(postInfoJson.getTitle(), postInfoJson.getUsername(),
-                            postInfoJson.getTime(), postInfoJson.getSupportNum(), postInfoJson.getSupportNum()));
-                }
-            }
+            List<PostInfoJson> posts = postService.getPostsCollectedByUser(userName);
+//            if(posts != null) {
+//                String json = contents.get("content").toString();
+//                Log.i("json", json);
+//                Gson gson = new Gson();
+//                Type type = new TypeToken<List<PostInfoJson>>() {
+//                }.getType();
+//                List<PostInfoJson> postInfoJsons = gson.fromJson(json, type);
+//                for (PostInfoJson postInfoJson : posts) {
+//                    //缺少评论数
+//                    posts.add(new MyPost(postInfoJson.getTitle(), postInfoJson.getUsername(),
+//                            postInfoJson.getTime(), postInfoJson.getSupportNum(), postInfoJson.getSupportNum()));
+//                }
         } catch (ResponseException e) {
             Log.i("error", e.getMessage());
         }

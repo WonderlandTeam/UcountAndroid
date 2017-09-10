@@ -92,12 +92,12 @@ public class AssetFragment extends Fragment {
     @Background
     void initAsset() {
         try {
-            Map<String, Object> result = accountService.getAccountsByUser(username);
-            String content = result.get("content").toString();
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<AccountInfoJson>>() {
-            }.getType();
-            List<AccountInfoJson> accounts = gson.fromJson(content, type);
+            List<AccountInfoJson> accounts = accountService.getAccountsByUser(username);
+//            String content = result.get("content").toString();
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<List<AccountInfoJson>>() {
+//            }.getType();
+//            List<AccountInfoJson> accounts = gson.fromJson(content, type);
 
             Log.i("tag",accounts.toString());
             Log.i("tag","加载测试");

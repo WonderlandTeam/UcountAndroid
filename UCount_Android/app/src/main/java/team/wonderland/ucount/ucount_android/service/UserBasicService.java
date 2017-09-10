@@ -10,6 +10,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
+import team.wonderland.ucount.ucount_android.json.UserInfoJson;
 import team.wonderland.ucount.ucount_android.json.UserSignUpJson;
 import team.wonderland.ucount.ucount_android.util.RestAPI;
 
@@ -29,12 +30,12 @@ public interface UserBasicService {
      * @return
      */
     @Post("/users")
-    Map<String, Object> signUp(@Body UserSignUpJson userSignUpJson);
+    String signUp(@Body UserSignUpJson userSignUpJson);
 
     /**
      * 用户登录
      * @return
      */
     @Post("/users/login")
-    Map<String, Object> login(@Part String username, @Part String password);
+    UserInfoJson login(@Part String username, @Part String password);
 }

@@ -51,11 +51,11 @@ public class ReportTwoFragment extends Fragment {
     @Background
     void getData(){
         try {
-            Map<String, Object> contents = statementService.getBalanceSheet(userName,"2016-10-1","2017-7-1");
-            String json = contents.get("content").toString();
-            Log.i("json", json);
-            // TODO: 17/9/9 转json闪退
-            balanceSheetJson = new Gson().fromJson(json, BalanceSheetJson.class);
+            balanceSheetJson = statementService.getBalanceSheet(userName,"2016-10-1","2017-7-1");
+//            String json = contents.get("content").toString();
+//            Log.i("json", json);
+//            // TODO: 17/9/9 转json闪退
+//            balanceSheetJson = new Gson().fromJson(json, BalanceSheetJson.class);
             if (balanceSheetJson == null) {
                 Log.i("balanceSheetJson", "null");
             }

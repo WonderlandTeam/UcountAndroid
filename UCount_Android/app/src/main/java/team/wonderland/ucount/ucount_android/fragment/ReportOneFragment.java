@@ -187,12 +187,12 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     void initData() {
         try {
-            Map<String, Object> contents = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())
+            IncomeStatementJson contents = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())
                     , removeAllSpace(endDate.getText().toString()));
-            String json = contents.get("content").toString();
-            Log.i("json", json);
-            // TODO: 17/9/9 转json闪退
-            incomeStatementJson=new Gson().fromJson(json,IncomeStatementJson.class);
+//            String json = contents.get("content").toString();
+//            Log.i("json", json);
+//            // TODO: 17/9/9 转json闪退
+//            incomeStatementJson=new Gson().fromJson(json,IncomeStatementJson.class);
             if(incomeStatementJson==null){
                 Log.i("incomeStatementJson","null");
             }

@@ -155,7 +155,7 @@ public class PlanBudgetNewFragment extends Fragment {
     @Background
     void addBudget(){
         try {
-            Map<String, Object> result = budgetService.addBudget(budgetAddJson);
+            Long result = budgetService.addBudget(budgetAddJson);
             returnToPlanBudgetFragment();
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());

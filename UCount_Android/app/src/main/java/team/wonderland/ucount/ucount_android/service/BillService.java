@@ -25,7 +25,7 @@ public interface BillService {
      * @return                  账目信息vo
      */
     @Get("/accounts/{account_id}/bills/{bill_id}")
-    public BillInfoJson getBill(@Path Long account_id, @Path Long bill_id);
+    BillInfoJson getBill(@Path Long account_id, @Path Long bill_id);
 
     /**
      * 获取账户所有账目信息
@@ -34,7 +34,7 @@ public interface BillService {
      * @return                  账目列表
      */
     @Get("/accounts/{account_id}/bills?page={page}&size={size}&sort={sort},{direct}")
-    public List<BillInfoJson> getBillsByAccount(@Path Long account_id,@Path int page,@Path int size,@Path String sort,@Path String direct);
+    List<BillInfoJson> getBillsByAccount(@Path Long account_id,@Path int page,@Path int size,@Path String sort,@Path String direct);
 
     /**
      * 获取用户所有账目信息
@@ -43,7 +43,7 @@ public interface BillService {
      * @return                  账目列表
      */
     @Get("/users/{username}/bills?page={page}&size={size}&sort={sort},{direct}")
-    public List<BillInfoJson> getBillsByUser(@Path String username,@Path int page,@Path int size,@Path String sort,@Path String direct);
+    List<BillInfoJson> getBillsByUser(@Path String username,@Path int page,@Path int size,@Path String sort,@Path String direct);
 
     /**
      * 用户手动记账
@@ -52,7 +52,7 @@ public interface BillService {
      * @return                  新增账目id
      */
     @Post("/accounts/{account_id}/bills/")
-    public Map<String, Object> addBillManually(@Path Long account_id, @Body BillAddJson billAddJson);
+    List<BillInfoJson> addBillManually(@Path Long account_id, @Body BillAddJson billAddJson);
 
     /**
      * 删除单条账目信息
@@ -60,5 +60,5 @@ public interface BillService {
      * @param bill_id            账目id
      */
     @Delete("/accounts/{account_id}/bills/{bill_id}")
-    public Map<String, Object> deleteBill(@Path Long account_id, @Path Long bill_id);
+    String deleteBill(@Path Long account_id, @Path Long bill_id);
 }

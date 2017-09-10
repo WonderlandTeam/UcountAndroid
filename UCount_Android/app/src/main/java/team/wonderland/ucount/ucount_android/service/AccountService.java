@@ -24,7 +24,7 @@ public interface AccountService {
      * @return
      */
     @Get("/accounts/{account_id}")
-    public Map<String,Object> getAccountByID(@Path Long account_id);
+    AccountInfoJson getAccountByID(@Path Long account_id);
 
     /**
      * 获取用户所有账户信息
@@ -32,7 +32,7 @@ public interface AccountService {
      * @return
      */
     @Get("/accounts?username={username}")
-    public Map<String,Object> getAccountsByUser(@Path String username);
+    List<AccountInfoJson> getAccountsByUser(@Path String username);
 
     /**
      * 添加账户信息
@@ -40,12 +40,12 @@ public interface AccountService {
      * @return account_id
      */
     @Post("/accounts")
-    public Map<String, Object> addAccount(@Body AccountAddJson accountAddJson);
+    Long addAccount(@Body AccountAddJson accountAddJson);
 
     /**
      * 删除账户信息
      * @param account_id
      */
     @Delete("/accounts/{account_id}")
-    public Map<String, Object> deleteAccount(@Path Long account_id);
+    String deleteAccount(@Path Long account_id);
 }

@@ -7,8 +7,12 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
+import team.wonderland.ucount.ucount_android.json.BalanceSheetJson;
+import team.wonderland.ucount.ucount_android.json.CashFlowJson;
+import team.wonderland.ucount.ucount_android.json.IncomeStatementJson;
 import team.wonderland.ucount.ucount_android.util.RestAPI;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,10 +28,10 @@ public interface StatementService {
      * @param endDate
      * @return
      */
-    @Get("/statements//balanceSheet?username={username}&beginDate={beginDate}&endDate={endDate}")
-    public Map<String, Object> getBalanceSheet(@Path String username,
-                                               @Path String beginDate,
-                                               @Path String endDate);
+    @Get("/statements/balanceSheet?username={username}&beginDate={beginDate}&endDate={endDate}")
+    BalanceSheetJson getBalanceSheet(@Path String username,
+                                     @Path String beginDate,
+                                     @Path String endDate);
 
     /**
      * 获取收支储蓄表（利润表）
@@ -37,9 +41,9 @@ public interface StatementService {
      * @return
      */
     @Get("/statements/incomeStatement?username={username}&beginDate={beginDate}&endDate={endDate}")
-    public Map<String, Object> getIncomeStatement(@Path String username,
-                                                  @Path String beginDate,
-                                                  @Path String endDate);
+    IncomeStatementJson getIncomeStatement(@Path String username,
+                                           @Path String beginDate,
+                                           @Path String endDate);
 
     /**
      * 获取现金流量表
@@ -49,7 +53,7 @@ public interface StatementService {
      * @return
      */
     @Get("/statements/cashFlows?username={username}&beginDate={beginDate}&endDate={endDate}")
-    public Map<String, Object> getCashFlowsStatement(@Path String username,
-                                                     @Path String beginDate,
-                                                     @Path String endDate);
+    List<CashFlowJson> getCashFlowsStatement(@Path String username,
+                                             @Path String beginDate,
+                                             @Path String endDate);
 }

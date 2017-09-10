@@ -145,7 +145,7 @@ public class PlanBudgetReviewFragment extends Fragment {
             BudgetModifyJson budgetModifyJson = new BudgetModifyJson(total);
             Log.i("tag", budgetInfoJson.getId().toString());
             Log.i("tag", String.valueOf(budgetModifyJson.getMoney()));
-            Map<String, Object> result = budgetService.updateBudget(budgetInfoJson.getId(), budgetModifyJson);
+            String message = budgetService.updateBudget(budgetInfoJson.getId(), budgetModifyJson);
             returnToPlanBudgetFragment();
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());

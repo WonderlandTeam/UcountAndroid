@@ -141,12 +141,12 @@ public class PlanBudgetFragment extends Fragment {
         budgets = new ArrayList<>();
         date = dateTextView.getText().toString().replace(",", "-").replace("月", "");
         try {
-            Map<String, Object> result = budgetService.getBudgetsByUser(username, date);
-            String content = result.get("content").toString();
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<BudgetInfoJson>>() {
-            }.getType();
-            budgets = gson.fromJson(content, type);
+            budgets = budgetService.getBudgetsByUser(username, date);
+//            String content = result.get("content").toString();
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<List<BudgetInfoJson>>() {
+//            }.getType();
+//            budgets = gson.fromJson(content, type);
 
             Log.i("tag","测试");
             Log.i("tag",budgets.toString());
@@ -280,7 +280,7 @@ public class PlanBudgetFragment extends Fragment {
     @Background
     void reviewTotalBudget(long id, BudgetModifyJson totalBudgetModifyJson){
         try {
-            Map<String, Object> result = budgetService.updateBudget(id, totalBudgetModifyJson);
+            String result = budgetService.updateBudget(id, totalBudgetModifyJson);
             reviewTotalBudgetSuccess(totalBudgetModifyJson);
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
@@ -290,7 +290,7 @@ public class PlanBudgetFragment extends Fragment {
     @Background
     void newTotalBudget(BudgetAddJson totalBudgetAddJson){
         try {
-            Map<String, Object> result = budgetService.addBudget(totalBudgetAddJson);
+            Long budgetId = budgetService.addBudget(totalBudgetAddJson);
             newTotalBudgetSuccess();
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
@@ -338,7 +338,7 @@ public class PlanBudgetFragment extends Fragment {
     @Background
     void deleteItem(int pos){
         try {
-            Map<String, Object> result = budgetService.deleteBudget(budgets.get(pos).getId());
+            String result = budgetService.deleteBudget(budgets.get(pos).getId());
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
         }

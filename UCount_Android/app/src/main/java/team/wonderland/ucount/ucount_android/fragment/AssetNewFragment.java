@@ -170,8 +170,7 @@ public class AssetNewFragment extends Fragment{
     @Background
     void addAccount(){
         try {
-            Map<String,Object> result=accountService.addAccount(accountAddJson);
-//            System.out.println(result.get("content"));
+            Long accountId = accountService.addAccount(accountAddJson);
             returnToAssetFragment();
         }catch (ResponseException e){
             showErrorInfo(e.toString());

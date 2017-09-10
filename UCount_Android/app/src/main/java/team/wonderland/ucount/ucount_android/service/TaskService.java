@@ -6,9 +6,11 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
 import team.wonderland.ucount.ucount_android.json.TaskAddJson;
+import team.wonderland.ucount.ucount_android.json.TaskInfoJson;
 import team.wonderland.ucount.ucount_android.json.TaskModifyJson;
 import team.wonderland.ucount.ucount_android.util.RestAPI;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +25,7 @@ public interface TaskService {
      * @return
      */
     @Get("/tasks/{taskId}")
-    public Map<String, Object> getTask(@Path Long taskId);
+    TaskInfoJson getTask(@Path Long taskId);
 
     /**
      * 获取用户不同状态的攒钱计划信息
@@ -32,7 +34,7 @@ public interface TaskService {
      * @return
      */
     @Get("/tasks/states?username={username}&taskState={taskState}")
-    public Map<String, Object> getTasksByState(@Path String username,@Path String taskState);
+    List<TaskInfoJson> getTasksByState(@Path String username, @Path String taskState);
 
     /**
      *获取用户所有攒钱计划信息
@@ -40,7 +42,7 @@ public interface TaskService {
      * @return
      */
     @Get("/tasks?username={username}")
-    public Map<String, Object> getTasksByUser(@Path String username);
+    List<TaskInfoJson> getTasksByUser(@Path String username);
 
     /**
      * 用户添加攒钱计划
@@ -48,7 +50,7 @@ public interface TaskService {
      * @return
      */
     @Post("/tasks/")
-    public Map<String, Object> addTask(@Body TaskAddJson taskAddJson);
+    Long addTask(@Body TaskAddJson taskAddJson);
 
     /**
      * 更新攒钱计划
@@ -57,7 +59,7 @@ public interface TaskService {
      * @return
      */
     @Post("/tasks/{taskId}/")
-    public Map<String, Object> updateTask(@Path Long taskId,@Body TaskModifyJson taskModifyJson);
+    String updateTask(@Path Long taskId,@Body TaskModifyJson taskModifyJson);
 
     /**
      * 删除攒钱计划
@@ -65,5 +67,5 @@ public interface TaskService {
      * @return
      */
     @Delete("/tasks/{taskId}")
-    public Map<String, Object> deleteTask(@Path Long taskId);
+    String deleteTask(@Path Long taskId);
 }

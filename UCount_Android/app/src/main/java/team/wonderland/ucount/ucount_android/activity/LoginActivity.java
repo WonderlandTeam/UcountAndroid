@@ -19,6 +19,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.UserInfoJson;
 import team.wonderland.ucount.ucount_android.service.UserBasicService;
 
 import java.util.Map;
@@ -102,19 +103,19 @@ public class LoginActivity extends AppCompatActivity {
     @Background
     void loginAsync() {
         try {
-            Map<String, Object> result = userBasicService.login(usernameValue, passwordValue);
-            loginSuccess();
+            UserInfoJson userInfo = userBasicService.login(usernameValue, passwordValue);
+            loginSuccess(userInfo);
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
     }
 
     @UiThread
-    void loginSuccess() {
-        SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=preferences.edit();
-        editor.putString("USERNAME", usernameValue);
-        editor.putString("PASSWORD", passwordValue);
+    void loginSuccess(UserInfoJson userInfo) {
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("USERNAME", userInfo.userName);
+        editor.putString("PASSWORD", userInfo.password);
         editor.putBoolean("HAVELOGINED", true);
         editor.commit();
 

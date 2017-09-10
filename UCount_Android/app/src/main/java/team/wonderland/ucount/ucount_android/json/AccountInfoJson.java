@@ -17,6 +17,8 @@ public class AccountInfoJson implements Serializable{
     public double income; 		//账户总收入
     public double expend; 		//账户总支出
 
+    public AccountInfoJson() {
+    }
 
     public AccountInfoJson(long accountId, double balance, String type, String username, String cardID, double income, double expend) {
         this.accountId = accountId;

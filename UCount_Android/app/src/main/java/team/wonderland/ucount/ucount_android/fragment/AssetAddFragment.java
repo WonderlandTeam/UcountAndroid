@@ -26,11 +26,13 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.BillAddJson;
+import team.wonderland.ucount.ucount_android.json.BillInfoJson;
 import team.wonderland.ucount.ucount_android.service.BillService;
 
 /**
@@ -304,7 +306,7 @@ public class AssetAddFragment extends Fragment{
     @Background
     void addBillAsync(){
         try {
-            Map<String,Object> result=billService.addBillManually(accountID,billAddJson);
+            List<BillInfoJson> bills = billService.addBillManually(accountID, billAddJson);
 //            System.out.println(result.get("content"));
             returnToFragment();
         }catch (ResponseException e){
