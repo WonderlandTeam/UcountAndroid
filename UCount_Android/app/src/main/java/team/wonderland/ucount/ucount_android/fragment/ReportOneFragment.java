@@ -278,11 +278,11 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         pieChartView.setAlpha(0.9f);//设置透明度
         pieChartView.setCircleFillRatio(1f);//设置饼图大小
 
-        pd.setValueLabelsTextColor(Color.BLACK);//设置显示值的字体颜色
-        pd.setValueLabelTextSize(12);
+        pd.setValueLabelsTextColor(Color.WHITE);//设置显示值的字体颜色
+        pd.setValueLabelTextSize(15);
         pd.setHasLabels(true);//显示label
         pd.setHasLabelsOnlyForSelected(false);//不用点击显示占的百分比
-        pd.setHasLabelsOutside(true);//占的百分比是否显示在饼图外面
+        pd.setHasLabelsOutside(false);//占的百分比是否显示在饼图外面
         pd.setHasCenterCircle(true);//是否是环形显示
         pd.setValueLabelBackgroundColor(Color.TRANSPARENT);
         pd.setCenterCircleColor(Color.TRANSPARENT);//设置环形中间的颜色
@@ -322,7 +322,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             totalIncome = totalIncome + incomes.get(i);
         }
         for (int i = 0; i < incomeLabels.size(); i++) {
-            if(!incomes.get(i).equals(0f)) {
+            if(!incomes.get(i).equals(0f)||totalIncome>0||incomes.get(i) * 100 / totalIncome>0.1f) {
                 sliceList.add(new SliceValue(incomes.get(i), Color.parseColor(colors[i])).setLabel(incomeLabels.get(i)));
                 //初始化条目数据
                 incomeItems.add(new ReportItem(icons[i], incomeLabels.get(i) + "收入",
@@ -375,7 +375,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             totalOutput = totalOutput + outputs.get(i);
         }
         for (int i = 0; i < outputLabels.size(); i++) {
-            if(!outputs.get(i).equals(0f)) {
+            if(!outputs.get(i).equals(0f)||totalOutput>0||outputs.get(i) * 100 / totalOutput>0.1f) {
                 sliceList.add(new SliceValue(outputs.get(i), Color.parseColor(colors[i])).setLabel(outputLabels.get(i)));
                 outputItems.add(new ReportItem(icons[i], outputLabels.get(i) + "支出",
                         String.format("%.1f", outputs.get(i) * 100 / totalOutput), outputs.get(i)));
