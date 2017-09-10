@@ -78,7 +78,7 @@ public class PlanTaskFragment extends Fragment {
     public void initData(){
         try {
             tasks = taskService.getTasksByUser(username);
-
+            initRecyclerView();
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
         }

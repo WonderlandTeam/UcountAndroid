@@ -3,6 +3,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.Date;
 
 import at.markushi.ui.CircleButton;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.TaskAddJson;
 import team.wonderland.ucount.ucount_android.service.TaskService;
 import team.wonderland.ucount.ucount_android.util.TimePickerDialog;
@@ -49,6 +51,8 @@ public class PlanTaskNewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.plan_task_new_fragment, container, false);
 
+        username = getActivity().getSharedPreferences("user",0).getString("USERNAME","");
+
         et_content = view.findViewById(R.id.plan_task_new_edittext_name);
         tv_date = view.findViewById(R.id.plan_task_new_textview_date);
         et_num = view.findViewById(R.id.plan_task_new_edittext_num);
@@ -66,10 +70,10 @@ public class PlanTaskNewFragment extends Fragment {
                 final TimePickerView pvTime = new TimePickerView.Builder(getActivity(), new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {//选中事件回调
-                        tv_date.setText((date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDay());
+                       tv_date.setText((date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDate());
                     }
                 })
-                        .setType(new boolean[]{true, true, false, false, false, false})
+                        .setType(new boolean[]{true, true, true, false, false, false})
                         .setLabel("年", "月", "日", "", "", "")
                         .setRangDate(startDate, endDate)
                         .setCancelText("取消")//取消按钮文字
@@ -100,7 +104,7 @@ public class PlanTaskNewFragment extends Fragment {
     public void saveTask(){
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH)+1;
         int day = c.get(Calendar.DAY_OF_MONTH);
         createTime = year + "-" + month + "-" + day;
 
@@ -115,9 +119,15 @@ public class PlanTaskNewFragment extends Fragment {
         }else if(et_num.getText().equals("")){
             showErrorInfo("金额不能为空");
         }else{
+            Log.i("tag","测试测试");
+            Log.i("nowDate",createTime);
             TaskAddJson taskAddJson = new TaskAddJson(username,content,createTime,deadline,Double.parseDouble(et_num.getText().toString()));
-            taskService.addTask(taskAddJson);
-
+            try {
+                taskService.addTask(taskAddJson);
+                saveSuccess();
+            }catch(ResponseException e){
+                showErrorInfo(e.getMessage());
+            }
         }
 
     }

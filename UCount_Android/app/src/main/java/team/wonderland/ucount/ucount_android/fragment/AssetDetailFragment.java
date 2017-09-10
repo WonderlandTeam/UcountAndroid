@@ -120,8 +120,7 @@ public class AssetDetailFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new AssetDetailRecyclerAdapter(assetItems,getActivity());
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(
-                getActivity(), DividerItemDecoration.HORIZONTAL));
+        recyclerView.addItemDecoration(new MyItemDecoration());
 
 
         swipeRefreshLayout.setColorSchemeResources(
