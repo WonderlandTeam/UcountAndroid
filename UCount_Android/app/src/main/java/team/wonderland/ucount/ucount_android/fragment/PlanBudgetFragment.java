@@ -338,7 +338,9 @@ public class PlanBudgetFragment extends Fragment {
     @Background
     void deleteItem(int pos){
         try {
+            Log.i("tag",budgets.get(pos).getId().toString());
             String result = budgetService.deleteBudget(budgets.get(pos).getId());
+            Log.i("result",result);
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
         }
