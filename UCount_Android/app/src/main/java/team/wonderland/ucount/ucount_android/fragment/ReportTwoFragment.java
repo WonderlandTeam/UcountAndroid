@@ -41,7 +41,7 @@ public class ReportTwoFragment extends Fragment {
         userName = preferences.getString("USERNAME", "sigma");
 
         //TODO 服务器报错
-//        getData();
+        getData();
 
         chartTableView=view.findViewById(R.id.chartTableView);
 

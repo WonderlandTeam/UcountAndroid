@@ -58,8 +58,9 @@ public class ReportThreeFragment extends Fragment {
         userName=preferences.getString("USERNAME","sigma");
         Log.i("userName",userName);
 
-        initData();
         moneyFlows=new ArrayList<>();
+
+        initData();
 
         reportTimelineAdapter=new ReportTimelineAdapter(getContext(),moneyFlows);
         listView.setAdapter(reportTimelineAdapter);
