@@ -17,4 +17,72 @@
         <item>预算</item>
         <item>任务</item>
     </string-array>
+
+
+    SALARY                  ("工资收入"),
+    MANAGEMENT_INCOME       ("理财收入"),
+    ALIMONY                 ("家庭补助"),
+    OTHER_INCOME            ("其他收入"),
+
+
+    /************ 支出类型 ************/
+
+    /* 生活必需 */
+
+    TRAFFIC                 ("交通"),
+
+    /* 妆服费 */
+    CLOTHING                ("衣帽鞋包"),
+    CREAM                   ("护肤品"),
+    COSMETICS               ("彩妆"),
+    JEWELRY                 ("首饰"),
+
+    /* 学习 */
+    TRAINING                ("培训、考证费用"),
+    BOOK                    ("书籍"),
+    STATIONERY              ("文具"),
+    PRINT                   ("打印资料"),
+    ACTIVITY                ("组织活动"),
+
+    /* 娱乐 */
+    ENTERTAINMENT           ("娱乐"),
+    /* 理财 */
+    MANAGEMENT_EXPENDITURE  ("理财支出"),
+
+    /* 捐赠 */
+    DONATION                ("捐款"),
+    OTHER_DONATION          ("其他捐赠"),
+
+    /* 其他支出 */
+    OTHER_EXPENDITURE       ("其他支出");
+
+    <String-array name="cost">
+        <item>饮食</item>
+        <item>日用品</item>
+        <item>水电费</item>
+        <item>通讯和网费</item>
+        <item>电子设备</item>
+        <item>交通</item>
+        <item>衣帽鞋包</item>
+        <item>护肤品</item>
+        <item>彩妆</item>
+        <item>首饰</item>
+        <item>培训、考证费用</item>
+        <item>书籍</item>
+        <item>文具</item>
+        <item>打印资料</item>
+        <item>组织活动</item>
+        <item>捐款</item>
+        <item>其他捐赠</item>
+        <item>理财支出</item>
+        <item>娱乐</item>
+        <item>其他支出</item>
+    </String-array>
+    
+    <String-array>
+        <item>其他收入</item>
+        <item>家庭补助</item>
+        <item>工资收入</item>
+        <item>理财收入</item>
+    </String-array>
 </resources>

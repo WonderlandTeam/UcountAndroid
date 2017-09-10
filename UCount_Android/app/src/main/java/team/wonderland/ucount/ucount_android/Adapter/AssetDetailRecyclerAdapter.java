@@ -14,6 +14,8 @@ import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.AssetItem;
+import team.wonderland.ucount.ucount_android.fragment.GlobalVariables;
+import team.wonderland.ucount.ucount_android.json.BillInfoJson;
 
 /**
  * Created by liuyu on 2017/8/30.
@@ -21,10 +23,10 @@ import team.wonderland.ucount.ucount_android.fragment.AssetItem;
 
 public class AssetDetailRecyclerAdapter extends RecyclerView.Adapter<AssetDetailRecyclerAdapter.AccountViewHolder> {
 
-    private List<AssetItem> assetItems;
+    private List<BillInfoJson> assetItems;
     private Context context;
 
-    public AssetDetailRecyclerAdapter(List<AssetItem> assetItems,Context context) {
+    public AssetDetailRecyclerAdapter(List<BillInfoJson> assetItems,Context context) {
         this.assetItems = assetItems;
         this.context=context;
     }
@@ -40,10 +42,11 @@ public class AssetDetailRecyclerAdapter extends RecyclerView.Adapter<AssetDetail
     public void onBindViewHolder(AssetDetailRecyclerAdapter.AccountViewHolder holder, int position) {
         final int j=position;
 
-        AccountViewHolder.date.setText(assetItems.get(position).getDate());
+        AccountViewHolder.date.setText(assetItems.get(position).getTime());
         AssetDetailRecyclerAdapter.AccountViewHolder.type.setText(assetItems.get(position).getType());
-        AssetDetailRecyclerAdapter.AccountViewHolder.num.setText(String.valueOf(assetItems.get(position).getNum()));
-
+        AssetDetailRecyclerAdapter.AccountViewHolder.num.setText(String.valueOf(assetItems.get(position).getAmount()));
+        AccountViewHolder.description.setText(assetItems.get(position).getTrader());
+        AccountViewHolder.img.setImageResource(GlobalVariables.getSrcID(assetItems.get(position).getType()));
     }
 
     @Override
@@ -56,6 +59,8 @@ public class AssetDetailRecyclerAdapter extends RecyclerView.Adapter<AssetDetail
         static TextView date;
         static TextView type;
         static TextView num;
+        static TextView description;
+        static ImageView img;
 
         public AccountViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +68,8 @@ public class AssetDetailRecyclerAdapter extends RecyclerView.Adapter<AssetDetail
             date = (TextView)itemView.findViewById(R.id.asset_detail_item_tv_date);
             type = (TextView)itemView.findViewById(R.id.asset_detail_item_tv_type);
             num = (TextView)itemView.findViewById(R.id.asset_detail_item_tv_num);
+            description = (TextView)itemView.findViewById(R.id.asset_detail_item_tv_description);
+            img = (ImageView)itemView.findViewById(R.id.asset_detail_item_img);
         }
     }
 }
