@@ -1,6 +1,7 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -40,14 +41,10 @@ public class ReportTwoFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("user", 0);
         userName = preferences.getString("USERNAME", "sigma");
 
-        //TODO 服务器报错
-        getData();
 
         chartTableView=view.findViewById(R.id.chartTableView);
 
-        if(balanceSheetJson!=null) {
-        chartTableView.setData(balanceSheetJson);
-        }
+        new aTask().execute();
         return view;
     }
 
@@ -65,6 +62,31 @@ public class ReportTwoFragment extends Fragment {
 
         } catch (ResponseException e) {
             Log.i("error", e.getMessage());
+        }
+    }
+
+    /**
+     * 异步刷新
+     */
+    private class aTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPostExecute(Void o) {
+            super.onPostExecute(o);
+            if(balanceSheetJson!=null) {
+                chartTableView.setData(balanceSheetJson);
+                chartTableView.showData();
+            }
+            else{
+                Log.i("balanceSheetJson","null");
+            }
+            Log.i("tag", "调用后");
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            getData();
+            Log.i("tag", "调用后台数据");
+            return null;
         }
     }
 }

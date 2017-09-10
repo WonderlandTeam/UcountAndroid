@@ -1,6 +1,7 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -46,13 +46,7 @@ public class ReportThreeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.report_three, container, false);
         listView=view.findViewById(R.id.timeLine);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO
-            }
-        });
-        listView.setDividerHeight(0);
+
 
         SharedPreferences preferences=getActivity().getSharedPreferences("user",0);
         userName=preferences.getString("USERNAME","sigma");
@@ -60,15 +54,25 @@ public class ReportThreeFragment extends Fragment {
 
         moneyFlows=new ArrayList<>();
 
-        initData();
+        new aTask().execute();
 
-        reportTimelineAdapter=new ReportTimelineAdapter(getContext(),moneyFlows);
-        listView.setAdapter(reportTimelineAdapter);
+
 
         return view;
     }
 
-    @Background
+    void initListView(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //TODO
+            }
+        });
+        listView.setDividerHeight(0);
+        reportTimelineAdapter=new ReportTimelineAdapter(getContext(),moneyFlows);
+        listView.setAdapter(reportTimelineAdapter);
+    }
+
     void initData(){
         //stub data
         moneyFlows.add(new MoneyFlow(true,1000,"工资","2017-8-1", R.drawable.type_get_2));
@@ -80,7 +84,6 @@ public class ReportThreeFragment extends Fragment {
         moneyFlows.add(new MoneyFlow(true,1000,"工资","2017-8-1", R.drawable.type_get_2));
         moneyFlows.add(new MoneyFlow(false,50,"支付宝","2017-8-4",R.mipmap.alipay));
         moneyFlows.add(new MoneyFlow(false,100,"银行卡","2017-8-5",R.mipmap.card_pay));
-
 
         //get data from server
         try {
@@ -115,6 +118,23 @@ public class ReportThreeFragment extends Fragment {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
         Looper.loop();
 
+    }
+
+    private class aTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPostExecute(Void o) {
+            super.onPostExecute(o);
+            initListView();
+            Log.i("tag", "调用后");
+            reportTimelineAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            initData();
+            Log.i("tag", "调用后台数据");
+            return null;
+        }
     }
 
     private int getIconID(String billType){

@@ -2,6 +2,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
@@ -22,7 +23,6 @@ import lecho.lib.hellocharts.model.*;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -113,11 +113,8 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initData();
-                showTables();
-                //显示说明文字
-                intro1.setText(getActivity().getString(R.string.report_intros1));
-                intro2.setText(getActivity().getString(R.string.report_intros2));
+                //调用后台数据并且调用完成后刷新界面
+                new aTask().execute();
             }
         });
 
@@ -165,9 +162,29 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     }
 
+    /**
+     * 异步刷新
+     */
+    private class aTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPostExecute(Void o) {
+            super.onPostExecute(o);
+            showTables();
+            //显示说明文字
+            intro1.setText(getActivity().getString(R.string.report_intros1));
+            intro2.setText(getActivity().getString(R.string.report_intros2));
+            Log.i("tag", "调用后");
+        }
 
-    //调服务器获得数据
-    @Background
+        @Override
+        protected Void doInBackground(Void... voids) {
+            initData();
+            Log.i("tag", "调用后台数据");
+            return null;
+        }
+    }
+
+
     void initData() {
         try {
             Map<String, Object> contents = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())

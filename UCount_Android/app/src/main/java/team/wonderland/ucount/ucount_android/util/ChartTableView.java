@@ -121,6 +121,8 @@ public class ChartTableView extends View {
     private float startX;
     private float startY;
 
+    private Canvas canvas;
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -136,6 +138,7 @@ public class ChartTableView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        this.canvas=canvas;
         startX = (float) 5;
         assets.add(asset1);
         assets.add(asset2);
@@ -201,25 +204,7 @@ public class ChartTableView extends View {
 
         initData();
 
-        now_height=startY + tableItemHeight / 2 + textSize / 2;
-        for(int i=0;i<assetCost.size();i++){
-            now_height=now_height+tableItemHeight;
-            if(!assetCost.get(i).equals(0.0)){
-                canvas.drawText(""+assetCost.get(i).intValue(),startX + tableItemWidth * 3 / 2,now_height,mPaintText);
-            }
-            if(!assetPrice.get(i).equals(0.0)){
-                canvas.drawText(""+assetPrice.get(i).intValue(),startX + tableItemWidth * 5 / 2,now_height,mPaintText);
-            }
-            if(!debtMoney.get(i).equals(0.0)){
-                canvas.drawText(""+debtMoney.get(i).intValue(),startX + tableItemWidth * 9 / 2,now_height,mPaintText);
-            }
-            if(!clearCost.get(i).equals(0.0)){
-                canvas.drawText(""+clearCost.get(i).intValue(),startX + tableItemWidth * 13 / 2,now_height,mPaintText);
-            }
-            if(!clearPrice.get(i).equals(0.0)){
-                canvas.drawText(""+clearPrice.get(i).intValue(),startX + tableItemWidth * 15 / 2,now_height,mPaintText);
-            }
-        }
+
 
     }
 
@@ -310,6 +295,28 @@ public class ChartTableView extends View {
         debtMoney.add(0.0);
         clearPrice.add(balanceSheetJson.personalNetValue.get("market"));
         clearPrice.add(balanceSheetJson.totalNetValue.get("market"));
+    }
+
+    public void showData(){
+        float now_height=startY + tableItemHeight / 2 + textSize / 2;
+        for(int i=0;i<assetCost.size();i++){
+            now_height=now_height+tableItemHeight;
+            if(!assetCost.get(i).equals(0.0)){
+                canvas.drawText(""+assetCost.get(i).intValue(),startX + tableItemWidth * 3 / 2,now_height,mPaintText);
+            }
+            if(!assetPrice.get(i).equals(0.0)){
+                canvas.drawText(""+assetPrice.get(i).intValue(),startX + tableItemWidth * 5 / 2,now_height,mPaintText);
+            }
+            if(!debtMoney.get(i).equals(0.0)){
+                canvas.drawText(""+debtMoney.get(i).intValue(),startX + tableItemWidth * 9 / 2,now_height,mPaintText);
+            }
+            if(!clearCost.get(i).equals(0.0)){
+                canvas.drawText(""+clearCost.get(i).intValue(),startX + tableItemWidth * 13 / 2,now_height,mPaintText);
+            }
+            if(!clearPrice.get(i).equals(0.0)){
+                canvas.drawText(""+clearPrice.get(i).intValue(),startX + tableItemWidth * 15 / 2,now_height,mPaintText);
+            }
+        }
     }
 
 }
