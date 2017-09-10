@@ -99,7 +99,7 @@ public class AssetDetailFragment extends Fragment {
     @Background
     public void initBillDetail(){
         try {
-            assetItems = billService.getBillsByAccount(accountID,0,20,"id","DESC");
+            assetItems = billService.getBillsByAccount(accountID,0,20,"id","ASC");
             Log.i("tag","调用数据");
             Log.i("tag",assetItems.toString());
 

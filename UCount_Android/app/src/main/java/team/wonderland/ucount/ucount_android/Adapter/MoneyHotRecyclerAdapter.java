@@ -12,6 +12,7 @@ import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.Post;
+import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 
 /**
  * Created by liuyu on 2017/8/31.
@@ -21,11 +22,11 @@ public class MoneyHotRecyclerAdapter extends RecyclerView.Adapter<MoneyHotRecycl
         implements View.OnClickListener{
 
 
-    private List<Post> posts;
+    private List<PostInfoJson> posts;
     private Context context;
     private MoneyHotRecyclerAdapter.OnItemClickListener mOnItemClickListener = null;
 
-    public MoneyHotRecyclerAdapter(List<Post> posts,Context context) {
+    public MoneyHotRecyclerAdapter(List<PostInfoJson> posts,Context context) {
         this.posts = posts;
         this.context=context;
     }

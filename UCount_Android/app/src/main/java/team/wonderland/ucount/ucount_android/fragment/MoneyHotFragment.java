@@ -9,6 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +22,46 @@ import java.util.List;
 import team.wonderland.ucount.ucount_android.Adapter.AssetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.Adapter.MoneyHotRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.PostInfoJson;
+import team.wonderland.ucount.ucount_android.service.PostService;
+
 /**
  * Created by liuyu on 2017/8/31.
  */
-
+@EFragment
 public class MoneyHotFragment extends Fragment {
     private RecyclerView recyclerView;
     private MoneyHotRecyclerAdapter adapter;
-    private List<Post> posts;
+    private List<PostInfoJson> posts;
+
+    @RestService
+    PostService postService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.money_hot_fragment, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.money_hot_recyclerview);
 
         initData();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.money_hot_recyclerview);
+
+        return view;
+    }
+
+    @Background
+    public void initData(){
+        try {
+            String username = this.getActivity().getSharedPreferences("user",0).getString("USERNAME","");
+            posts = postService.getPosts(username,0,20,"id","ASC");
+
+        }catch (ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    @UiThread
+    void initRecyclerView(){
         //添加适配器
         adapter = new MoneyHotRecyclerAdapter(posts,getActivity());
         recyclerView.setAdapter(adapter);
@@ -55,15 +85,10 @@ public class MoneyHotFragment extends Fragment {
             }
         });
         recyclerView.addItemDecoration(new MyItemDecoration());
-
-        return view;
     }
 
-    public void initData(){
-        posts = new ArrayList<>();
-        posts.add(new Post("说说信用卡还贷款","2017.8.31","wind",".............."));
-        posts.add(new Post("P2P还款方式那么多，总有一款适合你","2017.8.31","飘飘",".............."));
-        posts.add(new Post("如何通过自己的爱好赚钱","2017.8.31","黄飘",".............."));
-        posts.add(new Post("腾讯信用和芝麻信用哪个更重要","2017.8.31","飘",".............."));
+    @UiThread
+    void showErrorInfo(String error){
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 }
