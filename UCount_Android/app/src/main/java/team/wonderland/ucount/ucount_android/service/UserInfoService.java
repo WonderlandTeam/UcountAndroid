@@ -34,6 +34,6 @@ public interface UserInfoService {
      * @param userModifyJson
      */
     @Put("/users/{username}")
-    String modifyUserInfo(@Path String username, @Body UserModifyJson userModifyJson);
+    void modifyUserInfo(@Path String username, @Body UserModifyJson userModifyJson);
 
 }

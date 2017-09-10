@@ -280,7 +280,7 @@ public class PlanBudgetFragment extends Fragment {
     @Background
     void reviewTotalBudget(long id, BudgetModifyJson totalBudgetModifyJson){
         try {
-            String result = budgetService.updateBudget(id, totalBudgetModifyJson);
+            budgetService.updateBudget(id, totalBudgetModifyJson);
             reviewTotalBudgetSuccess(totalBudgetModifyJson);
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
@@ -335,12 +335,12 @@ public class PlanBudgetFragment extends Fragment {
         popupMenu.show();
     }
 
+
     @Background
     void deleteItem(int pos){
         try {
             Log.i("tag",budgets.get(pos).getId().toString());
-            String result = budgetService.deleteBudget(budgets.get(pos).getId());
-            Log.i("result",result);
+            budgetService.deleteBudget(budgets.get(pos).getId());
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
         }

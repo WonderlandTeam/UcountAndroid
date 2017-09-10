@@ -47,5 +47,5 @@ public interface AccountService {
      * @param account_id
      */
     @Delete("/accounts/{account_id}")
-    String deleteAccount(@Path Long account_id);
+    void deleteAccount(@Path Long account_id);
 }

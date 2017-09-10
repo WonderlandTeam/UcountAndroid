@@ -59,7 +59,7 @@ public interface TaskService {
      * @return
      */
     @Post("/tasks/{taskId}/")
-    String updateTask(@Path Long taskId,@Body TaskModifyJson taskModifyJson);
+    void updateTask(@Path Long taskId,@Body TaskModifyJson taskModifyJson);
 
     /**
      * 删除攒钱计划
@@ -67,5 +67,5 @@ public interface TaskService {
      * @return
      */
     @Delete("/tasks/{taskId}")
-    String deleteTask(@Path Long taskId);
+    void deleteTask(@Path Long taskId);
 }

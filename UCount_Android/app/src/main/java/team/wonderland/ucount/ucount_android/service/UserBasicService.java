@@ -30,7 +30,7 @@ public interface UserBasicService {
      * @return
      */
     @Post("/users")
-    String signUp(@Body UserSignUpJson userSignUpJson);
+    void signUp(@Body UserSignUpJson userSignUpJson);
 
     /**
      * 用户登录

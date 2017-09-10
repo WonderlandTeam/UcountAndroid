@@ -60,5 +60,5 @@ public interface BillService {
      * @param bill_id            账目id
      */
     @Delete("/accounts/{account_id}/bills/{bill_id}")
-    String deleteBill(@Path Long account_id, @Path Long bill_id);
+    void deleteBill(@Path Long account_id, @Path Long bill_id);
 }

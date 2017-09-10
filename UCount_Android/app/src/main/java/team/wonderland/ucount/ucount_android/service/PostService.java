@@ -63,7 +63,7 @@ public interface PostService {
      * @return
      */
     @Post("/posts/{post_id}/collections?username={username}")
-    String collectPost(@Path Long post_id, @Path String username);
+    void collectPost(@Path Long post_id, @Path String username);
 
     /**
      * 用户取消收藏
@@ -73,7 +73,7 @@ public interface PostService {
      * @return
      */
     @Delete("/posts/{post_id}/collections?username={username}")
-    String deleteCollection(@Path Long post_id, @Path String username);
+    void deleteCollection(@Path Long post_id, @Path String username);
 
     /**
      * 获取用户收藏
@@ -91,7 +91,7 @@ public interface PostService {
      * @param post_id  帖子id
      */
     @Post("/posts/{post_id}/praises?username={username}")
-    String praisePost(@Path Long post_id, @Path String username);
+    void praisePost(@Path Long post_id, @Path String username);
 
     /**
      * 取消称赞
@@ -100,7 +100,7 @@ public interface PostService {
      * @param post_id  帖子id
      */
     @Delete("/posts/{post_id}/praises?username={username}")
-    String cancelPraisePost(@Path Long post_id, @Path Long username);
+    void cancelPraisePost(@Path Long post_id, @Path Long username);
 
     /**
      * 用户点赞帖子回复
@@ -110,7 +110,7 @@ public interface PostService {
      * @return
      */
     @Post("/posts/replies/{reply_id}/praises?username={username}")
-    String praisePostReply(@Path Long reply_id, @Path String username);
+    void praisePostReply(@Path Long reply_id, @Path String username);
 
     /**
      * 用户取消帖子回复点赞
@@ -120,7 +120,7 @@ public interface PostService {
      * @return
      */
     @Delete("/posts/replies/{reply_id}/praises?username={username}")
-    String cancelPraisePostReply(@Path Long reply_id, @Path String username);
+    void cancelPraisePostReply(@Path Long reply_id, @Path String username);
 
     /**
      * 回复帖子

@@ -56,7 +56,7 @@ public interface BudgetService {
      * @param budgetModifyJson 预算修改信息vo
      */
     @Post("/budgets/{budget_id}/")
-    String updateBudget(@Path Long budget_id, @Body BudgetModifyJson budgetModifyJson);
+    void updateBudget(@Path Long budget_id, @Body BudgetModifyJson budgetModifyJson);
 
     /**
      * 删除预算
@@ -64,6 +64,6 @@ public interface BudgetService {
      * @param budget_id 预算id
      */
     @Delete("/budgets/{budget_id}")
-    String deleteBudget(@Path Long budget_id);
+    void deleteBudget(@Path Long budget_id);
 
 }
