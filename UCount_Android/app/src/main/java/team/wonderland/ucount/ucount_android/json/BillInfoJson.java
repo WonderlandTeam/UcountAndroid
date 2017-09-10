@@ -13,6 +13,9 @@ public class BillInfoJson implements Serializable {
     public double amount ; 			//交易金额
     public String time;				//交易时间
 
+    public BillInfoJson() {
+    }
+
     public BillInfoJson(String type, String trader, double amount, String time) {
         this.type = type;
         this.trader = trader;

@@ -15,6 +15,9 @@ public class UserModifyJson implements Serializable {
     private String cardId;//银行卡号
     private String schoolCardId;//校园卡号
 
+    public UserModifyJson() {
+    }
+
     public UserModifyJson(String username) {
         this.username = username;
     }

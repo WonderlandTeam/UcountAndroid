@@ -10,6 +10,9 @@ public class PostAddJson {
     public String title;
     public String content;
 
+    public PostAddJson() {
+    }
+
     public PostAddJson(String username, String title, String content) {
         this.username = username;
         this.title = title;

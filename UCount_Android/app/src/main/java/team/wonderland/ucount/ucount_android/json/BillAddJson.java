@@ -14,6 +14,9 @@ public class BillAddJson implements Serializable{
     public String consumeType;          //交易类型
     public String remark;
 
+    public BillAddJson() {
+    }
+
     public BillAddJson(String time, Double incomeExpenditure, String commodity, String consumeType, String remark) {
         this.time = time;
         this.incomeExpenditure = incomeExpenditure;

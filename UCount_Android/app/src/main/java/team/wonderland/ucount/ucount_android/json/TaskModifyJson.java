@@ -7,6 +7,9 @@ package team.wonderland.ucount.ucount_android.json;
 public class TaskModifyJson {
     double money;
 
+    public TaskModifyJson() {
+    }
+
     public TaskModifyJson(double money) {
         this.money = money;
     }

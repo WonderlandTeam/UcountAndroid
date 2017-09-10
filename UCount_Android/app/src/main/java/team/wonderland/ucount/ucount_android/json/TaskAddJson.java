@@ -11,6 +11,9 @@ public class TaskAddJson {
     private String deadline;
     private Double upper;
 
+    public TaskAddJson() {
+    }
+
     public TaskAddJson(String username, String taskContent, String createTime, String deadline, Double upper) {
         this.username = username;
         this.taskContent = taskContent;

@@ -17,6 +17,8 @@ public class TaskInfoJson {
     private double haveToSaveEveryday;
     private String taskState;
 
+    public TaskInfoJson() {
+    }
 
     public TaskInfoJson(Long id, String username, String taskContent, double upper, double savedMoney, String createTime, String deadline, double haveToSaveEveryday, String taskState) {
         this.id = id;

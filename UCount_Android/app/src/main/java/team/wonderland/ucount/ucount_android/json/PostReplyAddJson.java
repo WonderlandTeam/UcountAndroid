@@ -8,6 +8,9 @@ public class PostReplyAddJson {
     public String username;     // 用户名
     public String content;      // 回复内容
 
+    public PostReplyAddJson() {
+    }
+
     public PostReplyAddJson(String username, String content) {
         this.username = username;
         this.content = content;

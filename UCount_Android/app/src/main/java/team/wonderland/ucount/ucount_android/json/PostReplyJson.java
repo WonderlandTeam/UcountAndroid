@@ -14,6 +14,9 @@ public class PostReplyJson implements Serializable {
     public int supportNum;
     public boolean isSupported;
 
+    public PostReplyJson() {
+    }
+
     public PostReplyJson(Long replyId, String username, String content, String time, int supportNum, boolean isSupported) {
         this.replyId = replyId;
         this.username = username;
