@@ -180,14 +180,11 @@ public class AssetNewFragment extends Fragment{
     //返回到资产主界面
     @UiThread
     void returnToAssetFragment(){
-
-        Looper.prepare();
         Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
-        Looper.loop();
 
         //保存成功跳转到资产主界面
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, new AssetFragment_()).commit();
+        transaction.replace(R.id.fragment_container, new AssetFragment_()).commit();
     }
 
     //显示错误信息

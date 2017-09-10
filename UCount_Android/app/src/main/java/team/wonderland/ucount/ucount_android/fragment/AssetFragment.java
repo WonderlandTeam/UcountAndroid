@@ -5,9 +5,11 @@ import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -79,7 +81,7 @@ public class AssetFragment extends Fragment {
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, new AssetDetailFragment()).commit();
+                        .replace(R.id.fragment_container, new AssetDetailFragment_()).commit();
             }
         });
         return view;
@@ -92,15 +94,7 @@ public class AssetFragment extends Fragment {
     @Background
     void initAsset() {
         try {
-            List<AccountInfoJson> accounts = accountService.getAccountsByUser(username);
-//            String content = result.get("content").toString();
-//            Gson gson = new Gson();
-//            Type type = new TypeToken<List<AccountInfoJson>>() {
-//            }.getType();
-//            List<AccountInfoJson> accounts = gson.fromJson(content, type);
-
-            Log.i("tag",accounts.toString());
-            Log.i("tag","加载测试");
+            accounts = accountService.getAccountsByUser(username);
             //显示账户列表
             showRecyclerView();
 
@@ -122,9 +116,45 @@ public class AssetFragment extends Fragment {
             public void onItemClick(View view , int position){
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, new AssetImportCardFragment()).commit();
+                        .replace(R.id.fragment_container, new AssetDetailFragment_()).commit();
+            }
+
+            @Override
+            public void onItemLongOnClick(View view, int position) {
+                showPopMenu(view,position);
             }
         });
+    }
+
+    @UiThread
+    public void showPopMenu(View view,final int pos){
+        PopupMenu popupMenu = new PopupMenu(getActivity(),view);
+        popupMenu.getMenuInflater().inflate(R.menu.item_menu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                deleteAccount(accounts.get(pos).getAccountId());
+                adapter.removeItem(pos);
+                adapter.notifyItemChanged(pos);
+                return false;
+            }
+        });
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                Toast.makeText(getActivity().getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
+            }
+        });
+        popupMenu.show();
+    }
+
+    //删除账户
+    @Background
+    void deleteAccount(long id){
+        try {
+            accountService.deleteAccount(id);
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
     }
 
     //显示错误信息
