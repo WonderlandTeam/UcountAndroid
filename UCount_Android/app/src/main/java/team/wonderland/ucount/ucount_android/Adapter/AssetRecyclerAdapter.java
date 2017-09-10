@@ -12,7 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.fragment.Account;
+import team.wonderland.ucount.ucount_android.fragment.GlobalVariables;
+import team.wonderland.ucount.ucount_android.json.AccountInfoJson;
 
 /**
  * Created by liuyu on 2017/8/23.
@@ -21,11 +22,11 @@ import team.wonderland.ucount.ucount_android.fragment.Account;
 public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdapter.AccountViewHolder>
         implements View.OnClickListener{
 
-    private List<Account> accounts;
+    private List<AccountInfoJson> accounts;
     private Context context;
     private OnItemClickListener mOnItemClickListener = null;
 
-    public AssetRecyclerAdapter(List<Account> accounts,Context context) {
+    public AssetRecyclerAdapter(List<AccountInfoJson> accounts,Context context) {
         this.accounts = accounts;
         this.context=context;
     }
@@ -42,9 +43,9 @@ public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdap
     public void onBindViewHolder(AssetRecyclerAdapter.AccountViewHolder holder, int position) {
         final int j=position;
 
-        AccountViewHolder.accountImg.setImageResource(accounts.get(position).getImgId());
-        AccountViewHolder.accountName.setText(accounts.get(position).getName());
-        AccountViewHolder.accountTotal.setText(String.valueOf(accounts.get(position).getTotal()));
+        AccountViewHolder.accountImg.setImageResource(GlobalVariables.getSrcID(accounts.get(position).getType()));
+        AccountViewHolder.accountName.setText(accounts.get(position).getCardID());
+        AccountViewHolder.accountTotal.setText(String.valueOf(String.valueOf(accounts.get(position).getBalance())));
 
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);

@@ -1,19 +1,15 @@
 package team.wonderland.ucount.ucount_android.Adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.fragment.Account;
-import team.wonderland.ucount.ucount_android.fragment.Post;
 import team.wonderland.ucount.ucount_android.util.Task;
 
 /**
