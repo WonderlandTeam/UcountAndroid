@@ -13,11 +13,9 @@ public class CashFlowJson implements Serializable{
     private String time;
 
     public CashFlowJson() {
-        super();
     }
 
     public CashFlowJson(String accountType, String cardId, String billType, double money, String time) {
-        super();
         this.accountType = accountType;
         this.cardId = cardId;
         this.billType = billType;

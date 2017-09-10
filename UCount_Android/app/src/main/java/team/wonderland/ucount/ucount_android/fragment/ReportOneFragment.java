@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import at.markushi.ui.CircleButton;
-import com.google.gson.Gson;
 import lecho.lib.hellocharts.formatter.ColumnChartValueFormatter;
 import lecho.lib.hellocharts.formatter.SimpleColumnChartValueFormatter;
 import lecho.lib.hellocharts.model.*;
@@ -36,7 +35,6 @@ import team.wonderland.ucount.ucount_android.util.TimePickerDialog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 收支表
@@ -187,11 +185,10 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
     void initData() {
         try {
-            IncomeStatementJson contents = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())
+            incomeStatementJson = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())
                     , removeAllSpace(endDate.getText().toString()));
 //            String json = contents.get("content").toString();
 //            Log.i("json", json);
-//            // TODO: 17/9/9 转json闪退
 //            incomeStatementJson=new Gson().fromJson(json,IncomeStatementJson.class);
             if(incomeStatementJson==null){
                 Log.i("incomeStatementJson","null");
@@ -233,14 +230,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         outputRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         outputRecyclerView.setAdapter(new ReportItemAdapter(outputItems, getActivity()));
         /**生活必需**/
-        //假的数据
         ArrayList<Float> list = new ArrayList<>();
-        list.add(10.6f);
-        list.add(12.2f);
-        list.add(20.8f);
-        list.add(10.6f);
-        list.add(12.2f);
-        list.add(20.8f);
         if(incomeStatementJson!=null) {
             list.add((float) incomeStatementJson.getCommodity());
             list.add((float) incomeStatementJson.getUtilities());
@@ -253,12 +243,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         initColumnChart(outputColumnChart1, list, outputCategory1);
 
         /**服饰**/
-        //假的数据
         ArrayList<Float> list2 = new ArrayList<>();
-        list2.add(10.6f);
-        list2.add(12.2f);
-        list2.add(20.8f);
-        list2.add(10.6f);
         if(incomeStatementJson!=null) {
             list2.add((float) incomeStatementJson.getClothing());
             list2.add((float) incomeStatementJson.getCream());
@@ -267,13 +252,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         }
         initColumnChart(outputColumnChart2, list2, outputCategory2);
         /**学习**/
-        //假的数据
         ArrayList<Float> list3 = new ArrayList<>();
-        list3.add(10.6f);
-        list3.add(12.2f);
-        list3.add(20.8f);
-        list3.add(10.6f);
-        list3.add(12.2f);
         if(incomeStatementJson!=null) {
             list3.add((float) incomeStatementJson.getTraining());
             list3.add((float) incomeStatementJson.getBook());
@@ -299,11 +278,11 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         pieChartView.setAlpha(0.9f);//设置透明度
         pieChartView.setCircleFillRatio(1f);//设置饼图大小
 
-        pd.setValueLabelsTextColor(Color.WHITE);//设置显示值的字体颜色
-        pd.setValueLabelTextSize(15);
+        pd.setValueLabelsTextColor(Color.BLACK);//设置显示值的字体颜色
+        pd.setValueLabelTextSize(12);
         pd.setHasLabels(true);//显示label
         pd.setHasLabelsOnlyForSelected(false);//不用点击显示占的百分比
-        pd.setHasLabelsOutside(false);//占的百分比是否显示在饼图外面
+        pd.setHasLabelsOutside(true);//占的百分比是否显示在饼图外面
         pd.setHasCenterCircle(true);//是否是环形显示
         pd.setValueLabelBackgroundColor(Color.TRANSPARENT);
         pd.setCenterCircleColor(Color.TRANSPARENT);//设置环形中间的颜色
@@ -327,12 +306,6 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         incomeLabels.add("其他");
 
         List<Float> incomes = new ArrayList<>();
-        //stub data
-        incomes.add((float) 10);
-        incomes.add((float) 20);
-        incomes.add((float) 25);
-        incomes.add((float) 5);
-        //TODO
         if(incomeStatementJson!=null) {
             incomes.add((float) incomeStatementJson.getSalary());
             incomes.add((float) incomeStatementJson.getManagementIncome());
@@ -349,10 +322,12 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             totalIncome = totalIncome + incomes.get(i);
         }
         for (int i = 0; i < incomeLabels.size(); i++) {
-            sliceList.add(new SliceValue(incomes.get(i), Color.parseColor(colors[i])).setLabel(incomeLabels.get(i)));
-            //初始化条目数据
-            incomeItems.add(new ReportItem(icons[i], incomeLabels.get(i) + "收入",
-                    String.format("%.1f", incomes.get(i) * 100 / totalIncome), incomes.get(i)));
+            if(!incomes.get(i).equals(0f)) {
+                sliceList.add(new SliceValue(incomes.get(i), Color.parseColor(colors[i])).setLabel(incomeLabels.get(i)));
+                //初始化条目数据
+                incomeItems.add(new ReportItem(icons[i], incomeLabels.get(i) + "收入",
+                        String.format("%.1f", incomes.get(i) * 100 / totalIncome), incomes.get(i)));
+            }
         }
         pd.setCenterText1("收入" + totalIncome);//环形中间的文字1
         pd.setCenterText1Color(Color.BLACK);//文字颜色
@@ -379,15 +354,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         outputLabels.add("捐赠");
         outputLabels.add("其他");
 
-        //TODO
         List<Float> outputs = new ArrayList<>();
-        outputs.add((float) 10);
-        outputs.add((float) 20);
-        outputs.add((float) 25);
-        outputs.add((float) 5);
-        outputs.add((float) 5);
-        outputs.add((float) 5);
-        outputs.add((float) 5);
         if(incomeStatementJson!=null){
             outputs.add((float) incomeStatementJson.getNecessityTotal());
             outputs.add((float) incomeStatementJson.getAdornTotal());
@@ -408,9 +375,11 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             totalOutput = totalOutput + outputs.get(i);
         }
         for (int i = 0; i < outputLabels.size(); i++) {
-            sliceList.add(new SliceValue(outputs.get(i), Color.parseColor(colors[i])).setLabel(outputLabels.get(i)));
-            outputItems.add(new ReportItem(icons[i], outputLabels.get(i) + "支出",
-                    String.format("%.1f", outputs.get(i) * 100 / totalOutput), outputs.get(i)));
+            if(!outputs.get(i).equals(0f)) {
+                sliceList.add(new SliceValue(outputs.get(i), Color.parseColor(colors[i])).setLabel(outputLabels.get(i)));
+                outputItems.add(new ReportItem(icons[i], outputLabels.get(i) + "支出",
+                        String.format("%.1f", outputs.get(i) * 100 / totalOutput), outputs.get(i)));
+            }
         }
 
         pd.setCenterText1("支出" + totalOutput);//环形中间的文字1

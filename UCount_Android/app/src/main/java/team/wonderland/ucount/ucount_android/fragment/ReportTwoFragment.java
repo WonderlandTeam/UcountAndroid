@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.google.gson.Gson;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.rest.spring.annotations.RestService;
 import team.wonderland.ucount.ucount_android.R;
@@ -17,8 +15,6 @@ import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.BalanceSheetJson;
 import team.wonderland.ucount.ucount_android.service.StatementService;
 import team.wonderland.ucount.ucount_android.util.ChartTableView;
-
-import java.util.Map;
 
 /**
  * Created by CLL on 17/9/2.
@@ -42,22 +38,20 @@ public class ReportTwoFragment extends Fragment {
         userName = preferences.getString("USERNAME", "sigma");
 
 
-        chartTableView=view.findViewById(R.id.chartTableView);
+        chartTableView = view.findViewById(R.id.chartTableView);
 
         new aTask().execute();
+
         return view;
     }
 
-    @Background
-    void getData(){
+    void getData() {
         try {
-            balanceSheetJson = statementService.getBalanceSheet(userName,"2016-10-1","2017-7-1");
-//            String json = contents.get("content").toString();
-//            Log.i("json", json);
-//            // TODO: 17/9/9 转json闪退
-//            balanceSheetJson = new Gson().fromJson(json, BalanceSheetJson.class);
+            balanceSheetJson = statementService.getBalanceSheet(userName, "2017-08-01");
             if (balanceSheetJson == null) {
                 Log.i("balanceSheetJson", "null");
+            } else {
+                Log.i("json", balanceSheetJson.toString());
             }
 
         } catch (ResponseException e) {
@@ -68,18 +62,13 @@ public class ReportTwoFragment extends Fragment {
     /**
      * 异步刷新
      */
-    private class aTask extends AsyncTask<Void, Void, Void> {
+    public class aTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPostExecute(Void o) {
             super.onPostExecute(o);
-            if(balanceSheetJson!=null) {
-                chartTableView.setData(balanceSheetJson);
-                chartTableView.showData();
-            }
-            else{
-                Log.i("balanceSheetJson","null");
-            }
-            Log.i("tag", "调用后");
+            Log.i("tag", "setData");
+            chartTableView.setData(balanceSheetJson);
+            chartTableView.invalidate();
         }
 
         @Override
@@ -88,5 +77,8 @@ public class ReportTwoFragment extends Fragment {
             Log.i("tag", "调用后台数据");
             return null;
         }
+
+
     }
+
 }

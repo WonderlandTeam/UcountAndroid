@@ -60,6 +60,9 @@ public class IncomeStatementJson implements Serializable{
     /* 支出合计 */
     public double totalExpenditure;     // 支出合计
 
+    public IncomeStatementJson() {
+    }
+
     /**
      * 根据字段名获取字段
      */

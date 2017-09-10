@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import team.wonderland.ucount.ucount_android.json.BalanceSheetJson;
 
@@ -110,6 +111,8 @@ public class ChartTableView extends View {
 
         dataNum = 14;
 
+        initData();
+
 
     }
 
@@ -202,9 +205,7 @@ public class ChartTableView extends View {
         canvas.drawLine((float) (startX + tableItemWidth * (5 - 1.0 / 8)), startY + tableItemHeight, (float) (startX + tableItemWidth
                 * (5 - 1.0 / 8)), now_height, mPaintLine);
 
-        initData();
-
-
+        showData();
 
     }
 
@@ -220,11 +221,13 @@ public class ChartTableView extends View {
         clearPrice=new ArrayList<>();
     }
 
+
     /**
      * 提供给fragment的接口
      * @param balanceSheetJson
      */
     public void setData(BalanceSheetJson balanceSheetJson){
+        Log.i("tag","setData");
 
 
         //从上到下共13个数
@@ -271,30 +274,33 @@ public class ChartTableView extends View {
         debtMoney.add(balanceSheetJson.totalLiabilities);
 
         //4
-        debtMoney.add(0.0);
-        debtMoney.add(0.0);
+        clearCost.add(0.0);
+        clearCost.add(0.0);
         clearCost.add(balanceSheetJson.currentNetValue.get("cost"));
         for(int i=0;i<5;i++){
-            debtMoney.add(0.0);
+            clearCost.add(0.0);
         }
         clearCost.add(balanceSheetJson.investmentNetValue.get("cost"));
-        debtMoney.add(0.0);
-        debtMoney.add(0.0);
+        clearCost.add(0.0);
+        clearCost.add(0.0);
         clearCost.add(balanceSheetJson.personalNetValue.get("cost"));
         clearCost.add(balanceSheetJson.totalNetValue.get("cost"));
 
         //4
-        debtMoney.add(0.0);
-        debtMoney.add(0.0);
+        clearPrice.add(0.0);
+        clearPrice.add(0.0);
         clearPrice.add(balanceSheetJson.currentNetValue.get("market"));
         for(int i=0;i<5;i++){
-            debtMoney.add(0.0);
+            clearPrice.add(0.0);
         }
         clearPrice.add(balanceSheetJson.investmentNetValue.get("market"));
-        debtMoney.add(0.0);
-        debtMoney.add(0.0);
+        clearPrice.add(0.0);
+        clearPrice.add(0.0);
         clearPrice.add(balanceSheetJson.personalNetValue.get("market"));
         clearPrice.add(balanceSheetJson.totalNetValue.get("market"));
+
+        Log.i("tableSize",""+assetCost.size());
+
     }
 
     public void showData(){
@@ -314,9 +320,10 @@ public class ChartTableView extends View {
                 canvas.drawText(""+clearCost.get(i).intValue(),startX + tableItemWidth * 13 / 2,now_height,mPaintText);
             }
             if(!clearPrice.get(i).equals(0.0)){
-                canvas.drawText(""+clearPrice.get(i).intValue(),startX + tableItemWidth * 15 / 2,now_height,mPaintText);
+                canvas.drawText(""+clearPrice.get(i).intValue(),startX + tableItemWidth * 15 / 2,now_height,mPaintWhiteText);
             }
         }
+        Log.i("tag","showData");
     }
 
 }

@@ -17,6 +17,8 @@ public class PostInfoJson implements Serializable {
     public boolean isCollected;         // 用户是否收藏
     public boolean isSupported;         // 用户是否点赞
 
+    public PostInfoJson() {
+    }
 
     public PostInfoJson(Long postId, String username, String title, String content, String time, int supportNum, boolean isCollected, boolean isSupported) {
         this.postId = postId;

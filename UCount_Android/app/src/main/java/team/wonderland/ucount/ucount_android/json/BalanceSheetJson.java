@@ -47,6 +47,9 @@ public class BalanceSheetJson implements Serializable{
     /* 总净值 */
     public Map<String, Double> totalNetValue;
 
+    public BalanceSheetJson() {
+    }
+
     public Map<String, Double> getCash() {
         return cash;
     }

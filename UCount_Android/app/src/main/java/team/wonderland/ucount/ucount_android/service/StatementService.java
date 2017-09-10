@@ -13,7 +13,6 @@ import team.wonderland.ucount.ucount_android.json.IncomeStatementJson;
 import team.wonderland.ucount.ucount_android.util.RestAPI;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 获取报表
@@ -24,14 +23,11 @@ public interface StatementService {
     /**
      * 获取资产负债表
      * @param username
-     * @param beginDate
-     * @param endDate
+     * @param date
      * @return
      */
-    @Get("/statements/balanceSheet?username={username}&beginDate={beginDate}&endDate={endDate}")
-    BalanceSheetJson getBalanceSheet(@Path String username,
-                                     @Path String beginDate,
-                                     @Path String endDate);
+    @Get("/statements/balanceSheet?username={username}&date={date}")
+    BalanceSheetJson getBalanceSheet(@Path String username, @Path String date);
 
     /**
      * 获取收支储蓄表（利润表）
