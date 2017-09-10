@@ -3,6 +3,7 @@ package team.wonderland.ucount.ucount_android.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -103,7 +104,10 @@ public class LoginActivity extends AppCompatActivity {
     @Background
     void loginAsync() {
         try {
-            UserInfoJson userInfo = userBasicService.login(usernameValue, passwordValue);
+            String brand = Build.BRAND;
+            String model = Build.MODEL;
+            UserInfoJson userInfo = userBasicService.login(usernameValue, passwordValue, brand + " " + model);
+            Log.i("login", "brand:" + brand + " model:" + model);
             loginSuccess(userInfo);
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
