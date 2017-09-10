@@ -57,10 +57,9 @@ public class PlanBudgetFragment extends Fragment {
     private RecyclerView recyclerView;
     private PlanBudgetRecyclerAdapter adapter;
     private List<BudgetInfoJson> budgets = new ArrayList<>();
-
     private BudgetInfoJson totalBudgetInfoJson;
-//    private BudgetAddJson totalBudgetAddJson;
-//    private BudgetModifyJson totalBudgetModifyJson;
+    private BudgetAddJson totalBudgetAddJson;
+    private BudgetModifyJson totalBudgetModifyJson;
 
     private double totalnum;
 

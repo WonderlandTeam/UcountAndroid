@@ -41,7 +41,7 @@ public class AssetFragment extends Fragment {
     private TextView txtDetail,txtNew,txtTotal,txtIn,txtOut;
     private RecyclerView recyclerView;
     private AssetRecyclerAdapter adapter;
-    private List<Account> accounts;
+    private List<AccountInfoJson> accounts = new ArrayList<>();
 
     String username;
 
@@ -102,12 +102,6 @@ public class AssetFragment extends Fragment {
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
 
         initAsset();//获得用户所有账户信息 AccountService.getAccountsByUser
-
-        accounts = new ArrayList<>();
-        accounts.add(new Account("现金",20.0,R.mipmap.xianjin));
-        accounts.add(new Account("银行卡",0.0,R.mipmap.yinhangka));
-        accounts.add(new Account("校园卡",0.0,R.mipmap.xiaoyuan));
-        accounts.add(new Account("支付宝",0.0,R.mipmap.zhifubao));
     }
 
     /**
@@ -121,11 +115,7 @@ public class AssetFragment extends Fragment {
             Gson gson = new Gson();
             Type type = new TypeToken<List<AccountInfoJson>>() {
             }.getType();
-            List<AccountInfoJson> accountInfoJsons = gson.fromJson(content, type);
-            System.out.println(accountInfoJsons);
-
-            //TODO 处理成Account类型
-
+            List<AccountInfoJson> accounts = gson.fromJson(content, type);
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
