@@ -25,6 +25,7 @@ public class ReportFragment extends Fragment {
     private Fragment report1;
     private Fragment report2;
     private Fragment report3;
+    private Fragment report4;
 
     public ReportFragment() {
     }
@@ -43,6 +44,8 @@ public class ReportFragment extends Fragment {
         report1 = new ReportOneFragment_();
         report2 = new ReportTwoFragment_();
         report3 = new ReportThreeFragment_();
+        report4=new ReportAnalysisFragment_();
+
     }
 
     private void setUI(LayoutInflater inflater, final View view) {
@@ -51,6 +54,7 @@ public class ReportFragment extends Fragment {
         fragments.add(report1);
         fragments.add(report2);
         fragments.add(report3);
+        fragments.add(report4);
 
         FragAdapter fragAdapter= new FragAdapter(getChildFragmentManager(), fragments);
         mViewPager.setAdapter(fragAdapter);
