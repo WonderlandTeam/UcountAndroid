@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,8 @@ public class AssetFragment extends Fragment {
         txtOut = (TextView)view.findViewById(R.id.asset_txt_out);
         recyclerView = (RecyclerView)view.findViewById(R.id.asset_recyclerview);
 
-        initData();
+        username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
+        initAsset();
 
         txtNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +82,35 @@ public class AssetFragment extends Fragment {
                         .replace(R.id.fragment_container, new AssetDetailFragment()).commit();
             }
         });
+        return view;
+    }
 
+
+    /**
+     * 获得用户所有账户信息
+     */
+    @Background
+    void initAsset() {
+        try {
+            Map<String, Object> result = accountService.getAccountsByUser(username);
+            String content = result.get("content").toString();
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<AccountInfoJson>>() {
+            }.getType();
+            List<AccountInfoJson> accounts = gson.fromJson(content, type);
+
+            Log.i("tag",accounts.toString());
+            Log.i("tag","加载测试");
+            //显示账户列表
+            showRecyclerView();
+
+        } catch (ResponseException e) {
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    @UiThread
+    void showRecyclerView(){
         //设置布局管理器
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //设置适配器
@@ -95,40 +125,12 @@ public class AssetFragment extends Fragment {
                         .replace(R.id.fragment_container, new AssetImportCardFragment()).commit();
             }
         });
-        return view;
     }
-
-    public void initData(){
-        username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
-
-        initAsset();//获得用户所有账户信息 AccountService.getAccountsByUser
-    }
-
-    /**
-     * 获得用户所有账户信息
-     */
-    @Background
-    void initAsset() {
-        try {
-            Map<String, Object> result = accountService.getAccountsByUser(username);
-            String content = result.get("content").toString();
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<AccountInfoJson>>() {
-            }.getType();
-            List<AccountInfoJson> accounts = gson.fromJson(content, type);
-        } catch (ResponseException e) {
-            showErrorInfo(e.getMessage());
-        }
-    }
-
 
     //显示错误信息
     @UiThread
     void showErrorInfo(String error) {
-        Looper.prepare();
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-        Looper.loop();
-
     }
 
 }

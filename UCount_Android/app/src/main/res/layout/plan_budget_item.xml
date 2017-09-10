@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v7.widget.CardView
+    android:id="@+id/plan_budget_item_cardview"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="48dp">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/main_bg">
 
     <ImageView
@@ -44,12 +49,5 @@
         android:layout_marginRight="8dp"
         android:layout_toLeftOf="@id/plan_budget_item_num"
         />
-
-    <!-- 横线  -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#CACDD1"
-        android:layout_alignParentBottom="true"
-        />
 </RelativeLayout>
+</android.support.v7.widget.CardView>

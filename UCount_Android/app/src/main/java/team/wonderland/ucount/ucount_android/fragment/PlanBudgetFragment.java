@@ -7,10 +7,12 @@ import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -265,6 +267,11 @@ public class PlanBudgetFragment extends Fragment {
                         .replace(R.id.plan_fragment_container, fragment)
                         .commit();
             }
+
+            @Override
+            public void onItemLongOnClick(View view, int position) {
+                showPopMenu(view,position);
+            }
         });
 
         newBudget.attachToRecyclerView(recyclerView);
@@ -302,11 +309,38 @@ public class PlanBudgetFragment extends Fragment {
         totalTextView.setText(String.valueOf(totalBudgetAddJson.getConsumeMoney()));
     }
 
+    @UiThread
     //显示错误信息
     void showErrorInfo(String error) {
-        Looper.prepare();
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-        Looper.loop();
     }
 
+    @UiThread
+    public void showPopMenu(View view,final int pos){
+        PopupMenu popupMenu = new PopupMenu(getActivity(),view);
+        popupMenu.getMenuInflater().inflate(R.menu.item_menu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                deleteItem(pos);
+                adapter.removeItem(pos);
+                return false;
+            }
+        });
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                Toast.makeText(getActivity().getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
+            }
+        });
+        popupMenu.show();
+    }
+
+    @Background
+    void deleteItem(int pos){
+        try {
+            Map<String, Object> result = budgetService.deleteBudget(budgets.get(pos).getId());
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
 }
