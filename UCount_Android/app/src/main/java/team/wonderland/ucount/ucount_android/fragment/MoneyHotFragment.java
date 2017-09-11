@@ -45,7 +45,6 @@ public class MoneyHotFragment extends Fragment {
 
         initData();
 
-
         return view;
     }
 

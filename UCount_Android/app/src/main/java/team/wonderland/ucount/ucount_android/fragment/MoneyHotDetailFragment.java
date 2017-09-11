@@ -16,18 +16,26 @@ import android.widget.Toast;
 
 import com.wx.goodview.GoodView;
 
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.rest.spring.annotations.RestService;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.Adapter.AssetDetailRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.Adapter.MoneyHotDetailRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
+import team.wonderland.ucount.ucount_android.json.PostReplyJson;
+import team.wonderland.ucount.ucount_android.service.PostService;
 
 /**
  * Created by liuyu on 2017/9/1.
  */
-
+@EFragment
 public class MoneyHotDetailFragment extends Fragment{
 
     private GoodView mGoodView;
@@ -37,13 +45,21 @@ public class MoneyHotDetailFragment extends Fragment{
     private boolean starClicked = false;
     private RecyclerView recyclerView;
     private MoneyHotDetailRecyclerAdapter adapter;
-    private List<PostInfoJson> posts;
     private ImageView back;
     private TextView tv_remark;
+
+    private PostInfoJson postInfoJson;
+    private String username;
+    private List<PostReplyJson> posts;
+    @RestService
+    PostService postService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.money_hot_detail_fragment, container, false);
+
+        postInfoJson = (PostInfoJson) getArguments().get("post");
+        username = getActivity().getSharedPreferences("user",0).getString("USERNAME","");
 
         mGoodView = new GoodView(getContext());
         good = view.findViewById(R.id.money_hot_detail_good);
@@ -111,8 +127,21 @@ public class MoneyHotDetailFragment extends Fragment{
         return view;
     }
 
+
+        @Background
         public void initData(){
-            //TODO 获得所有热门的帖子 PostService.getPosts
-            posts = new ArrayList<>();
+            try {
+                posts = postService.getPostReplies(postInfoJson.getPostId(),username);
+            }catch(ResponseException e){
+                showErrorInfo(e.getMessage());
+            }
+
         }
+
+    //显示错误信息
+    @UiThread
+    void showErrorInfo(String error) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+    }
+
 }
