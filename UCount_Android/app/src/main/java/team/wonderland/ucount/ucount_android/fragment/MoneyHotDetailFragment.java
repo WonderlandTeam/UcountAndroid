@@ -109,13 +109,10 @@ public class MoneyHotDetailFragment extends Fragment{
                 //TODO: 发表评论 PostService.replyPost
             }
         });
-        initData();
 
         recyclerView = (RecyclerView)view.findViewById(R.id.money_hot_detail_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new MoneyHotDetailRecyclerAdapter(getActivity(),posts);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new MyItemDecoration());
+
 
         back = (ImageView)view.findViewById(R.id.money_hot_detail_back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -124,19 +121,36 @@ public class MoneyHotDetailFragment extends Fragment{
                 getFragmentManager().popBackStack();
             }
         });
+
+        initData(inflater);
+
         return view;
     }
 
+    private void setHeaderView(LayoutInflater inflater,RecyclerView view){
+        View header = inflater.inflate(R.layout.money_hot_article_item, view, false);
+        adapter.setHeaderView(header);
+    }
 
         @Background
-        public void initData(){
+        public void initData(LayoutInflater inflater){
             try {
                 posts = postService.getPostReplies(postInfoJson.getPostId(),username);
+                initRecyclerAdapter(inflater);
             }catch(ResponseException e){
                 showErrorInfo(e.getMessage());
             }
 
         }
+
+
+    @UiThread
+    void initRecyclerAdapter(LayoutInflater inflater){
+        adapter = new MoneyHotDetailRecyclerAdapter(posts,getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new MyItemDecoration());
+        setHeaderView(inflater,recyclerView);
+    }
 
     //显示错误信息
     @UiThread

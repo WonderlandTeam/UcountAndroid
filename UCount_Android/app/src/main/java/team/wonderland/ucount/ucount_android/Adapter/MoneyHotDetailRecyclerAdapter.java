@@ -12,69 +12,111 @@ import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
+import team.wonderland.ucount.ucount_android.json.PostReplyJson;
 
 /**
  * Created by liuyu on 2017/8/31.
  */
 
-public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder>
-        implements View.OnClickListener{
+public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder> {
+    public static final int TYPE_HEADER = 0;  //说明是带有Header的
+    public static final int TYPE_FOOTER = 1;  //说明是带有Footer的
+    public static final int TYPE_NORMAL = 2;  //说明是不带有header和footer的
 
-
-    private List<PostInfoJson> posts;
+    private List<PostReplyJson> posts;
+    private View mHeaderView;
+    private View mFooterView;
     private Context context;
-    private MoneyHotDetailRecyclerAdapter.OnItemClickListener mOnItemClickListener = null;
 
-    public MoneyHotDetailRecyclerAdapter(List<PostInfoJson> posts, Context context) {
+
+    public MoneyHotDetailRecyclerAdapter(List<PostReplyJson> posts, Context context) {
         this.posts = posts;
         this.context=context;
     }
 
     @Override
     public MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(mHeaderView != null && viewType == TYPE_HEADER) {
+            return new MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder(mHeaderView);
+        }
+        if(mFooterView != null && viewType == TYPE_FOOTER){
+            return new MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder(mFooterView);
+        }
+
         View v= LayoutInflater.from(context).inflate(R.layout.money_hot_recyclerview_item,parent,false);
         MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder nvh=new MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder(v);
-        v.setOnClickListener(this);
         return nvh;
     }
 
     @Override
     public void onBindViewHolder(MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder holder, int position) {
-        MoneyHotViewHolder.title.setText(posts.get(position).getTitle());
-        //将position保存在itemView的Tag中，以便点击时进行获取
-        holder.itemView.setTag(position);
+        if(getItemViewType(position) == TYPE_NORMAL){
+            if(holder instanceof MoneyHotViewHolder) {
+                //这里加载数据的时候要注意，是从position-1开始，因为position==0已经被header占用了
+                ((MoneyHotViewHolder) holder).title.setText(posts.get(position-1).getContent());
+                return;
+            }
+            return;
+        }else if(getItemViewType(position) == TYPE_HEADER){
+            return;
+        }else{
+            return;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        if(mHeaderView == null && mFooterView == null){
+            return posts.size();
+        }else if(mHeaderView == null && mFooterView != null){
+            return posts.size() + 1;
+        }else if (mHeaderView != null && mFooterView == null){
+            return posts.size() + 1;
+        }else {
+            return posts.size() + 2;
+        }
     }
 
-    static class MoneyHotViewHolder extends RecyclerView.ViewHolder{
-        static CardView cardView;
-        static TextView title;
+    class MoneyHotViewHolder extends RecyclerView.ViewHolder{
+        CardView cardView;
+        TextView title;
 
         public MoneyHotViewHolder(View itemView) {
             super(itemView);
+            if (itemView == mHeaderView){
+                return;
+            }
+            if (itemView == mFooterView){
+                return;
+            }
             cardView = (CardView)itemView.findViewById(R.id.money_hot_recyclerview_item_cardview);
             title = (TextView)itemView.findViewById(R.id.money_hot_recyclerview_item_title);
         }
     }
 
-    //define interface
-    public static interface OnItemClickListener {
-        void onItemClick(View view, int position);
+    //HeaderView的get和set函数
+    public View getHeaderView() {
+        return mHeaderView;
+    }
+    public void setHeaderView(View headerView) {
+        mHeaderView = headerView;
+        notifyItemInserted(0);
     }
 
     @Override
-    public void onClick(View v) {
-        if (mOnItemClickListener != null) {
-            //注意这里使用getTag方法获取position
-            mOnItemClickListener.onItemClick(v,(int)v.getTag());
+    public int getItemViewType(int position) {
+        if (mHeaderView == null && mFooterView == null){
+            return TYPE_NORMAL;
         }
+        if (position == 0){
+            //第一个item应该加载Header
+            return TYPE_HEADER;
+        }
+        if (position == getItemCount()-1){
+            //最后一个,应该加载Footer
+            return TYPE_FOOTER;
+        }
+        return TYPE_NORMAL;
     }
 
-    public void setOnItemClickListener(MoneyHotDetailRecyclerAdapter.OnItemClickListener listener) {
-        this.mOnItemClickListener = listener;
-    }
 }
