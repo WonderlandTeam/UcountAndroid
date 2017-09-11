@@ -23,6 +23,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -227,7 +228,6 @@ public class AssetAddFragment extends Fragment{
                         calculatorClear();
                         //TODO: 手动添加一条账目 BillService.addBillMannually
                         addBill();
-//                        getFragmentManager().popBackStack();
                     }
                     break;
                 case R.id.clear:
@@ -237,7 +237,7 @@ public class AssetAddFragment extends Fragment{
                 case R.id.add_description:
                     getFragmentManager().beginTransaction()
                             .addToBackStack(null)  //将当前fragment加入到返回栈中
-                            .replace(R.id.fragment_container, new AssetAddDescriptionFragment()).commit();
+                            .add(R.id.fragment_container, new AssetAddDescriptionFragment()).commit();
             }
 
             transaction.commit();
@@ -297,14 +297,14 @@ public class AssetAddFragment extends Fragment{
         }
 
     }
+
+    @Background
     void addBill(){
         accountID  = (Long)this.getArguments().get("account");
 
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH)+1;
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        String time = year + "-" + month + "-" + day;
+        Date date=new Date();
+        DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time=format.format(date);//time就是当前时间
 
         double incomeExpenditure = Double.parseDouble(moneyText.getText().toString());
 
@@ -314,12 +314,8 @@ public class AssetAddFragment extends Fragment{
 
         String remark = GlobalVariables.getmDescription();
 
+        Log.i("assetAdd",accountID+" "+time+" "+incomeExpenditure+" "+commity+" "+consumeType+" "+remark);
         billAddJson = new BillAddJson(time, incomeExpenditure, commity, consumeType, remark);
-
-    }
-
-    @Background
-    void addBillAsync(){
         try {
             List<BillInfoJson> bills = billService.addBillManually(accountID, billAddJson);
 //            System.out.println(result.get("content"));

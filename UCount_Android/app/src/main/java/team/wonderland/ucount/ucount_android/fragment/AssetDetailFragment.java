@@ -53,6 +53,7 @@ public class AssetDetailFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private Long accountID = 1l;
+    private String accountType = "";
     private String username = "";
     @RestService
     BillService billService;
@@ -75,6 +76,10 @@ public class AssetDetailFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.asset_cash_detail_refresh);
 
         accountID = (Long)this.getArguments().get("account");
+        accountType = (String)this.getArguments().get("accountType");
+        if(!accountType.equals("现金")){
+            add.setVisibility(View.INVISIBLE);
+        }
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
 
 

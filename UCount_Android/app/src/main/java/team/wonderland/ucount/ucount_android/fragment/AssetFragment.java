@@ -116,11 +116,12 @@ public class AssetFragment extends Fragment {
             public void onItemClick(View view , int position){
                 Bundle bundle = new Bundle();
                 bundle.putLong("account",accounts.get(position).getAccountId());
+                bundle.putString("accountType",accounts.get(position).getType());
                 Fragment fragment = new AssetDetailFragment_();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, fragment).commit();
+                        .add(R.id.fragment_container, fragment).commit();
             }
 
             @Override
