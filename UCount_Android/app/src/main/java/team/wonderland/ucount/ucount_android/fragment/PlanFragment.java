@@ -27,6 +27,7 @@ public class PlanFragment extends Fragment {
     private List<Fragment> fragments;
     private Fragment budget;
     private Fragment task;
+    private Fragment knowledge;
 
     public PlanFragment() {
 
@@ -45,12 +46,14 @@ public class PlanFragment extends Fragment {
         mTopNavigationTabStrip = (NavigationTabStrip) view.findViewById(R.id.plan_nts_top);
         budget = new PlanBudgetFragment_();
         task = new PlanTaskFragment_();
+        knowledge = new PlanKnowledgeFragment();
     }
 
     private void setUI(LayoutInflater inflater, final View view) {
         fragments = new ArrayList<>();
         fragments.add(budget);
         fragments.add(task);
+        fragments.add(knowledge);
 
         FragAdapter fragAdapter = new FragAdapter(getChildFragmentManager(), fragments);
         mViewPager.setAdapter(fragAdapter);

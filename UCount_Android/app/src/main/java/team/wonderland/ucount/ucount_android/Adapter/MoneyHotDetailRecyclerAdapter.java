@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 import team.wonderland.ucount.ucount_android.json.PostReplyJson;
 
 /**
@@ -24,8 +23,8 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
     public static final int TYPE_NORMAL = 2;  //说明是不带有header和footer的
 
     private List<PostReplyJson> posts;
-    private View mHeaderView;
-    private View mFooterView;
+    private static View mHeaderView;
+    private static View mFooterView;
     private Context context;
 
 
@@ -43,7 +42,7 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
             return new MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder(mFooterView);
         }
 
-        View v= LayoutInflater.from(context).inflate(R.layout.money_hot_recyclerview_item,parent,false);
+        View v= LayoutInflater.from(context).inflate(R.layout.money_hot_remark_item,parent,false);
         MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder nvh=new MoneyHotDetailRecyclerAdapter.MoneyHotViewHolder(v);
         return nvh;
     }
@@ -53,11 +52,14 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
         if(getItemViewType(position) == TYPE_NORMAL){
             if(holder instanceof MoneyHotViewHolder) {
                 //这里加载数据的时候要注意，是从position-1开始，因为position==0已经被header占用了
-                ((MoneyHotViewHolder) holder).title.setText(posts.get(position-1).getContent());
+                ((MoneyHotViewHolder) holder).name.setText(posts.get(position-1).getUsername());
+                ((MoneyHotViewHolder) holder).date.setText(posts.get(position-1).getTime());
+                ((MoneyHotViewHolder) holder).content.setText(posts.get(position-1).getContent());
                 return;
             }
             return;
         }else if(getItemViewType(position) == TYPE_HEADER){
+
             return;
         }else{
             return;
@@ -77,9 +79,12 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
         }
     }
 
-    class MoneyHotViewHolder extends RecyclerView.ViewHolder{
+    static class MoneyHotViewHolder extends RecyclerView.ViewHolder{
         CardView cardView;
-        TextView title;
+        TextView name;
+        TextView date;
+        TextView content;
+
 
         public MoneyHotViewHolder(View itemView) {
             super(itemView);
@@ -89,8 +94,11 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
             if (itemView == mFooterView){
                 return;
             }
-            cardView = (CardView)itemView.findViewById(R.id.money_hot_recyclerview_item_cardview);
-            title = (TextView)itemView.findViewById(R.id.money_hot_recyclerview_item_title);
+            cardView = (CardView)itemView.findViewById(R.id.money_hot_remark_cardview);
+            name = (TextView)itemView.findViewById(R.id.money_hot_remark_name);
+            date = (TextView)itemView.findViewById(R.id.money_hot_remark_date);
+            content = (TextView)itemView.findViewById(R.id.money_hot_remark_content);
+            
         }
     }
 

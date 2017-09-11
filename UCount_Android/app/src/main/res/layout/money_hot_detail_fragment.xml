@@ -58,6 +58,15 @@
                 android:layout_marginTop="8dp"
                 />
 
+            <TextView
+                android:id="@+id/money_hot_detail_remark_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发布"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+
             <ImageView
                 android:id="@+id/money_hot_detail_good"
                 android:layout_width="30dp"

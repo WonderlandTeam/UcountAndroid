@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +59,14 @@ public class MoneyHotDetailFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.money_hot_detail_fragment, container, false);
 
+        //TODO: 这里获得了postInfoJson和username
         postInfoJson = (PostInfoJson) getArguments().get("post");
         username = getActivity().getSharedPreferences("user",0).getString("USERNAME","");
 
         mGoodView = new GoodView(getContext());
         good = view.findViewById(R.id.money_hot_detail_good);
         star = view.findViewById(R.id.money_hot_detail_star);
-        tv_remark = view.findViewById(R.id.money_hot_detail_remark);
+        tv_remark = view.findViewById(R.id.money_hot_detail_remark_send);
 
         good.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +76,13 @@ public class MoneyHotDetailFragment extends Fragment{
                     mGoodView.setTextInfo("+1", Color.parseColor("#e74c3c"), 12);
                     mGoodView.show(good);
                     goodClicked = true;
+                    //TODO: 点赞 PostService.praisePost()
                 }else{
                     good.setImageResource(R.mipmap.ic_good);
                     mGoodView.setTextInfo("取消赞", Color.parseColor("#e74c3c"), 12);
                     mGoodView.show(good);
                     goodClicked = false;
-
+                    //TODO: 取消点赞 PostService.cancelPraisePost()
                 }
 //                Toast.makeText(getContext(), "默认Toast样式",
 //                        Toast.LENGTH_SHORT).show();
@@ -94,11 +97,13 @@ public class MoneyHotDetailFragment extends Fragment{
                     mGoodView.setTextInfo("收藏成功", Color.parseColor("#f4e842"), 12);
                     mGoodView.show(star);
                     starClicked = true;
+                    //TODO: 收藏 PostService.collectPost()
                 }else{
                     star.setImageResource(R.mipmap.ic_star);
                     mGoodView.setTextInfo("取消收藏", Color.parseColor("#f4e842"), 12);
                     mGoodView.show(star);
                     starClicked = false;
+                    //TODO: 取消收藏 PostService.deleteCollection()
                 }
             }
         });
@@ -107,6 +112,7 @@ public class MoneyHotDetailFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 //TODO: 发表评论 PostService.replyPost
+
             }
         });
 
@@ -129,6 +135,10 @@ public class MoneyHotDetailFragment extends Fragment{
 
     private void setHeaderView(LayoutInflater inflater,RecyclerView view){
         View header = inflater.inflate(R.layout.money_hot_article_item, view, false);
+        ((TextView)header.findViewById(R.id.money_hot_article_title)).setText(postInfoJson.getTitle());
+        ((TextView)header.findViewById(R.id.money_hot_article_author)).setText(postInfoJson.getUsername());
+        ((TextView)header.findViewById(R.id.money_hot_article_date)).setText(postInfoJson.getTime());
+        ((TextView)header.findViewById(R.id.money_hot_article_content)).setText(postInfoJson.getContent());
         adapter.setHeaderView(header);
     }
 
@@ -136,13 +146,13 @@ public class MoneyHotDetailFragment extends Fragment{
         public void initData(LayoutInflater inflater){
             try {
                 posts = postService.getPostReplies(postInfoJson.getPostId(),username);
+                Log.i("moneyhotdetail",posts.toString());
                 initRecyclerAdapter(inflater);
             }catch(ResponseException e){
                 showErrorInfo(e.getMessage());
             }
 
         }
-
 
     @UiThread
     void initRecyclerAdapter(LayoutInflater inflater){
