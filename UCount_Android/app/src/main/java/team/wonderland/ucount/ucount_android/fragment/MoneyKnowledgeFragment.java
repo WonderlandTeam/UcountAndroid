@@ -15,6 +15,7 @@ import java.util.List;
 import team.wonderland.ucount.ucount_android.Adapter.AssetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.Adapter.MoneyHotRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 
 /**
  * Created by liuyu on 2017/8/31.
@@ -23,7 +24,7 @@ import team.wonderland.ucount.ucount_android.R;
 public class MoneyKnowledgeFragment extends Fragment {
     private RecyclerView recyclerView;
     private MoneyHotRecyclerAdapter adapter;
-    private List<Post> posts;
+    private List<PostInfoJson> posts;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,13 +63,13 @@ public class MoneyKnowledgeFragment extends Fragment {
 
     public void initData(){
         posts = new ArrayList<>();
-        posts.add(new Post("大学生理财真人秀:不做“穷学生”，只需这四步","","",""));
-        posts.add(new Post("政府工作报告对股市影响解读汇总:2017全年看呈U型","","",""));
-        posts.add(new Post("银行理财要蔫了，但还有更安全的理财方式!","","",""));
-        posts.add(new Post("理财知识 | 基础理财知识普及","","",""));
-        posts.add(new Post("理财全靠机器?理财经理怎么办?","","",""));
-        posts.add(new Post("理财和不理财，人生会有多大差别?| 直播","","",""));
-        posts.add(new Post("理财基础知识","","",""));
-        posts.add(new Post("理财扩展知识","","",""));
+//        posts.add(new Post("大学生理财真人秀:不做“穷学生”，只需这四步","","",""));
+//        posts.add(new Post("政府工作报告对股市影响解读汇总:2017全年看呈U型","","",""));
+//        posts.add(new Post("银行理财要蔫了，但还有更安全的理财方式!","","",""));
+//        posts.add(new Post("理财知识 | 基础理财知识普及","","",""));
+//        posts.add(new Post("理财全靠机器?理财经理怎么办?","","",""));
+//        posts.add(new Post("理财和不理财，人生会有多大差别?| 直播","","",""));
+//        posts.add(new Post("理财基础知识","","",""));
+//        posts.add(new Post("理财扩展知识","","",""));
     }
 }

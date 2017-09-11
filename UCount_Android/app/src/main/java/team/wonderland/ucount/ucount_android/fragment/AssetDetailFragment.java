@@ -71,20 +71,25 @@ public class AssetDetailFragment extends Fragment {
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, new AssetAddFragment_()).commit();
-            }
-        });
-
         recyclerView = (RecyclerView)view.findViewById(R.id.asset_cash_detail_recyclerview);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.asset_cash_detail_refresh);
 
         accountID = (Long)this.getArguments().get("account");
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
+
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("account",accountID);
+                Fragment fragment = new AssetAddFragment_();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .addToBackStack(null)  //将当前fragment加入到返回栈中
+                        .replace(R.id.fragment_container, fragment).commit();
+            }
+        });
 
         initBillDetail();
 

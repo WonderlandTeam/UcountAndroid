@@ -25,6 +25,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -296,10 +297,24 @@ public class AssetAddFragment extends Fragment{
         }
 
     }
-
-
     void addBill(){
-        //TODO   accountID 和 billAddJson还未设置,可以在这个方法里面设置
+        accountID  = (Long)this.getArguments().get("account");
+
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH)+1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        String time = year + "-" + month + "-" + day;
+
+        double incomeExpenditure = Double.parseDouble(moneyText.getText().toString());
+
+        String commity = "";
+
+        String consumeType = bannerText.getText().toString();
+
+        String remark = GlobalVariables.getmDescription();
+
+        billAddJson = new BillAddJson(time, incomeExpenditure, commity, consumeType, remark);
 
     }
 
@@ -315,10 +330,8 @@ public class AssetAddFragment extends Fragment{
     }
 
     //返回界面,
-    //TODO 对应上面注释掉的那条，不知道对不对
     @UiThread
     void returnToFragment(){
-
         Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
         //跳转
         getFragmentManager().popBackStack();
