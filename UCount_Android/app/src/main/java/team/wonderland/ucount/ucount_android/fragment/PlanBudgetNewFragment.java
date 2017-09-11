@@ -173,7 +173,7 @@ public class PlanBudgetNewFragment extends Fragment {
         Toast.makeText(getContext(),"添加成功",Toast.LENGTH_SHORT).show();
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.plan_fragment_container, new PlanBudgetFragment_())
+                .replace(R.id.plan_fragment_container, new PlanFragment())
                 .commit();
     }
 

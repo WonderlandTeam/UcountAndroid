@@ -55,10 +55,11 @@ public class PlanFragment extends Fragment {
         FragAdapter fragAdapter = new FragAdapter(getChildFragmentManager(), fragments);
         mViewPager.setAdapter(fragAdapter);
 
+
         mTopNavigationTabStrip.setOnTabStripSelectedIndexListener(new NavigationTabStrip.OnTabStripSelectedIndexListener() {
             @Override
             public void onStartTabSelected(String title, int index) {
-                Log.i("tag", "切换" + title);
+                Log.i("tag", "切换" + title+ index);
             }
 
             @Override
@@ -68,5 +69,12 @@ public class PlanFragment extends Fragment {
         });
         mTopNavigationTabStrip.setTabIndex(0, true);
         mTopNavigationTabStrip.setViewPager(mViewPager);
+
+        if(getArguments()!=null){
+            if(getArguments().get("planFragment").equals("task")){
+                mViewPager.setCurrentItem(1);
+                mTopNavigationTabStrip.setViewPager(mViewPager,1);
+            }
+        }
     }
 }

@@ -164,8 +164,12 @@ public class PlanTaskDetailFragment extends Fragment {
     @UiThread
     void reviseSuccess(){
         Toast.makeText(getActivity(), "修改成功", Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putString("planFragment","task");
+        PlanFragment fragment = new PlanFragment();
+        fragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
-                .replace(R.id.plan_fragment_container, new PlanTaskFragment_())
+                .replace(R.id.plan_fragment_container, fragment)
                 .commit();
     }
 }

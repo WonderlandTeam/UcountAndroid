@@ -135,10 +135,12 @@ public class PlanTaskNewFragment extends Fragment {
     @UiThread
     public void saveSuccess(){
         Toast.makeText(getActivity(), "新建成功", Toast.LENGTH_SHORT).show();
-        getFragmentManager()
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.plan_fragment_container, new PlanTaskFragment_())
+        Bundle bundle = new Bundle();
+        bundle.putString("planFragment","task");
+        PlanFragment fragment = new PlanFragment();
+        fragment.setArguments(bundle);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.plan_fragment_container, fragment)
                 .commit();
     }
 

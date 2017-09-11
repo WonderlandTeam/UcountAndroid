@@ -54,7 +54,7 @@ public class MoneyHotFragment extends Fragment {
         try {
             String username = this.getActivity().getSharedPreferences("user",0).getString("USERNAME","");
             posts = postService.getPosts(username,0,20,"time","ASC");
-
+            initRecyclerView();
         }catch (ResponseException e){
             showErrorInfo(e.getMessage());
         }
