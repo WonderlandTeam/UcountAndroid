@@ -1,12 +1,15 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import at.markushi.ui.CircleButton;
 import team.wonderland.ucount.ucount_android.R;
@@ -42,6 +45,10 @@ public class AssetAddDescriptionFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                // 隐藏软键盘
+                imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+
                 GlobalVariables.setmDescription(inputTxt.getText().toString());
                 getFragmentManager().popBackStack();
             }

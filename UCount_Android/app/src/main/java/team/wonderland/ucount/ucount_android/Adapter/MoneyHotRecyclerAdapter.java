@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.fragment.Post;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 
 /**

@@ -22,6 +22,7 @@ import java.util.List;
 import team.wonderland.ucount.ucount_android.Adapter.AssetDetailRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.Adapter.MoneyHotDetailRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 
 /**
  * Created by liuyu on 2017/9/1.
@@ -36,7 +37,7 @@ public class MoneyHotDetailFragment extends Fragment{
     private boolean starClicked = false;
     private RecyclerView recyclerView;
     private MoneyHotDetailRecyclerAdapter adapter;
-    private List<Post> posts;
+    private List<PostInfoJson> posts;
     private ImageView back;
     private TextView tv_remark;
 
@@ -113,8 +114,5 @@ public class MoneyHotDetailFragment extends Fragment{
         public void initData(){
             //TODO 获得所有热门的帖子 PostService.getPosts
             posts = new ArrayList<>();
-            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘",""));
-            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘",""));
-            posts.add(new Post("震惊！南大学生竟然在宿舍偷偷干这个事情","2017年7月1日","黄飘",""));
         }
 }

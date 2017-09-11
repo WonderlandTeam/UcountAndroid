@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.ServiceCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ import team.wonderland.ucount.ucount_android.util.Task;
 /**
  * Created by liuyu on 2017/9/2.
  */
-@EFragment
+@EFragment(R.layout.plan_task_fragment)
 public class PlanTaskFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -78,6 +79,9 @@ public class PlanTaskFragment extends Fragment {
     public void initData(){
         try {
             tasks = taskService.getTasksByUser(username);
+            Log.i("tag","测试");
+            Log.i("PlanTask",tasks.toString());
+
             initRecyclerView();
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
@@ -87,18 +91,24 @@ public class PlanTaskFragment extends Fragment {
 
     @UiThread
     public void initRecyclerView(){
-        //设置布局管理器
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //设置适配器
         adapter = new PlanTaskRecyclerAdapter(tasks,getActivity());
         recyclerView.setAdapter(adapter);
+        //设置布局管理器 , 将布局设置成纵向
+        LinearLayoutManager linerLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linerLayoutManager);
+        recyclerView.addItemDecoration(new MyItemDecoration());
 
         adapter.setOnItemClickListener(new PlanTaskRecyclerAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("task",tasks.get(position));
+                Fragment fragment = new PlanTaskDetailFragment_();
+                fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.plan_fragment_container, new PlanTaskDetailFragment())
+                        .replace(R.id.plan_fragment_container, fragment)
                         .commit();
             }
         });

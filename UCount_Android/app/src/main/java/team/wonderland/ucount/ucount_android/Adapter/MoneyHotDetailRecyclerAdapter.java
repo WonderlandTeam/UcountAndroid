@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
-import team.wonderland.ucount.ucount_android.fragment.Post;
+import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 
 /**
  * Created by liuyu on 2017/9/2.
@@ -24,9 +24,9 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<Recycler
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<Post> posts;
+    private List<PostInfoJson> posts;
 
-    public MoneyHotDetailRecyclerAdapter(Context context,List<Post> posts){
+    public MoneyHotDetailRecyclerAdapter(Context context,List<PostInfoJson> posts){
         this.mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.posts = posts;
