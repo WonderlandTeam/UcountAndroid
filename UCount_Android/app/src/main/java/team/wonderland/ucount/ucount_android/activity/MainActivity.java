@@ -114,8 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabAsset.performClick();
         
         username= (TextView) findViewById(R.id.username);
-        // TODO: 17/9/7  
-        username.setText("Username："+"chen");
+        SharedPreferences preferences = getSharedPreferences("user", 0);
+        String userName = preferences.getString("USERNAME", "sigma");
+        username.setText("Username："+userName);
 
         //个人中心按钮
         ll_quit = (LinearLayout) findViewById(R.id.main_center_quit);
