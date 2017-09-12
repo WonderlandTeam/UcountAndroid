@@ -79,9 +79,13 @@ public class AssetFragment extends Fragment {
         txtDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("accountType","total");
+                Fragment fragment = new AssetDetailFragment_();
+                fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, new AssetDetailFragment_()).commit();
+                        .replace(R.id.fragment_container, fragment).commit();
             }
         });
         return view;

@@ -75,11 +75,14 @@ public class AssetDetailFragment extends Fragment {
         recyclerView = (RecyclerView)view.findViewById(R.id.asset_cash_detail_recyclerview);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.asset_cash_detail_refresh);
 
-        accountID = (Long)this.getArguments().get("account");
+
         accountType = (String)this.getArguments().get("accountType");
+
+
         if(!accountType.equals("现金")){
             add.setVisibility(View.INVISIBLE);
         }
+
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
 
 
@@ -96,15 +99,17 @@ public class AssetDetailFragment extends Fragment {
             }
         });
 
-        initBillDetail();
+
+        if(accountType.equals("total")){
+            initTotalBillDetail();
+        }else {
+            accountID = (Long)this.getArguments().get("account");
+            initBillDetail();
+        }
 
         return view;
     }
 
-    public void initData(){
-        //TODO: 获得用户某类账户中所有账目 BillService.getBillsByAccount
-        //TODO 在这里设定接口需要的参数
-    }
 
     @Background
     public void initBillDetail(){
@@ -112,7 +117,6 @@ public class AssetDetailFragment extends Fragment {
             assetItems = billService.getBillsByAccount(accountID,0,20,"id","ASC");
             Log.i("tag","调用数据");
             Log.i("tag",assetItems.toString());
-
             initRecyclerView();
  //           billService.getBillsByAccount(accountID,);
 //            Map<String, Object> result = billService.
@@ -120,6 +124,19 @@ public class AssetDetailFragment extends Fragment {
 //            Gson gson = new Gson();
 //            Type type = new TypeToken<List<BillInfoJson>>() {
 //            }.getType();
+        } catch (ResponseException e) {
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    @Background
+    public void initTotalBillDetail(){
+        try {
+            assetItems = billService.getBillsByUser(username,0,20,"time","ASC");
+            Log.i("tag","调用数据");
+            Log.i("tag",assetItems.toString());
+
+            initRecyclerView();
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
