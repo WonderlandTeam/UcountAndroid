@@ -98,7 +98,7 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
             name = (TextView)itemView.findViewById(R.id.money_hot_remark_name);
             date = (TextView)itemView.findViewById(R.id.money_hot_remark_date);
             content = (TextView)itemView.findViewById(R.id.money_hot_remark_content);
-            
+
         }
     }
 
