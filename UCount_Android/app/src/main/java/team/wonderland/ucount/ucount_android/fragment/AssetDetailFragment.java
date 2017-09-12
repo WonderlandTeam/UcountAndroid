@@ -61,7 +61,7 @@ public class AssetDetailFragment extends Fragment {
     private Long accountID = 1l;
     private String accountType = "";
     private String username = "";
-    private AccountInfoJson accountInfoJson = null;
+    private AccountInfoJson accountInfoJson=null;
 
     private TextView tv_in;
     private TextView tv_out;
@@ -100,6 +100,9 @@ public class AssetDetailFragment extends Fragment {
             initTotalBillDetail();
         }else {
             accountInfoJson = (AccountInfoJson) this.getArguments().get("account");
+            Log.i("assetDetailFragment","测试测试");
+            Log.i("assetDetailFragment",accountInfoJson.toString());
+
             accountID = accountInfoJson.getAccountId();
             DecimalFormat df = new DecimalFormat("0.00");
             tv_in.setText(df.format(accountInfoJson.getIncome()));
@@ -119,7 +122,6 @@ public class AssetDetailFragment extends Fragment {
                         .replace(R.id.fragment_container, fragment).commit();
             }
         });
-
 
         return view;
     }
@@ -147,8 +149,8 @@ public class AssetDetailFragment extends Fragment {
     public void initTotalBillDetail(){
         try {
             assetItems = billService.getBillsByUser(username,0,20,"time","ASC");
-            Log.i("tag","调用数据");
-            Log.i("tag",assetItems.toString());
+            Log.i("assetDetailFragment","调用数据");
+            Log.i("assetDetailFragment",assetItems.toString());
 
             initRecyclerView();
         } catch (ResponseException e) {
@@ -172,7 +174,7 @@ public class AssetDetailFragment extends Fragment {
             public void onRefresh() {
                 //TODO: 获得用户某类账户中所有账目 BillService.getBillsByAccount
                 //重新获取完网络数据刷新Adapter，完成后需要调用onRefreshComplete方法取消滑出来的圆形进度
-                initBillDetail();
+                //initBillDetail();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -205,7 +207,7 @@ public class AssetDetailFragment extends Fragment {
         popupMenu.getMenuInflater().inflate(R.menu.item_menu,popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                deleteAccountItem(assetItems.get(pos).getId());
+                deleteAccountItem(assetItems.get(pos).getBillId());
                 adapter.removeItem(pos);
                 adapter.notifyItemChanged(pos);
                 return false;
@@ -214,7 +216,6 @@ public class AssetDetailFragment extends Fragment {
         popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
             @Override
             public void onDismiss(PopupMenu menu) {
-                Toast.makeText(getActivity().getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
             }
         });
         popupMenu.show();
