@@ -52,7 +52,7 @@ public class MoneyHotFragment extends Fragment {
     public void initData(){
         try {
             String username = this.getActivity().getSharedPreferences("user",0).getString("USERNAME","");
-            posts = postService.getPosts(username,0,20,"time","ASC");
+            posts = postService.getPosts(username,0,20,"time","DESC");
             initRecyclerView();
         }catch (ResponseException e){
             showErrorInfo(e.getMessage());

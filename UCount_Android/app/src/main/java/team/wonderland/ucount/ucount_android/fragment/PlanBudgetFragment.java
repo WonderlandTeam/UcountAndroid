@@ -176,7 +176,7 @@ public class PlanBudgetFragment extends Fragment {
 
     @UiThread
     void showTotalBudget(BudgetInfoJson totalBudgetInfoJson){
-        mPercentageRing.setTargetPercent((int)(totalBudgetInfoJson.getRemain()/totalBudgetInfoJson.getBudgetMoney()));
+        mPercentageRing.setTargetPercent((int)(totalBudgetInfoJson.getRemain()*100/totalBudgetInfoJson.getBudgetMoney()));
         totalTextView.setText(String.valueOf(totalBudgetInfoJson.getRemain()));
         id = totalBudgetInfoJson.getId();
 

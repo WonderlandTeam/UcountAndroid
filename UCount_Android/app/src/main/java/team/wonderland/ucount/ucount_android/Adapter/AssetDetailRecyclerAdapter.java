@@ -1,6 +1,7 @@
 package team.wonderland.ucount.ucount_android.Adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.activity.MainActivity;
 import team.wonderland.ucount.ucount_android.fragment.AssetItem;
 import team.wonderland.ucount.ucount_android.fragment.GlobalVariables;
 import team.wonderland.ucount.ucount_android.json.BillInfoJson;
@@ -25,10 +27,15 @@ public class AssetDetailRecyclerAdapter extends RecyclerView.Adapter<AssetDetail
 
     private List<BillInfoJson> assetItems;
     private Context context;
+    private String[] earns;
+    private OnItemClickListener mOnItemClickListener=null;
 
     public AssetDetailRecyclerAdapter(List<BillInfoJson> assetItems,Context context) {
         this.assetItems = assetItems;
         this.context=context;
+
+        Resources resources = MainActivity.resources;
+        earns = resources.getStringArray(R.array.earn);
     }
 
     @Override
@@ -39,14 +46,42 @@ public class AssetDetailRecyclerAdapter extends RecyclerView.Adapter<AssetDetail
     }
 
     @Override
-    public void onBindViewHolder(AssetDetailRecyclerAdapter.AccountViewHolder holder, int position) {
+    public void onBindViewHolder(final AssetDetailRecyclerAdapter.AccountViewHolder holder,final int position) {
         final int j=position;
 
         AccountViewHolder.date.setText(assetItems.get(position).getTime());
-        AssetDetailRecyclerAdapter.AccountViewHolder.type.setText(assetItems.get(position).getType());
+        String type = assetItems.get(position).getType();
+        AssetDetailRecyclerAdapter.AccountViewHolder.type.setText(type);
+        boolean isEarn = false;
+        for(int i=0;i<earns.length;i++){
+            if(type.equals(earns[i])){
+                isEarn = true;
+                break;
+            }
+        }
+        if(isEarn){
+            AssetDetailRecyclerAdapter.AccountViewHolder.num.setTextColor(MainActivity.resources.getColor(R.color.text_red));
+        }
         AssetDetailRecyclerAdapter.AccountViewHolder.num.setText(String.valueOf(assetItems.get(position).getAmount()));
         AccountViewHolder.description.setText(assetItems.get(position).getTrader());
         AccountViewHolder.img.setImageResource(GlobalVariables.getSrcID(assetItems.get(position).getType()));
+
+        if(mOnItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mOnItemClickListener.onItemLongOnClick(holder.itemView,position);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -71,6 +106,21 @@ public class AssetDetailRecyclerAdapter extends RecyclerView.Adapter<AssetDetail
             description = (TextView)itemView.findViewById(R.id.asset_detail_item_tv_description);
             img = (ImageView)itemView.findViewById(R.id.asset_detail_item_img);
         }
+    }
+
+    //define interface
+    public static interface OnItemClickListener {
+        void onItemClick(View view , int position);
+        void onItemLongOnClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(AssetDetailRecyclerAdapter.OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
+    public void removeItem(int pos){
+        assetItems.remove(pos);
+        notifyItemRemoved(pos);
     }
 }
 

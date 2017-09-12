@@ -89,6 +89,7 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
         TextView date;
         TextView content;
         ImageView good;
+        GoodView mGoodView;
         boolean clicked = false;
 
         public MoneyHotViewHolder(View itemView) {
@@ -104,20 +105,26 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
             date = (TextView)itemView.findViewById(R.id.money_hot_remark_date);
             content = (TextView)itemView.findViewById(R.id.money_hot_remark_content);
             good = (ImageView)itemView.findViewById(R.id.money_hot_remark_reply);
-            GoodView mGoodView = new GoodView(itemView.getContext());
-            if(clicked == false) {
-                //TODO: 给回帖点赞
-                good.setImageResource(R.mipmap.ic_good_clicked);
-                mGoodView.setTextInfo("+1", Color.parseColor("#e74c3c"), 12);
-                mGoodView.show(good);
-                clicked = true;
-            }else{
-                //TODO: 取消对回帖的赞
-                good.setImageResource(R.mipmap.ic_good);
-                mGoodView.setTextInfo("取消赞", Color.parseColor("#e74c3c"), 12);
-                mGoodView.show(good);
-                clicked = false;
-            }
+            mGoodView = new GoodView(itemView.getContext());
+            good.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(clicked == false) {
+                        //TODO: 给回帖点赞
+                        good.setImageResource(R.mipmap.ic_good_clicked);
+                        mGoodView.setTextInfo("+1", Color.parseColor("#e74c3c"), 12);
+                        mGoodView.show(good);
+                        clicked = true;
+                    }else{
+                        //TODO: 取消对回帖的赞
+                        good.setImageResource(R.mipmap.ic_good);
+                        mGoodView.setTextInfo("取消赞", Color.parseColor("#e74c3c"), 12);
+                        mGoodView.show(good);
+                        clicked = false;
+                    }
+                }
+            });
+
         }
     }
 

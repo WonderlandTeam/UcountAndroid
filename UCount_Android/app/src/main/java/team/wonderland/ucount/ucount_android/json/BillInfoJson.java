@@ -8,6 +8,7 @@ import java.util.Calendar;
  * Created by CLL on 17/8/18.
  */
 public class BillInfoJson implements Serializable {
+    public Long id;
     public String type ; 			//交易类型
     public String trader ; 			//交易对象
     public double amount ; 			//交易金额
@@ -16,7 +17,8 @@ public class BillInfoJson implements Serializable {
     public BillInfoJson() {
     }
 
-    public BillInfoJson(String type, String trader, double amount, String time) {
+    public BillInfoJson(Long id,String type, String trader, double amount, String time) {
+        this.id = id;
         this.type = type;
         this.trader = trader;
         this.amount = amount;
@@ -31,6 +33,14 @@ public class BillInfoJson implements Serializable {
                 ", amount=" + amount +
                 ", time='" + time + '\'' +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getType() {

@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,6 +36,7 @@ import java.util.Map;
 
 import at.markushi.ui.CircleButton;
 import team.wonderland.ucount.ucount_android.Adapter.AssetDetailRecyclerAdapter;
+import team.wonderland.ucount.ucount_android.Adapter.AssetRecyclerAdapter;
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.AccountInfoJson;
@@ -58,7 +61,7 @@ public class AssetDetailFragment extends Fragment {
     private Long accountID = 1l;
     private String accountType = "";
     private String username = "";
-    private AccountInfoJson accountInfoJson;
+    private AccountInfoJson accountInfoJson = null;
 
     private TextView tv_in;
     private TextView tv_out;
@@ -160,7 +163,6 @@ public class AssetDetailFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new MyItemDecoration());
 
-
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.text_green,
                 R.color.text_green_darker
@@ -175,6 +177,19 @@ public class AssetDetailFragment extends Fragment {
             }
         });
         add.attachToRecyclerView(recyclerView);
+
+        if(accountInfoJson!=null) {
+            adapter.setOnItemClickListener(new AssetDetailRecyclerAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                }
+
+                @Override
+                public void onItemLongOnClick(View view, int position) {
+                    showPopMenu(view, position);
+                }
+            });
+        }
     }
 
 
@@ -184,4 +199,34 @@ public class AssetDetailFragment extends Fragment {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
+    @UiThread
+    public void showPopMenu(View view,final int pos){
+        PopupMenu popupMenu = new PopupMenu(getActivity(),view);
+        popupMenu.getMenuInflater().inflate(R.menu.item_menu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                deleteAccountItem(assetItems.get(pos).getId());
+                adapter.removeItem(pos);
+                adapter.notifyItemChanged(pos);
+                return false;
+            }
+        });
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                Toast.makeText(getActivity().getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
+            }
+        });
+        popupMenu.show();
+    }
+
+    //删除账户
+    @Background
+    void deleteAccountItem(long id){
+        try {
+            billService.deleteBill(accountInfoJson.getAccountId(),id);
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
 }

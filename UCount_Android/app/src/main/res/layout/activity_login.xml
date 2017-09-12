@@ -89,7 +89,7 @@
         android:layout_marginRight="32dp"
         android:text="@string/no_username"
         android:layout_alignParentRight="true"
-        android:textColor="@color/text_green"
+        android:textColor="@color/navigation"
         android:textSize="18sp"
         android:layout_below="@id/login_edtPwd"
         />
