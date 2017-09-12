@@ -1,12 +1,16 @@
 package team.wonderland.ucount.ucount_android.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.wx.goodview.GoodView;
 
 import java.util.List;
 
@@ -84,7 +88,8 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
         TextView name;
         TextView date;
         TextView content;
-
+        ImageView good;
+        boolean clicked = false;
 
         public MoneyHotViewHolder(View itemView) {
             super(itemView);
@@ -98,7 +103,21 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
             name = (TextView)itemView.findViewById(R.id.money_hot_remark_name);
             date = (TextView)itemView.findViewById(R.id.money_hot_remark_date);
             content = (TextView)itemView.findViewById(R.id.money_hot_remark_content);
-
+            good = (ImageView)itemView.findViewById(R.id.money_hot_remark_reply);
+            GoodView mGoodView = new GoodView(itemView.getContext());
+            if(clicked == false) {
+                //TODO: 给回帖点赞
+                good.setImageResource(R.mipmap.ic_good_clicked);
+                mGoodView.setTextInfo("+1", Color.parseColor("#e74c3c"), 12);
+                mGoodView.show(good);
+                clicked = true;
+            }else{
+                //TODO: 取消对回帖的赞
+                good.setImageResource(R.mipmap.ic_good);
+                mGoodView.setTextInfo("取消赞", Color.parseColor("#e74c3c"), 12);
+                mGoodView.show(good);
+                clicked = false;
+            }
         }
     }
 
