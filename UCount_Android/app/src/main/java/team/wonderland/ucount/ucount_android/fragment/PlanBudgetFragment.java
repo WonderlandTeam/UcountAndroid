@@ -321,15 +321,17 @@ public class PlanBudgetFragment extends Fragment {
         popupMenu.getMenuInflater().inflate(R.menu.item_menu,popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                deleteItem(pos);
+                deleteItem(budgets.get(pos).getId());
                 adapter.removeItem(pos);
+                adapter.notifyItemChanged(pos);
+                Toast.makeText(getActivity().getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
             @Override
             public void onDismiss(PopupMenu menu) {
-                Toast.makeText(getActivity().getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
+
             }
         });
         popupMenu.show();
@@ -337,10 +339,9 @@ public class PlanBudgetFragment extends Fragment {
 
 
     @Background
-    void deleteItem(int pos){
+    void deleteItem(long id){
         try {
-            Log.i("tag",budgets.get(pos).getId().toString());
-            budgetService.deleteBudget(budgets.get(pos).getId());
+            budgetService.deleteBudget(id);
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
         }

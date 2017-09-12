@@ -161,7 +161,7 @@ public class PlanBudgetReviewFragment extends Fragment {
     void returnToPlanBudgetFragment(){
         Toast.makeText(getActivity(), "保存成功", Toast.LENGTH_SHORT).show();
         getFragmentManager().beginTransaction()
-                .replace(R.id.plan_fragment_container, new PlanBudgetFragment_())
+                .replace(R.id.plan_fragment_container, new PlanFragment())
                 .commit();
 
     }

@@ -8,38 +8,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
 import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.entity.Post;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
 
 /**
  * Created by liuyu on 2017/8/31.
  */
 
-public class MoneyHotRecyclerAdapter extends RecyclerView.Adapter<MoneyHotRecyclerAdapter.MoneyHotViewHolder>
+public class MoneyKnowledgeRecyclerAdapter extends RecyclerView.Adapter<MoneyKnowledgeRecyclerAdapter.MoneyHotViewHolder>
         implements View.OnClickListener{
 
 
-    private List<PostInfoJson> posts;
+    private List<Post> posts;
     private Context context;
-    private MoneyHotRecyclerAdapter.OnItemClickListener mOnItemClickListener = null;
+    private MoneyKnowledgeRecyclerAdapter.OnItemClickListener mOnItemClickListener = null;
 
-    public MoneyHotRecyclerAdapter(List<PostInfoJson> posts,Context context) {
+    public MoneyKnowledgeRecyclerAdapter(List<Post> posts, Context context) {
         this.posts = posts;
         this.context=context;
     }
 
     @Override
-    public MoneyHotRecyclerAdapter.MoneyHotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MoneyKnowledgeRecyclerAdapter.MoneyHotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(context).inflate(R.layout.money_hot_recyclerview_item,parent,false);
-        MoneyHotRecyclerAdapter.MoneyHotViewHolder nvh=new MoneyHotRecyclerAdapter.MoneyHotViewHolder(v);
+        MoneyKnowledgeRecyclerAdapter.MoneyHotViewHolder nvh=new MoneyKnowledgeRecyclerAdapter.MoneyHotViewHolder(v);
         v.setOnClickListener(this);
         return nvh;
     }
 
     @Override
-    public void onBindViewHolder(MoneyHotRecyclerAdapter.MoneyHotViewHolder holder, int position) {
+    public void onBindViewHolder(MoneyKnowledgeRecyclerAdapter.MoneyHotViewHolder holder, int position) {
         MoneyHotViewHolder.title.setText(posts.get(position).getTitle());
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);
@@ -63,7 +65,7 @@ public class MoneyHotRecyclerAdapter extends RecyclerView.Adapter<MoneyHotRecycl
 
     //define interface
     public static interface OnItemClickListener {
-        void onItemClick(View view , int position);
+        void onItemClick(View view, int position);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class MoneyHotRecyclerAdapter extends RecyclerView.Adapter<MoneyHotRecycl
         }
     }
 
-    public void setOnItemClickListener(MoneyHotRecyclerAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(MoneyKnowledgeRecyclerAdapter.OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
 }

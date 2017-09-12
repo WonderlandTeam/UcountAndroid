@@ -1,12 +1,14 @@
 package team.wonderland.ucount.ucount_android.json;
 
+import java.io.Serializable;
+
 /**
  * 计划信息（攒钱id，用户名，攒钱项目，攒钱总额，已攒金额，开始时间，预计完成日期，每日应攒金额,计划状态）
  * 时间格式为yyyy-MM-dd
  * Created by green-cherry on 2017/8/21.
  */
 
-public class TaskInfoJson {
+public class TaskInfoJson implements Serializable{
     private Long id;
     private String username;
     private String taskContent;

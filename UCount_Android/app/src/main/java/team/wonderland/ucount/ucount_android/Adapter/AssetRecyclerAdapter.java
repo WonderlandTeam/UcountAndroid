@@ -19,8 +19,7 @@ import team.wonderland.ucount.ucount_android.json.AccountInfoJson;
  * Created by liuyu on 2017/8/23.
  */
 
-public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdapter.AccountViewHolder>
-        implements View.OnClickListener{
+public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdapter.AccountViewHolder> {
 
     private List<AccountInfoJson> accounts;
     private Context context;
@@ -35,20 +34,33 @@ public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdap
     public AssetRecyclerAdapter.AccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(context).inflate(R.layout.asset_item,parent,false);
         AccountViewHolder nvh=new AccountViewHolder(v);
-        v.setOnClickListener(this);
         return nvh;
     }
 
     @Override
-    public void onBindViewHolder(AssetRecyclerAdapter.AccountViewHolder holder, int position) {
+    public void onBindViewHolder(final AssetRecyclerAdapter.AccountViewHolder holder,final int position) {
         final int j=position;
 
         AccountViewHolder.accountImg.setImageResource(GlobalVariables.getSrcID(accounts.get(position).getType()));
         AccountViewHolder.accountName.setText(accounts.get(position).getCardID());
         AccountViewHolder.accountTotal.setText(String.valueOf(String.valueOf(accounts.get(position).getBalance())));
 
-        //将position保存在itemView的Tag中，以便点击时进行获取
-        holder.itemView.setTag(position);
+        if(mOnItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mOnItemClickListener.onItemLongOnClick(holder.itemView,position);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -74,18 +86,16 @@ public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdap
     //define interface
     public static interface OnItemClickListener {
         void onItemClick(View view , int position);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (mOnItemClickListener != null) {
-            //注意这里使用getTag方法获取position
-            mOnItemClickListener.onItemClick(v,(int)v.getTag());
-        }
+        void onItemLongOnClick(View view, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
+    }
+
+    public void removeItem(int pos){
+        accounts.remove(pos);
+        notifyItemRemoved(pos);
     }
 
 }

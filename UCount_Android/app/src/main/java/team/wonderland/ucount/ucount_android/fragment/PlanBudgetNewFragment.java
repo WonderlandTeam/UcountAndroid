@@ -3,6 +3,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.activity.MainActivity;
 import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.BudgetAddJson;
 import team.wonderland.ucount.ucount_android.service.BudgetService;
@@ -50,8 +52,7 @@ public class PlanBudgetNewFragment extends Fragment {
     private EditText et_money;
     private TextView tv_date;
 
-    private String[] titles = {"饮食", "日用", "水电气", "通讯网费", "电子设备", "交通", "衣帽鞋服", "护肤品",
-            "彩妆", "首饰", "培训", "书", "文具", "图像影音", "组织活动","捐款","恋爱","社交","兴趣"};
+    private String[] titles;
     private String consumeType;
     private String username;
     private double consumeMoney;
@@ -65,6 +66,9 @@ public class PlanBudgetNewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.plan_budget_new_fragment, container, false);
+
+        Resources resources = MainActivity.resources;
+        titles = resources.getStringArray(R.array.cost);
 
         save = view.findViewById(R.id.plan_budget_new_bt_save);
         save.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +173,7 @@ public class PlanBudgetNewFragment extends Fragment {
         Toast.makeText(getContext(),"添加成功",Toast.LENGTH_SHORT).show();
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.plan_fragment_container, new PlanBudgetFragment_())
+                .replace(R.id.plan_fragment_container, new PlanFragment())
                 .commit();
     }
 

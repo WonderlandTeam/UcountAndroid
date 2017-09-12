@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.Adapter.GridRecyclerAdapter;
+import team.wonderland.ucount.ucount_android.activity.MainActivity;
 import team.wonderland.ucount.ucount_android.util.MyGridLayoutManager;
 import team.wonderland.ucount.ucount_android.Adapter.ViewPagerAdapter;
 
@@ -31,7 +33,8 @@ import team.wonderland.ucount.ucount_android.Adapter.ViewPagerAdapter;
  */
 
 public class AssetEarnFragment extends Fragment{
-    private String[] titles = {"一般收入","家庭补助","工资收入","理财收入"};
+//    private String[] titles = {"一般收入","家庭补助","工资收入","理财收入"};
+    private String[] titles;
     private ViewPager mPager;
     private List<View> mPagerList;
     private List<IOItem> mDatas;
@@ -58,6 +61,8 @@ public class AssetEarnFragment extends Fragment{
                              @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: start");
 
+        Resources resources = MainActivity.resources;
+        titles = resources.getStringArray(R.array.earn);
         // 获得AddItemActivity对应的控件，用来提示已选择的项目类型
         getBannerId();
 

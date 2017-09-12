@@ -45,8 +45,8 @@ public class MoneyFragment extends Fragment {
     private void initUI(View view) {
         mViewPager = (ViewPager) view.findViewById(R.id.money_vp);
         mTopNavigationTabStrip = (NavigationTabStrip) view.findViewById(R.id.money_nts_top);
-        hot = new MoneyHotFragment();
-        post = new MoneyPostFragment();
+        hot = new MoneyHotFragment_();
+        post = new MoneyPostFragment_();
         knowledge = new MoneyKnowledgeFragment();
     }
 

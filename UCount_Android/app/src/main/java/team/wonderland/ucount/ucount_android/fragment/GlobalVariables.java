@@ -2,6 +2,7 @@ package team.wonderland.ucount.ucount_android.fragment;
 
 import android.content.res.Resources;
 
+import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.activity.MainActivity;
 
 /**
@@ -13,10 +14,9 @@ public class GlobalVariables {
     private static boolean mHasDot = false;
     private static String mInputMoney = "";
     private static String mDescription = "";
-    private static String[] cost_titles = {"饮食", "日用", "水电气", "通讯网费", "电子设备", "交通", "衣帽鞋服", "护肤品",
-            "彩妆", "首饰", "培训", "书", "文具", "图像影音", "组织活动","捐款","恋爱","社交","兴趣"};
-    private static String[] earn_titles = {"一般收入","家庭补助","工资收入","理财收入"};
-    private static String[] accounts = {"现金","银行卡","校园卡","支付宝"};
+    private static String[] cost_titles;
+    private static String[] earn_titles;
+    private static String[] accounts = {"现金","银行卡","校园卡","支付宝","工行卡"};
 
     public static void setmDate(String date)      { mDate = date;     }
     public static void setHasDot(boolean hasDot)  { mHasDot = hasDot; }
@@ -31,6 +31,9 @@ public class GlobalVariables {
     public static int getSrcID(String type){
 
             Resources resources = MainActivity.resources;
+            cost_titles = resources.getStringArray(R.array.cost);
+            earn_titles = resources.getStringArray(R.array.earn);
+
             String srcName = "";
             for(int i=0;i<cost_titles.length;i++){
                 if(type.equals(cost_titles[i])){
@@ -56,6 +59,10 @@ public class GlobalVariables {
             if(type.equals(accounts[3])){
                 return resources.getIdentifier("zhifubao", "mipmap", MainActivity.PACKAGE_NAME);
             }
+            if(type.equals(accounts[4])){
+            return resources.getIdentifier("gonghang", "mipmap", MainActivity.PACKAGE_NAME);
+            }
+
 
             return resources.getIdentifier(srcName, "drawable", MainActivity.PACKAGE_NAME);
     }

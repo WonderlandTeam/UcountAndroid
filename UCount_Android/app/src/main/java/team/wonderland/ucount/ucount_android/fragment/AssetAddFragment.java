@@ -23,8 +23,10 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -226,7 +228,6 @@ public class AssetAddFragment extends Fragment{
                         calculatorClear();
                         //TODO: 手动添加一条账目 BillService.addBillMannually
                         addBill();
-//                        getFragmentManager().popBackStack();
                     }
                     break;
                 case R.id.clear:
@@ -236,7 +237,7 @@ public class AssetAddFragment extends Fragment{
                 case R.id.add_description:
                     getFragmentManager().beginTransaction()
                             .addToBackStack(null)  //将当前fragment加入到返回栈中
-                            .replace(R.id.fragment_container, new AssetAddDescriptionFragment()).commit();
+                            .add(R.id.fragment_container, new AssetAddDescriptionFragment()).commit();
             }
 
             transaction.commit();
@@ -297,14 +298,24 @@ public class AssetAddFragment extends Fragment{
 
     }
 
-
-    void addBill(){
-        //TODO   accountID 和 billAddJson还未设置,可以在这个方法里面设置
-
-    }
-
     @Background
-    void addBillAsync(){
+    void addBill(){
+        accountID  = (Long)this.getArguments().get("account");
+
+        Date date=new Date();
+        DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time=format.format(date);//time就是当前时间
+
+        double incomeExpenditure = Double.parseDouble(moneyText.getText().toString());
+
+        String commity = "";
+
+        String consumeType = bannerText.getText().toString();
+
+        String remark = GlobalVariables.getmDescription();
+
+        Log.i("assetAdd",accountID+" "+time+" "+incomeExpenditure+" "+commity+" "+consumeType+" "+remark);
+        billAddJson = new BillAddJson(time, incomeExpenditure, commity, consumeType, remark);
         try {
             List<BillInfoJson> bills = billService.addBillManually(accountID, billAddJson);
 //            System.out.println(result.get("content"));
@@ -315,10 +326,8 @@ public class AssetAddFragment extends Fragment{
     }
 
     //返回界面,
-    //TODO 对应上面注释掉的那条，不知道对不对
     @UiThread
     void returnToFragment(){
-
         Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
         //跳转
         getFragmentManager().popBackStack();

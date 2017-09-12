@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.Adapter.GridRecyclerAdapter;
+import team.wonderland.ucount.ucount_android.activity.MainActivity;
 import team.wonderland.ucount.ucount_android.util.MyGridLayoutManager;
 import team.wonderland.ucount.ucount_android.Adapter.ViewPagerAdapter;
 
@@ -31,8 +33,9 @@ import team.wonderland.ucount.ucount_android.Adapter.ViewPagerAdapter;
  */
 
 public class AssetCostFragment extends Fragment {
-    private String[] titles = {"饮食", "日用", "水电气", "通讯网费", "电子设备", "交通", "衣帽鞋服", "护肤品",
-            "彩妆", "首饰", "培训", "书", "文具", "图像影音", "组织活动","捐款","恋爱","社交","兴趣"};
+//    private String[] titles = {"饮食", "日用", "水电气", "通讯网费", "电子设备", "交通", "衣帽鞋服", "护肤品",
+//            "彩妆", "首饰", "培训", "书", "文具", "图像影音", "组织活动","捐款","恋爱","社交","兴趣"};
+    private String[] titles;
     private ViewPager mPager;
     private List<View> mPagerList;
     private List<IOItem> mDatas;
@@ -58,6 +61,9 @@ public class AssetCostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: start");
+
+        Resources resources = MainActivity.resources;
+        titles = resources.getStringArray(R.array.cost);
 
         // 获得AddItemActivity对应的控件，用来提示已选择的项目类型
         getBannerId();

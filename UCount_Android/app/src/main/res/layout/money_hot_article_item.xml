@@ -45,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/money_hot_article_author"
+        android:scrollbars="vertical"
         android:text =
             "嗨，大家好，我叫黄飘，黄飘的黄，黄飘的飘。你们还可以叫我飘飘。我是一个很可爱的人，希望大家都能喜欢我，耶。
         测试测试测试测试测试测试测试测试测试测试测试测试测试测试，测试测试测试测试测，试测试测试测试测，试测试测试测试测试测试测试测试测试测试

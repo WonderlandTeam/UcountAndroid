@@ -37,5 +37,5 @@ public interface UserBasicService {
      * @return
      */
     @Post("/users/login")
-    UserInfoJson login(@Part String username, @Part String password);
+    UserInfoJson login(@Part String username, @Part String password, @Part("userAgent") String mobileInfo);
 }
