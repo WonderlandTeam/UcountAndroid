@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -23,8 +24,10 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +58,10 @@ public class AssetDetailFragment extends Fragment {
     private Long accountID = 1l;
     private String accountType = "";
     private String username = "";
+    private AccountInfoJson accountInfoJson;
+
+    private TextView tv_in;
+    private TextView tv_out;
     @RestService
     BillService billService;
 
@@ -64,6 +71,8 @@ public class AssetDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.asset_cash_detail_fragment, container, false);
         back = (ImageView)view.findViewById(R.id.asset_cash_detail_back);
         add = (FloatingActionButton) view.findViewById(R.id.asset_cash_detail_bt_add);
+        tv_in = view.findViewById(R.id.asset_cash_detail_txt_in);
+        tv_out = view.findViewById(R.id.asset_cash_detail_txt_out);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +93,16 @@ public class AssetDetailFragment extends Fragment {
         }
 
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
-
+        if(accountType.equals("total")){
+            initTotalBillDetail();
+        }else {
+            accountInfoJson = (AccountInfoJson) this.getArguments().get("account");
+            accountID = accountInfoJson.getAccountId();
+            DecimalFormat df = new DecimalFormat("0.00");
+            tv_in.setText(df.format(accountInfoJson.getIncome()));
+            tv_out.setText(df.format(accountInfoJson.getExpend()));
+            initBillDetail();
+        }
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,13 +117,6 @@ public class AssetDetailFragment extends Fragment {
             }
         });
 
-
-        if(accountType.equals("total")){
-            initTotalBillDetail();
-        }else {
-            accountID = (Long)this.getArguments().get("account");
-            initBillDetail();
-        }
 
         return view;
     }

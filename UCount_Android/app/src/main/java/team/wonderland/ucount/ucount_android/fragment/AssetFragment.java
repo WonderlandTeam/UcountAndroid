@@ -24,6 +24,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -57,9 +58,9 @@ public class AssetFragment extends Fragment {
         View view = inflater.inflate(R.layout.asset_fragment,container,false);
         txtDetail = (TextView)view.findViewById(R.id.asset_txt_detail);
         txtNew = (TextView)view.findViewById(R.id.asset_txt_new);
-        txtTotal = (TextView)view.findViewById(R.id.asset_txt_total);
-        txtIn = (TextView)view.findViewById(R.id.asset_txt_in);
-        txtOut = (TextView)view.findViewById(R.id.asset_txt_out);
+        txtTotal = (TextView)view.findViewById(R.id.asset_txt_totalnum);
+        txtIn = (TextView)view.findViewById(R.id.asset_txt_innum);
+        txtOut = (TextView)view.findViewById(R.id.asset_txt_outnum);
         recyclerView = (RecyclerView)view.findViewById(R.id.asset_recyclerview);
 
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
@@ -101,7 +102,6 @@ public class AssetFragment extends Fragment {
             accounts = accountService.getAccountsByUser(username);
             //显示账户列表
             showRecyclerView();
-
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
@@ -119,7 +119,7 @@ public class AssetFragment extends Fragment {
             @Override
             public void onItemClick(View view , int position){
                 Bundle bundle = new Bundle();
-                bundle.putLong("account",accounts.get(position).getAccountId());
+                bundle.putSerializable("account",accounts.get(position));
                 bundle.putString("accountType",accounts.get(position).getType());
                 Fragment fragment = new AssetDetailFragment_();
                 fragment.setArguments(bundle);
@@ -133,6 +133,20 @@ public class AssetFragment extends Fragment {
                 showPopMenu(view,position);
             }
         });
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        double income = 0;
+        double outcome = 0;
+        double balance = 0;
+        //遍历获得所有账户的总支出和总收入
+        for(int i=0;i<accounts.size();i++){
+            income += accounts.get(i).getIncome();
+            outcome += accounts.get(i).getExpend();
+            balance += accounts.get(i).getBalance();
+        }
+        txtTotal.setText(String.valueOf(df.format(balance)));
+        txtIn.setText(String.valueOf(df.format(income)));
+        txtOut.setText(String.valueOf(df.format(outcome)));
     }
 
     @UiThread

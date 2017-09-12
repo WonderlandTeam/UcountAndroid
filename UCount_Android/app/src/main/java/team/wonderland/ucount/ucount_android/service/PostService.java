@@ -7,6 +7,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import team.wonderland.ucount.ucount_android.exception.MyResponseErrorHandler;
 import team.wonderland.ucount.ucount_android.json.PostAddJson;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
+import team.wonderland.ucount.ucount_android.json.PostReplyAddJson;
 import team.wonderland.ucount.ucount_android.json.PostReplyJson;
 import team.wonderland.ucount.ucount_android.util.RestAPI;
 
@@ -99,8 +100,9 @@ public interface PostService {
      * @param username 用户id
      * @param post_id  帖子id
      */
+    //TODO: username是不是String不是Long类型
     @Delete("/posts/{post_id}/praises?username={username}")
-    void cancelPraisePost(@Path Long post_id, @Path Long username);
+    void cancelPraisePost(@Path Long post_id, @Path String username);
 
     /**
      * 用户点赞帖子回复
@@ -126,10 +128,11 @@ public interface PostService {
      * 回复帖子
      *
      * @param post_id       帖子id
-     * @param postReplyJson 帖子回复信息
+     * @param postReplyAddJson 帖子回复信息
      */
+    //TODO: 这里是不是应该是PostReplyAddJson不是PostReplyJson
     @Post("/posts/{post_id}/replies")
-    Long replyPost(@Path Long post_id, @Body PostReplyJson postReplyJson);
+    Long replyPost(@Path Long post_id, @Body PostReplyAddJson postReplyAddJson);
 
     /**
      * 获取帖子回复信息
