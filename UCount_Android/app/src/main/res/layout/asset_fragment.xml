@@ -109,4 +109,15 @@
         />
 
 
+    <com.github.silvestrpredko.dotprogressbar.DotProgressBar
+        android:id="@+id/asset_dot_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        app:amount="5"
+        app:duration="@android:integer/config_mediumAnimTime"
+        app:endColor="@color/text_green_darker"
+        app:startColor="@color/text_green"
+        app:animationDirection="left"
+        />
     </android.support.percent.PercentRelativeLayout>

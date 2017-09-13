@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -47,6 +48,7 @@ public class AssetFragment extends Fragment {
     private AssetRecyclerAdapter adapter;
     private List<AccountInfoJson> accounts = new ArrayList<>();
 
+    private DotProgressBar dotProgressBar;
     String username;
 
     @RestService
@@ -62,7 +64,7 @@ public class AssetFragment extends Fragment {
         txtIn = (TextView)view.findViewById(R.id.asset_txt_innum);
         txtOut = (TextView)view.findViewById(R.id.asset_txt_outnum);
         recyclerView = (RecyclerView)view.findViewById(R.id.asset_recyclerview);
-
+        dotProgressBar = view.findViewById(R.id.asset_dot_progress_bar);
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
         initAsset();
 
@@ -98,10 +100,12 @@ public class AssetFragment extends Fragment {
      */
     @Background
     void initAsset() {
+        showLoading();
         try {
             accounts = accountService.getAccountsByUser(username);
             //显示账户列表
             showRecyclerView();
+            hideLoading();
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
@@ -186,4 +190,14 @@ public class AssetFragment extends Fragment {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
+    //显示加载动画
+    @UiThread
+    void showLoading(){
+        dotProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @UiThread
+    void hideLoading(){
+        dotProgressBar.setVisibility(View.INVISIBLE);
+    }
 }

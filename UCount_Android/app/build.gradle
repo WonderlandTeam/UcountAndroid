@@ -54,6 +54,7 @@ dependencies {
     compile 'com.android.support:palette-v7:+'
     compile 'com.github.barteksc:android-pdf-viewer:2.5.0'
     compile 'com.wx.goodview:goodview:1.0.0'
+    compile 'com.github.silvestrpredko:dot-progress-bar:1.1'
 
     compile 'com.fasterxml.jackson.core:jackson-core:2.8.1'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.1'
