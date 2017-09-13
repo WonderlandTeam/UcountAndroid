@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +45,7 @@ import team.wonderland.ucount.ucount_android.json.AccountInfoJson;
 import team.wonderland.ucount.ucount_android.json.BillInfoJson;
 import team.wonderland.ucount.ucount_android.json.BudgetInfoJson;
 import team.wonderland.ucount.ucount_android.service.BillService;
+import team.wonderland.ucount.ucount_android.util.EndLessOnScrollListener;
 import team.wonderland.ucount.ucount_android.util.PercentageRing;
 
 /**
@@ -54,8 +57,11 @@ public class AssetDetailFragment extends Fragment {
     private ImageView back;
     private FloatingActionButton add;
     private RecyclerView recyclerView;
+    private LinearLayoutManager mLinearLayoutManager;
+    private int page = 0;
     private AssetDetailRecyclerAdapter adapter;
     private List<BillInfoJson> assetItems;
+    private List<BillInfoJson> newassetItems;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private Long accountID = 1l;
@@ -65,6 +71,14 @@ public class AssetDetailFragment extends Fragment {
 
     private TextView tv_in;
     private TextView tv_out;
+    private TextView tv_in_title;
+    private TextView tv_out_title;
+
+    private boolean isTotalBill = false;
+    private boolean canLoadMore = true;
+
+    private final int ITEMS = 10;
+
     @RestService
     BillService billService;
 
@@ -76,6 +90,8 @@ public class AssetDetailFragment extends Fragment {
         add = (FloatingActionButton) view.findViewById(R.id.asset_cash_detail_bt_add);
         tv_in = view.findViewById(R.id.asset_cash_detail_txt_in);
         tv_out = view.findViewById(R.id.asset_cash_detail_txt_out);
+        tv_in_title = view.findViewById(R.id.asset_cash_detail_txt_intitle);
+        tv_out_title = view.findViewById(R.id.asset_cash_detail_txt_outtitle);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,11 +113,15 @@ public class AssetDetailFragment extends Fragment {
 
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
         if(accountType.equals("total")){
+            isTotalBill = true;
+
+            tv_in.setText("");
+            tv_out.setText("");
+            tv_in_title.setText((Calendar.getInstance().getTime().getMonth()+1)+"月账目");
+            tv_out_title.setText("");
             initTotalBillDetail();
         }else {
             accountInfoJson = (AccountInfoJson) this.getArguments().get("account");
-            Log.i("assetDetailFragment","测试测试");
-            Log.i("assetDetailFragment",accountInfoJson.toString());
 
             accountID = accountInfoJson.getAccountId();
             DecimalFormat df = new DecimalFormat("0.00");
@@ -130,9 +150,11 @@ public class AssetDetailFragment extends Fragment {
     @Background
     public void initBillDetail(){
         try {
-            assetItems = billService.getBillsByAccount(accountID,0,20,"id","ASC");
-            Log.i("tag","调用数据");
-            Log.i("tag",assetItems.toString());
+            assetItems = billService.getBillsByAccount(accountID,0,ITEMS,"id","ASC");
+            Log.i("AssetDetailFragment",assetItems.toString());
+            if(assetItems.size()<ITEMS){
+                canLoadMore = false;
+            }
             initRecyclerView();
  //           billService.getBillsByAccount(accountID,);
 //            Map<String, Object> result = billService.
@@ -148,10 +170,10 @@ public class AssetDetailFragment extends Fragment {
     @Background
     public void initTotalBillDetail(){
         try {
-            assetItems = billService.getBillsByUser(username,0,20,"time","ASC");
-            Log.i("assetDetailFragment","调用数据");
-            Log.i("assetDetailFragment",assetItems.toString());
-
+            assetItems = billService.getBillsByUser(username,0,ITEMS,"id","ASC");
+            if(assetItems.size()<ITEMS){
+                canLoadMore = false;
+            }
             initRecyclerView();
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
@@ -160,7 +182,8 @@ public class AssetDetailFragment extends Fragment {
 
     @UiThread
     void initRecyclerView(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLinearLayoutManager);
         adapter = new AssetDetailRecyclerAdapter(assetItems,getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new MyItemDecoration());
@@ -180,12 +203,23 @@ public class AssetDetailFragment extends Fragment {
         });
         add.attachToRecyclerView(recyclerView);
 
+        //加载更多
+        if(canLoadMore) {
+            recyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
+                @Override
+                public void onLoadMore(int currentPage) {
+                    loadMoreData();
+                }
+            });
+        }
+
         if(accountInfoJson!=null) {
             adapter.setOnItemClickListener(new AssetDetailRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
                 }
 
+                //长按删除
                 @Override
                 public void onItemLongOnClick(View view, int position) {
                     showPopMenu(view, position);
@@ -194,6 +228,30 @@ public class AssetDetailFragment extends Fragment {
         }
     }
 
+    @Background
+    //每次上拉加载的时候，给RecyclerView的后面添加了20条数据数据
+    void loadMoreData(){
+        try {
+            page ++;
+            if(isTotalBill){
+                newassetItems=billService.getBillsByUser(username,page,ITEMS,"id","ASC");
+            }else {
+                newassetItems=billService.getBillsByAccount(accountID, page, ITEMS, "id", "ASC");
+            }
+            if(newassetItems.size()<ITEMS){
+                canLoadMore = false;
+            }
+            assetItems.addAll(newassetItems);
+            loadMoreDataSuccess();
+        } catch (ResponseException e) {
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    @UiThread
+    void loadMoreDataSuccess(){
+        adapter.notifyDataSetChanged();
+    }
 
     //显示错误信息
     @UiThread

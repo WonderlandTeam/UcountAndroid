@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_below="@id/asset_txt_totalnum"
-        android:text="资产"
+        android:text="流入"
         android:textColor="@color/main_bg"
         android:textSize="18sp" />
 
@@ -72,7 +72,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_below="@id/asset_txt_totalnum"
-        android:text="负债"
+        android:text="流出"
         android:textColor="@color/main_bg"
         android:textSize="18sp" />
 
