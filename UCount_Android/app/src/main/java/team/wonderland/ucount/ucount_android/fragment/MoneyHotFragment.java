@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
+
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
@@ -34,7 +36,7 @@ public class MoneyHotFragment extends Fragment {
     private RecyclerView recyclerView;
     private MoneyHotRecyclerAdapter adapter;
     private List<PostInfoJson> posts;
-
+    private DotProgressBar dotProgressBar;
     @RestService
     PostService postService;
 
@@ -42,6 +44,7 @@ public class MoneyHotFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.money_hot_fragment, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.money_hot_recyclerview);
+        dotProgressBar = view.findViewById(R.id.money_hot_dot_progress_bar);
 
         initData();
 
@@ -50,6 +53,7 @@ public class MoneyHotFragment extends Fragment {
 
     @Background
     public void initData(){
+        showLoading();
         try {
             String username = this.getActivity().getSharedPreferences("user",0).getString("USERNAME","");
             posts = postService.getPosts(username,0,20,"time","ASC");
@@ -57,6 +61,7 @@ public class MoneyHotFragment extends Fragment {
         }catch (ResponseException e){
             showErrorInfo(e.getMessage());
         }
+        hideLoading();
     }
 
     @UiThread
@@ -89,5 +94,16 @@ public class MoneyHotFragment extends Fragment {
     @UiThread
     void showErrorInfo(String error){
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+    }
+
+    //显示加载动画
+    @UiThread
+    void showLoading(){
+        dotProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @UiThread
+    void hideLoading(){
+        dotProgressBar.setVisibility(View.INVISIBLE);
     }
 }

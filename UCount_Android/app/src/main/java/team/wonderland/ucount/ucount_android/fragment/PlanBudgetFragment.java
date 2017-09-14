@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.melnykov.fab.FloatingActionButton;
@@ -67,6 +68,7 @@ public class PlanBudgetFragment extends Fragment {
 
     private double totalnum;
 
+    private DotProgressBar dotProgressBar;
     private String username;
     private String date;
 
@@ -83,6 +85,7 @@ public class PlanBudgetFragment extends Fragment {
         totalTextView = (TextView)view.findViewById(R.id.plan_budget_textview_leftmum);
         mPercentageRing = (PercentageRing) view.findViewById(R.id.plan_budget_circle);
         totalTextView.setText("点击设置");
+        dotProgressBar = view.findViewById(R.id.plan_budget_dot_progress_bar);
 
         final Calendar startDate = Calendar.getInstance();
         startDate.set(2017, 8, 1);
@@ -138,6 +141,7 @@ public class PlanBudgetFragment extends Fragment {
      */
     @Background
     void initBudget() {
+        showLoading();
         budgets = new ArrayList<>();
         date = dateTextView.getText().toString().replace(",", "-").replace("月", "");
         try {
@@ -242,6 +246,7 @@ public class PlanBudgetFragment extends Fragment {
                 }
             }
         });
+        hideLoading();
     }
 
     @UiThread
@@ -345,5 +350,17 @@ public class PlanBudgetFragment extends Fragment {
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
         }
+    }
+
+
+    //显示加载动画
+    @UiThread
+    void showLoading(){
+        dotProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @UiThread
+    void hideLoading(){
+        dotProgressBar.setVisibility(View.INVISIBLE);
     }
 }

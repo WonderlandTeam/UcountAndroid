@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg"
@@ -9,4 +10,16 @@
         android:id="@+id/money_hot_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-</LinearLayout>
+
+    <com.github.silvestrpredko.dotprogressbar.DotProgressBar
+        android:id="@+id/money_hot_dot_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        app:amount="5"
+        app:duration="@android:integer/config_mediumAnimTime"
+        app:endColor="@color/text_green_darker"
+        app:startColor="@color/text_green"
+        app:animationDirection="left"
+        />
+</RelativeLayout>

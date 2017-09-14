@@ -105,10 +105,10 @@ public class AssetFragment extends Fragment {
             accounts = accountService.getAccountsByUser(username);
             //显示账户列表
             showRecyclerView();
-            hideLoading();
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
+        hideLoading();
     }
 
     @UiThread

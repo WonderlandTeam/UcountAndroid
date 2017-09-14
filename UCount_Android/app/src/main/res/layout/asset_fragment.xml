@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/main_bg">
 
+    <!--android:src="@drawable/header"-->
     <ImageView
         android:id="@+id/asset_img_header"
-        android:src="@drawable/header"
+        android:background="@color/text_green_darker"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_heightPercent="30%" />
+        app:layout_heightPercent="30%"
+
+        />
 
         <TextView
             android:id="@+id/asset_txt_detail"
