@@ -376,7 +376,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         }
         for (int i = 0; i < outputLabels.size(); i++) {
             if(!outputs.get(i).equals(0f)||totalOutput>0||outputs.get(i) * 100 / totalOutput>0.1f) {
-                sliceList.add(new SliceValue(outputs.get(i), Color.parseColor(colors[i])).setLabel(outputLabels.get(i)));
+                sliceList.add(new SliceValue(outputs.get(i), ChartUtils.pickColor()).setLabel(outputLabels.get(i)));
                 outputItems.add(new ReportItem(icons[i], outputLabels.get(i) + "支出",
                         String.format("%.1f", outputs.get(i) * 100 / totalOutput), outputs.get(i)));
             }

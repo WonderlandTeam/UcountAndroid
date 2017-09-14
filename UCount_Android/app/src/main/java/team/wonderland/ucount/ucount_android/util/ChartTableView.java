@@ -192,9 +192,9 @@ public class ChartTableView extends View {
         canvas.drawRect(startX, now_height, (float) (startX + tableItemWidth * (3 - 1.0 / 8)), now_height + tableItemHeight,mPaintHead2);
         canvas.drawRect((float) (startX + tableItemWidth * (3 - 1.0 / 8)), now_height, (float) (startX + tableItemWidth * (5 - 1.0 / 8)), now_height + tableItemHeight, mPaintHead);
         canvas.drawRect((float) (startX + tableItemWidth * (5 - 1.0 / 8)), now_height, width, now_height + tableItemHeight, mPaintHead2);
-        canvas.drawText("总资产", startX + tableItemWidth / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintWhiteText);
-        canvas.drawText("总负债", startX + tableItemWidth * 7 / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintWhiteText);
-        canvas.drawText("总净值", startX + tableItemWidth * 11 / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintWhiteText);
+        canvas.drawText("总资产", startX + tableItemWidth / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintText);
+        canvas.drawText("总负债", startX + tableItemWidth * 7 / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintText);
+        canvas.drawText("总净值", startX + tableItemWidth * 11 / 2, now_height + tableItemHeight / 2 + textSize / 2, mPaintText);
         now_height = now_height + tableItemHeight;
 
 
