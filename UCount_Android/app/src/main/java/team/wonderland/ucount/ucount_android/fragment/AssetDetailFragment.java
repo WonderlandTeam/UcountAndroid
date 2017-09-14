@@ -170,7 +170,7 @@ public class AssetDetailFragment extends Fragment {
     @Background
     public void initTotalBillDetail(){
         try {
-            assetItems = billService.getBillsByUser(username,0,ITEMS,"id","ASC");
+            assetItems = billService.getBillsByUser(username, null);
             if(assetItems.size()<ITEMS){
                 canLoadMore = false;
             }
@@ -234,7 +234,7 @@ public class AssetDetailFragment extends Fragment {
         try {
             page ++;
             if(isTotalBill){
-                newassetItems=billService.getBillsByUser(username,page,ITEMS,"id","ASC");
+                newassetItems=billService.getBillsByUser(username, null);
             }else {
                 newassetItems=billService.getBillsByAccount(accountID, page, ITEMS, "id", "ASC");
             }

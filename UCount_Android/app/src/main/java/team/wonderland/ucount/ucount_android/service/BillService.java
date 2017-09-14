@@ -39,11 +39,11 @@ public interface BillService {
     /**
      * 获取用户所有账目信息
      * @param username          用户id
-     *                           pageable筛选信息传什么？
+     * @param month             月份（yyyy-MM），可为空
      * @return                  账目列表
      */
-    @Get("/users/{username}/bills?page={page}&size={size}&sort={sort},{direct}")
-    List<BillInfoJson> getBillsByUser(@Path String username,@Path int page,@Path int size,@Path String sort,@Path String direct);
+    @Get("/users/{username}/bills?month={month}")
+    List<BillInfoJson> getBillsByUser(@Path String username, @Path String month);
 
     /**
      * 用户手动记账
