@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,6 +25,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +48,7 @@ public class AssetFragment extends Fragment {
     private AssetRecyclerAdapter adapter;
     private List<AccountInfoJson> accounts = new ArrayList<>();
 
+    private DotProgressBar dotProgressBar;
     String username;
 
     @RestService
@@ -57,11 +60,11 @@ public class AssetFragment extends Fragment {
         View view = inflater.inflate(R.layout.asset_fragment,container,false);
         txtDetail = (TextView)view.findViewById(R.id.asset_txt_detail);
         txtNew = (TextView)view.findViewById(R.id.asset_txt_new);
-        txtTotal = (TextView)view.findViewById(R.id.asset_txt_total);
-        txtIn = (TextView)view.findViewById(R.id.asset_txt_in);
-        txtOut = (TextView)view.findViewById(R.id.asset_txt_out);
+        txtTotal = (TextView)view.findViewById(R.id.asset_txt_totalnum);
+        txtIn = (TextView)view.findViewById(R.id.asset_txt_innum);
+        txtOut = (TextView)view.findViewById(R.id.asset_txt_outnum);
         recyclerView = (RecyclerView)view.findViewById(R.id.asset_recyclerview);
-
+        dotProgressBar = view.findViewById(R.id.asset_dot_progress_bar);
         username = getActivity().getSharedPreferences("user", 0).getString("USERNAME", "");
         initAsset();
 
@@ -79,9 +82,13 @@ public class AssetFragment extends Fragment {
         txtDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("accountType","total");
+                Fragment fragment = new AssetDetailFragment_();
+                fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.fragment_container, new AssetDetailFragment_()).commit();
+                        .replace(R.id.fragment_container, fragment).commit();
             }
         });
         return view;
@@ -93,14 +100,15 @@ public class AssetFragment extends Fragment {
      */
     @Background
     void initAsset() {
+        showLoading();
         try {
             accounts = accountService.getAccountsByUser(username);
             //显示账户列表
             showRecyclerView();
-
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
+        hideLoading();
     }
 
     @UiThread
@@ -115,7 +123,7 @@ public class AssetFragment extends Fragment {
             @Override
             public void onItemClick(View view , int position){
                 Bundle bundle = new Bundle();
-                bundle.putLong("account",accounts.get(position).getAccountId());
+                bundle.putSerializable("account",accounts.get(position));
                 bundle.putString("accountType",accounts.get(position).getType());
                 Fragment fragment = new AssetDetailFragment_();
                 fragment.setArguments(bundle);
@@ -129,6 +137,20 @@ public class AssetFragment extends Fragment {
                 showPopMenu(view,position);
             }
         });
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        double income = 0;
+        double outcome = 0;
+        double balance = 0;
+        //遍历获得所有账户的总支出和总收入
+        for(int i=0;i<accounts.size();i++){
+            income += accounts.get(i).getIncome();
+            outcome += accounts.get(i).getExpend();
+            balance += accounts.get(i).getBalance();
+        }
+        txtTotal.setText(String.valueOf(df.format(balance)));
+        txtIn.setText(String.valueOf(df.format(income)));
+        txtOut.setText(String.valueOf(df.format(outcome)));
     }
 
     @UiThread
@@ -168,4 +190,14 @@ public class AssetFragment extends Fragment {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
+    //显示加载动画
+    @UiThread
+    void showLoading(){
+        dotProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @UiThread
+    void hideLoading(){
+        dotProgressBar.setVisibility(View.INVISIBLE);
+    }
 }

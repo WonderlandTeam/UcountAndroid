@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.activity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
+import org.androidannotations.rest.spring.annotations.RestService;
+
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.exception.ResponseException;
+import team.wonderland.ucount.ucount_android.json.UserSignUpJson;
+import team.wonderland.ucount.ucount_android.service.UserBasicService;
 
 /**
  * Created by liuyu on 2017/8/20.
@@ -23,8 +31,8 @@ public class RegisterActivity extends AppCompatActivity{
     private String phoneValue,usernameValue,passwordValue;
     private ImageView back;
 
-//    @RestService
-//    UserBasicService userBasicService;
+    @RestService
+    UserBasicService userBasicService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +50,10 @@ public class RegisterActivity extends AppCompatActivity{
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showLoginActivity();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity_.class);
+                startActivity(intent);
+                finish();
+
             }
         });
     }
@@ -50,12 +61,15 @@ public class RegisterActivity extends AppCompatActivity{
     @Click(R.id.btn_register)
     public void registerClick(View view){
         if(username==null||username.getText().toString().equals("")) {
+            showErrorMessage("用户名不能为空");
             return;
         }
         if(password==null||password.getText().toString().equals("")) {
+            showErrorMessage("密码不能为空");
             return;
         }
         if(phone==null||phone.getText().toString().equals("")) {
+            showErrorMessage("电话不能为空");
             return;
         }
         //邮箱可选，先空着
@@ -71,6 +85,17 @@ public class RegisterActivity extends AppCompatActivity{
 //            //进入登录界面
 //            showLoginActivity();
 //        }
+    }
+
+    @Background
+    void register(){
+        try{
+            UserSignUpJson userSignUpJson=new UserSignUpJson(username.getText().toString(),password.getText().toString(),
+                phone.getText().toString(),null);
+            userBasicService.signUp(userSignUpJson);
+        }catch(ResponseException e){
+            showErrorMessage(e.getMessage());
+        }
     }
 
     @UiThread

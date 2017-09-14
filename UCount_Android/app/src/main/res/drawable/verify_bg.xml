@@ -12,7 +12,7 @@
                 />
             <stroke
                 android:width="0.5px"
-                android:color="@color/text_green"/>
+                android:color="@color/navigation"/>
         </shape>
     </item>
 </layer-list>

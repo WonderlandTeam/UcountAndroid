@@ -30,6 +30,7 @@ import team.wonderland.ucount.ucount_android.Adapter.MoneyHotDetailRecyclerAdapt
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.exception.ResponseException;
 import team.wonderland.ucount.ucount_android.json.PostInfoJson;
+import team.wonderland.ucount.ucount_android.json.PostReplyAddJson;
 import team.wonderland.ucount.ucount_android.json.PostReplyJson;
 import team.wonderland.ucount.ucount_android.service.PostService;
 
@@ -59,7 +60,6 @@ public class MoneyHotDetailFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.money_hot_detail_fragment, container, false);
 
-        //TODO: 这里获得了postInfoJson和username
         postInfoJson = (PostInfoJson) getArguments().get("post");
         username = getActivity().getSharedPreferences("user",0).getString("USERNAME","");
 
@@ -72,20 +72,10 @@ public class MoneyHotDetailFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 if(goodClicked == false) {
-                    good.setImageResource(R.mipmap.ic_good_clicked);
-                    mGoodView.setTextInfo("+1", Color.parseColor("#e74c3c"), 12);
-                    mGoodView.show(good);
-                    goodClicked = true;
-                    //TODO: 点赞 PostService.praisePost()
+                    setGood();
                 }else{
-                    good.setImageResource(R.mipmap.ic_good);
-                    mGoodView.setTextInfo("取消赞", Color.parseColor("#e74c3c"), 12);
-                    mGoodView.show(good);
-                    goodClicked = false;
-                    //TODO: 取消点赞 PostService.cancelPraisePost()
+                    cancleGood();
                 }
-//                Toast.makeText(getContext(), "默认Toast样式",
-//                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,17 +83,9 @@ public class MoneyHotDetailFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 if(starClicked == false) {
-                    star.setImageResource(R.mipmap.ic_star_clicked);
-                    mGoodView.setTextInfo("收藏成功", Color.parseColor("#f4e842"), 12);
-                    mGoodView.show(star);
-                    starClicked = true;
-                    //TODO: 收藏 PostService.collectPost()
+                    setStar();
                 }else{
-                    star.setImageResource(R.mipmap.ic_star);
-                    mGoodView.setTextInfo("取消收藏", Color.parseColor("#f4e842"), 12);
-                    mGoodView.show(star);
-                    starClicked = false;
-                    //TODO: 取消收藏 PostService.deleteCollection()
+                    cancleStar();
                 }
             }
         });
@@ -111,8 +93,12 @@ public class MoneyHotDetailFragment extends Fragment{
         tv_remark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: 发表评论 PostService.replyPost
+                String remark = tv_remark.getText().toString();
+                if(remark.equals("")){
+                    showErrorInfo("评论不能为空哦");
+                }else{
 
+                }
             }
         });
 
@@ -168,4 +154,103 @@ public class MoneyHotDetailFragment extends Fragment{
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
+
+    //点赞
+    @Background
+    void setGood(){
+        try {
+            postService.praisePost(postInfoJson.getPostId(),username);
+            setGoodSuccess();
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    //点赞成功
+    @UiThread
+    void setGoodSuccess(){
+        good.setImageResource(R.mipmap.ic_good_clicked);
+        mGoodView.setTextInfo("+1", Color.parseColor("#e74c3c"), 12);
+        mGoodView.show(good);
+        goodClicked = true;
+    }
+
+    //取消点赞
+    @Background
+    void cancleGood(){
+        try {
+            postService.cancelPraisePost(postInfoJson.getPostId(),username);
+            cancleGoodSuccess();
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    //取消点赞成功
+    @UiThread
+    void cancleGoodSuccess(){
+        good.setImageResource(R.mipmap.ic_good);
+        mGoodView.setTextInfo("取消赞", Color.parseColor("#e74c3c"), 12);
+        mGoodView.show(good);
+        goodClicked = false;
+    }
+
+
+    //收藏
+    @Background
+    void setStar(){
+        try {
+            postService.collectPost(postInfoJson.getPostId(),username);
+            setStarSuccess();
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    //收藏成功
+    @UiThread
+    void setStarSuccess(){
+        star.setImageResource(R.mipmap.ic_star_clicked);
+        mGoodView.setTextInfo("收藏成功", Color.parseColor("#f4e842"), 12);
+        mGoodView.show(star);
+        starClicked = true;
+    }
+
+    //取消收藏
+    @Background
+    void cancleStar(){
+        try {
+            postService.deleteCollection(postInfoJson.getPostId(),username);
+            cancleStarSuccess();
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    //取消收藏成功
+    @UiThread
+    void cancleStarSuccess(){
+        star.setImageResource(R.mipmap.ic_star);
+        mGoodView.setTextInfo("取消收藏", Color.parseColor("#f4e842"), 12);
+        mGoodView.show(star);
+        starClicked = false;
+    }
+
+    //发布评论
+    @Background
+    void remark(String remark){
+        try {
+            PostReplyAddJson postReplyAddJson = new PostReplyAddJson(username,remark);
+            postService.replyPost(postInfoJson.getPostId(),postReplyAddJson);
+            remarkSuccess();
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
+
+    //发布评论成功
+    @UiThread
+    void remarkSuccess(){
+        Toast.makeText(getActivity(), "发布评论成功", Toast.LENGTH_SHORT).show();
+    }
 }

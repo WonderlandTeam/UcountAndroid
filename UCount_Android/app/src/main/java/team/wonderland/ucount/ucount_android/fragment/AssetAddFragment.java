@@ -55,8 +55,6 @@ public class AssetAddFragment extends Fragment{
     private TextView tv_description;
     private Button zero,one,two,three,four,five,six,seven,eight,nine,dot;
 
-
-
     private ImageView bannerImage;
     private TextView bannerText;
 
@@ -208,13 +206,13 @@ public class AssetAddFragment extends Fragment{
 
             switch (view.getId()) {
                 case R.id.add_cost_button:
-                    addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“支出“按钮为灰色
+                    addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.navigation)); // 设置“支出“按钮为灰色
                     addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“收入”按钮为绿色
                     transaction.replace(R.id.item_fragment, new AssetCostFragment());
 
                     break;
                 case R.id.add_earn_button:
-                    addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.text_green)); // 设置“收入“按钮为灰色
+                    addEarnBtn.setTextColor(getActivity().getResources().getColor(R.color.navigation)); // 设置“收入“按钮为灰色
                     addCostBtn.setTextColor(getActivity().getResources().getColor(R.color.text_gray)); // 设置“支出”按钮为绿色
                     transaction.replace(R.id.item_fragment, new AssetEarnFragment());
 
@@ -226,7 +224,6 @@ public class AssetAddFragment extends Fragment{
                     else {
                         putItemInData(Double.parseDouble(moneyText.getText().toString()));
                         calculatorClear();
-                        //TODO: 手动添加一条账目 BillService.addBillMannually
                         addBill();
                     }
                     break;
@@ -261,6 +258,7 @@ public class AssetAddFragment extends Fragment{
 //        ioItem.save();
 
         int type = ioItem.getType();
+
         String sumDate = formatSum.format(new Date());
     }
 
@@ -306,8 +304,13 @@ public class AssetAddFragment extends Fragment{
         DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time=format.format(date);//time就是当前时间
 
-        double incomeExpenditure = Double.parseDouble(moneyText.getText().toString());
+        int tagType = (int) bannerImage.getTag();
 
+        double incomeExpenditure = Double.parseDouble(moneyText.getText().toString());
+        //tagType<0 cost
+        if (tagType < 0) {
+            incomeExpenditure = 0-incomeExpenditure;
+        }
         String commity = "";
 
         String consumeType = bannerText.getText().toString();
@@ -324,6 +327,8 @@ public class AssetAddFragment extends Fragment{
             showErrorInfo(e.toString());
         }
     }
+
+
 
     //返回界面,
     @UiThread

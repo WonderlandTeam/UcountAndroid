@@ -19,6 +19,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,14 +72,14 @@ public class PlanTaskDetailFragment extends Fragment {
         tv_review = view.findViewById(R.id.plan_task_detail_revise);
         save = view.findViewById(R.id.plan_task_detail_bt_save);
 
-
+        DecimalFormat df = new DecimalFormat("0.00");
         tv_title.setText(taskInfoJson.getTaskContent());
         et_money.setText(String.valueOf(taskInfoJson.getUpper()));
         et_money.setEnabled(false);
         tv_starttime.setText(taskInfoJson.getCreateTime());
         tv_deadline.setText(taskInfoJson.getDeadline());
-        tv_have.setText(String.valueOf(taskInfoJson.getSavedMoney()));
-        tv_daily.setText(String.valueOf(taskInfoJson.getHaveToSaveEveryday()));
+        tv_have.setText(String.valueOf(df.format(taskInfoJson.getSavedMoney())));
+        tv_daily.setText(String.valueOf(df.format(taskInfoJson.getHaveToSaveEveryday())));
 
 
         tv_review.setOnClickListener(new View.OnClickListener() {

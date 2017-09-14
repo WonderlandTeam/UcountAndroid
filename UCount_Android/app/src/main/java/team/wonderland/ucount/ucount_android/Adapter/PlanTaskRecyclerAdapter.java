@@ -17,8 +17,7 @@ import team.wonderland.ucount.ucount_android.util.Task;
  * Created by liuyu on 2017/8/31.
  */
 
-public class PlanTaskRecyclerAdapter extends RecyclerView.Adapter<PlanTaskRecyclerAdapter.PlanTaskViewHolder>
-        implements View.OnClickListener{
+public class PlanTaskRecyclerAdapter extends RecyclerView.Adapter<PlanTaskRecyclerAdapter.PlanTaskViewHolder> {
 
 
     private List<TaskInfoJson> tasks;
@@ -34,15 +33,30 @@ public class PlanTaskRecyclerAdapter extends RecyclerView.Adapter<PlanTaskRecycl
     public PlanTaskRecyclerAdapter.PlanTaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(context).inflate(R.layout.plan_task_item,parent,false);
         PlanTaskRecyclerAdapter.PlanTaskViewHolder nvh=new PlanTaskRecyclerAdapter.PlanTaskViewHolder(v);
-        v.setOnClickListener(this);
         return nvh;
     }
 
     @Override
-    public void onBindViewHolder(PlanTaskRecyclerAdapter.PlanTaskViewHolder holder, int position) {
+    public void onBindViewHolder(final PlanTaskRecyclerAdapter.PlanTaskViewHolder holder, final int position) {
         PlanTaskViewHolder.title.setText(tasks.get(position).getTaskContent());
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);
+        if(mOnItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mOnItemClickListener.onItemLongOnClick(holder.itemView,position);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -62,17 +76,16 @@ public class PlanTaskRecyclerAdapter extends RecyclerView.Adapter<PlanTaskRecycl
     //define interface
     public static interface OnItemClickListener {
         void onItemClick(View view , int position);
+        void onItemLongOnClick(View view, int position);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (mOnItemClickListener != null) {
-            //注意这里使用getTag方法获取position
-            mOnItemClickListener.onItemClick(v,(int)v.getTag());
-        }
-    }
 
     public void setOnItemClickListener(PlanTaskRecyclerAdapter.OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
+    }
+
+    public void removeItem(int pos){
+        tasks.remove(pos);
+        notifyItemRemoved(pos);
     }
 }

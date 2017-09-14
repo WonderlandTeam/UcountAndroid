@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/main_bg">
 
+    <!--android:src="@drawable/header"-->
     <ImageView
         android:id="@+id/asset_img_header"
-        android:src="@drawable/header"
+        android:background="@color/text_green_darker"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_heightPercent="30%" />
+        app:layout_heightPercent="30%"
+
+        />
 
         <TextView
             android:id="@+id/asset_txt_detail"
@@ -61,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_below="@id/asset_txt_totalnum"
-        android:text="资产"
+        android:text="流入"
         android:textColor="@color/main_bg"
         android:textSize="18sp" />
 
@@ -72,7 +75,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_below="@id/asset_txt_totalnum"
-        android:text="负债"
+        android:text="流出"
         android:textColor="@color/main_bg"
         android:textSize="18sp" />
 
@@ -109,4 +112,15 @@
         />
 
 
+    <com.github.silvestrpredko.dotprogressbar.DotProgressBar
+        android:id="@+id/asset_dot_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        app:amount="5"
+        app:duration="@android:integer/config_mediumAnimTime"
+        app:endColor="@color/text_green_darker"
+        app:startColor="@color/text_green"
+        app:animationDirection="left"
+        />
     </android.support.percent.PercentRelativeLayout>

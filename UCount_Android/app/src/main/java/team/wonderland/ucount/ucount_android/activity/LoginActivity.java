@@ -56,6 +56,15 @@ public class LoginActivity extends AppCompatActivity {
         passwordValue = sp.getString("PASSWORD","");
         haveLogined = sp.getBoolean("HAVELOGINED",false);
 
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity_.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         if(haveLogined){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);

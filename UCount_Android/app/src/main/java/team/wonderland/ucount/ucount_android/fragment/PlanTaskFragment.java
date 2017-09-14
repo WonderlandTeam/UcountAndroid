@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ServiceCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -81,7 +83,6 @@ public class PlanTaskFragment extends Fragment {
             tasks = taskService.getTasksByUser(username);
             Log.i("tag","测试");
             Log.i("PlanTask",tasks.toString());
-
             initRecyclerView();
         }catch(ResponseException e){
             showErrorInfo(e.getMessage());
@@ -111,8 +112,46 @@ public class PlanTaskFragment extends Fragment {
                         .replace(R.id.plan_fragment_container, fragment)
                         .commit();
             }
+
+            @Override
+            public void onItemLongOnClick(View view, int position) {
+                showPopMenu(view,position);
+            }
         });
+
     }
+
+
+    @UiThread
+    public void showPopMenu(View view,final int pos){
+        PopupMenu popupMenu = new PopupMenu(getActivity(),view);
+        popupMenu.getMenuInflater().inflate(R.menu.item_menu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                deleteTask(tasks.get(pos).getId());
+                adapter.removeItem(pos);
+                adapter.notifyItemChanged(pos);
+                return false;
+            }
+        });
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+            }
+        });
+        popupMenu.show();
+    }
+
+    //删除账户
+    @Background
+    void deleteTask(long id){
+        try {
+            taskService.deleteTask(id);
+        }catch(ResponseException e){
+            showErrorInfo(e.getMessage());
+        }
+    }
+
 
     @UiThread
     void showErrorInfo(String error) {
