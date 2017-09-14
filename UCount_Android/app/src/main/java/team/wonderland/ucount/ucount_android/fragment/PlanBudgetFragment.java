@@ -176,6 +176,7 @@ public class PlanBudgetFragment extends Fragment {
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
         }
+        hideLoading();
     }
 
     @UiThread
@@ -246,7 +247,6 @@ public class PlanBudgetFragment extends Fragment {
                 }
             }
         });
-        hideLoading();
     }
 
     @UiThread
