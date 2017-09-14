@@ -171,6 +171,9 @@ public class AssetDetailFragment extends Fragment {
     public void initTotalBillDetail(){
         try {
             assetItems = billService.getBillsByUser(username, null);
+
+            Log.i("getBillByUser",assetItems.toString());
+
             if(assetItems.size()<ITEMS){
                 canLoadMore = false;
             }

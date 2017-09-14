@@ -61,11 +61,15 @@ public class MoneyHotDetailRecyclerAdapter extends RecyclerView.Adapter<MoneyHot
                 ((MoneyHotViewHolder) holder).content.setText(posts.get(position-1).getContent());
                 return;
             }
+
             return;
         }else if(getItemViewType(position) == TYPE_HEADER){
 
             return;
         }else{
+            ((MoneyHotViewHolder) holder).name.setText(posts.get(position-1).getUsername());
+            ((MoneyHotViewHolder) holder).date.setText(posts.get(position-1).getTime());
+            ((MoneyHotViewHolder) holder).content.setText(posts.get(position-1).getContent());
             return;
         }
     }

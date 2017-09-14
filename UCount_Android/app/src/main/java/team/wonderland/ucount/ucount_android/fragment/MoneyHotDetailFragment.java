@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,16 +50,20 @@ public class MoneyHotDetailFragment extends Fragment{
     private MoneyHotDetailRecyclerAdapter adapter;
     private ImageView back;
     private TextView tv_remark;
-
+    private EditText et_remark;
     private PostInfoJson postInfoJson;
     private String username;
     private List<PostReplyJson> posts;
+    private LayoutInflater inflater;
+
     @RestService
     PostService postService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.money_hot_detail_fragment, container, false);
+
+        this.inflater = inflater;
 
         postInfoJson = (PostInfoJson) getArguments().get("post");
         username = getActivity().getSharedPreferences("user",0).getString("USERNAME","");
@@ -67,7 +72,7 @@ public class MoneyHotDetailFragment extends Fragment{
         good = view.findViewById(R.id.money_hot_detail_good);
         star = view.findViewById(R.id.money_hot_detail_star);
         tv_remark = view.findViewById(R.id.money_hot_detail_remark_send);
-
+        et_remark = view.findViewById(R.id.money_hot_detail_remark);
         good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,11 +98,11 @@ public class MoneyHotDetailFragment extends Fragment{
         tv_remark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String remark = tv_remark.getText().toString();
+                String remark = et_remark.getText().toString();
                 if(remark.equals("")){
                     showErrorInfo("评论不能为空哦");
                 }else{
-
+                    remark(remark);
                 }
             }
         });
@@ -252,5 +257,6 @@ public class MoneyHotDetailFragment extends Fragment{
     @UiThread
     void remarkSuccess(){
         Toast.makeText(getActivity(), "发布评论成功", Toast.LENGTH_SHORT).show();
+        initData(inflater);
     }
 }
