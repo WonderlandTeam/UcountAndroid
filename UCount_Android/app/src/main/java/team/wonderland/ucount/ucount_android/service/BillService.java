@@ -39,11 +39,14 @@ public interface BillService {
     /**
      * 获取用户所有账目信息
      * @param username          用户id
-     * @param month             月份（yyyy-MM），可为空
+     * @param month             月份(yyyy-MM)，不可为空
      * @return                  账目列表
      */
     @Get("/users/{username}/bills?month={month}")
     List<BillInfoJson> getBillsByUser(@Path String username, @Path String month);
+
+    @Get("/users/{username}/bills")
+    List<BillInfoJson> getBillsByUser(@Path String username);
 
     /**
      * 用户手动记账
