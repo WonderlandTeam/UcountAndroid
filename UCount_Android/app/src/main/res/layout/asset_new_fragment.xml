@@ -115,7 +115,7 @@
                 android:id="@+id/asset_new_tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="银行卡"
+                android:text="现金"
                 android:gravity="center"
                 android:layout_marginRight="8dp"
                 android:layout_toLeftOf="@id/asset_new_img_type"

@@ -49,7 +49,7 @@ public class AssetNewFragment extends Fragment{
     TextView tv_balance;
     EditText et_name;
     EditText et_balance;
-    String[] titles = {"现金","银行卡","校园卡","支付宝"};
+    String[] titles = {"现金","工行卡","校园卡","支付宝"};
 
     public String username;         // 用户名
     public String accountType;      // 账户类型

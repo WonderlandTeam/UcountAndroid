@@ -170,10 +170,7 @@ public class AssetDetailFragment extends Fragment {
     @Background
     public void initTotalBillDetail(){
         try {
-            assetItems = billService.getBillsByUser(username, null);
-
-            Log.i("getBillByUser",assetItems.toString());
-
+            assetItems = billService.getBillsByUser(username);
             if(assetItems.size()<ITEMS){
                 canLoadMore = false;
             }
@@ -198,7 +195,6 @@ public class AssetDetailFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //TODO: 获得用户某类账户中所有账目 BillService.getBillsByAccount
                 //重新获取完网络数据刷新Adapter，完成后需要调用onRefreshComplete方法取消滑出来的圆形进度
                 //initBillDetail();
                 swipeRefreshLayout.setRefreshing(false);
@@ -237,7 +233,7 @@ public class AssetDetailFragment extends Fragment {
         try {
             page ++;
             if(isTotalBill){
-                newassetItems=billService.getBillsByUser(username, null);
+                newassetItems=billService.getBillsByUser(username);
             }else {
                 newassetItems=billService.getBillsByAccount(accountID, page, ITEMS, "id", "ASC");
             }
