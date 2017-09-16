@@ -93,7 +93,7 @@ public class ReportThreeFragment extends Fragment {
 //            Log.i("jsonSize","" + cashFlowJsons.size());
             if(cashFlowJsons != null) {
                 for (CashFlowJson cashFlowJson : cashFlowJsons) {
-                    moneyFlows.add(new MoneyFlow(isIn(cashFlowJson.getBillType()),cashFlowJson.getMoney(),cashFlowJson.getAccountType(),
+                    moneyFlows.add(new MoneyFlow(isIn(cashFlowJson.getBillType()),cashFlowJson.getMoney(),cashFlowJson.getBillType(),
                             cashFlowJson.getTime(),getIconID(cashFlowJson.getBillType())));
                 }
             }

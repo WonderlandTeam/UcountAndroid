@@ -78,7 +78,7 @@ public class ReportTimelineAdapter extends BaseAdapter {
             // 如何来解释这个呢？如果一屏幕有三个item，那么holder就将缓存三个item，到第四个的时候，
             // 就会将holder中原来缓存的第一个去覆盖第四个，这样就会出现，本来应该是右边出现的布局跑到了左边，还跟下面出现的布局重合的现象
             // 建议注释掉之后看效果，这样有点讲不明白
-            if (0 == i%2 && !reportTimelineViewHolder.isLeftOrRight) {
+            if (moneyFlowList.get(i).isIn() && !reportTimelineViewHolder.isLeftOrRight) {
                 // 加载左边布局
                 view = inflater.inflate(R.layout.report_timeline_left_item, null);
                 // 创建一个VIewHolder用以缓存
@@ -93,7 +93,7 @@ public class ReportTimelineAdapter extends BaseAdapter {
 
                 // 设置holder标签
                 view.setTag(reportTimelineViewHolder);
-            }else if(1 == i%2 && reportTimelineViewHolder.isLeftOrRight){
+            }else if(!moneyFlowList.get(i).isIn()&& reportTimelineViewHolder.isLeftOrRight){
                 // 加载右边布局
                 view = inflater.inflate(R.layout.report_timeline_right_item, null);
                 // 创建一个VIewHolder用以缓存
@@ -114,7 +114,7 @@ public class ReportTimelineAdapter extends BaseAdapter {
         String description="";
         // 先遍历列表中的对象，一个个来填充
         if(moneyFlowList.get(i).isIn()){
-            description=description+moneyFlowList.get(i).getType()+" 收入"+moneyFlowList.get(i).getMoney()+"元";
+            description=description+moneyFlowList.get(i).getType()+""+moneyFlowList.get(i).getMoney()+"元";
         }
         else{
             description=description+moneyFlowList.get(i).getType()+" 支出"+moneyFlowList.get(i).getMoney()+"元";
@@ -123,7 +123,6 @@ public class ReportTimelineAdapter extends BaseAdapter {
         reportTimelineViewHolder.type.setText(description);
         reportTimelineViewHolder.time.setText(moneyFlowList.get(i).getTime());
         reportTimelineViewHolder.img_center.setImageResource(moneyFlowList.get(i).getImg_id());
-        //TODO 图片
 
 
         return view;
