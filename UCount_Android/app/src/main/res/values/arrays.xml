@@ -15,7 +15,7 @@
 
     <string-array name="plan">
         <item>预算</item>
-        <item>任务</item>
+        <item>计划</item>
         <item>消费建议</item>
     </string-array>
 
