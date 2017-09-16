@@ -329,9 +329,13 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
                         String.format("%.1f", incomes.get(i) * 100 / totalIncome), incomes.get(i)));
             }
         }
-        pd.setCenterText1("收入" + totalIncome);//环形中间的文字1
+        pd.setCenterText1("收入");//环形中间的文字1
         pd.setCenterText1Color(Color.BLACK);//文字颜色
         pd.setCenterText1FontSize(25);//文字大小
+
+        pd.setCenterText2(""+totalIncome);//环形中间的文字2
+        pd.setCenterText2Color(Color.BLACK);//文字颜色
+        pd.setCenterText2FontSize(22);//文字大小
 
         pd.setValues(sliceList);
         return pd;
@@ -382,9 +386,12 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             }
         }
 
-        pd.setCenterText1("支出" + totalOutput);//环形中间的文字1
+        pd.setCenterText1("支出");//环形中间的文字1
         pd.setCenterText1Color(Color.BLACK);//文字颜色
         pd.setCenterText1FontSize(25);//文字大小
+        pd.setCenterText2("" + totalOutput);//环形中间的文字2
+        pd.setCenterText2Color(Color.BLACK);//文字颜色
+        pd.setCenterText2FontSize(22);//文字大小
         pd.setValues(sliceList);
         return pd;
     }
