@@ -320,7 +320,7 @@ public class ChartTableView extends View {
                 canvas.drawText(""+clearCost.get(i).intValue(),startX + tableItemWidth * 13 / 2,now_height,mPaintText);
             }
             if(!clearPrice.get(i).equals(0.0)){
-                canvas.drawText(""+clearPrice.get(i).intValue(),startX + tableItemWidth * 15 / 2,now_height,mPaintWhiteText);
+                canvas.drawText(""+clearPrice.get(i).intValue(),startX + tableItemWidth * 15 / 2,now_height,mPaintText);
             }
         }
         Log.i("tag","showData");

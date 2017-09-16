@@ -83,7 +83,7 @@ public class ReportThreeFragment extends Fragment {
 
         //get data from server
         try {
-            List<CashFlowJson> cashFlowJsons = statementService.getCashFlowsStatement(userName,"2017-06-01","2017-07-01");
+            List<CashFlowJson> cashFlowJsons = statementService.getCashFlowsStatement(userName,"2017-06-20","2017-07-01");
 //            String json=contents.get("content").toString();
 //            Log.i("json",json);
 //            Gson gson = new Gson();
