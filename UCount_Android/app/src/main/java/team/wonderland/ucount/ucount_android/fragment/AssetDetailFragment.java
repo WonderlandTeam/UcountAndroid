@@ -197,6 +197,8 @@ public class AssetDetailFragment extends Fragment {
             public void onRefresh() {
                 //重新获取完网络数据刷新Adapter，完成后需要调用onRefreshComplete方法取消滑出来的圆形进度
                 //initBillDetail();
+//                assetItems.add(new BillInfoJson(1l,"理财收入","天弘基金管理有限公司",0.24,"2017-09-06 07:22:36"));
+//                adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

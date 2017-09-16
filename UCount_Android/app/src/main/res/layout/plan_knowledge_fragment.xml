@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg"
     >
-    <com.github.barteksc.pdfviewer.PDFView
-        android:id="@+id/plan_knowledge_pdf_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
-</LinearLayout>
+    <TextView
+        android:layout_marginTop="32dp"
+        android:id="@+id/plan_knowledge_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:text="你的消费水平"
+    />
+
+    <TextView
+        android:id="@+id/plan_knowledge_tv_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/plan_knowledge_level"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:text="高"
+        />
+
+
+    <TextView
+        android:id="@+id/plan_knowledge_feature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:layout_below="@id/plan_knowledge_tv_level"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:text="你的消费特征"
+        />
+
+    <TextView
+        android:id="@+id/plan_knowledge_tv_feature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/plan_knowledge_feature"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:text="总支出最多，消费趋于多样化，必需品占比较小"
+        />
+
+    <TextView
+        android:id="@+id/plan_knowledge_advice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:layout_below="@id/plan_knowledge_tv_feature"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:text="消费建议"
+        />
+
+    <TextView
+        android:id="@+id/plan_knowledge_tv_advice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/plan_knowledge_advice"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:text="你更为注重娱乐饮食类消费，文教类消费极低，其他较为均衡。建议减少外出饮食娱乐的次数，控制好“人情消费”，根据自己的实际能力理性消费，培养建立起一定的理财意识。"
+        />
+</RelativeLayout>

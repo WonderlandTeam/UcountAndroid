@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.barteksc.pdfviewer.PDFView;
 
@@ -17,17 +18,20 @@ import team.wonderland.ucount.ucount_android.R;
 
 public class PlanKnowledgeFragment extends Fragment {
 
+    TextView level;
+    TextView feature;
+    TextView advice;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.plan_knowledge_fragment, container, false);
-        PDFView mPdfView = (PDFView) view.findViewById(R.id.plan_knowledge_pdf_fragment);
 
-        mPdfView.fromAsset("consumeadvice.pdf")
-                .defaultPage(0)//默认页
-                .enableSwipe(true)//允许拖动
-                .swipeHorizontal(false)//默认方向是竖轴的，改为true变为横轴
-                .enableDoubletap(true)//允许双击放缩
-                .load();
+
+        level = view.findViewById(R.id.plan_knowledge_tv_level);
+
+        feature = view.findViewById(R.id.plan_knowledge_tv_feature);
+
+        advice =view.findViewById(R.id.plan_knowledge_tv_advice);
 
         return view;
     }

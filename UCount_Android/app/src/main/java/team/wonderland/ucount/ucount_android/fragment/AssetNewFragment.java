@@ -190,9 +190,6 @@ public class AssetNewFragment extends Fragment{
     //显示错误信息
     @UiThread
     void showErrorInfo(String error) {
-        Looper.prepare();
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-        Looper.loop();
-
     }
 }

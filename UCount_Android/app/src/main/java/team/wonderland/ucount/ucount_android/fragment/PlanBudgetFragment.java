@@ -175,6 +175,7 @@ public class PlanBudgetFragment extends Fragment {
 
         } catch (ResponseException e) {
             showErrorInfo(e.getMessage());
+            initRecyclerView();
         }
         hideLoading();
     }
