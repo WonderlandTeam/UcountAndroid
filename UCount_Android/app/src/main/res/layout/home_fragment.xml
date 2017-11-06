@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    >
+
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+            <TextView
+                android:id="@+id/home_currentconsume_text"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/shape_round_textview"
+                android:gravity="center"
+                android:text="今日消费\n20元"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="40dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/home_currentleft_text"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/shape_round_textview"
+                android:gravity="center"
+                android:text="账户余额\n5400元"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="40dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                />
+    </RelativeLayout>
+
+    <GridView
+        android:layout_marginTop="30dp"
+        android:id="@+id/home_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:numColumns="4"
+        android:horizontalSpacing="30dp"
+        android:verticalSpacing="5dp">
+    </GridView>
+
+</LinearLayout>

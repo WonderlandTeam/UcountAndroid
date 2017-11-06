@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.*;
 
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout mDrawerLayout = null;
     private TextView tabAsset;
     private TextView tabReport;
+    private TextView tabHome;
     private TextView tabPlan;
     private TextView tabMoney;
 
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private AssetFragment assetFragment;
     private ReportFragment reportFragment;
+    private HomeFragment homeFragment;
     private PlanFragment planFragment;
     private MoneyFragment moneyFragment;
     private FragmentTransaction transaction;
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bindView();
 
-        tabAsset.performClick();
+        tabHome.performClick();
         
         username= (TextView) findViewById(R.id.username);
         SharedPreferences preferences = getSharedPreferences("user", 0);
@@ -135,8 +140,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 editor.commit();
             }
         });
-
-
 
 
         cv_modifyPassword=  (CardView) findViewById(R.id.main_center_password);
@@ -237,12 +240,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void bindView() {
         tabAsset = (TextView)this.findViewById(R.id.txt_asset);
         tabReport = (TextView)this.findViewById(R.id.txt_report);
+        tabHome = (TextView)this.findViewById(R.id.txt_home);
         tabPlan = (TextView)this.findViewById(R.id.txt_plan);
         tabMoney = (TextView)this.findViewById(R.id.txt_money);
         ly_content = (FrameLayout) findViewById(fragment_container);
 
         tabAsset.setOnClickListener(this);
         tabReport.setOnClickListener(this);
+        tabHome.setOnClickListener(this);
         tabPlan.setOnClickListener(this);
         tabMoney.setOnClickListener(this);
 
@@ -252,6 +257,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void selected(){
         tabAsset.setSelected(false);
         tabReport.setSelected(false);
+        tabHome.setSelected(false);
         tabPlan.setSelected(false);
         tabMoney.setSelected(false);
     }
@@ -287,6 +293,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tabMoney.setSelected(true);
                 moneyFragment = new MoneyFragment();
                 transaction.add(fragment_container, moneyFragment);
+                break;
+
+            case R.id.txt_home:
+                selected();
+                tabHome.setSelected(true);
+                homeFragment = new HomeFragment_();
+                transaction.add(fragment_container, homeFragment);
                 break;
         }
 

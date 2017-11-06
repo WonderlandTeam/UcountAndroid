@@ -13,7 +13,7 @@ public class RestAPI {
      * 域名／ip地址
      * 需要修改为服务器ip
      */
-    public static final String IP = "139.199.179.137";
+    public static final String IP = "172.28.47.182";
 
     public static final int PORT = 8080;
 
