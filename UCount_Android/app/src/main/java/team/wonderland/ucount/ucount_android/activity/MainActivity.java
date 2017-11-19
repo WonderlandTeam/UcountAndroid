@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -223,6 +224,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 获得包名和资源，方便后面的程序使用
         PACKAGE_NAME = getApplicationContext().getPackageName();
         resources = getResources();
+
+
+        int id = getIntent().getIntExtra("jump", 0);
+        if (id == 1||id==2||id==3 || id ==4) {
+            tabAsset.setSelected(true);
+            tabHome.setSelected(false);
+            Fragment toFragment = new AssetFragment_();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container,toFragment)
+                    .commit();
+        }else if(id == 5||id==6||id==7|| id ==8){
+            tabReport.setSelected(true);
+            tabHome.setSelected(false);
+            Fragment toFragment = new ReportFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container,toFragment)
+                    .commit();
+        }else if(id == 9||id==10 |id==11){
+            tabPlan.setSelected(true);
+            tabHome.setSelected(false);
+            Fragment toFragment = new PlanFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container,toFragment)
+                    .commit();
+        }else if(id == 12){
+            tabMoney.setSelected(true);
+            tabHome.setSelected(false);
+            Fragment toFragment = new MoneyFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container,toFragment)
+                    .commit();
+        }
     }
 
 

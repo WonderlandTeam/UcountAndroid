@@ -1,5 +1,6 @@
 package team.wonderland.ucount.ucount_android.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import team.wonderland.ucount.ucount_android.R;
+import team.wonderland.ucount.ucount_android.activity.MainActivity;
 import team.wonderland.ucount.ucount_android.service.AccountService;
 
 import org.androidannotations.annotations.Background;
@@ -61,7 +63,37 @@ public class HomeFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "你点击了第" + i, Toast.LENGTH_SHORT).show();
+                Intent intent;
+                intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtra("jump",i+1);
+                        startActivity(intent);
+
+//                switch (i){
+//                    case 0:
+//                        intent = new Intent(getActivity(), MainActivity.class);
+//                        intent.putExtra("jump",1);
+//                        startActivity(intent);
+//                    case 1:
+//                        intent = new Intent(getActivity(), MainActivity.class);
+//                        intent.putExtra("jump",2);
+//                        startActivity(intent);
+//                    case 2:
+//                        intent = new Intent(getActivity(), MainActivity.class);
+//                        intent.putExtra("jump",3);
+//                        startActivity(intent);
+//                    case 3:
+//                        intent = new Intent(getActivity(), MainActivity.class);
+//                        intent.putExtra("jump",4);
+//                        startActivity(intent);
+//                    case 4:
+//                        intent = new Intent(getActivity(), MainActivity.class);
+//                        intent.putExtra("jump",1);
+//                        startActivity(intent);
+//
+//                }
+
+                Toast.makeText(getActivity(), "即将进入"+text[i], Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "你点击了第" + i, Toast.LENGTH_SHORT).show();
             }
         });
 
