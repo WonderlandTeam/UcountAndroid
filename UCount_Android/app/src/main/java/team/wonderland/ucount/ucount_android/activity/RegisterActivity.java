@@ -95,14 +95,16 @@ public class RegisterActivity extends AppCompatActivity{
             UserSignUpJson userSignUpJson=new UserSignUpJson(username.getText().toString(),password.getText().toString(),
                 phone.getText().toString(),null);
             userBasicService.signUp(userSignUpJson);
+            showLoginActivity();
         }catch(ResponseException e){
             showErrorMessage(e.getMessage());
         }
     }
 
     @UiThread
-    void showLoginActivity(){
-        LoginActivity_.intent(getApplication()).start();
+    void showLoginActivity() {
+        Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+//        LoginActivity_.intent(getApplication()).start();
     }
 
     @UiThread
