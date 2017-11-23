@@ -31,22 +31,22 @@
             android:id="@+id/plan_budget_circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:radius="180"
+            android:layout_centerHorizontal="true"
             app:circleBackground="#ffBBECB9"
+            app:radius="300"
             app:ringColor="#ff3cb371"
             app:textColor="#ffffffff"
-            android:layout_centerHorizontal="true"
             />
 
         <TextView
             android:id="@+id/plan_budget_textview_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
             android:text="剩余预算"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
             />
 
         <TextView

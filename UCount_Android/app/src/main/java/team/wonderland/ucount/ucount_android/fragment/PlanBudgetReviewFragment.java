@@ -133,7 +133,7 @@ public class PlanBudgetReviewFragment extends Fragment {
         budgetInfoJson = (BudgetInfoJson) this.getArguments().get("budgetInfo");
         tv_type.setText(budgetInfoJson.getConsumeType());
         et_total.setText(String.valueOf(budgetInfoJson.getBudgetMoney()));
-        et_left.setText(String.valueOf(budgetInfoJson.getRemain()));
+        et_left.setText(String.valueOf((int)(budgetInfoJson.getRemain() * 100) / 100.0));
         tv_date.setText(budgetInfoJson.getBugdetTime());
 
         return view;

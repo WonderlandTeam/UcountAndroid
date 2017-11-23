@@ -38,6 +38,7 @@ public class ReportThreeFragment extends Fragment {
 
     @RestService
     StatementService statementService;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.report_three, container, false);
@@ -83,7 +84,7 @@ public class ReportThreeFragment extends Fragment {
 
         //get data from server
         try {
-            List<CashFlowJson> cashFlowJsons = statementService.getCashFlowsStatement(userName,"2017-06-20","2017-07-01");
+            List<CashFlowJson> cashFlowJsons = statementService.getCashFlowsStatement(userName, "2017-09-01", "2017-11-23");
 //            String json=contents.get("content").toString();
 //            Log.i("json",json);
 //            Gson gson = new Gson();

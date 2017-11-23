@@ -155,17 +155,17 @@ public class PlanBudgetFragment extends Fragment {
             Log.i("tag","测试");
             Log.i("tag",budgets.toString());
 
-            if(budgets==null){
+            if (budgets == null) {
                 budgets = new ArrayList<BudgetInfoJson>();
-            }else{
-                for(int i=0;i<budgets.size();i++){
-                    if(budgets.get(i).getConsumeType().equals("总预算")){
+            } else {
+                for(int i = 0; i < budgets.size(); i++) {
+                    if (budgets.get(i).getConsumeType().equals("总预算")) {
                         totalBudgetInfoJson = budgets.get(i);
                         //显示总预算
                         showTotalBudget(totalBudgetInfoJson);
 
                         budgets.remove(i);
-                    }else{
+                    } else {
                         totalBudgetInfoJson = null;
                     }
                 }
@@ -183,7 +183,7 @@ public class PlanBudgetFragment extends Fragment {
     @UiThread
     void showTotalBudget(BudgetInfoJson totalBudgetInfoJson){
         mPercentageRing.setTargetPercent((int)(totalBudgetInfoJson.getRemain()*100/totalBudgetInfoJson.getBudgetMoney()));
-        totalTextView.setText(String.valueOf(totalBudgetInfoJson.getRemain()));
+        totalTextView.setText(String.valueOf((int)(totalBudgetInfoJson.getRemain() * 100) / 100.0));
         id = totalBudgetInfoJson.getId();
 
         mPercentageRing.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +266,7 @@ public class PlanBudgetFragment extends Fragment {
             public void onItemClick(View view , int position){
                 Bundle bundle = new Bundle();
                 Fragment fragment = new PlanBudgetReviewFragment_();
-                bundle.putSerializable("budgetInfo",budgets.get(position));
+                bundle.putSerializable("budgetInfo", budgets.get(position));
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .addToBackStack(null)
@@ -276,7 +276,7 @@ public class PlanBudgetFragment extends Fragment {
 
             @Override
             public void onItemLongOnClick(View view, int position) {
-                showPopMenu(view,position);
+                showPopMenu(view, position);
             }
         });
 
@@ -284,11 +284,11 @@ public class PlanBudgetFragment extends Fragment {
     }
 
     @Background
-    void reviewTotalBudget(long id, BudgetModifyJson totalBudgetModifyJson){
+    void reviewTotalBudget(long id, BudgetModifyJson totalBudgetModifyJson) {
         try {
             budgetService.updateBudget(id, totalBudgetModifyJson);
             reviewTotalBudgetSuccess(totalBudgetModifyJson);
-        }catch(ResponseException e){
+        } catch(ResponseException e) {
             showErrorInfo(e.getMessage());
         }
     }

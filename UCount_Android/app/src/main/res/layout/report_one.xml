@@ -57,9 +57,14 @@
         >
         </at.markushi.ui.CircleButton>
     </RelativeLayout>
-    <team.wonderland.ucount.ucount_android.util.FlowLayout android:layout_width="match_parent"
-                                                           android:layout_height="wrap_content">
-        <lecho.lib.hellocharts.view.PieChartView
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <lecho.lib.hellocharts.view.PieChartView
                 android:id="@+id/income_piechart"
 
                 android:layout_width="325dp"
@@ -67,25 +72,25 @@
                 android:layout_height="325dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
-        >
+                >
 
-        </lecho.lib.hellocharts.view.PieChartView>
+            </lecho.lib.hellocharts.view.PieChartView>
 
-        <android.support.v7.widget.RecyclerView android:id="@+id/income_recycleview"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:scrollbars="vertical"
-                                                android:layout_marginLeft="20dp"
-                                                android:background="@color/main_bg">
+            <android.support.v7.widget.RecyclerView android:id="@+id/income_recycleview"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:scrollbars="vertical"
+                                                    android:layout_marginLeft="20dp"
+                                                    android:background="@color/main_bg">
 
-        </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
 
-        <TextView android:layout_width="300dp" android:layout_height="wrap_content"
-                  android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
-                  android:layout_marginTop="20dp"
-                  android:textSize="15dp" android:id="@+id/intros1"/>
+            <TextView android:layout_width="300dp" android:layout_height="wrap_content"
+                      android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
+                      android:layout_marginTop="20dp"
+                      android:textSize="15dp" android:id="@+id/intros1"/>
 
-        <lecho.lib.hellocharts.view.PieChartView
+            <lecho.lib.hellocharts.view.PieChartView
                 android:id="@+id/output_piechart"
 
                 android:layout_width="325dp"
@@ -93,79 +98,81 @@
                 android:layout_height="325dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
-        >
+                >
 
-        </lecho.lib.hellocharts.view.PieChartView>
+            </lecho.lib.hellocharts.view.PieChartView>
 
-        <android.support.v7.widget.RecyclerView android:id="@+id/output_recycleview"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:scrollbars="vertical"
-                                                android:layout_marginLeft="20dp"
-                                                android:background="@color/main_bg">
+            <android.support.v7.widget.RecyclerView android:id="@+id/output_recycleview"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:scrollbars="vertical"
+                                                    android:layout_marginLeft="20dp"
+                                                    android:background="@color/main_bg">
 
-        </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
 
-        <TextView android:layout_width="300dp" android:layout_height="wrap_content"
-                  android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
-                  android:layout_marginTop="20dp"
-                  android:textSize="15dp" android:id="@+id/intros2"/>
+            <TextView android:layout_width="300dp" android:layout_height="wrap_content"
+                      android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
+                      android:layout_marginTop="20dp"
+                      android:textSize="15dp" android:id="@+id/intros2"/>
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textColor="@color/text_gray" android:textSize="20dp"
-                  android:layout_marginTop="20dp"
-                  android:layout_marginLeft="100dp"
-                  android:text="生活必需支出分配"
-                  android:textAlignment="center"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:textColor="@color/text_gray" android:textSize="20dp"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginLeft="100dp"
+                      android:text="生活必需支出分配"
+                      android:textAlignment="center"/>
 
-        <lecho.lib.hellocharts.view.ColumnChartView
+            <lecho.lib.hellocharts.view.ColumnChartView
                 android:id="@+id/output_columnchart"
                 android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-        >
+                >
 
-        </lecho.lib.hellocharts.view.ColumnChartView>
+            </lecho.lib.hellocharts.view.ColumnChartView>
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textColor="@color/text_gray" android:textSize="20dp"
-                  android:text="服饰支出分配"
-                  android:layout_marginTop="20dp"
-                  android:layout_marginLeft="100dp"
-                  android:textAlignment="center"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:textColor="@color/text_gray" android:textSize="20dp"
+                      android:text="服饰支出分配"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginLeft="100dp"
+                      android:textAlignment="center"/>
 
-        <lecho.lib.hellocharts.view.ColumnChartView
+            <lecho.lib.hellocharts.view.ColumnChartView
                 android:id="@+id/output_columnchart2"
                 android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-        >
+                >
 
-        </lecho.lib.hellocharts.view.ColumnChartView>
+            </lecho.lib.hellocharts.view.ColumnChartView>
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textColor="@color/text_gray" android:textSize="20dp"
-                  android:text="学习支出分配"
-                  android:layout_marginTop="20dp"
-                  android:layout_marginLeft="100dp"
-                  android:textAlignment="center"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:textColor="@color/text_gray" android:textSize="20dp"
+                      android:text="学习支出分配"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginLeft="100dp"
+                      android:textAlignment="center"/>
 
-        <lecho.lib.hellocharts.view.ColumnChartView
+            <lecho.lib.hellocharts.view.ColumnChartView
                 android:id="@+id/output_columnchart3"
                 android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-        >
+                >
 
-        </lecho.lib.hellocharts.view.ColumnChartView>
+            </lecho.lib.hellocharts.view.ColumnChartView>
 
-    </team.wonderland.ucount.ucount_android.util.FlowLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

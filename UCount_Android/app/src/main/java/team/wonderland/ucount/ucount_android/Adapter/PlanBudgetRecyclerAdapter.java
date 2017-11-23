@@ -42,7 +42,7 @@ public class PlanBudgetRecyclerAdapter extends RecyclerView.Adapter<PlanBudgetRe
     public void onBindViewHolder(final PlanBudgetRecyclerAdapter.PlanBudgetViewHolder holder, final int position) {
         PlanBudgetViewHolder.icon.setImageResource(GlobalVariables.getSrcID(budgets.get(position).getConsumeType()));
         PlanBudgetViewHolder.typename.setText(budgets.get(position).getConsumeType());
-        PlanBudgetViewHolder.num.setText(String.valueOf(budgets.get(position).getRemain()));
+        PlanBudgetViewHolder.num.setText(String.valueOf((int)(budgets.get(position).getRemain() * 100) / 100.0));
 
         if(mOnItemClickListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener(){
