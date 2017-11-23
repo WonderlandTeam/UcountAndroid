@@ -73,6 +73,8 @@ public class RegisterActivity extends AppCompatActivity{
             return;
         }
         //邮箱可选，先空着
+        register();
+
         //TODO
 //        UserSignUpJson userSignUpJson=new UserSignUpJson(username.getText().toString(),password.getText().toString(),
 //                phone.getText().toString(),null);
