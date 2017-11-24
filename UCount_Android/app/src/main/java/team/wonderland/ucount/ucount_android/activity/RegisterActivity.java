@@ -104,6 +104,9 @@ public class RegisterActivity extends AppCompatActivity{
     @UiThread
     void showLoginActivity() {
         Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity_.class);
+        startActivity(intent);
+        finish();
 //        LoginActivity_.intent(getApplication()).start();
     }
 
