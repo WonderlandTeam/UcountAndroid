@@ -192,9 +192,16 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
 
     void initData() {
+        Log.i("date",beginDate.getText().toString());
         try {
-            incomeStatementJson = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())
-                    , removeAllSpace(endDate.getText().toString()));
+            if(beginDate.getText().toString().equals("")||endDate.getText().toString().equals("")){
+                incomeStatementJson = statementService.getIncomeStatement(userName,"2017-07-01"
+                        ,"2017-07-15" );
+            }
+            else {
+                incomeStatementJson = statementService.getIncomeStatement(userName, removeAllSpace(beginDate.getText().toString())
+                        , removeAllSpace(endDate.getText().toString()));
+            }
 //            String json = contents.get("content").toString();
 //            Log.i("json", json);
 //            incomeStatementJson=new Gson().fromJson(json,IncomeStatementJson.class);
