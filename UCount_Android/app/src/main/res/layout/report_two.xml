@@ -7,7 +7,7 @@
 >
 
 
-    <team.wonderland.ucount.ucount_android.util.FlowLayout
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -35,6 +35,6 @@
             </RelativeLayout>
 
         </ScrollView>
-    </team.wonderland.ucount.ucount_android.util.FlowLayout>
+    </ScrollView>
 
 </RelativeLayout>
