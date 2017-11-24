@@ -161,15 +161,16 @@ public class PlanBudgetFragment extends Fragment {
                 for(int i = 0; i < budgets.size(); i++) {
                     if (budgets.get(i).getConsumeType().equals("总预算")) {
                         totalBudgetInfoJson = budgets.get(i);
-                        //显示总预算
-                        showTotalBudget(totalBudgetInfoJson);
-
+                        Log.i("planbudgetfragment",totalTextView.getText().toString());
                         budgets.remove(i);
+                        break;
                     } else {
                         totalBudgetInfoJson = null;
                     }
                 }
             }
+            //显示总预算
+            showTotalBudget(totalBudgetInfoJson);
             //显示预算列表
             initRecyclerView();
 
@@ -182,15 +183,22 @@ public class PlanBudgetFragment extends Fragment {
 
     @UiThread
     void showTotalBudget(BudgetInfoJson totalBudgetInfoJson){
-        mPercentageRing.setTargetPercent((int)(totalBudgetInfoJson.getRemain()*100/totalBudgetInfoJson.getBudgetMoney()));
-        totalTextView.setText(String.valueOf((int)(totalBudgetInfoJson.getRemain() * 100) / 100.0));
-        id = totalBudgetInfoJson.getId();
+        if(totalBudgetInfoJson!=null) {
+            mPercentageRing.setTargetPercent((int) (totalBudgetInfoJson.getRemain() * 100 / totalBudgetInfoJson.getBudgetMoney()));
+            totalTextView.setText(String.valueOf((int) (totalBudgetInfoJson.getRemain() * 100) / 100.0));
+            id = totalBudgetInfoJson.getId();
+        }else{
+            totalTextView.setText("点击设置");
+        }
 
         mPercentageRing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                if(totalTextView.getText().equals("点击设置")){
+                Log.i("planbudgetfragment",totalTextView.getText().toString());
+                Log.i("planbudgetfragment",totalTextView.getText().toString().equals("点击设置")+"");
+                if(totalTextView.getText().toString().equals("点击设置")){
+                    Log.i("planbudgetfragment","hi");
                     AlertDialog.Builder localBuilder = new AlertDialog.Builder(getActivity());
                     View dialog = getActivity().getLayoutInflater().inflate(R.layout.dialog,null);
                     localBuilder.setView(dialog);
