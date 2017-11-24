@@ -329,14 +329,14 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 //            incomes.add((float) 0);
 //            incomes.add((float) 2000);
 //            incomes.add((float) 0);
-            incomes.add((float) 0);
-            incomes.add((float) 0);
-            incomes.add((float) 3500);
-            incomes.add((float) 0);
-//            incomes.add((float) incomeStatementJson.getSalary());
-//            incomes.add((float) incomeStatementJson.getManagementIncome());
-//            incomes.add((float) incomeStatementJson.getAlimony());
-//            incomes.add((float) incomeStatementJson.getOtherIncome());
+//            incomes.add((float) 0);
+//            incomes.add((float) 0);
+//            incomes.add((float) 3500);
+//            incomes.add((float) 0);
+            incomes.add((float) incomeStatementJson.getSalary());
+            incomes.add((float) incomeStatementJson.getManagementIncome());
+            incomes.add((float) incomeStatementJson.getAlimony());
+            incomes.add((float) incomeStatementJson.getOtherIncome());
         }
 
         List<SliceValue> sliceList = new ArrayList<SliceValue>();
@@ -387,13 +387,13 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
         List<Float> outputs = new ArrayList<>();
         if(incomeStatementJson!=null){
-            outputs.add((float) 1700);
-            outputs.add((float) 0);
-            outputs.add((float) 80);
-            outputs.add((float) 3000);
-            outputs.add((float) 0);
-            outputs.add((float) 0);
-            outputs.add((float) 0);
+//            outputs.add((float) 1700);
+//            outputs.add((float) 0);
+//            outputs.add((float) 80);
+//            outputs.add((float) 3000);
+//            outputs.add((float) 0);
+//            outputs.add((float) 0);
+//            outputs.add((float) 0);
 
 //            outputs.add((float) 1000);
 //            outputs.add((float) 0);
@@ -403,13 +403,13 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 //            outputs.add((float) 0);
 //            outputs.add((float) 0);
 
-//            outputs.add((float) incomeStatementJson.getNecessityTotal());
-//            outputs.add((float) incomeStatementJson.getAdornTotal());
-//            outputs.add((float) incomeStatementJson.getLearningTotal());
-//            outputs.add((float) incomeStatementJson.getEntertainment());
-//            outputs.add((float) incomeStatementJson.getManagementExpenditure());
-//            outputs.add((float) incomeStatementJson.getDonationTotal());
-//            outputs.add((float) incomeStatementJson.getOtherExpenditure());
+            outputs.add((float) incomeStatementJson.getNecessityTotal());
+            outputs.add((float) incomeStatementJson.getAdornTotal());
+            outputs.add((float) incomeStatementJson.getLearningTotal());
+            outputs.add((float) incomeStatementJson.getEntertainment());
+            outputs.add((float) incomeStatementJson.getManagementExpenditure());
+            outputs.add((float) incomeStatementJson.getDonationTotal());
+            outputs.add((float) incomeStatementJson.getOtherExpenditure());
         }
 
         String[] colors = {"#996600", "#00CC66", "#99CCFF", "#FF9933", "#FF99CC", "#FF0066", "#CC6666"};
