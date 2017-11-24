@@ -177,8 +177,8 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             intro1.setText(getActivity().getString(R.string.report_intros1));
             intro2.setText(getActivity().getString(R.string.report_intros2));
             //显示最上面一行
-            remain.setText("您这段时间总盈余为 "+String.format("%.1f",(incomeStatementJson.getTotalIncome()-incomeStatementJson.getTotalExpenditure()))+"元");
-            rank.setText("打败了66%的用户");
+//            remain.setText("您这段时间总盈余为 "+String.format("%.1f",(incomeStatementJson.getTotalIncome()-incomeStatementJson.getTotalExpenditure()))+"元");
+//            rank.setText("打败了66%的用户");
             Log.i("tag", "调用后");
         }
 
