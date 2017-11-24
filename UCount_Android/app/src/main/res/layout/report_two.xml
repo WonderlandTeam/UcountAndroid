@@ -11,24 +11,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <team.wonderland.ucount.ucount_android.util.ChartTableView
-                    android:id="@+id/chartTableView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/main_bg"/>
-        </ScrollView>
-        <ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:layout_width="300dp" android:layout_height="wrap_content"
-                      android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
-                      android:layout_marginTop="20dp" android:text="@string/report_intros3"
-                      android:textSize="18dp" android:id="@+id/intros3"/>
-        </ScrollView>
-        <ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:layout_width="300dp" android:layout_height="wrap_content"
-                      android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
-                      android:layout_marginTop="10dp" android:text="@string/report_intros4"
-                      android:textSize="18dp" android:id="@+id/intros4"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+                <team.wonderland.ucount.ucount_android.util.ChartTableView
+                        android:id="@+id/chartTableView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/main_bg"/>
+                <!--</ScrollView>-->
+                <!--<ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">-->
+                <TextView android:layout_width="300dp" android:layout_height="wrap_content"
+                          android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
+                          android:layout_below="@+id/chartTableView"
+                          android:layout_marginTop="20dp" android:text="@string/report_intros3"
+                          android:textSize="18dp" android:id="@+id/intros3"/>
+                <!--</ScrollView>-->
+                <!--<ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">-->
+                <TextView android:layout_width="300dp" android:layout_height="wrap_content"
+                          android:textColor="@color/text_gray" android:layout_marginLeft="50dp"
+                          android:layout_below="@+id/intros3"
+                          android:layout_marginTop="10dp" android:text="@string/report_intros4"
+                          android:textSize="18dp" android:id="@+id/intros4"/>
+            </RelativeLayout>
+
         </ScrollView>
     </team.wonderland.ucount.ucount_android.util.FlowLayout>
 

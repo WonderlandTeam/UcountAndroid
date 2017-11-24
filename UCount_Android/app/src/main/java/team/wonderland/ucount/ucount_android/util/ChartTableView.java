@@ -133,6 +133,7 @@ public class ChartTableView extends View {
         //根据数据数量来得到控件高
         if (dataNum != 0) {
             height = (dataNum + 1) * tableItemHeight;
+            Log.i("height",""+height);
         }
         //表格单元宽
         tableItemWidth = width / 8;

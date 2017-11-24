@@ -56,6 +56,8 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
     RecyclerView outputRecyclerView;
     TextView intro1;
     TextView intro2;
+    TextView remain;
+    TextView rank;
 
     private String userName;
 
@@ -103,6 +105,9 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
         intro1 = view.findViewById(R.id.intros1);
         intro2 = view.findViewById(R.id.intros2);
+//
+//        remain=view.findViewById(R.id.remain);
+//        rank=view.findViewById(R.id.rank);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("user", 0);
         userName = preferences.getString("USERNAME", "sigma");
@@ -171,6 +176,9 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
             //显示说明文字
             intro1.setText(getActivity().getString(R.string.report_intros1));
             intro2.setText(getActivity().getString(R.string.report_intros2));
+            //显示最上面一行
+            remain.setText("您这段时间总盈余为 "+String.format("%.1f",(incomeStatementJson.getTotalIncome()-incomeStatementJson.getTotalExpenditure()))+"元");
+            rank.setText("打败了66%的用户");
             Log.i("tag", "调用后");
         }
 
@@ -232,6 +240,12 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         /**生活必需**/
         ArrayList<Float> list = new ArrayList<>();
         if(incomeStatementJson!=null) {
+//            list.add((float) 200.0);
+//            list.add((float) 124.5);
+//            list.add((float) 222);
+//            list.add((float) 895);
+//            list.add((float) 56.5);
+//            list.add((float) 99.5);
             list.add((float) incomeStatementJson.getCommodity());
             list.add((float) incomeStatementJson.getUtilities());
             list.add((float) incomeStatementJson.getCommunication());
@@ -307,10 +321,22 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
         List<Float> incomes = new ArrayList<>();
         if(incomeStatementJson!=null) {
-            incomes.add((float) incomeStatementJson.getSalary());
-            incomes.add((float) incomeStatementJson.getManagementIncome());
-            incomes.add((float) incomeStatementJson.getAlimony());
-            incomes.add((float) incomeStatementJson.getOtherIncome());
+//            incomes.add((float) 1500);
+//            incomes.add((float) 35.9);
+//            incomes.add((float) 500);
+//            incomes.add((float) 525);
+//            incomes.add((float) 0);
+//            incomes.add((float) 0);
+//            incomes.add((float) 2000);
+//            incomes.add((float) 0);
+            incomes.add((float) 0);
+            incomes.add((float) 0);
+            incomes.add((float) 3500);
+            incomes.add((float) 0);
+//            incomes.add((float) incomeStatementJson.getSalary());
+//            incomes.add((float) incomeStatementJson.getManagementIncome());
+//            incomes.add((float) incomeStatementJson.getAlimony());
+//            incomes.add((float) incomeStatementJson.getOtherIncome());
         }
 
         List<SliceValue> sliceList = new ArrayList<SliceValue>();
@@ -351,22 +377,39 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
 
         List<String> outputLabels = new ArrayList<>();
         outputLabels.add("必需");
-        outputLabels.add("服饰");
-        outputLabels.add("学习");
-        outputLabels.add("娱乐");
         outputLabels.add("理财");
-        outputLabels.add("捐赠");
+        outputLabels.add("学习");
+        outputLabels.add("服饰");
         outputLabels.add("其他");
+        outputLabels.add("娱乐");
+        outputLabels.add("捐赠");
+
 
         List<Float> outputs = new ArrayList<>();
         if(incomeStatementJson!=null){
-            outputs.add((float) incomeStatementJson.getNecessityTotal());
-            outputs.add((float) incomeStatementJson.getAdornTotal());
-            outputs.add((float) incomeStatementJson.getLearningTotal());
-            outputs.add((float) incomeStatementJson.getEntertainment());
-            outputs.add((float) incomeStatementJson.getManagementExpenditure());
-            outputs.add((float) incomeStatementJson.getDonationTotal());
-            outputs.add((float) incomeStatementJson.getOtherExpenditure());
+            outputs.add((float) 1700);
+            outputs.add((float) 0);
+            outputs.add((float) 80);
+            outputs.add((float) 3000);
+            outputs.add((float) 0);
+            outputs.add((float) 0);
+            outputs.add((float) 0);
+
+//            outputs.add((float) 1000);
+//            outputs.add((float) 0);
+//            outputs.add((float) 110);
+//            outputs.add((float) 0);
+//            outputs.add((float) 0);
+//            outputs.add((float) 0);
+//            outputs.add((float) 0);
+
+//            outputs.add((float) incomeStatementJson.getNecessityTotal());
+//            outputs.add((float) incomeStatementJson.getAdornTotal());
+//            outputs.add((float) incomeStatementJson.getLearningTotal());
+//            outputs.add((float) incomeStatementJson.getEntertainment());
+//            outputs.add((float) incomeStatementJson.getManagementExpenditure());
+//            outputs.add((float) incomeStatementJson.getDonationTotal());
+//            outputs.add((float) incomeStatementJson.getOtherExpenditure());
         }
 
         String[] colors = {"#996600", "#00CC66", "#99CCFF", "#FF9933", "#FF99CC", "#FF0066", "#CC6666"};
@@ -380,7 +423,7 @@ public class ReportOneFragment extends Fragment implements TimePickerDialog.Time
         }
         for (int i = 0; i < outputLabels.size(); i++) {
             if(!outputs.get(i).equals(0f)||totalOutput>0||outputs.get(i) * 100 / totalOutput>0.1f) {
-                sliceList.add(new SliceValue(outputs.get(i), ChartUtils.pickColor()).setLabel(outputLabels.get(i)));
+                sliceList.add(new SliceValue(outputs.get(i), Color.parseColor(colors[i])).setLabel(outputLabels.get(i)));
                 outputItems.add(new ReportItem(icons[i], outputLabels.get(i) + "支出",
                         String.format("%.1f", outputs.get(i) * 100 / totalOutput), outputs.get(i)));
             }

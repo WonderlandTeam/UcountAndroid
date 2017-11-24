@@ -16,9 +16,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import team.wonderland.ucount.ucount_android.R;
 import team.wonderland.ucount.ucount_android.fragment.*;
 
@@ -122,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         username= (TextView) findViewById(R.id.username);
         SharedPreferences preferences = getSharedPreferences("user", 0);
         String userName = preferences.getString("USERNAME", "sigma");
-        username.setText("Username："+userName);
+        username.setText("用户："+userName);
 
         //个人中心按钮
         ll_quit = (LinearLayout) findViewById(R.id.main_center_quit);

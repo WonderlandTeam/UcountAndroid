@@ -107,13 +107,13 @@
          The drawer is given a fixed width in dp and extends the full height of
          the container. A solid background is used for contrast
          with the content view. -->
-    <team.wonderland.ucount.ucount_android.util.FlowLayout android:id="@+id/left_menu"
+    <RelativeLayout android:id="@+id/left_menu"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="left"
         >
-        <LinearLayout android:layout_width="280dp" android:layout_height="450px"
+        <LinearLayout android:layout_width="280dp" android:layout_height="450px" android:id="@+id/head"
                         android:background="@drawable/header">
             <TextView   android:id="@+id/username"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -122,8 +122,8 @@
                         android:textSize="25dp"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/main_bg"
-        android:orientation="vertical">
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/main_bg"
+        android:orientation="vertical" android:layout_below="@id/head">
             <android.support.v7.widget.CardView
                     android:id="@+id/main_center_password"
                     android:layout_width="match_parent"
@@ -158,6 +158,7 @@
 
             <android.support.v7.widget.CardView
                     android:id="@+id/main_center_post"
+                    android:layout_below="@+id/main_center_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardPreventCornerOverlap="false"
@@ -190,6 +191,7 @@
 
             <android.support.v7.widget.CardView
                     android:id="@+id/main_center_collection"
+                    android:layout_below="@+id/main_center_post"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardPreventCornerOverlap="false"
@@ -222,6 +224,7 @@
 
             <android.support.v7.widget.CardView
                     android:id="@+id/main_center_reply"
+                    android:layout_below="@+id/main_center_collection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardPreventCornerOverlap="false"
@@ -254,6 +257,7 @@
 
             <android.support.v7.widget.CardView
                     android:id="@+id/main_Center_praise"
+                    android:layout_below="@+id/main_center_reply"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardPreventCornerOverlap="false"
@@ -286,6 +290,7 @@
 
             <android.support.v7.widget.CardView
                     android:id="@+id/main_center_message"
+                    android:layout_below="@+id/main_Center_praise"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardPreventCornerOverlap="false"
@@ -318,6 +323,7 @@
 
             <LinearLayout
                 android:id="@+id/main_center_quit"
+                android:layout_below="@+id/main_center_message"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
@@ -339,7 +345,7 @@
                         android:textColor="@color/text_green_darker"/>
             </LinearLayout>
 
-        </LinearLayout>
-    </team.wonderland.ucount.ucount_android.util.FlowLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>

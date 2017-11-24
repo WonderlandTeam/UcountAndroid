@@ -10,14 +10,28 @@
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:layout_gravity="center"
-              android:layout_marginTop="10dp"
-                android:textSize="18dp" android:textAlignment="center"
-                android:textColor="@color/text_gray" android:text="您属于：较高消费人群"/>
+              android:layout_marginTop="8dp"
+              android:textSize="18dp" android:textAlignment="center"
+              android:textColor="@color/black" android:text="   清偿比率：21.43%\n  您的债务过多，请注意债务到期无法偿还的风险\n    投资与净资产比率:0.00%\n    您的投资占比过低，可适当地投资以提高净资产的收益率;\n    月结余比率:－36.57%\n  您的控制支出和储蓄积累的能力较弱，注意控制您的消费、投资等支出;\n    流动性比率:0.21%\n   您资产的流动性过低，要注意投资结构的合理性和变现的风险;\n 消费比率:136.57%\n   您的消费占比过高，储蓄能力不强，要注意适度消费"/>
 
-    <TextView android:layout_width="350dp" android:layout_height="wrap_content"
-              android:layout_marginTop="15dp"
-              android:layout_gravity="center"
-                android:textSize="18dp" 
-                android:textColor="@color/black"
-                android:text="     饮食占据了26.7%的支出,恩格尔系数为26.7%,娱乐支出占总支出的11.4%，交通支出占总支出的2.6%，文教支出占总支出的4.3%，其他支出则占总支出的11.7。餐饮，娱乐和交通是生活支出的主力，文教所占比例极少。其他如恋爱消费也占据一定比例。高投入支出为饮食娱乐，能给自身带来长远效益的相对高产出支出为文教支出，文教支出作为个人发展支出与生活资料、娱乐支出存在差异。\n     此消费人群作为高消费人群，消费结构依然单一，多元化的生活方式存在提升的空间。\n     建议：可考虑将剩余资金进行投资活动。"/>
+    <!--<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"-->
+              <!--android:layout_gravity="center"-->
+              <!--android:layout_marginTop="3dp"-->
+                <!--android:textSize="18dp" android:textAlignment="center"-->
+                <!--android:textColor="@color/black" android:text=" 您属于：较高消费人群"/>-->
+
+
+
+    <!--<TextView android:layout_width="350dp" android:layout_height="wrap_content"-->
+              <!--android:layout_marginTop="8dp"-->
+              <!--android:layout_gravity="center"-->
+                <!--android:textSize="18dp" -->
+                <!--android:textColor="@color/black"-->
+                <!--android:text="     饮食占据了26.7%的支出,恩格尔系数为26.7%,娱乐支出占总支出的11.4%，交通支出占总支出的2.6%，文教支出占总支出的4.3%，其他支出则占总支出的11.7。餐饮，娱乐和交通是生活支出的主力，文教所占比例极少。其他如恋爱消费也占据一定比例。高投入支出为饮食娱乐，能给自身带来长远效益的相对高产出支出为文教支出，文教支出作为个人发展支出与生活资料、娱乐支出存在差异。\n     此消费人群作为高消费人群，消费结构依然单一，多元化的生活方式存在提升的空间。\n     建议：可考虑将剩余资金进行投资活。"/>-->
+
+    <!--<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"-->
+              <!--android:layout_gravity="center"-->
+              <!--android:layout_marginTop="8dp"-->
+              <!--android:textSize="18dp" android:textAlignment="center"-->
+              <!--android:textColor="@color/black" android:text="   您的偿债能力在大学生中排名为TOP 10%,和您处于相似水平的人有15.2%;您的投资占比在大学生中排名为TOP90.5%,和您处于相似水平的人有33.3%;您的控制支出和储蓄积累的能力在大学生中排名为TOP 45%,和您处于相似水平的人有10%;您资产的流动性在大学生中排名为TOP5%,和您处于相似水平的人有5%;您的消费占比在大学生中的排名为50.2%,和您处于相似水平的人有13.3%"/>-->
 </LinearLayout>
